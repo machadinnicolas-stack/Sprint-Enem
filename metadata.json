@@ -1,0 +1,6 @@
+{
+  "name": "Sprint ENEM",
+  "description": "Plataforma inteligente de personalização de estudos para o ENEM com cronograma dinâmico, simulados diários e checklist por incidência TRI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
