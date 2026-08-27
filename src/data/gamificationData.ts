@@ -67,7 +67,7 @@ export const INITIAL_BADGES: Badge[] = [
     icon: 'local_fire_department',
     category: 'streak',
     unlocked: false,
-    progress: 1,
+    progress: 0,
     maxProgress: 3,
     rarity: 'comum',
     xpReward: 150
@@ -79,7 +79,7 @@ export const INITIAL_BADGES: Badge[] = [
     icon: 'whatshot',
     category: 'streak',
     unlocked: false,
-    progress: 1,
+    progress: 0,
     maxProgress: 7,
     rarity: 'epico',
     xpReward: 350
@@ -91,7 +91,7 @@ export const INITIAL_BADGES: Badge[] = [
     icon: 'shield',
     category: 'streak',
     unlocked: false,
-    progress: 1,
+    progress: 0,
     maxProgress: 14,
     rarity: 'lendario',
     xpReward: 600
@@ -185,12 +185,35 @@ export function getLevelInfo(xp: number): UserLevelInfo {
   };
 }
 
+// Local (not UTC) calendar date as YYYY-MM-DD, so the streak matches the user's actual day.
+function getLocalDateString(d: Date = new Date()): string {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// Whole calendar days between two YYYY-MM-DD local dates (b - a).
+function getDaysBetween(dateA: string, dateB: string): number {
+  const a = new Date(`${dateA}T00:00:00`);
+  const b = new Date(`${dateB}T00:00:00`);
+  return Math.round((b.getTime() - a.getTime()) / (1000 * 60 * 60 * 24));
+}
+
+// Events that represent real study activity and should count toward the daily streak.
+const STREAK_QUALIFYING_EVENTS = new Set<GamificationUpdateEvent['type']>([
+  'block_completed',
+  'pomodoro_completed',
+  'simulado_answered',
+  'redacao_evaluated'
+]);
+
 export function getInitialGamificationState(): UserGamificationState {
   const initialXp = 50; // Started with planner unlock
   return {
     xp: initialXp,
-    streakDays: 3, // Starting streak for realistic motivation
-    lastStudiedDate: new Date().toISOString().split('T')[0],
+    streakDays: 0,
+    lastStudiedDate: '',
     totalBlocksCompleted: 0,
     totalMinutesStudied: 0,
     simuladosCompleted: 0,
@@ -200,7 +223,7 @@ export function getInitialGamificationState(): UserGamificationState {
 }
 
 export interface GamificationUpdateEvent {
-  type: 'block_completed' | 'block_uncompleted' | 'pomodoro_completed' | 'simulado_answered' | 'redacao_evaluated' | 'streak_advanced' | 'plan_customized';
+  type: 'block_completed' | 'block_uncompleted' | 'pomodoro_completed' | 'simulado_answered' | 'redacao_evaluated' | 'plan_customized';
   minutes?: number;
   isAllDayCompleted?: boolean;
 }
@@ -220,6 +243,7 @@ export function processGamificationEvent(
   let simulados = prevState.simuladosCompleted;
   let redacoes = prevState.redacoesEvaluated;
   let streak = prevState.streakDays;
+  let lastStudiedDate = prevState.lastStudiedDate;
 
   if (event.type === 'block_completed') {
     xpGained += 50;
@@ -238,9 +262,27 @@ export function processGamificationEvent(
   } else if (event.type === 'redacao_evaluated') {
     xpGained += 150;
     redacoes += 1;
-  } else if (event.type === 'streak_advanced') {
-    streak += 1;
-    xpGained += 100;
+  }
+
+  // Real, calendar-based streak: only the first qualifying study action of each
+  // day advances it. Studying again the same day is a no-op; missing a day resets it.
+  if (STREAK_QUALIFYING_EVENTS.has(event.type)) {
+    const today = getLocalDateString();
+    if (!prevState.lastStudiedDate) {
+      streak = 1;
+      lastStudiedDate = today;
+    } else {
+      const daysSinceLastStudy = getDaysBetween(prevState.lastStudiedDate, today);
+      if (daysSinceLastStudy === 1) {
+        streak = prevState.streakDays + 1;
+        lastStudiedDate = today;
+        xpGained += 100;
+      } else if (daysSinceLastStudy > 1 || daysSinceLastStudy < 0) {
+        streak = 1;
+        lastStudiedDate = today;
+      }
+      // daysSinceLastStudy === 0: already studied today, streak unchanged.
+    }
   }
 
   const newTotalXp = Math.max(0, prevState.xp + xpGained);
@@ -328,6 +370,7 @@ export function processGamificationEvent(
       ...prevState,
       xp: finalXp,
       streakDays: streak,
+      lastStudiedDate,
       totalBlocksCompleted: totalBlocks,
       totalMinutesStudied: totalMins,
       simuladosCompleted: simulados,

@@ -29,9 +29,22 @@ export const BadgeUnlockCelebration: React.FC<BadgeUnlockCelebrationProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full text-center shadow-2xl border border-[#e1e3e4] relative animate-in zoom-in-95 duration-300">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="celebration-modal-title"
+        className="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full text-center shadow-2xl border border-[#e1e3e4] relative animate-in zoom-in-95 duration-300"
+      >
         {/* Glow backdrop */}
         <div className="w-24 h-24 mx-auto mb-4 relative flex items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-tr from-amber-400 to-yellow-300 rounded-full blur-xl opacity-60 animate-pulse"></div>
@@ -48,7 +61,7 @@ export const BadgeUnlockCelebration: React.FC<BadgeUnlockCelebrationProps> = ({
           {isLevelUp ? '🎉 NOVO NÍVEL ALCANÇADO!' : '🏆 NOVO EMBLEMA DESBLOQUEADO!'}
         </span>
 
-        <h3 className="text-xl md:text-2xl font-black text-[#191c1d] mb-1">
+        <h3 id="celebration-modal-title" className="text-xl md:text-2xl font-black text-[#191c1d] mb-1">
           {isLevelUp ? `Nível ${newLevelNumber}: ${newLevelTitle}` : badge?.title}
         </h3>
 

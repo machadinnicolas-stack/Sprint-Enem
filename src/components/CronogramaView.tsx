@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GeneratedPlan, StudyBlock, SubjectType, UserGamificationState } from '../types';
 import { SUBJECT_INFO } from '../data/enemData';
 import { getLevelInfo, LEVEL_TIERS } from '../data/gamificationData';
@@ -13,7 +13,18 @@ interface CronogramaViewProps {
   onOpenTimer: (block: StudyBlock) => void;
   onEditPreferences: () => void;
   onOpenBadgesModal: () => void;
+  onChangeDaySubject: (dayIndex: number, newSubject: SubjectType) => void;
+  onAddDay: () => void;
+  onRemoveDay: (dayIndex: number) => void;
 }
+
+const EDITABLE_SUBJECTS: { id: SubjectType; label: string }[] = [
+  { id: 'matematica', label: 'Matemática' },
+  { id: 'natureza', label: 'Natureza' },
+  { id: 'humanas', label: 'Humanas' },
+  { id: 'linguagens', label: 'Linguagens' },
+  { id: 'redacao', label: 'Redação' }
+];
 
 function renderRecommendationHtml(text: string): string {
   const escaped = text
@@ -31,12 +42,25 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
   onToggleBlock,
   onOpenTimer,
   onEditPreferences,
-  onOpenBadgesModal
+  onOpenBadgesModal,
+  onChangeDaySubject,
+  onAddDay,
+  onRemoveDay
 }) => {
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const [showTriModal, setShowTriModal] = useState(false);
   const [showPrintModal, setShowPrintModal] = useState(false);
+  const [showEditDaysModal, setShowEditDaysModal] = useState(false);
   const [chartMode, setChartMode] = useState<'status' | 'areas'>('status');
+
+  useEffect(() => {
+    if (!showEditDaysModal) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowEditDaysModal(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showEditDaysModal]);
 
   const levelInfo = getLevelInfo(gamification.xp);
   const unlockedBadges = gamification.badges.filter((b) => b.unlocked);
@@ -598,14 +622,24 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
 
         {/* Week Day Switcher Tabs */}
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-2 gap-2">
             <h2 className="text-lg font-bold text-[#191c1d] flex items-center gap-2">
               <span className="material-symbols-outlined text-[#7c3aed]">calendar_month</span>
               Roteiro da Semana
             </h2>
-            <span className="text-xs font-medium text-[#7b7487]">
-              Dia {selectedDayIndex + 1} de {plan.weeklySchedule.length}
-            </span>
+            <div className="flex items-center gap-2.5">
+              <span className="text-xs font-medium text-[#7b7487] hidden sm:inline">
+                Dia {selectedDayIndex + 1} de {plan.weeklySchedule.length}
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowEditDaysModal(true)}
+                className="text-xs font-bold text-[#7c3aed] hover:text-[#5a00c6] flex items-center gap-1 cursor-pointer bg-[#ede0ff] hover:bg-[#d8b4fe] px-3 py-1.5 rounded-lg transition-all"
+              >
+                <span className="material-symbols-outlined text-[16px]">edit_calendar</span>
+                <span>Editar dias e matérias</span>
+              </button>
+            </div>
           </div>
 
           <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
@@ -866,6 +900,89 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                 <span>Imprimir / Salvar em PDF</span>
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Days & Subjects Modal */}
+      {showEditDaysModal && (
+        <div className="no-print fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="edit-days-modal-title"
+            className="bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200"
+          >
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#e1e3e4]">
+              <div>
+                <h3 id="edit-days-modal-title" className="text-lg font-bold text-[#191c1d]">
+                  Editar dias e matérias
+                </h3>
+                <p className="text-xs text-[#7b7487] mt-0.5">
+                  Escolha a matéria principal de cada dia ou ajuste quantos dias você quer estudar por semana.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowEditDaysModal(false)}
+                aria-label="Fechar"
+                className="text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f3f4f5] transition-colors cursor-pointer shrink-0"
+              >
+                <span className="material-symbols-outlined text-2xl">close</span>
+              </button>
+            </div>
+
+            <div className="space-y-2.5 mb-5">
+              {plan.weeklySchedule.map((day, index) => {
+                const currentSubject = (day.blocks[0]?.subject as SubjectType) || 'matematica';
+                return (
+                  <div
+                    key={day.dayNumber}
+                    className="flex items-center gap-2.5 bg-[#f9fafb] border border-[#e1e3e4] rounded-xl px-3.5 py-2.5"
+                  >
+                    <span className="text-xs font-bold text-[#191c1d] w-16 shrink-0">{day.dayName}</span>
+                    <select
+                      value={currentSubject}
+                      onChange={(e) => onChangeDaySubject(index, e.target.value as SubjectType)}
+                      aria-label={`Matéria principal de ${day.dayName}`}
+                      className="flex-1 bg-white border border-[#ccc3d8] rounded-lg px-2.5 py-1.5 text-xs font-semibold text-[#191c1d] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none cursor-pointer"
+                    >
+                      {EDITABLE_SUBJECTS.map((s) => (
+                        <option key={s.id} value={s.id}>{s.label}</option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      onClick={() => onRemoveDay(index)}
+                      disabled={plan.weeklySchedule.length <= 1}
+                      aria-label={`Remover ${day.dayName} do cronograma`}
+                      title="Remover este dia"
+                      className="p-1.5 rounded-lg text-[#b91c1c] hover:bg-[#fee2e2] transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">delete</span>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              onClick={onAddDay}
+              disabled={plan.weeklySchedule.length >= 7}
+              className="w-full py-2.5 rounded-xl border border-dashed border-[#ccc3d8] text-[#7c3aed] hover:bg-[#f9fafb] font-semibold text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed mb-5"
+            >
+              <span className="material-symbols-outlined text-[18px]">add</span>
+              <span>Adicionar dia de estudo</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowEditDaysModal(false)}
+              className="w-full py-3 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white font-bold text-sm shadow-md transition-all cursor-pointer"
+            >
+              Concluído
+            </button>
           </div>
         </div>
       )}

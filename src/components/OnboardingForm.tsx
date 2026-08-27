@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserPreferences, LevelType, TimeType, SubjectType } from '../types';
 import { POPULAR_COURSES, SUBJECT_INFO } from '../data/enemData';
 import { motion } from 'motion/react';
@@ -27,6 +27,15 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
       setDificuldades([...dificuldades, subj]);
     }
   };
+
+  useEffect(() => {
+    if (!showConfirm) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !isGenerating) setShowConfirm(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showConfirm, isGenerating]);
 
   const handleOpenConfirm = (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,10 +152,10 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                       value={time}
                       checked={isSelected}
                       onChange={() => setTempoDia(time)}
-                      className="absolute opacity-0 w-0 h-0"
+                      className="peer absolute opacity-0 w-0 h-0"
                     />
                     <div
-                      className={`px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 ${
+                      className={`px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-[#7c3aed] peer-focus-visible:ring-offset-2 ${
                         isSelected
                           ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-xs'
                           : 'bg-[#f9fafb] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
@@ -180,10 +189,10 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                       value={num}
                       checked={isSelected}
                       onChange={() => setDiasSemana(num)}
-                      className="absolute opacity-0 w-0 h-0"
+                      className="peer absolute opacity-0 w-0 h-0"
                     />
                     <div
-                      className={`w-12 h-12 flex items-center justify-center rounded-xl border text-base font-semibold transition-all duration-200 ${
+                      className={`w-12 h-12 flex items-center justify-center rounded-xl border text-base font-semibold transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-[#7c3aed] peer-focus-visible:ring-offset-2 ${
                         isSelected
                           ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-xs scale-105'
                           : 'bg-[#f9fafb] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
@@ -236,10 +245,10 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                       value={lvl.id}
                       checked={isSelected}
                       onChange={() => setNivel(lvl.id)}
-                      className="absolute opacity-0 w-0 h-0"
+                      className="peer absolute opacity-0 w-0 h-0"
                     />
                     <div
-                      className={`flex items-center justify-between p-3.5 rounded-xl border transition-all duration-200 ${
+                      className={`flex items-center justify-between p-3.5 rounded-xl border transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-[#7c3aed] peer-focus-visible:ring-offset-2 ${
                         isSelected
                           ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-xs'
                           : 'bg-[#f9fafb] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
@@ -298,10 +307,10 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                       value={item.id}
                       checked={isSelected}
                       onChange={() => toggleDificuldade(item.id)}
-                      className="absolute opacity-0 w-0 h-0"
+                      className="peer absolute opacity-0 w-0 h-0"
                     />
                     <div
-                      className={`px-4 py-2.5 rounded-xl border text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
+                      className={`px-4 py-2.5 rounded-xl border text-sm font-medium transition-all duration-200 flex items-center gap-1.5 peer-focus-visible:ring-2 peer-focus-visible:ring-[#7c3aed] peer-focus-visible:ring-offset-2 ${
                         isSelected
                           ? 'bg-[#eaddff] text-[#630ed4] border-[#7c3aed] font-semibold shadow-xs'
                           : 'bg-[#f9fafb] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
@@ -346,13 +355,18 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
       {/* Confirmation Modal */}
       {showConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirm-modal-title"
+            className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200"
+          >
             <div className="text-center mb-5">
               <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#630ed4] bg-[#ede0ff] px-3 py-1 rounded-full mb-3">
                 <span className="material-symbols-outlined text-[14px]">fact_check</span>
                 Confirme seus dados
               </span>
-              <h3 className="text-lg md:text-xl font-bold text-[#191c1d]">
+              <h3 id="confirm-modal-title" className="text-lg md:text-xl font-bold text-[#191c1d]">
                 Vamos gerar seu plano com base nisso:
               </h3>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserGamificationState, Badge } from '../types';
 import { getLevelInfo, LEVEL_TIERS } from '../data/gamificationData';
 
@@ -13,6 +13,14 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
 }) => {
   const [filterCategory, setFilterCategory] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<'all' | 'unlocked' | 'locked'>('all');
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
 
   const levelInfo = getLevelInfo(gamification.xp);
   const unlockedCount = gamification.badges.filter((b) => b.unlocked).length;
@@ -71,7 +79,12 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-      <div className="bg-white rounded-3xl p-5 md:p-7 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200 no-scrollbar">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="badges-modal-title"
+        className="bg-white rounded-3xl p-5 md:p-7 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200 no-scrollbar"
+      >
         {/* Top Header */}
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#e1e3e4]">
           <div className="flex items-center gap-3">
@@ -79,7 +92,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
               <span className="material-symbols-outlined text-[24px]">workspace_premium</span>
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-[#191c1d] tracking-tight">
+              <h2 id="badges-modal-title" className="text-xl font-extrabold text-[#191c1d] tracking-tight">
                 Emblemas & Conquistas
               </h2>
               <p className="text-xs text-[#7b7487]">
@@ -90,6 +103,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
 
           <button
             onClick={onClose}
+            aria-label="Fechar"
             className="text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f3f4f5] transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-2xl">close</span>

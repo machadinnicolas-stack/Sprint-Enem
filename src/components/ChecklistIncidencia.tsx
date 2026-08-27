@@ -136,10 +136,13 @@ export const ChecklistIncidencia: React.FC = () => {
         {filteredTopics.map((item) => {
           const subj = SUBJECT_INFO[item.subject];
           return (
-            <div
+            <button
               key={item.id}
+              type="button"
               onClick={() => toggleTopic(item.id)}
-              className={`p-4 rounded-2xl border transition-all cursor-pointer select-none ${
+              aria-pressed={item.completed}
+              aria-label={`${item.title} — ${item.completed ? 'concluído, clique para desmarcar' : 'não concluído, clique para marcar como concluído'}`}
+              className={`w-full text-left p-4 rounded-2xl border transition-all cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7c3aed] focus-visible:ring-offset-2 ${
                 item.completed
                   ? 'bg-[#f8f9fa] border-[#e1e3e4] opacity-80'
                   : 'bg-white border-[#e1e3e4] hover:border-[#7c3aed] shadow-xs'
@@ -148,6 +151,7 @@ export const ChecklistIncidencia: React.FC = () => {
               <div className="flex items-start gap-3">
                 {/* Custom Checkbox */}
                 <div
+                  aria-hidden="true"
                   className={`w-5 h-5 rounded-md border flex items-center justify-center mt-0.5 transition-all shrink-0 ${
                     item.completed
                       ? 'bg-[#7c3aed] border-[#7c3aed] text-white'
@@ -185,7 +189,7 @@ export const ChecklistIncidencia: React.FC = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>

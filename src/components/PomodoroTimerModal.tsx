@@ -53,6 +53,15 @@ export const PomodoroTimerModal: React.FC<PomodoroTimerModalProps> = ({
     };
   }, [isRunning, timeLeft, block, onCompleteBlock]);
 
+  useEffect(() => {
+    if (!block) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [block, onClose]);
+
   if (!block) return null;
 
   const minutes = Math.floor(timeLeft / 60);
@@ -67,10 +76,16 @@ export const PomodoroTimerModal: React.FC<PomodoroTimerModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-      <div className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pomodoro-modal-title"
+        className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200"
+      >
         {/* Close button */}
         <button
           onClick={onClose}
+          aria-label="Fechar"
           className="absolute top-4 right-4 text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f3f4f5] transition-colors cursor-pointer"
         >
           <span className="material-symbols-outlined text-2xl">close</span>
@@ -82,7 +97,7 @@ export const PomodoroTimerModal: React.FC<PomodoroTimerModalProps> = ({
             <span className="material-symbols-outlined text-[14px]">timer</span>
             Modo Foco Ativo
           </span>
-          <h3 className="text-lg md:text-xl font-bold text-[#191c1d] leading-snug">
+          <h3 id="pomodoro-modal-title" className="text-lg md:text-xl font-bold text-[#191c1d] leading-snug">
             {block.title}
           </h3>
           <p className="text-xs text-[#7b7487] mt-1 line-clamp-1">{block.topic}</p>

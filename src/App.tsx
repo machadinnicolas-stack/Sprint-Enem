@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { UserPreferences, GeneratedPlan, StudyBlock, UserGamificationState, Badge } from './types';
-import { generateStudyPlan } from './data/enemData';
+import { motion } from 'motion/react';
+import { UserPreferences, GeneratedPlan, StudyBlock, UserGamificationState, Badge, SubjectType } from './types';
+import { generateStudyPlan, buildDaySchedule, regenerateDaySubject } from './data/enemData';
+
+const DAY_NAMES = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
 import { getInitialGamificationState, processGamificationEvent, getLevelInfo } from './data/gamificationData';
 import { OnboardingForm } from './components/OnboardingForm';
 import { Header } from './components/Header';
@@ -93,6 +96,55 @@ export default function App() {
     }
   };
 
+  const handleChangeDaySubject = (dayIndex: number, newSubject: SubjectType) => {
+    const day = plan.weeklySchedule[dayIndex];
+    if (!day) return;
+    const updatedDay = regenerateDaySubject(day, newSubject);
+    const updatedSchedule = plan.weeklySchedule.map((d, i) => (i === dayIndex ? updatedDay : d));
+    const allBlocks = updatedSchedule.flatMap((d) => d.blocks);
+    const completed = allBlocks.filter((b) => b.completed).length;
+    const pct = allBlocks.length > 0 ? Math.round((completed / allBlocks.length) * 100) : 0;
+    setPlan({
+      ...plan,
+      weeklySchedule: updatedSchedule,
+      summaryStats: { ...plan.summaryStats, completionPercentage: pct }
+    });
+  };
+
+  const handleAddDay = () => {
+    if (plan.weeklySchedule.length >= 7) return;
+    const usedNames = new Set(plan.weeklySchedule.map((d) => d.dayName));
+    const nextName = DAY_NAMES.find((n) => !usedNames.has(n)) || `Dia ${plan.weeklySchedule.length + 1}`;
+    const dailyMinutes = plan.weeklySchedule[0]?.totalTimeMinutes || 120;
+    const newDayIndex = plan.weeklySchedule.length;
+    const newDay = buildDaySchedule(newDayIndex, nextName, 'matematica', 'matematica', dailyMinutes);
+    const updatedSchedule = [...plan.weeklySchedule, newDay];
+    const totalWeeklyHours = Math.round(updatedSchedule.reduce((acc, d) => acc + d.totalTimeMinutes, 0) / 60);
+    setPlan({
+      ...plan,
+      weeklySchedule: updatedSchedule,
+      summaryStats: { ...plan.summaryStats, totalWeeklyHours }
+    });
+    setPreferences((prev) => ({ ...prev, diasSemana: updatedSchedule.length }));
+  };
+
+  const handleRemoveDay = (dayIndex: number) => {
+    if (plan.weeklySchedule.length <= 1) return;
+    const updatedSchedule = plan.weeklySchedule
+      .filter((_, i) => i !== dayIndex)
+      .map((day, i) => ({ ...day, dayNumber: i + 1 }));
+    const allBlocks = updatedSchedule.flatMap((d) => d.blocks);
+    const completed = allBlocks.filter((b) => b.completed).length;
+    const pct = allBlocks.length > 0 ? Math.round((completed / allBlocks.length) * 100) : 0;
+    const totalWeeklyHours = Math.round(updatedSchedule.reduce((acc, d) => acc + d.totalTimeMinutes, 0) / 60);
+    setPlan({
+      ...plan,
+      weeklySchedule: updatedSchedule,
+      summaryStats: { ...plan.summaryStats, completionPercentage: pct, totalWeeklyHours }
+    });
+    setPreferences((prev) => ({ ...prev, diasSemana: updatedSchedule.length }));
+  };
+
   const handleToggleBlock = (blockId: string) => {
     let blockWasCompleted = false;
     let blockDuration = 30;
@@ -157,13 +209,17 @@ export default function App() {
 
   const handleCompleteBlock = (blockId: string) => {
     let blockDuration = 25;
+    let blockAlreadyCompleted = false;
     for (const day of plan.weeklySchedule) {
       const found = day.blocks.find((b) => b.id === blockId);
       if (found) {
         blockDuration = found.durationMinutes || 25;
+        blockAlreadyCompleted = found.completed;
         break;
       }
     }
+
+    if (blockAlreadyCompleted) return;
 
     setPlan((prev) => {
       const updatedSchedule = prev.weeklySchedule.map((day) => ({
@@ -263,33 +319,43 @@ export default function App() {
 
       {/* Screen Views */}
       <main className="flex-1">
-        {activeTab === 'personalizar' && (
-          <OnboardingForm
-            initialValues={preferences}
-            onGeneratePlan={handleGeneratePlan}
-          />
-        )}
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+        >
+          {activeTab === 'personalizar' && (
+            <OnboardingForm
+              initialValues={preferences}
+              onGeneratePlan={handleGeneratePlan}
+            />
+          )}
 
-        {activeTab === 'cronograma' && (
-          <CronogramaView
-            plan={plan}
-            gamification={gamification}
-            onToggleBlock={handleToggleBlock}
-            onOpenTimer={(b) => setSelectedBlockForTimer(b)}
-            onEditPreferences={() => setActiveTab('personalizar')}
-            onOpenBadgesModal={() => setIsBadgesModalOpen(true)}
-          />
-        )}
+          {activeTab === 'cronograma' && (
+            <CronogramaView
+              plan={plan}
+              gamification={gamification}
+              onToggleBlock={handleToggleBlock}
+              onOpenTimer={(b) => setSelectedBlockForTimer(b)}
+              onEditPreferences={() => setActiveTab('personalizar')}
+              onOpenBadgesModal={() => setIsBadgesModalOpen(true)}
+              onChangeDaySubject={handleChangeDaySubject}
+              onAddDay={handleAddDay}
+              onRemoveDay={handleRemoveDay}
+            />
+          )}
 
-        {activeTab === 'incidencia' && <ChecklistIncidencia />}
+          {activeTab === 'incidencia' && <ChecklistIncidencia />}
 
-        {activeTab === 'simulado' && (
-          <SimuladoTRI onAnswerQuestion={handleSimuladoAnswered} />
-        )}
+          {activeTab === 'simulado' && (
+            <SimuladoTRI onAnswerQuestion={handleSimuladoAnswered} />
+          )}
 
-        {activeTab === 'redacao' && (
-          <RedacaoHub onEvaluationComplete={handleRedacaoEvaluated} />
-        )}
+          {activeTab === 'redacao' && (
+            <RedacaoHub onEvaluationComplete={handleRedacaoEvaluated} />
+          )}
+        </motion.div>
       </main>
 
       {/* Focus Timer Modal */}
