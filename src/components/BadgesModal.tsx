@@ -111,8 +111,9 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
         </div>
 
         {/* Level & Rank Hero Card */}
-        <div className="bg-gradient-to-br from-[#1e1b4b] via-[#2e1065] to-[#4c1d95] rounded-3xl p-5 md:p-6 text-white mb-6 relative overflow-hidden shadow-lg">
-          <div className="absolute right-0 bottom-0 translate-x-4 translate-y-4 w-40 h-40 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="bg-gradient-to-br from-[#1e1b4b] via-[#7c3aed] to-[#c026d3] rounded-3xl p-5 md:p-6 text-white mb-6 relative overflow-hidden shadow-lg shadow-[#7c3aed]/20">
+          <div className="absolute right-0 bottom-0 translate-x-4 translate-y-4 w-40 h-40 bg-amber-400/20 rounded-full blur-2xl pointer-events-none"></div>
+          <div className="absolute left-0 top-0 -translate-x-6 -translate-y-6 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
 
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
             <div className="flex items-center gap-4">
@@ -306,7 +307,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
 
           <button
             onClick={onClose}
-            className="px-6 py-2.5 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer self-end sm:self-auto"
+            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-bold text-xs md:text-sm shadow-md transition-all cursor-pointer self-end sm:self-auto"
           >
             Continuar Estudando
           </button>

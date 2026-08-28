@@ -247,10 +247,11 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
       {/* Screen Interactive View (Hidden on print) */}
       <div className="no-print max-w-4xl mx-auto px-4 py-6 pb-24">
         {/* Header Summary Banner */}
-        <div className="bg-gradient-to-br from-[#7c3aed] to-[#5a00c6] rounded-3xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden mb-6">
+        <div className="bg-gradient-to-br from-[#7c3aed] via-[#c026d3] to-[#f59e0b] rounded-3xl p-6 md:p-8 text-white shadow-lg shadow-[#c026d3]/20 relative overflow-hidden mb-6">
           {/* Decorative background glow */}
           <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-          
+          <div className="absolute -left-16 -top-16 w-56 h-56 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-xs px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
@@ -303,6 +304,182 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                 {completedBlocks} de {totalBlocks} blocos concluídos
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* Week Day Switcher Tabs */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-2 gap-2">
+            <h2 className="text-lg font-bold text-[#191c1d] flex items-center gap-2">
+              <span className="material-symbols-outlined text-[#7c3aed]">calendar_month</span>
+              Roteiro da Semana
+            </h2>
+            <div className="flex items-center gap-2.5">
+              <span className="text-xs font-medium text-[#7b7487] hidden sm:inline">
+                Dia {selectedDayIndex + 1} de {plan.weeklySchedule.length}
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowEditDaysModal(true)}
+                className="text-xs font-bold text-[#7c3aed] hover:text-[#5a00c6] flex items-center gap-1 cursor-pointer bg-[#ede0ff] hover:bg-[#d8b4fe] px-3 py-1.5 rounded-lg transition-all"
+              >
+                <span className="material-symbols-outlined text-[16px]">edit_calendar</span>
+                <span>Editar dias e matérias</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+            {plan.weeklySchedule.map((day, index) => {
+              const isSelected = selectedDayIndex === index;
+              const dayCompleted = day.blocks.every(b => b.completed) && day.blocks.length > 0;
+              const completedCount = day.blocks.filter(b => b.completed).length;
+
+              return (
+                <button
+                  key={day.dayNumber}
+                  onClick={() => setSelectedDayIndex(index)}
+                  className={`min-w-[105px] md:min-w-[125px] p-3 rounded-2xl border text-left transition-all duration-200 cursor-pointer shrink-0 ${
+                    isSelected
+                      ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-md scale-[1.02]'
+                      : 'bg-white text-[#4a4455] border-[#e1e3e4] hover:border-[#7c3aed]'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-bold uppercase tracking-wider opacity-80">
+                      {day.dayName}
+                    </span>
+                    {dayCompleted ? (
+                      <span className="material-symbols-outlined text-[16px] text-green-400 fill-1">check_circle</span>
+                    ) : (
+                      <span className="text-[10px] font-semibold opacity-70">
+                        {completedCount}/{day.blocks.length}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-xs font-bold truncate">
+                    {day.focusArea.split('&')[0]}
+                  </div>
+                  <div className="text-[10px] opacity-75 mt-0.5">
+                    {day.totalTimeMinutes} min de estudo
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Selected Day Study Blocks */}
+        <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-[#e1e3e4]">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed]">
+                {activeDay.dayName} • Foco do Dia
+              </span>
+              <h3 className="text-xl font-extrabold text-[#191c1d]">
+                {activeDay.focusArea}
+              </h3>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold bg-[#f3f4f5] text-[#4a4455] px-3 py-1.5 rounded-full flex items-center gap-1">
+                <span className="material-symbols-outlined text-[14px]">schedule</span>
+                {activeDay.totalTimeMinutes} minutos programados
+              </span>
+            </div>
+          </div>
+
+          {/* List of Blocks */}
+          <div className="space-y-4">
+            {activeDay.blocks.map((block) => {
+              const subj = block.subject !== 'geral' ? SUBJECT_INFO[block.subject as SubjectType] : null;
+
+              return (
+                <div
+                  key={block.id}
+                  className={`p-4 md:p-5 rounded-2xl border transition-all ${
+                    block.completed
+                      ? 'bg-[#f8f9fa] border-[#e1e3e4] opacity-75'
+                      : 'bg-white border-[#e1e3e4] shadow-xs hover:border-[#7c3aed]'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-start gap-3 flex-1">
+                      {/* Checkbox button */}
+                      <button
+                        type="button"
+                        onClick={() => handleBlockCheck(block.id, block.completed)}
+                        className={`w-6 h-6 rounded-lg border flex items-center justify-center mt-1 transition-all cursor-pointer ${
+                          block.completed
+                            ? 'bg-[#7c3aed] border-[#7c3aed] text-white'
+                            : 'border-[#ccc3d8] bg-white hover:border-[#7c3aed]'
+                        }`}
+                      >
+                        {block.completed && (
+                          <span className="material-symbols-outlined text-[18px]">check</span>
+                        )}
+                      </button>
+
+                      {/* Block Info */}
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          {subj && (
+                            <span
+                              className="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1"
+                              style={{
+                                backgroundColor: subj.bgColor,
+                                color: subj.textColor
+                              }}
+                            >
+                              <span className="material-symbols-outlined text-[14px]">{subj.icon}</span>
+                              {subj.name}
+                            </span>
+                          )}
+
+                          <span className="text-[11px] font-semibold text-[#7b7487] bg-[#f3f4f5] px-2 py-0.5 rounded-md">
+                            {block.durationMinutes} min
+                          </span>
+
+                          <span className="text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-0.5">
+                            <span className="material-symbols-outlined text-[13px]">trending_up</span>
+                            TRI {block.triWeight}
+                          </span>
+
+                          <span className="text-[10px] font-extrabold text-[#630ed4] bg-[#ede0ff] px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                            <span className="material-symbols-outlined text-[12px]">stars</span>
+                            +50 XP
+                          </span>
+                        </div>
+
+                        <h4 className={`text-base font-bold ${block.completed ? 'line-through text-[#7b7487]' : 'text-[#191c1d]'}`}>
+                          {block.title}
+                        </h4>
+                        <p className="text-xs md:text-sm text-[#4a4455] mt-0.5">
+                          {block.topic}
+                        </p>
+
+                        {block.tip && (
+                          <div className="mt-2.5 p-2.5 bg-[#f9fafb] border border-[#e1e3e4] rounded-xl text-xs text-[#4a4455] flex items-start gap-1.5">
+                            <span className="material-symbols-outlined text-amber-500 text-[16px] shrink-0 mt-0.5">tips_and_updates</span>
+                            <span>{block.tip}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Focus timer trigger */}
+                    <button
+                      type="button"
+                      onClick={() => onOpenTimer(block)}
+                      className="p-2.5 rounded-xl border border-[#e1e3e4] hover:border-[#7c3aed] text-[#630ed4] hover:bg-[#ede0ff] transition-all cursor-pointer shrink-0 flex items-center gap-1 text-xs font-semibold"
+                      title="Iniciar cronômetro de foco para este bloco"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">timer</span>
+                      <span className="hidden sm:inline">Modo Foco</span>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -620,182 +797,6 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
           </AnimatePresence>
         </div>
 
-        {/* Week Day Switcher Tabs */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2 gap-2">
-            <h2 className="text-lg font-bold text-[#191c1d] flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#7c3aed]">calendar_month</span>
-              Roteiro da Semana
-            </h2>
-            <div className="flex items-center gap-2.5">
-              <span className="text-xs font-medium text-[#7b7487] hidden sm:inline">
-                Dia {selectedDayIndex + 1} de {plan.weeklySchedule.length}
-              </span>
-              <button
-                type="button"
-                onClick={() => setShowEditDaysModal(true)}
-                className="text-xs font-bold text-[#7c3aed] hover:text-[#5a00c6] flex items-center gap-1 cursor-pointer bg-[#ede0ff] hover:bg-[#d8b4fe] px-3 py-1.5 rounded-lg transition-all"
-              >
-                <span className="material-symbols-outlined text-[16px]">edit_calendar</span>
-                <span>Editar dias e matérias</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
-            {plan.weeklySchedule.map((day, index) => {
-              const isSelected = selectedDayIndex === index;
-              const dayCompleted = day.blocks.every(b => b.completed) && day.blocks.length > 0;
-              const completedCount = day.blocks.filter(b => b.completed).length;
-
-              return (
-                <button
-                  key={day.dayNumber}
-                  onClick={() => setSelectedDayIndex(index)}
-                  className={`min-w-[105px] md:min-w-[125px] p-3 rounded-2xl border text-left transition-all duration-200 cursor-pointer shrink-0 ${
-                    isSelected
-                      ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-md scale-[1.02]'
-                      : 'bg-white text-[#4a4455] border-[#e1e3e4] hover:border-[#7c3aed]'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-bold uppercase tracking-wider opacity-80">
-                      {day.dayName}
-                    </span>
-                    {dayCompleted ? (
-                      <span className="material-symbols-outlined text-[16px] text-green-400 fill-1">check_circle</span>
-                    ) : (
-                      <span className="text-[10px] font-semibold opacity-70">
-                        {completedCount}/{day.blocks.length}
-                      </span>
-                    )}
-                  </div>
-                  <div className="text-xs font-bold truncate">
-                    {day.focusArea.split('&')[0]}
-                  </div>
-                  <div className="text-[10px] opacity-75 mt-0.5">
-                    {day.totalTimeMinutes} min de estudo
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Selected Day Study Blocks */}
-        <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-[#e1e3e4]">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed]">
-                {activeDay.dayName} • Foco do Dia
-              </span>
-              <h3 className="text-xl font-extrabold text-[#191c1d]">
-                {activeDay.focusArea}
-              </h3>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold bg-[#f3f4f5] text-[#4a4455] px-3 py-1.5 rounded-full flex items-center gap-1">
-                <span className="material-symbols-outlined text-[14px]">schedule</span>
-                {activeDay.totalTimeMinutes} minutos programados
-              </span>
-            </div>
-          </div>
-
-          {/* List of Blocks */}
-          <div className="space-y-4">
-            {activeDay.blocks.map((block) => {
-              const subj = block.subject !== 'geral' ? SUBJECT_INFO[block.subject as SubjectType] : null;
-
-              return (
-                <div
-                  key={block.id}
-                  className={`p-4 md:p-5 rounded-2xl border transition-all ${
-                    block.completed
-                      ? 'bg-[#f8f9fa] border-[#e1e3e4] opacity-75'
-                      : 'bg-white border-[#e1e3e4] shadow-xs hover:border-[#7c3aed]'
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-start gap-3 flex-1">
-                      {/* Checkbox button */}
-                      <button
-                        type="button"
-                        onClick={() => handleBlockCheck(block.id, block.completed)}
-                        className={`w-6 h-6 rounded-lg border flex items-center justify-center mt-1 transition-all cursor-pointer ${
-                          block.completed
-                            ? 'bg-[#7c3aed] border-[#7c3aed] text-white'
-                            : 'border-[#ccc3d8] bg-white hover:border-[#7c3aed]'
-                        }`}
-                      >
-                        {block.completed && (
-                          <span className="material-symbols-outlined text-[18px]">check</span>
-                        )}
-                      </button>
-
-                      {/* Block Info */}
-                      <div className="flex-1">
-                        <div className="flex flex-wrap items-center gap-2 mb-1">
-                          {subj && (
-                            <span
-                              className="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1"
-                              style={{
-                                backgroundColor: subj.bgColor,
-                                color: subj.textColor
-                              }}
-                            >
-                              <span className="material-symbols-outlined text-[14px]">{subj.icon}</span>
-                              {subj.name}
-                            </span>
-                          )}
-
-                          <span className="text-[11px] font-semibold text-[#7b7487] bg-[#f3f4f5] px-2 py-0.5 rounded-md">
-                            {block.durationMinutes} min
-                          </span>
-
-                          <span className="text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-0.5">
-                            <span className="material-symbols-outlined text-[13px]">trending_up</span>
-                            TRI {block.triWeight}
-                          </span>
-
-                          <span className="text-[10px] font-extrabold text-[#630ed4] bg-[#ede0ff] px-1.5 py-0.5 rounded flex items-center gap-0.5">
-                            <span className="material-symbols-outlined text-[12px]">stars</span>
-                            +50 XP
-                          </span>
-                        </div>
-
-                        <h4 className={`text-base font-bold ${block.completed ? 'line-through text-[#7b7487]' : 'text-[#191c1d]'}`}>
-                          {block.title}
-                        </h4>
-                        <p className="text-xs md:text-sm text-[#4a4455] mt-0.5">
-                          {block.topic}
-                        </p>
-
-                        {block.tip && (
-                          <div className="mt-2.5 p-2.5 bg-[#f9fafb] border border-[#e1e3e4] rounded-xl text-xs text-[#4a4455] flex items-start gap-1.5">
-                            <span className="material-symbols-outlined text-amber-500 text-[16px] shrink-0 mt-0.5">tips_and_updates</span>
-                            <span>{block.tip}</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Focus timer trigger */}
-                    <button
-                      type="button"
-                      onClick={() => onOpenTimer(block)}
-                      className="p-2.5 rounded-xl border border-[#e1e3e4] hover:border-[#7c3aed] text-[#630ed4] hover:bg-[#ede0ff] transition-all cursor-pointer shrink-0 flex items-center gap-1 text-xs font-semibold"
-                      title="Iniciar cronômetro de foco para este bloco"
-                    >
-                      <span className="material-symbols-outlined text-[18px]">timer</span>
-                      <span className="hidden sm:inline">Modo Foco</span>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Action Footer */}
         <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-[#e1e3e4]">
           <button
@@ -818,7 +819,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
             <button
               id="btn-imprimir-rodape"
               onClick={handlePrint}
-              className="px-5 py-2.5 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white text-xs md:text-sm font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-95"
+              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white text-xs md:text-sm font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-95"
             >
               <span className="material-symbols-outlined text-[18px]">picture_as_pdf</span>
               <span>Baixar PDF / Imprimir</span>
@@ -894,7 +895,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                   setShowPrintModal(false);
                   setTimeout(() => handlePrint(), 200);
                 }}
-                className="px-6 py-2.5 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white text-xs md:text-sm font-bold shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white text-xs md:text-sm font-bold shadow-md transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[18px]">print</span>
                 <span>Imprimir / Salvar em PDF</span>
@@ -979,7 +980,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
             <button
               type="button"
               onClick={() => setShowEditDaysModal(false)}
-              className="w-full py-3 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white font-bold text-sm shadow-md transition-all cursor-pointer"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-bold text-sm shadow-md transition-all cursor-pointer"
             >
               Concluído
             </button>

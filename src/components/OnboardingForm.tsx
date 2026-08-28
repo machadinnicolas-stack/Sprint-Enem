@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { UserPreferences, LevelType, TimeType, SubjectType } from '../types';
 import { POPULAR_COURSES, SUBJECT_INFO } from '../data/enemData';
 import { motion } from 'motion/react';
 import confetti from 'canvas-confetti';
+
+// Accent-insensitive, case-insensitive normalization so "historia" matches "História".
+function normalizeForSearch(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(new RegExp('[\\u0300-\\u036f]', 'g'), '')
+    .toLowerCase();
+}
 
 interface OnboardingFormProps {
   initialValues: UserPreferences;
@@ -19,6 +27,13 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
   );
   const [isGenerating, setIsGenerating] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+
+  const courseSuggestions = useMemo(() => {
+    const query = curso.trim();
+    if (!query) return POPULAR_COURSES.slice(0, 8);
+    const normalizedQuery = normalizeForSearch(query);
+    return POPULAR_COURSES.filter((c) => normalizeForSearch(c).includes(normalizedQuery)).slice(0, 8);
+  }, [curso]);
 
   const toggleDificuldade = (subj: SubjectType) => {
     if (dificuldades.includes(subj)) {
@@ -112,24 +127,32 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
               placeholder="Ex: Medicina, Direito, Engenharia..."
               className="w-full bg-[#f9fafb] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
             />
-            {/* Quick suggestions */}
-            <div className="mt-3 flex flex-wrap gap-1.5 items-center">
-              <span className="text-xs text-[#7b7487] mr-1">Sugestões:</span>
-              {POPULAR_COURSES.slice(0, 5).map((pop) => (
-                <button
-                  key={pop}
-                  type="button"
-                  onClick={() => setCurso(pop)}
-                  className={`text-xs px-2.5 py-1 rounded-full border transition-all ${
-                    curso.toLowerCase() === pop.toLowerCase()
-                      ? 'bg-[#ede0ff] text-[#630ed4] border-[#7c3aed] font-medium'
-                      : 'bg-white text-[#4a4455] border-[#e1e3e4] hover:border-[#7c3aed]'
-                  }`}
-                >
-                  {pop}
-                </button>
-              ))}
-            </div>
+            {/* Quick suggestions / smart search results */}
+            {courseSuggestions.length > 0 ? (
+              <div className="mt-3 flex flex-wrap gap-1.5 items-center">
+                <span className="text-xs text-[#7b7487] mr-1">
+                  {curso.trim() ? 'Cursos encontrados:' : 'Sugestões:'}
+                </span>
+                {courseSuggestions.map((pop) => (
+                  <button
+                    key={pop}
+                    type="button"
+                    onClick={() => setCurso(pop)}
+                    className={`text-xs px-2.5 py-1 rounded-full border transition-all cursor-pointer ${
+                      curso.toLowerCase() === pop.toLowerCase()
+                        ? 'bg-[#ede0ff] text-[#630ed4] border-[#7c3aed] font-medium'
+                        : 'bg-white text-[#4a4455] border-[#e1e3e4] hover:border-[#7c3aed]'
+                    }`}
+                  >
+                    {pop}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-3 text-xs text-[#7b7487]">
+                Nenhum curso encontrado nas sugestões — tudo bem, pode continuar digitando o seu.
+              </p>
+            )}
           </div>
 
           {/* Question 2: Time Available per day */}
@@ -335,7 +358,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
             type="button"
             onClick={handleOpenConfirm}
             disabled={isGenerating}
-            className="w-full bg-[#7c3aed] hover:bg-[#630ed4] text-white font-semibold text-base md:text-lg py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-md cursor-pointer disabled:opacity-75"
+            className="w-full bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-semibold text-base md:text-lg py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-md cursor-pointer disabled:opacity-75"
           >
             {isGenerating ? (
               <span className="flex items-center gap-2">
@@ -415,7 +438,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                 type="button"
                 onClick={handleConfirmGenerate}
                 disabled={isGenerating}
-                className="flex-1 py-3 px-4 rounded-xl font-bold text-sm bg-[#7c3aed] hover:bg-[#630ed4] text-white shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                className="flex-1 py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
               >
                 {isGenerating ? (
                   <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>

@@ -161,7 +161,7 @@ export const PomodoroTimerModal: React.FC<PomodoroTimerModalProps> = ({
             className={`flex-1 py-3 px-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer ${
               isRunning
                 ? 'bg-[#ba1a1a] hover:bg-[#93000a] text-white'
-                : 'bg-[#7c3aed] hover:bg-[#630ed4] text-white'
+                : 'bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white'
             }`}
           >
             <span className="material-symbols-outlined">

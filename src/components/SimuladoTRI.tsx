@@ -95,8 +95,10 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
   return (
     <div className="max-w-3xl mx-auto px-4 py-6 pb-24">
       {/* Header */}
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative">
+        <div className="absolute -left-8 -top-10 w-40 h-40 bg-[#7c3aed]/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="absolute right-0 -top-6 w-32 h-32 bg-amber-400/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="relative">
           <div className="inline-flex items-center gap-1.5 bg-[#ede0ff] text-[#630ed4] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
             <span className="material-symbols-outlined text-[14px]">psychology</span>
             Treino Rápido TRI
@@ -144,7 +146,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
             transition={{ duration: 0.25 }}
             className="bg-white rounded-3xl p-6 md:p-10 border border-[#e1e3e4] shadow-sm text-center"
           >
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7c3aed] to-[#5a00c6] text-white flex items-center justify-center mx-auto mb-4 shadow-md shadow-[#7c3aed]/20">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7c3aed] via-[#c026d3] to-amber-400 text-white flex items-center justify-center mx-auto mb-4 shadow-md shadow-[#c026d3]/30">
               <span className="material-symbols-outlined text-[32px]">emoji_events</span>
             </div>
             <h2 className="text-xl md:text-2xl font-black text-[#191c1d] mb-1">
@@ -172,7 +174,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
               <button
                 type="button"
                 onClick={handleRestart}
-                className="px-6 py-3 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white font-bold text-sm transition-all shadow-md cursor-pointer flex items-center gap-2"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-bold text-sm transition-all shadow-md cursor-pointer flex items-center gap-2"
               >
                 <span className="material-symbols-outlined text-[18px]">refresh</span>
                 <span>Refazer esta área</span>
@@ -301,14 +303,14 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
                 <button
                   onClick={handleConfirmAnswer}
                   disabled={!selectedOption}
-                  className="px-6 py-3 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white font-bold text-sm transition-all shadow-md cursor-pointer disabled:opacity-50"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-bold text-sm transition-all shadow-md cursor-pointer disabled:opacity-50"
                 >
                   Confirmar Resposta
                 </button>
               ) : (
                 <button
                   onClick={handleNext}
-                  className="px-6 py-3 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white font-bold text-sm transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-bold text-sm transition-all shadow-md flex items-center gap-2 cursor-pointer"
                 >
                   <span>{currentIndex < questions.length - 1 ? 'Próxima Questão' : 'Ver Resultado'}</span>
                   <span className="material-symbols-outlined text-[18px]">arrow_forward</span>

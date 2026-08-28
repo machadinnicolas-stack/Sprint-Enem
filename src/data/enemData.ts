@@ -1,16 +1,52 @@
 import { ExamQuestion, RedacaoTheme, TopicItem, SubjectType, UserPreferences, DaySchedule, GeneratedPlan, StudyBlock } from '../types';
 
+// Ordered with the most commonly searched courses first — the first few entries
+// are used as the default "popular" quick-picks before the user types anything.
 export const POPULAR_COURSES = [
   'Medicina',
   'Direito',
   'Engenharia de Software',
   'Psicologia',
   'Ciência da Computação',
-  'Odontologia',
   'Administração',
+  'Odontologia',
   'Arquitetura e Urbanismo',
   'Enfermagem',
-  'Biomedicina'
+  'Biomedicina',
+  'Engenharia Civil',
+  'Engenharia Mecânica',
+  'Engenharia Elétrica',
+  'Engenharia de Produção',
+  'Nutrição',
+  'Farmácia',
+  'Fisioterapia',
+  'Medicina Veterinária',
+  'Fonoaudiologia',
+  'Educação Física',
+  'Pedagogia',
+  'História',
+  'Geografia',
+  'Letras',
+  'Filosofia',
+  'Sociologia',
+  'Ciências Sociais',
+  'Relações Internacionais',
+  'Jornalismo',
+  'Publicidade e Propaganda',
+  'Design Gráfico',
+  'Ciências Contábeis',
+  'Economia',
+  'Serviço Social',
+  'Sistemas de Informação',
+  'Análise e Desenvolvimento de Sistemas',
+  'Gastronomia',
+  'Turismo',
+  'Matemática',
+  'Física',
+  'Química',
+  'Biologia',
+  'Zootecnia',
+  'Agronomia'
 ];
 
 export const SUBJECT_INFO: Record<SubjectType, {

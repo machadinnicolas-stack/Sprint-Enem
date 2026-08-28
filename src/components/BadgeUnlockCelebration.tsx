@@ -47,9 +47,9 @@ export const BadgeUnlockCelebration: React.FC<BadgeUnlockCelebrationProps> = ({
       >
         {/* Glow backdrop */}
         <div className="w-24 h-24 mx-auto mb-4 relative flex items-center justify-center">
-          <div className="absolute inset-0 bg-gradient-to-tr from-amber-400 to-yellow-300 rounded-full blur-xl opacity-60 animate-pulse"></div>
-          
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#7c3aed] to-[#5a00c6] text-white flex items-center justify-center shadow-xl relative z-10 border-2 border-amber-300">
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#7c3aed] via-[#c026d3] to-amber-300 rounded-full blur-xl opacity-70 animate-pulse"></div>
+
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#7c3aed] via-[#c026d3] to-amber-400 text-white flex items-center justify-center shadow-xl relative z-10 border-2 border-amber-300">
             <span className="material-symbols-outlined text-[40px]">
               {isLevelUp ? 'military_tech' : badge?.icon || 'workspace_premium'}
             </span>
@@ -79,7 +79,7 @@ export const BadgeUnlockCelebration: React.FC<BadgeUnlockCelebrationProps> = ({
 
         <button
           onClick={onClose}
-          className="w-full py-3 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white font-bold text-sm shadow-md transition-all cursor-pointer active:scale-95"
+          className="w-full py-3 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-bold text-sm shadow-md transition-all cursor-pointer active:scale-95"
         >
           Excelente! Continuar Estudando
         </button>

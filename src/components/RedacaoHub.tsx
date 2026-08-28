@@ -83,8 +83,10 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
   return (
     <div className="max-w-4xl mx-auto px-4 py-6 pb-24">
       {/* Header */}
-      <div className="mb-6">
-        <div className="inline-flex items-center gap-1.5 bg-[#fce7f3] text-[#be185d] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+      <div className="mb-6 relative">
+        <div className="absolute -left-8 -top-10 w-40 h-40 bg-[#ec4899]/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="absolute right-0 -top-6 w-32 h-32 bg-[#7c3aed]/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="relative inline-flex items-center gap-1.5 bg-[#fce7f3] text-[#be185d] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
           <span className="material-symbols-outlined text-[14px]">edit_document</span>
           Laboratório de Escrita
         </div>
@@ -198,7 +200,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
             type="button"
             onClick={handleEvaluate}
             disabled={!draftText.trim() || isEvaluating}
-            className="px-6 py-3 rounded-xl bg-[#7c3aed] hover:bg-[#630ed4] text-white font-bold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-bold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {isEvaluating ? (
               <>
