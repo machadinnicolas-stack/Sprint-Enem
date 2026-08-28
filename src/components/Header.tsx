@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
 
         {/* Navigation Tabs */}
-        <nav className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
+        <nav className="hidden md:flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
           <button
             onClick={() => setActiveTab('cronograma')}
             className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
@@ -141,6 +141,36 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
       </div>
+
+      <nav className="mobile-bottom-nav md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[#e1e3e4]/90 bg-white/95 px-1.5 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(71,42,112,0.1)] backdrop-blur-xl">
+        <div className="grid grid-cols-5 gap-1 max-w-lg mx-auto">
+          {[
+            { id: 'cronograma' as const, label: 'Plano', icon: 'calendar_today' },
+            { id: 'incidencia' as const, label: 'Raio-X', icon: 'fact_check' },
+            { id: 'simulado' as const, label: 'Simulado', icon: 'quiz' },
+            { id: 'redacao' as const, label: 'Redação', icon: 'edit_note' },
+            { id: 'personalizar' as const, label: 'Ajustar', icon: 'tune' }
+          ].map((item) => {
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveTab(item.id)}
+                aria-current={isActive ? 'page' : undefined}
+                className={`min-w-0 min-h-14 rounded-xl flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold transition-colors cursor-pointer ${
+                  isActive
+                    ? 'bg-[#ede0ff] text-[#630ed4]'
+                    : 'text-[#7b7487] active:bg-[#f3f4f5]'
+                }`}
+              >
+                <span className="material-symbols-outlined text-[21px]">{item.icon}</span>
+                <span className="truncate max-w-full px-0.5">{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
     </header>
   );
 };

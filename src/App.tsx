@@ -319,7 +319,7 @@ export default function App() {
       )}
 
       {/* Screen Views */}
-      <main className="flex-1">
+      <main className="flex-1 pb-20 md:pb-0">
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, y: 8 }}
