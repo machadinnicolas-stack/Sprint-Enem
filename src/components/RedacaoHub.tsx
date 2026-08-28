@@ -6,6 +6,8 @@ interface RedacaoHubProps {
   onEvaluationComplete?: (score: number) => void;
 }
 
+const MINIMUM_LINES = 8;
+
 export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) => {
   const [themes] = useState<RedacaoTheme[]>(REDACAO_THEMES);
   const [selectedTheme, setSelectedTheme] = useState<RedacaoTheme>(REDACAO_THEMES[0]);
@@ -19,9 +21,11 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
 
   const wordCount = draftText.trim() ? draftText.trim().split(/\s+/).length : 0;
   const lineEstimate = Math.ceil(wordCount / 10);
+  const hasMinimumLines = lineEstimate >= MINIMUM_LINES;
+  const linesRemaining = Math.max(0, MINIMUM_LINES - lineEstimate);
 
   const handleEvaluate = async () => {
-    if (!draftText.trim()) return;
+    if (!draftText.trim() || !hasMinimumLines) return;
     setIsEvaluating(true);
     setFeedback(null);
 
@@ -179,7 +183,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
           </h2>
           <div className="flex items-center gap-2 text-xs font-semibold text-[#7b7487]">
             <span>{wordCount} palavras</span>
-            <span>• ~{lineEstimate} linhas</span>
+            <span className={hasMinimumLines ? '' : 'text-amber-700'}>• ~{lineEstimate} linhas</span>
           </div>
         </div>
 
@@ -192,14 +196,16 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
         />
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-          <span className="text-xs text-[#7b7487]">
-            Avaliação orientada pelos critérios oficiais do INEP.
+          <span className={`text-xs ${hasMinimumLines ? 'text-[#7b7487]' : 'text-amber-700 font-semibold'}`}>
+            {hasMinimumLines
+              ? 'Avaliação orientada pelos critérios oficiais do INEP.'
+              : `Escreva mais ${linesRemaining} ${linesRemaining === 1 ? 'linha' : 'linhas'} para liberar a avaliação.`}
           </span>
 
           <button
             type="button"
             onClick={handleEvaluate}
-            disabled={!draftText.trim() || isEvaluating}
+            disabled={!hasMinimumLines || isEvaluating}
             className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] hover:from-[#6d28d9] hover:to-[#a21caf] text-white font-bold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {isEvaluating ? (

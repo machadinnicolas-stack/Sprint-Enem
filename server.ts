@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
+const MINIMUM_LINES = 8;
 
 app.use(express.json());
 
@@ -42,6 +43,15 @@ app.post('/api/evaluate-redacao', async (req: Request, res: Response) => {
 
   if (!text || typeof text !== 'string') {
     return res.status(400).json({ error: 'Texto da redação é obrigatório' });
+  }
+
+  const estimatedLineCount = Math.ceil(text.trim().split(/\s+/).length / 10);
+  if (estimatedLineCount < MINIMUM_LINES) {
+    return res.status(422).json({
+      error: `A redação precisa ter pelo menos ${MINIMUM_LINES} linhas estimadas para ser avaliada.`,
+      minimumLines: MINIMUM_LINES,
+      currentLines: estimatedLineCount
+    });
   }
 
   const ai = getGeminiAI();

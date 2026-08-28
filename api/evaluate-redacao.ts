@@ -1,5 +1,7 @@
 import { GoogleGenAI, Type } from '@google/genai';
 
+const MINIMUM_LINES = 8;
+
 // Vercel Serverless Function: POST /api/evaluate-redacao
 // Mirrors the logic in server.ts (used for local dev via `npm run dev`).
 
@@ -29,6 +31,15 @@ export default async function handler(req: any, res: any) {
 
   if (!text || typeof text !== 'string') {
     return res.status(400).json({ error: 'Texto da redação é obrigatório' });
+  }
+
+  const estimatedLineCount = Math.ceil(text.trim().split(/\s+/).length / 10);
+  if (estimatedLineCount < MINIMUM_LINES) {
+    return res.status(422).json({
+      error: `A redação precisa ter pelo menos ${MINIMUM_LINES} linhas estimadas para ser avaliada.`,
+      minimumLines: MINIMUM_LINES,
+      currentLines: estimatedLineCount
+    });
   }
 
   const ai = getGeminiAI();
