@@ -21,24 +21,24 @@ export const Header: React.FC<HeaderProps> = ({
   const unlockedBadgesCount = gamification.badges.filter((b) => b.unlocked).length;
 
   return (
-    <header className="app-header sticky top-0 z-30 bg-white/88 backdrop-blur-xl border-b border-[#e1e3e4]/80 px-4 py-2.5 transition-all">
-      <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 md:gap-3">
+    <header className="app-header sticky top-0 z-30 bg-white/88 backdrop-blur-xl border-b border-[#e1e3e4]/80 px-3 sm:px-4 pt-[max(0.625rem,env(safe-area-inset-top))] pb-2.5 transition-all overflow-hidden">
+      <div className="max-w-4xl mx-auto w-full min-w-0 flex items-center justify-between gap-2 md:gap-3">
         {/* Brand */}
         <button
           onClick={() => setActiveTab('cronograma')}
-          className="flex items-center gap-2 text-left cursor-pointer group shrink-0"
+          className="flex items-center gap-2 text-left cursor-pointer group min-w-0 shrink"
         >
           <div className="w-8 h-8 rounded-lg bg-[#ede0ff] text-[#630ed4] flex items-center justify-center transition-transform group-hover:scale-105">
             <span className="material-symbols-outlined text-[20px] fill-1">bolt</span>
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="font-bold text-sm tracking-tight text-[#191c1d]">Sprint ENEM</span>
-              <span className="bg-[#eaddff] text-[#630ed4] text-[10px] font-bold px-1.5 py-0.2 rounded-sm uppercase">
+              <span className="font-bold text-sm tracking-tight text-[#191c1d] truncate max-[380px]:hidden">Sprint ENEM</span>
+              <span className="bg-[#eaddff] text-[#630ed4] text-[10px] font-bold px-1.5 py-0.2 rounded-sm uppercase max-[380px]:hidden">
                 TRI Pro
               </span>
             </div>
-            <p className="text-[11px] text-[#7b7487] font-medium hidden sm:block">
+            <p className="text-[11px] text-[#7b7487] font-medium hidden sm:block truncate">
               {preferences.curso || 'Plano de Estudos'} • {preferences.tempoDia}/dia
             </p>
           </div>
@@ -109,11 +109,11 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* Gamification Level & Streak Button Trigger */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-1.5 shrink-0">
           <button
             type="button"
             onClick={onOpenBadgesModal}
-            className="flex items-center gap-2 bg-[#fdf8f6] hover:bg-[#faebd7] border border-[#fed7aa] p-1 md:px-2.5 md:py-1 rounded-2xl transition-all cursor-pointer shadow-xs active:scale-95 group"
+            className="flex items-center gap-1.5 bg-[#fdf8f6] hover:bg-[#faebd7] border border-[#fed7aa] p-1.5 sm:p-1 md:px-2.5 md:py-1 rounded-2xl transition-all cursor-pointer shadow-xs active:scale-95 group"
             title="Ver Nível, Sequência e Emblemas"
           >
             {/* Streak flame */}
