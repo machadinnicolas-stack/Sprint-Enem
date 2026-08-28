@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { UserPreferences, GeneratedPlan, StudyBlock, UserGamificationState, Badge, SubjectType } from './types';
 import { generateStudyPlan, buildDaySchedule, regenerateDaySubject } from './data/enemData';
-
-const DAY_NAMES = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
 import { getInitialGamificationState, processGamificationEvent, getLevelInfo } from './data/gamificationData';
 import { OnboardingForm } from './components/OnboardingForm';
 import { Header } from './components/Header';
@@ -14,6 +12,9 @@ import { RedacaoHub } from './components/RedacaoHub';
 import { PomodoroTimerModal } from './components/PomodoroTimerModal';
 import { BadgesModal } from './components/BadgesModal';
 import { BadgeUnlockCelebration } from './components/BadgeUnlockCelebration';
+import { UpdateNotifier } from './components/UpdateNotifier';
+
+const DAY_NAMES = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
 
 const DEFAULT_PREFERENCES: UserPreferences = {
   curso: 'Medicina',
@@ -385,6 +386,8 @@ export default function App() {
           onClose={() => setCelebration(null)}
         />
       )}
+
+      <UpdateNotifier />
     </div>
   );
 }
