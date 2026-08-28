@@ -370,7 +370,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
         </div>
 
         {/* Selected Day Study Blocks */}
-        <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-8">
+        <div className="surface-lift bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-[#e1e3e4]">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed]">

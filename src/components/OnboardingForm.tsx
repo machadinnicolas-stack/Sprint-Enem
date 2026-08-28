@@ -85,7 +85,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
   };
 
   return (
-    <div id="onboarding-container" className="min-h-screen bg-[#f9fafb] text-[#191c1d] pb-[130px]">
+    <div id="onboarding-container" className="onboarding-shell min-h-screen bg-[#f9fafb]/70 text-[#191c1d] pb-[130px]">
       {/* Header Context */}
       <header className="flex items-center justify-between gap-2 px-5 py-4 max-w-2xl mx-auto mt-2">
         <div className="flex items-center gap-2">
@@ -112,7 +112,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
           {/* Question 1: Course */}
           <div
             id="card-curso"
-            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#e1e3e4] transition-all hover:border-[#ccc3d8]"
+            className="surface-lift bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#e1e3e4] transition-all hover:border-[#ccc3d8]"
           >
             <label htmlFor="curso" className="block text-base md:text-lg font-semibold text-[#191c1d] mb-3 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#7b7487]">school</span>

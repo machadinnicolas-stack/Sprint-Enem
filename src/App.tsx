@@ -306,7 +306,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f9fafb] text-[#191c1d] flex flex-col font-sans selection:bg-[#eaddff] selection:text-[#630ed4]">
+    <div className="app-shell min-h-screen bg-[#f9fafb]/70 text-[#191c1d] flex flex-col font-sans selection:bg-[#eaddff] selection:text-[#630ed4]">
       {/* Top Header Navigation */}
       {activeTab !== 'personalizar' && (
         <Header

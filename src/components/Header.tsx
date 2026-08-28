@@ -21,7 +21,7 @@ export const Header: React.FC<HeaderProps> = ({
   const unlockedBadgesCount = gamification.badges.filter((b) => b.unlocked).length;
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#e1e3e4] px-4 py-2.5 transition-all">
+    <header className="app-header sticky top-0 z-30 bg-white/88 backdrop-blur-xl border-b border-[#e1e3e4]/80 px-4 py-2.5 transition-all">
       <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 md:gap-3">
         {/* Brand */}
         <button
