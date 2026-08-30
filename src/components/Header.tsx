@@ -8,6 +8,8 @@ interface HeaderProps {
   preferences: UserPreferences;
   gamification: UserGamificationState;
   onOpenBadgesModal: () => void;
+  userEmail?: string | null;
+  onLogout?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -15,7 +17,9 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   preferences,
   gamification,
-  onOpenBadgesModal
+  onOpenBadgesModal,
+  userEmail,
+  onLogout
 }) => {
   const levelInfo = getLevelInfo(gamification.xp);
   const unlockedBadgesCount = gamification.badges.filter((b) => b.unlocked).length;
@@ -139,6 +143,17 @@ export const Header: React.FC<HeaderProps> = ({
               {unlockedBadgesCount} 🏆
             </span>
           </button>
+
+          {onLogout && (
+            <button
+              type="button"
+              onClick={onLogout}
+              title={userEmail ? `Sair (${userEmail})` : 'Sair'}
+              className="w-8 h-8 flex items-center justify-center rounded-full text-[#7b7487] hover:bg-[#f3f4f5] hover:text-[#191c1d] transition-all cursor-pointer shrink-0"
+            >
+              <span className="material-symbols-outlined text-[19px]">logout</span>
+            </button>
+          )}
         </div>
       </div>
 
