@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { UserPreferences, GeneratedPlan, StudyBlock, UserGamificationState, Badge, SubjectType } from './types';
 import { generateStudyPlan, buildDaySchedule, regenerateDaySubject } from './data/enemData';
-import { getInitialGamificationState, processGamificationEvent, getLevelInfo } from './data/gamificationData';
+import { getInitialGamificationState, reconcileGamificationState, processGamificationEvent, getLevelInfo } from './data/gamificationData';
+import { useAuth } from './hooks/useAuth';
+import { loadUserData, saveUserData } from './services/userData';
+import { AuthScreen } from './components/AuthScreen';
 import { OnboardingForm } from './components/OnboardingForm';
 import { Header } from './components/Header';
 import { CronogramaView } from './components/CronogramaView';
 import { ChecklistIncidencia } from './components/ChecklistIncidencia';
 import { SimuladoTRI } from './components/SimuladoTRI';
+import { SimuladoCompleto } from './components/SimuladoCompleto';
 import { RedacaoHub } from './components/RedacaoHub';
 import { PomodoroTimerModal } from './components/PomodoroTimerModal';
 import { BadgesModal } from './components/BadgesModal';
@@ -25,26 +29,13 @@ const DEFAULT_PREFERENCES: UserPreferences = {
 };
 
 export default function App() {
-  const [preferences, setPreferences] = useState<UserPreferences>(() => {
-    try {
-      const saved = localStorage.getItem('sprint_enem_prefs');
-      return saved ? JSON.parse(saved) : DEFAULT_PREFERENCES;
-    } catch {
-      return DEFAULT_PREFERENCES;
-    }
-  });
+  const { user, authLoading, logout } = useAuth();
 
-  const [gamification, setGamification] = useState<UserGamificationState>(() => {
-    try {
-      const saved = localStorage.getItem('sprint_enem_gamification');
-      return saved ? JSON.parse(saved) : getInitialGamificationState();
-    } catch {
-      return getInitialGamificationState();
-    }
-  });
-
+  const [preferences, setPreferences] = useState<UserPreferences>(DEFAULT_PREFERENCES);
+  const [gamification, setGamification] = useState<UserGamificationState>(getInitialGamificationState());
   const [activeTab, setActiveTab] = useState<'personalizar' | 'cronograma' | 'incidencia' | 'simulado' | 'redacao'>('personalizar');
-  const [plan, setPlan] = useState<GeneratedPlan>(() => generateStudyPlan(preferences));
+  const [simuladoMode, setSimuladoMode] = useState<'rapido' | 'completo'>('rapido');
+  const [plan, setPlan] = useState<GeneratedPlan>(() => generateStudyPlan(DEFAULT_PREFERENCES));
   const [selectedBlockForTimer, setSelectedBlockForTimer] = useState<StudyBlock | null>(null);
   const [isBadgesModalOpen, setIsBadgesModalOpen] = useState(false);
 
@@ -55,21 +46,58 @@ export default function App() {
     newLevelNumber?: number;
   } | null>(null);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem('sprint_enem_prefs', JSON.stringify(preferences));
-    } catch {
-      // safe fallback
-    }
-  }, [preferences]);
+  // Cloud sync: load the signed-in user's data from Firestore, then debounce-save
+  // any local changes back. `dataReady` gates the save effect so we never overwrite
+  // Firestore with default state before the initial load completes.
+  const [dataReady, setDataReady] = useState(false);
+  const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    try {
-      localStorage.setItem('sprint_enem_gamification', JSON.stringify(gamification));
-    } catch {
-      // safe fallback
+    if (!user) {
+      setDataReady(false);
+      return;
     }
-  }, [gamification]);
+
+    let cancelled = false;
+    setDataReady(false);
+
+    loadUserData(user.id)
+      .then((data) => {
+        if (cancelled) return;
+        const loadedPrefs = data.preferences ?? DEFAULT_PREFERENCES;
+        setPreferences(loadedPrefs);
+        setGamification(reconcileGamificationState(data.gamification));
+        setPlan(data.plan ?? generateStudyPlan(loadedPrefs));
+        // Returning users with an existing plan land on their cronograma, not back at onboarding.
+        if (data.preferences) setActiveTab('cronograma');
+        setDataReady(true);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        // Falls back to defaults so the app doesn't hang on the loading spinner forever.
+        setPlan(generateStudyPlan(DEFAULT_PREFERENCES));
+        setDataReady(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !dataReady) return;
+
+    if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+    saveTimeoutRef.current = setTimeout(() => {
+      saveUserData(user.id, { preferences, gamification, plan }).catch(() => {
+        // safe fallback: next change will retry the save
+      });
+    }, 800);
+
+    return () => {
+      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+    };
+  }, [user, dataReady, preferences, gamification, plan]);
 
   const handleGeneratePlan = (newPrefs: UserPreferences) => {
     setPreferences(newPrefs);
@@ -285,6 +313,28 @@ export default function App() {
     }
   };
 
+  const handleSimuladoCompletoFinished = (correctCount: number, totalCount: number) => {
+    const { newState, newlyUnlocked, levelUp } = processGamificationEvent(gamification, {
+      type: 'simulado_completo_finished',
+      correctCount,
+      totalCount
+    });
+    setGamification(newState);
+
+    if (levelUp) {
+      const info = getLevelInfo(newState.xp);
+      setCelebration({
+        isLevelUp: true,
+        newLevelTitle: info.title,
+        newLevelNumber: info.level
+      });
+    } else if (newlyUnlocked.length > 0) {
+      setCelebration({
+        badge: newlyUnlocked[0]
+      });
+    }
+  };
+
   const handleRedacaoEvaluated = (_score: number) => {
     const { newState, newlyUnlocked, levelUp } = processGamificationEvent(gamification, {
       type: 'redacao_evaluated'
@@ -305,6 +355,18 @@ export default function App() {
     }
   };
 
+  if (authLoading || (user && !dataReady)) {
+    return (
+      <div className="min-h-screen bg-[#f9fafb]/70 flex items-center justify-center">
+        <div className="w-8 h-8 border-[3px] border-[#ede0ff] border-t-[#7c3aed] rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AuthScreen />;
+  }
+
   return (
     <div className="app-shell min-h-screen bg-[#f9fafb]/70 text-[#191c1d] flex flex-col font-sans selection:bg-[#eaddff] selection:text-[#630ed4]">
       {/* Top Header Navigation */}
@@ -315,6 +377,8 @@ export default function App() {
           preferences={preferences}
           gamification={gamification}
           onOpenBadgesModal={() => setIsBadgesModalOpen(true)}
+          userEmail={user.email}
+          onLogout={logout}
         />
       )}
 
@@ -350,7 +414,38 @@ export default function App() {
           {activeTab === 'incidencia' && <ChecklistIncidencia />}
 
           {activeTab === 'simulado' && (
-            <SimuladoTRI onAnswerQuestion={handleSimuladoAnswered} />
+            <div>
+              <div className="max-w-3xl mx-auto px-4 pt-6 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setSimuladoMode('rapido')}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    simuladoMode === 'rapido'
+                      ? 'bg-[#7c3aed] text-white shadow-xs'
+                      : 'bg-white border border-[#e1e3e4] text-[#4a4455] hover:border-[#7c3aed]'
+                  }`}
+                >
+                  Treino Rápido
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSimuladoMode('completo')}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    simuladoMode === 'completo'
+                      ? 'bg-[#7c3aed] text-white shadow-xs'
+                      : 'bg-white border border-[#e1e3e4] text-[#4a4455] hover:border-[#7c3aed]'
+                  }`}
+                >
+                  Simulado Completo
+                </button>
+              </div>
+
+              {simuladoMode === 'rapido' ? (
+                <SimuladoTRI onAnswerQuestion={handleSimuladoAnswered} />
+              ) : (
+                <SimuladoCompleto onFinishedDia={handleSimuladoCompletoFinished} />
+              )}
+            </div>
           )}
 
           {activeTab === 'redacao' && (

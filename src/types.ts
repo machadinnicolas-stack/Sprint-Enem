@@ -64,6 +64,7 @@ export interface UserGamificationState {
   totalBlocksCompleted: number;
   totalMinutesStudied: number;
   simuladosCompleted: number;
+  simuladosCompletosFinalizados: number;
   redacoesEvaluated: number;
   badges: Badge[];
 }
@@ -120,4 +121,20 @@ export interface TopicItem {
   importance: 'Muito Alta' | 'Alta' | 'Média';
   completed: boolean;
   summary: string;
+}
+
+export interface SimuladoCompletoDia {
+  id: 'dia1' | 'dia2';
+  label: string;
+  subjects: [SubjectType, SubjectType];
+  questionIds: string[];
+  durationMinutes: number;
+}
+
+export interface SimuladoCompletoResultado {
+  dia: 'dia1' | 'dia2';
+  acertos: number;
+  total: number;
+  tempoGastoSegundos: number;
+  notaEstimadaPorArea: Record<string, number>;
 }

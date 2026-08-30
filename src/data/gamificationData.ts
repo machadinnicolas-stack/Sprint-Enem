@@ -109,6 +109,18 @@ export const INITIAL_BADGES: Badge[] = [
     xpReward: 150
   },
   {
+    id: 'maratonista_enem',
+    title: 'Maratonista do ENEM',
+    description: 'Conclua um dia inteiro do Simulado Completo cronometrado.',
+    icon: 'timer',
+    category: 'simulado',
+    unlocked: false,
+    progress: 0,
+    maxProgress: 1,
+    rarity: 'epico',
+    xpReward: 300
+  },
+  {
     id: 'arquiteto_redacao',
     title: 'Arquiteto Nota 1000',
     description: 'Avalie uma redação na Oficina com a inteligência artificial.',
@@ -205,6 +217,7 @@ const STREAK_QUALIFYING_EVENTS = new Set<GamificationUpdateEvent['type']>([
   'block_completed',
   'pomodoro_completed',
   'simulado_answered',
+  'simulado_completo_finished',
   'redacao_evaluated'
 ]);
 
@@ -217,15 +230,40 @@ export function getInitialGamificationState(): UserGamificationState {
     totalBlocksCompleted: 0,
     totalMinutesStudied: 0,
     simuladosCompleted: 0,
+    simuladosCompletosFinalizados: 0,
     redacoesEvaluated: 0,
     badges: INITIAL_BADGES
   };
 }
 
+// Merges a persisted state (from before new fields/badges existed in code) with the
+// current defaults, so users who saved data with an older app version pick up new
+// badges/fields automatically instead of being stuck without them forever.
+export function reconcileGamificationState(saved?: UserGamificationState | null): UserGamificationState {
+  const initial = getInitialGamificationState();
+  if (!saved) return initial;
+
+  const savedBadgesById = new Map((saved.badges ?? []).map((b) => [b.id, b]));
+  const badges = INITIAL_BADGES.map((defaultBadge) => {
+    const savedBadge = savedBadgesById.get(defaultBadge.id);
+    return savedBadge ? { ...defaultBadge, ...savedBadge } : defaultBadge;
+  });
+
+  return {
+    ...initial,
+    ...saved,
+    simuladosCompleted: saved.simuladosCompleted ?? 0,
+    simuladosCompletosFinalizados: saved.simuladosCompletosFinalizados ?? 0,
+    badges
+  };
+}
+
 export interface GamificationUpdateEvent {
-  type: 'block_completed' | 'block_uncompleted' | 'pomodoro_completed' | 'simulado_answered' | 'redacao_evaluated' | 'plan_customized';
+  type: 'block_completed' | 'block_uncompleted' | 'pomodoro_completed' | 'simulado_answered' | 'simulado_completo_finished' | 'redacao_evaluated' | 'plan_customized';
   minutes?: number;
   isAllDayCompleted?: boolean;
+  correctCount?: number;
+  totalCount?: number;
 }
 
 export function processGamificationEvent(
@@ -241,6 +279,7 @@ export function processGamificationEvent(
   let totalBlocks = prevState.totalBlocksCompleted;
   let totalMins = prevState.totalMinutesStudied;
   let simulados = prevState.simuladosCompleted;
+  let simuladosCompletos = prevState.simuladosCompletosFinalizados;
   let redacoes = prevState.redacoesEvaluated;
   let streak = prevState.streakDays;
   let lastStudiedDate = prevState.lastStudiedDate;
@@ -259,6 +298,11 @@ export function processGamificationEvent(
   } else if (event.type === 'simulado_answered') {
     xpGained += 40;
     simulados += 1;
+  } else if (event.type === 'simulado_completo_finished') {
+    const correctCount = event.correctCount || 0;
+    xpGained += 100 + correctCount * 10;
+    simulados += 1;
+    simuladosCompletos += 1;
   } else if (event.type === 'redacao_evaluated') {
     xpGained += 150;
     redacoes += 1;
@@ -323,6 +367,9 @@ export function processGamificationEvent(
       case 'sniper_tri':
         currentProgress = simulados;
         break;
+      case 'maratonista_enem':
+        currentProgress = simuladosCompletos;
+        break;
       case 'arquiteto_redacao':
         currentProgress = redacoes;
         break;
@@ -374,6 +421,7 @@ export function processGamificationEvent(
       totalBlocksCompleted: totalBlocks,
       totalMinutesStudied: totalMins,
       simuladosCompleted: simulados,
+      simuladosCompletosFinalizados: simuladosCompletos,
       redacoesEvaluated: redacoes,
       badges: updatedBadges
     },

@@ -864,8 +864,255 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     correctLetter: 'C',
     explanation: 'O conectivo "contudo" é um operador argumentativo que introduz uma ideia de oposição ou contraste em relação ao que foi dito anteriormente, sinalizando uma ressalva ao argumento inicial.',
     triTip: 'Domine os conectivos de oposição (contudo, entretanto, todavia, no entanto) — eles são essenciais tanto para interpretação de texto quanto para a Competência 4 da Redação.'
+  },
+
+  // ---- Matemática (Simulado Completo) ----
+  {
+    id: 'q-29',
+    subject: 'matematica',
+    areaName: 'Matemática e suas Tecnologias',
+    year: 'ENEM 2022',
+    topic: 'Porcentagem (descontos sucessivos)',
+    difficulty: 'Fácil',
+    question: 'Uma loja anuncia dois descontos sucessivos de 20% sobre um produto de R$ 500,00. Qual é o valor final pago pelo cliente após os dois descontos?',
+    options: [
+      { letter: 'A', text: 'R$ 300,00' },
+      { letter: 'B', text: 'R$ 320,00' },
+      { letter: 'C', text: 'R$ 350,00' },
+      { letter: 'D', text: 'R$ 360,00' },
+      { letter: 'E', text: 'R$ 400,00' }
+    ],
+    correctLetter: 'B',
+    explanation: 'Aplicando o primeiro desconto: R$ 500,00 × 0,8 = R$ 400,00. Aplicando o segundo desconto sobre o novo valor: R$ 400,00 × 0,8 = R$ 320,00. Descontos sucessivos não se somam diretamente (não equivalem a 40% de uma vez).',
+    triTip: 'Desconto sucessivo é pegadinha clássica do ENEM — nunca some as porcentagens diretamente, aplique uma de cada vez sobre o valor já reduzido.'
+  },
+  {
+    id: 'q-30',
+    subject: 'matematica',
+    areaName: 'Matemática e suas Tecnologias',
+    year: 'ENEM 2021',
+    topic: 'Probabilidade',
+    difficulty: 'Média',
+    question: 'Uma urna contém 4 bolas vermelhas, 3 bolas azuis e 3 bolas verdes, totalizando 10 bolas idênticas ao tato. Retirando-se uma bola ao acaso, qual é a probabilidade de ela não ser vermelha?',
+    options: [
+      { letter: 'A', text: '40%' },
+      { letter: 'B', text: '50%' },
+      { letter: 'C', text: '60%' },
+      { letter: 'D', text: '70%' },
+      { letter: 'E', text: '80%' }
+    ],
+    correctLetter: 'C',
+    explanation: 'Há 6 bolas que não são vermelhas (3 azuis + 3 verdes) em um total de 10 bolas. A probabilidade é 6/10 = 0,6 = 60%.',
+    triTip: 'Em questões de evento complementar ("não ser algo"), conte diretamente os casos favoráveis restantes em vez de calcular 1 menos a probabilidade do evento oposto — é mais rápido em prova.'
+  },
+  {
+    id: 'q-31',
+    subject: 'matematica',
+    areaName: 'Matemática e suas Tecnologias',
+    year: 'ENEM 2023',
+    topic: 'Função Afim',
+    difficulty: 'Média',
+    question: 'O preço P (em reais) de uma corrida de aplicativo é dado pela função P(d) = 4 + 2d, em que d é a distância percorrida em quilômetros. Qual é o preço de uma corrida de 12 km?',
+    options: [
+      { letter: 'A', text: 'R$ 16,00' },
+      { letter: 'B', text: 'R$ 24,00' },
+      { letter: 'C', text: 'R$ 26,00' },
+      { letter: 'D', text: 'R$ 28,00' },
+      { letter: 'E', text: 'R$ 32,00' }
+    ],
+    correctLetter: 'D',
+    explanation: 'Substituindo d = 12 na função: P(12) = 4 + 2×12 = 4 + 24 = 28 reais.',
+    triTip: 'Funções afins (P = a + bx) aparecem quase todo ano disfarçadas de contexto de tarifas, corridas de app ou consumo de energia — identifique o "valor fixo" e a "taxa variável" no enunciado.'
+  },
+
+  // ---- Ciências da Natureza (Simulado Completo) ----
+  {
+    id: 'q-32',
+    subject: 'natureza',
+    areaName: 'Ciências da Natureza',
+    year: 'ENEM 2020',
+    topic: 'Física - Cinemática (Velocidade Média)',
+    difficulty: 'Fácil',
+    question: 'Um ciclista percorre 60 km em 3 horas, mantendo velocidade constante. Qual é a velocidade média desenvolvida, em km/h?',
+    options: [
+      { letter: 'A', text: '15 km/h' },
+      { letter: 'B', text: '18 km/h' },
+      { letter: 'C', text: '20 km/h' },
+      { letter: 'D', text: '24 km/h' },
+      { letter: 'E', text: '30 km/h' }
+    ],
+    correctLetter: 'C',
+    explanation: 'Velocidade média = distância / tempo = 60 km / 3 h = 20 km/h.',
+    triTip: 'Cinemática básica (v = ΔS/Δt) é garantia de pelo menos 1 questão fácil de Física no ENEM.'
+  },
+  {
+    id: 'q-33',
+    subject: 'natureza',
+    areaName: 'Ciências da Natureza',
+    year: 'ENEM 2022',
+    topic: 'Química - Escala de pH',
+    difficulty: 'Fácil',
+    question: 'Uma solução aquosa apresenta pH igual a 3. Essa solução é classificada como:',
+    options: [
+      { letter: 'A', text: 'Ácida' },
+      { letter: 'B', text: 'Básica (alcalina)' },
+      { letter: 'C', text: 'Neutra' },
+      { letter: 'D', text: 'Anfótera' },
+      { letter: 'E', text: 'Indefinida, faltam dados' }
+    ],
+    correctLetter: 'A',
+    explanation: 'Na escala de pH, valores menores que 7 indicam solução ácida; pH igual a 7 é neutro; pH maior que 7 é básico (alcalino). Como pH = 3 é menor que 7, a solução é ácida.',
+    triTip: 'Decore a escala: pH < 7 ácido, pH = 7 neutro, pH > 7 básico — base de praticamente toda questão de Química envolvendo soluções.'
+  },
+  {
+    id: 'q-34',
+    subject: 'natureza',
+    areaName: 'Ciências da Natureza',
+    year: 'ENEM 2019',
+    topic: 'Biologia - 1ª Lei de Mendel',
+    difficulty: 'Média',
+    question: 'Em ervilhas, o alelo para semente amarela (A) é dominante sobre o alelo para semente verde (a). Cruzando-se duas plantas heterozigotas (Aa × Aa), qual é a proporção fenotípica esperada na geração seguinte?',
+    options: [
+      { letter: 'A', text: '1 amarela : 1 verde' },
+      { letter: 'B', text: '3 amarelas : 1 verde' },
+      { letter: 'C', text: '1 amarela : 3 verdes' },
+      { letter: 'D', text: '100% amarela' },
+      { letter: 'E', text: '100% verde' }
+    ],
+    correctLetter: 'B',
+    explanation: 'No cruzamento Aa × Aa, a proporção genotípica esperada é 1AA : 2Aa : 1aa. Como A é dominante, tanto AA quanto Aa expressam o fenótipo amarelo, resultando na clássica proporção fenotípica de 3 amarelas : 1 verde.',
+    triTip: 'A proporção 3:1 é a marca registrada da 1ª Lei de Mendel (segregação de um único par de alelos) — decore esse padrão, ele se repete em várias questões de genética.'
+  },
+
+  // ---- Ciências Humanas (Simulado Completo) ----
+  {
+    id: 'q-35',
+    subject: 'humanas',
+    areaName: 'Ciências Humanas',
+    year: 'ENEM 2021',
+    topic: 'Geografia - Urbanização',
+    difficulty: 'Média',
+    question: 'O fenômeno da "macrocefalia urbana", observado em diversas metrópoles brasileiras ao longo do século XX, refere-se a:',
+    options: [
+      { letter: 'A', text: 'Crescimento equilibrado entre todas as cidades de um estado.' },
+      { letter: 'B', text: 'Concentração excessiva da população e das atividades econômicas em uma única cidade, em detrimento das demais.' },
+      { letter: 'C', text: 'Êxodo urbano em massa rumo às áreas rurais.' },
+      { letter: 'D', text: 'Distribuição uniforme da renda entre centro e periferia.' },
+      { letter: 'E', text: 'Ausência de problemas de infraestrutura urbana.' }
+    ],
+    correctLetter: 'B',
+    explanation: 'Macrocefalia urbana é o crescimento desproporcional de uma cidade (geralmente a capital ou maior polo econômico) em relação às demais do mesmo estado ou região, concentrando população, empregos e serviços.',
+    triTip: 'Urbanização, êxodo rural e macrocefalia urbana são temas recorrentes em Geografia — conecte sempre com desigualdade socioespacial, ótimo repertório de Redação também.'
+  },
+  {
+    id: 'q-36',
+    subject: 'humanas',
+    areaName: 'Ciências Humanas',
+    year: 'ENEM 2020',
+    topic: 'História - Era Vargas e CLT',
+    difficulty: 'Média',
+    question: 'A Consolidação das Leis do Trabalho (CLT), instituída em 1943 durante o governo de Getúlio Vargas, teve como principal objetivo:',
+    options: [
+      { letter: 'A', text: 'Extinguir todos os direitos trabalhistas conquistados anteriormente.' },
+      { letter: 'B', text: 'Unificar e regulamentar a legislação trabalhista brasileira, garantindo direitos como salário mínimo e férias.' },
+      { letter: 'C', text: 'Proibir qualquer forma de sindicalização dos trabalhadores.' },
+      { letter: 'D', text: 'Privatizar todas as empresas estatais existentes.' },
+      { letter: 'E', text: 'Estabelecer o voto obrigatório apenas para trabalhadores urbanos.' }
+    ],
+    correctLetter: 'B',
+    explanation: 'A CLT unificou a legislação trabalhista dispersa até então, regulamentando direitos como carteira assinada, salário mínimo, férias remuneradas e jornada de trabalho, no contexto do populismo trabalhista de Vargas.',
+    triTip: 'Era Vargas + direitos trabalhistas é combo certo no ENEM — associe CLT, sindicalismo atrelado ao Estado e o populismo varguista.'
+  },
+  {
+    id: 'q-37',
+    subject: 'humanas',
+    areaName: 'Ciências Humanas',
+    year: 'ENEM 2023',
+    topic: 'Filosofia - Contratualismo',
+    difficulty: 'Difícil',
+    question: 'Filósofos iluministas como Locke e Rousseau desenvolveram teorias contratualistas para explicar a origem do Estado. Segundo essas teorias, o Estado surge a partir de:',
+    options: [
+      { letter: 'A', text: 'Uma imposição divina direta sobre os súditos.' },
+      { letter: 'B', text: 'Um pacto entre os indivíduos, que abrem mão de parte de sua liberdade natural em troca de ordem e proteção coletiva.' },
+      { letter: 'C', text: 'Uma conquista militar sem qualquer forma de consentimento popular.' },
+      { letter: 'D', text: 'Uma seleção natural entre as sociedades mais fortes.' },
+      { letter: 'E', text: 'Uma decisão exclusiva da aristocracia hereditária.' }
+    ],
+    correctLetter: 'B',
+    explanation: 'As teorias contratualistas (Hobbes, Locke, Rousseau) explicam que o Estado nasce de um "contrato social": um pacto no qual os indivíduos cedem parte de sua liberdade natural em troca da segurança e da ordem garantidas pela vida em sociedade.',
+    triTip: 'Contratualismo é repertório sociocultural coringa pra Redação — cite Rousseau ou Hobbes ao discutir o "papel do Estado" em praticamente qualquer tema.'
+  },
+
+  // ---- Linguagens e Códigos (Simulado Completo) ----
+  {
+    id: 'q-38',
+    subject: 'linguagens',
+    areaName: 'Linguagens e Códigos',
+    year: 'ENEM 2022',
+    topic: 'Figuras de Linguagem - Metonímia',
+    difficulty: 'Fácil',
+    question: 'Na frase "O Brasil torce por seus atletas nas Olimpíadas", a palavra "Brasil" é empregada para se referir ao povo brasileiro. Essa figura de linguagem, que consiste em usar o lugar pelo que nele habita, é chamada de:',
+    options: [
+      { letter: 'A', text: 'Metáfora' },
+      { letter: 'B', text: 'Metonímia' },
+      { letter: 'C', text: 'Hipérbole' },
+      { letter: 'D', text: 'Ironia' },
+      { letter: 'E', text: 'Prosopopeia' }
+    ],
+    correctLetter: 'B',
+    explanation: 'Metonímia é a figura de linguagem que substitui um termo por outro com o qual mantém relação lógica de contiguidade — nesse caso, o lugar (Brasil) pelo que nele habita (o povo brasileiro).',
+    triTip: 'Metonímia (lugar pelo habitante, autor pela obra, marca pelo produto) é uma das figuras mais cobradas no ENEM — não confunda com metáfora, que é uma comparação implícita.'
+  },
+  {
+    id: 'q-39',
+    subject: 'linguagens',
+    areaName: 'Linguagens e Códigos',
+    year: 'ENEM 2021',
+    topic: 'Variação Linguística',
+    difficulty: 'Média',
+    question: 'Em uma entrevista de emprego, um candidato adapta seu vocabulário e forma de falar, evitando gírias que usaria com os amigos. Esse fenômeno linguístico, em que o falante ajusta a linguagem conforme o contexto social, é conhecido como:',
+    options: [
+      { letter: 'A', text: 'Preconceito linguístico' },
+      { letter: 'B', text: 'Variação linguística diastrática (entre classes sociais)' },
+      { letter: 'C', text: 'Adequação linguística (variação diafásica/estilística)' },
+      { letter: 'D', text: 'Erro gramatical' },
+      { letter: 'E', text: 'Regionalismo' }
+    ],
+    correctLetter: 'C',
+    explanation: 'A adaptação da linguagem ao contexto/situação de comunicação é chamada de variação diafásica ou estilística — o falante escolhe o registro (formal ou informal) conforme a situação, sem que isso configure "erro".',
+    triTip: 'O ENEM valoriza a ideia de adequação linguística, não de "certo x errado" — toda variedade linguística é legítima em seu contexto de uso.'
+  },
+  {
+    id: 'q-40',
+    subject: 'linguagens',
+    areaName: 'Linguagens e Códigos',
+    year: 'ENEM 2020',
+    topic: 'Literatura - Semana de Arte Moderna de 1922',
+    difficulty: 'Média',
+    question: 'A Semana de Arte Moderna, realizada em São Paulo em 1922, é considerada um marco da literatura brasileira porque:',
+    options: [
+      { letter: 'A', text: 'Consolidou o Parnasianismo como estilo literário oficial do Brasil.' },
+      { letter: 'B', text: 'Rompeu com os padrões estéticos tradicionais, propondo uma arte brasileira mais livre, experimental e nacionalista.' },
+      { letter: 'C', text: 'Proibiu a produção literária em língua portuguesa no país.' },
+      { letter: 'D', text: 'Restringiu a arte brasileira exclusivamente a temas europeus.' },
+      { letter: 'E', text: 'Marcou o fim da produção literária no Brasil.' }
+    ],
+    correctLetter: 'B',
+    explanation: 'A Semana de Arte Moderna de 1922 inaugurou o Modernismo no Brasil, rompendo com as estéticas parnasiana e simbolista ao propor uma linguagem mais livre, experimental e voltada para a valorização da cultura e identidade nacional.',
+    triTip: 'Semana de 22 é presença garantida em Literatura — associe a Oswald de Andrade (Manifesto Antropófago) e Mário de Andrade (Macunaíma).'
   }
 ];
+
+// Simplified, transparent approximation of an ENEM-scale score (0-1000) from raw
+// accuracy — NOT the official INEP TRI calculation, which requires calibrated item
+// parameters no third party has access to. 320 mirrors the typical floor a real TRI
+// score lands on even with zero correct answers; 1000 is reserved for a clean sweep.
+export function estimateEnemScore(acertos: number, total: number): number {
+  if (total <= 0) return 0;
+  const percentual = Math.max(0, Math.min(1, acertos / total));
+  const nota = 320 + percentual * 680;
+  return Math.round(nota / 10) * 10;
+}
 
 export const REDACAO_THEMES: RedacaoTheme[] = [
   {
