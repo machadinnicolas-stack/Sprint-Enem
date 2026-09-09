@@ -19,17 +19,11 @@ export default function App() {
       <Header />
 
       <main className="flex-1">
-        {/* Seção 1: Hero */}
         <Hero />
-        {/* Seção 2: Dor */}
         <PainSection />
-        {/* Seção 3: Produto / Solução */}
         <ProductShowcase />
-        {/* Seção 4: Como Funciona */}
         <HowItWorks />
-        {/* Seção 5: Ofertas */}
         <Offer />
-        {/* Seção 6: FAQ + CTA Final */}
         <FAQ />
         <FinalCTA />
       </main>

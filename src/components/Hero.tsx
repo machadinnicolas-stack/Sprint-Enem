@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, CheckCircle2, Clock, BookOpen, Target, Flame, Play } from 'lucide-react';
-import { PRICE, scrollToOffer, trackEvent } from '../config';
+import { ArrowRight, CheckCircle2, Clock, BookOpen, Target, Sparkles, Flame, Play } from 'lucide-react';
+import { PRODUCT_NAME, PRICE, handleCheckoutClick } from '../config';
 import { SprintEnemLogo } from './SprintEnemLogo';
 
 const ENEM_TARGET_DATE = new Date('2026-11-08T00:00:00-03:00');
@@ -32,19 +32,14 @@ export const Hero: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleHeroCTA = () => {
-    trackEvent('hero_cta_click');
-    scrollToOffer();
-  };
-
   return (
     <section id="topo" className="relative pt-6 pb-16 sm:pt-10 sm:pb-24 overflow-hidden">
-      {/* Background Glow */}
-      <div
-        aria-hidden="true"
+      {/* Harmonious Violet/Fuchsia Background Glows */}
+      <div 
+        aria-hidden="true" 
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl"
       >
-        <div
+        <div 
           className="aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-purple-200/50 via-fuchsia-100/40 to-pink-200/50 opacity-80"
           style={{
             clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
@@ -54,20 +49,37 @@ export const Hero: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto">
-
-          {/* Eyebrow */}
+          {/* Eyebrow with Logo Accent */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200/80 text-purple-900 text-xs sm:text-sm font-bold mb-5 shadow-xs">
             <SprintEnemLogo size="xs" />
-            <span>ENEM 2026</span>
+            <span>ENEM chegando. Seu plano começa agora.</span>
           </div>
 
-          {/* Countdown */}
-          <div className="flex items-center justify-center gap-2 mb-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-white/80 px-3 py-1.5 shadow-sm">
-              <Clock className="w-3.5 h-3.5 text-purple-600" />
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Faltam</span>
+          {/* Main Headline with Gradient Word */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight leading-[1.15] text-balance">
+            Você não precisa ter tempo sobrando para{' '}
+            <span className="block sm:inline text-slate-900">
+              entrar na faculdade e{' '}
+              <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 underline decoration-fuchsia-400 decoration-wavy decoration-2 underline-offset-4">
+                se formar
+              </span>
+              .
+            </span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto text-balance">
+            O {PRODUCT_NAME} ajuda você a transformar a rotina real em um plano objetivo, com foco no que importa para o seu sonho e no tempo que você realmente tem disponível.
+          </p>
+
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-white/80 px-3 py-2 shadow-sm">
+              <Clock className="w-4 h-4 text-purple-600" />
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700">
+                Prova do ENEM em
+              </span>
             </div>
-            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-700">
               <span className="rounded-lg bg-purple-50 border border-purple-200 px-2 py-1">{timeLeft.days}d</span>
               <span className="rounded-lg bg-purple-50 border border-purple-200 px-2 py-1">{timeLeft.hours}h</span>
               <span className="rounded-lg bg-purple-50 border border-purple-200 px-2 py-1">{timeLeft.minutes}m</span>
@@ -75,46 +87,35 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight leading-[1.15] text-balance">
-            Você não precisa estudar tudo.{' '}
-            <span className="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600">
-              Precisa saber o que estudar agora.
-            </span>
-          </h1>
+          {/* CTA Group with Harmonized Gradient Button */}
+          <div className="mt-8 sm:mt-10 flex flex-col items-center justify-center gap-4">
+            <div className="w-full sm:w-auto flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                id="hero-main-cta"
+                onClick={() => handleCheckoutClick('hero_cta_click')}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 sm:px-12 py-5 sm:py-5 text-lg sm:text-xl font-black text-white bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 active:scale-[0.98] rounded-2xl shadow-xl shadow-purple-500/30 animate-pulse-cta transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-purple-300 cursor-pointer"
+              >
+                <span>QUERO COMEÇAR MEU SPRINT</span>
+                <ArrowRight className="w-6 h-6 stroke-[2.5]" />
+              </button>
 
-          {/* Subheadline */}
-          <p className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto text-balance">
-            O Sprint ENEM monta seu plano de estudos de acordo com sua rotina, mostra o que priorizar e reúne as ferramentas que você precisa para estudar com direção.
-          </p>
-
-          {/* CTA Group */}
-          <div className="mt-8 sm:mt-10 flex flex-col items-center justify-center gap-3">
-            <button
-              id="hero-main-cta"
-              onClick={handleHeroCTA}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 sm:px-12 py-5 text-lg sm:text-xl font-black text-white bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 active:scale-[0.98] rounded-2xl shadow-xl shadow-purple-500/30 animate-pulse-cta transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-purple-300 cursor-pointer"
-            >
-              <span>QUERO COMEÇAR AGORA</span>
-              <ArrowRight className="w-6 h-6 stroke-[2.5]" />
-            </button>
-
-            {/* Price anchor */}
-            <div className="flex items-center gap-2 px-5 py-3 rounded-xl bg-purple-50 border border-purple-200 shadow-sm">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Sprint ENEM a partir de</span>
-              <span className="font-black text-purple-700 text-xl sm:text-2xl animate-pulse-price tracking-tight">{PRICE}</span>
+              <div className="flex items-center gap-2.5 px-6 py-4 rounded-2xl bg-purple-50 border-2 border-purple-200 text-slate-800 shadow-sm">
+                <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-600">Por apenas</span>
+                <span className="font-black text-purple-700 text-2xl sm:text-3xl animate-pulse-price tracking-tight">{PRICE}</span>
+              </div>
             </div>
 
             {/* Microcopy */}
-            <p className="text-xs sm:text-sm text-slate-500 flex items-center gap-1.5 font-medium">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-              <span>Acesso digital • Comece hoje</span>
+            <p className="text-xs sm:text-sm text-slate-600 flex items-center gap-1.5 font-medium">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Acesso imediato à plataforma após a confirmação.</span>
             </p>
           </div>
         </div>
 
         {/* HERO PRODUCT MOCKUP */}
         <div className="mt-10 sm:mt-14 relative mx-auto max-w-4xl">
+          {/* Outer Shell resembling modern SaaS window */}
           <div className="rounded-2xl sm:rounded-3xl bg-slate-900/95 p-2 sm:p-3.5 shadow-2xl ring-1 ring-purple-900/40 shadow-purple-950/20">
             {/* Window bar */}
             <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800 mb-2 sm:mb-3">
@@ -138,10 +139,10 @@ export const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Mockup Interface */}
+            {/* Mockup Interface Inside */}
             <div className="bg-slate-950 rounded-xl sm:rounded-2xl p-3.5 sm:p-6 text-white border border-slate-800/80 space-y-4 sm:space-y-5">
-
-              {/* Next Task Banner */}
+              
+              {/* Top Banner inside app: Next Step Clarity */}
               <div className="bg-gradient-to-r from-slate-900 via-purple-950/50 to-slate-900 rounded-xl p-4 sm:p-5 border border-purple-800/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
@@ -152,7 +153,7 @@ export const Hero: React.FC = () => {
                       <Clock className="w-3 h-3 text-slate-400" /> Bloco de 40 min
                     </span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 flex-wrap">
+                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                     <span>Matemática: Funções e Razão/Proporção</span>
                     <span className="text-xs font-normal text-amber-300 px-1.5 py-0.5 rounded bg-amber-950/70 border border-amber-800/50">
                       Alta Incidência ENEM
@@ -164,17 +165,17 @@ export const Hero: React.FC = () => {
                 </div>
 
                 <div className="flex items-center gap-2.5 w-full sm:w-auto">
-                  <div className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold text-xs sm:text-sm shadow-md">
+                  <div className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:opacity-90 text-white font-semibold text-xs sm:text-sm shadow-md transition-all">
                     <Play className="w-3.5 h-3.5 fill-current" />
                     <span>Iniciar no Modo Foco</span>
                   </div>
                 </div>
               </div>
 
-              {/* 3 Dashboard Widgets */}
+              {/* 3 Dashboard Summary Widgets */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-
-                {/* Widget 1: Cronograma */}
+                
+                {/* Widget 1: Cronograma Dinâmico */}
                 <div className="bg-slate-900/90 rounded-xl p-3.5 border border-slate-800">
                   <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
                     <span className="font-semibold text-slate-300 flex items-center gap-1.5">
@@ -194,7 +195,7 @@ export const Hero: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Widget 2: Raio-X */}
+                {/* Widget 2: Raio-X Prioridades */}
                 <div className="bg-slate-900/90 rounded-xl p-3.5 border border-slate-800">
                   <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
                     <span className="font-semibold text-slate-300 flex items-center gap-1.5">
@@ -210,6 +211,7 @@ export const Hero: React.FC = () => {
                     <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
                       <div className="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-full rounded-full w-[92%]" />
                     </div>
+
                     <div className="flex items-center justify-between text-slate-300 pt-1">
                       <span>Cálculo de Proporção</span>
                       <span className="text-purple-400 font-medium">88% incidência</span>
@@ -220,7 +222,7 @@ export const Hero: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Widget 3: Gamificação */}
+                {/* Widget 3: Gamificação & Foco */}
                 <div className="bg-slate-900/90 rounded-xl p-3.5 border border-slate-800">
                   <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
                     <span className="font-semibold text-slate-300 flex items-center gap-1.5">
@@ -246,12 +248,13 @@ export const Hero: React.FC = () => {
                 </div>
 
               </div>
+
             </div>
           </div>
-
-          {/* Caption */}
+          
+          {/* Subtle caption */}
           <p className="text-center text-xs text-slate-500 mt-2.5 font-medium">
-            Interface representativa da plataforma Sprint ENEM. Adaptada à sua rotina real.
+            Interface visual representativa da plataforma Sprint ENEM. Adaptada à sua rotina real.
           </p>
         </div>
       </div>

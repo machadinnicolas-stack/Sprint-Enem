@@ -4,24 +4,19 @@
  */
 
 export const PRODUCT_NAME = "Sprint ENEM";
-export const PRICE = "R$12,99";
-export const BUNDLE_PRICE = "R$22,98";
-export const SPRINT_PRICE = "R$12,99";
-export const REDACAO_PRICE = "R$9,99";
+export const PRICE = "R$ 12,99";
+export const BUNDLE_PRICE = "R$ 22,98";
 
-// Central Checkout Destination URLs:
-// Update these with the exact PerfectPay product links for each offer.
+// Central Checkout Destination URL:
+// Alter this single variable to change checkout destination across all CTAs
 export const CHECKOUT_URL: string = "https://perfectpay.com.br";
-export const CHECKOUT_URL_BUNDLE: string = "https://perfectpay.com.br";
 
-export type AnalyticsEvent =
+export type AnalyticsEvent = 
   | 'hero_cta_click'
   | 'header_cta_click'
   | 'sticky_cta_click'
-  | 'offer_sprint_cta_click'
-  | 'offer_bundle_cta_click'
-  | 'final_cta_sprint_click'
-  | 'final_cta_bundle_click'
+  | 'offer_cta_click'
+  | 'final_cta_click'
   | 'mid_page_cta_click'
   | 'faq_open'
   | 'checkout_click';
@@ -40,6 +35,7 @@ export function trackEvent(eventName: AnalyticsEvent, payload?: Record<string, u
       (window as any).dataLayer.push({
         event: eventName,
         product: PRODUCT_NAME,
+        price: PRICE,
         ...payload,
       });
     }
@@ -48,6 +44,7 @@ export function trackEvent(eventName: AnalyticsEvent, payload?: Record<string, u
     if (typeof (window as any).fbq === 'function') {
       (window as any).fbq('trackCustom', eventName, {
         product: PRODUCT_NAME,
+        value: 12.99,
         currency: 'BRL',
         ...payload,
       });
@@ -66,42 +63,20 @@ export function trackEvent(eventName: AnalyticsEvent, payload?: Record<string, u
 }
 
 /**
- * Navigates to a given checkout URL and fires analytics.
+ * Common handler for all checkout buttons
  */
-function goToCheckout(url: string, source: AnalyticsEvent) {
+export function handleCheckoutClick(source: AnalyticsEvent) {
   trackEvent(source, { timestamp: new Date().toISOString() });
   trackEvent('checkout_click', { source });
-
-  if (url && url !== '#') {
-    window.location.href = url;
+  
+  // Navigate to checkout
+  if (CHECKOUT_URL && CHECKOUT_URL !== '#') {
+    window.location.href = CHECKOUT_URL;
   } else {
+    // If URL is '#', scroll smoothly to offer section
     const offerEl = document.getElementById('oferta');
     if (offerEl) {
       offerEl.scrollIntoView({ behavior: 'smooth' });
     }
-  }
-}
-
-/**
- * Handler for Sprint ENEM (base offer) checkout buttons.
- */
-export function handleCheckoutClick(source: AnalyticsEvent) {
-  goToCheckout(CHECKOUT_URL, source);
-}
-
-/**
- * Handler for Sprint ENEM + Sprint Redação (bundle offer) checkout buttons.
- */
-export function handleBundleCheckoutClick(source: AnalyticsEvent) {
-  goToCheckout(CHECKOUT_URL_BUNDLE, source);
-}
-
-/**
- * Scrolls smoothly to the offer section (#oferta).
- */
-export function scrollToOffer() {
-  const offerEl = document.getElementById('oferta');
-  if (offerEl) {
-    offerEl.scrollIntoView({ behavior: 'smooth' });
   }
 }

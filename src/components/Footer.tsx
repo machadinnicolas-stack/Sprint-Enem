@@ -10,10 +10,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   return (
     <footer className="bg-slate-950 text-slate-400 py-12 sm:py-16 border-t border-slate-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-
+        
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-900">
-
-          {/* Brand */}
+          
+          {/* Brand Info */}
           <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
             <SprintEnemLogo size="md" />
             <div>
@@ -50,10 +50,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
 
         </div>
 
-        {/* Disclaimer */}
+        {/* Disclaimer & Copyright */}
         <div className="pt-8 space-y-4 text-center sm:text-left">
           <p className="text-xs text-slate-400 leading-relaxed max-w-3xl">
-            O {PRODUCT_NAME} é uma ferramenta educacional de organização e prática. O desempenho de cada estudante depende de diversos fatores individuais e não há garantia de aprovação ou nota específica. Esta plataforma não possui relação institucional com o INEP, MEC ou qualquer entidade governamental.
+            <strong>Aviso Legal:</strong> O {PRODUCT_NAME} é uma ferramenta de organização e prática. Os resultados dependem da dedicação de cada estudante e não há garantia de aprovação ou nota específica. Este produto não possui relação institucional com o INEP, MEC ou qualquer entidade governamental.
           </p>
 
           <p className="text-[11px] text-slate-500">
