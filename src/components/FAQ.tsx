@@ -37,7 +37,7 @@ const faqData: FAQItem[] = [
   {
     id: 6,
     question: 'Quanto custa?',
-    answer: 'O Sprint ENEM custa R$ 12,99.',
+    answer: 'Você pode entrar pelo Sprint ENEM por R$ 12,99 ou escolher o combo Sprint ENEM + Sprint Redação por R$ 22,98.',
   },
 ];
 
