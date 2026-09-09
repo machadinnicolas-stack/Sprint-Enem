@@ -1,0 +1,6 @@
+{
+  "name": "Sprint ENEM",
+  "description": "Organize sua rotina de estudos com cronograma personalizado, simulados TRI, redação, Modo Foco e ferramentas para acompanhar sua evolução.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
