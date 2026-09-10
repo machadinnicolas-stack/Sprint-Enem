@@ -11,33 +11,23 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     id: 1,
-    question: 'Estou começando atrasado. O Sprint serve para mim?',
-    answer: 'O Sprint foi pensado para ajudar na organização e priorização dos estudos de acordo com a realidade informada pelo estudante. Ele pode ser usado tanto por quem já estuda quanto por quem precisa organizar melhor sua preparação.',
+    question: 'O Sprint ENEM é um curso?',
+    answer: 'Não. O Sprint ENEM é uma plataforma digital de organização e prática para ajudar você a estruturar sua preparação para o ENEM.',
   },
   {
     id: 2,
-    question: 'Trabalho e tenho pouco tempo. Consigo usar?',
-    answer: 'Sim. O planejamento considera informações como dias e tempo disponível, permitindo organizar a rotina de acordo com a disponibilidade informada.',
+    question: 'Como recebo o acesso?',
+    answer: 'Após a confirmação da compra, você recebe as instruções para acessar a plataforma.',
   },
   {
     id: 3,
-    question: 'O Sprint garante que eu vou passar?',
-    answer: 'Não. O Sprint ENEM é uma ferramenta de organização e prática. O resultado depende da dedicação, rotina e desempenho de cada estudante, e não existe garantia de aprovação ou nota específica.',
+    question: 'Serve para quem está atrasado nos estudos?',
+    answer: 'Sim. A proposta é ajudar você a organizar o tempo disponível e definir prioridades, independentemente de quando começou a estudar.',
   },
   {
     id: 4,
-    question: 'O que encontro dentro da plataforma?',
-    answer: 'Você encontra cronograma personalizado, simulados TRI, Raio-X de incidência, Oficina de Redação, Modo Foco e recursos de acompanhamento de progresso e gamificação.',
-  },
-  {
-    id: 5,
-    question: 'Como recebo acesso?',
-    answer: 'Após a confirmação da compra, você recebe o endereço para acessar a plataforma e pode personalizar seu plano.',
-  },
-  {
-    id: 6,
-    question: 'Quanto custa?',
-    answer: 'Você pode entrar pelo Sprint ENEM por R$ 12,99 ou escolher o combo Sprint ENEM + Sprint Redação por R$ 22,98.',
+    question: 'Qual a diferença entre as duas opções?',
+    answer: 'O Sprint ENEM por R$12,99 dá acesso à plataforma. No pacote de R$22,98 você recebe o Sprint ENEM e também o Sprint Redação, material complementar para planejamento, escrita e revisão.',
   },
 ];
 
@@ -53,20 +43,14 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-slate-50 border-b border-slate-200/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        
+    <section className="py-14 sm:py-20 bg-white">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-200/70 px-3 py-1 rounded-full">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug">
             Dúvidas frequentes
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug">
-            Perguntas e respostas objetivas
           </h2>
-          <p className="mt-2 text-base text-slate-600">
-            Respostas diretas sobre o funcionamento e o propósito do Sprint ENEM.
-          </p>
         </div>
 
         {/* Accordion List */}
@@ -76,18 +60,18 @@ export const FAQ: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-colors"
+                className="bg-slate-50 rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-colors"
               >
                 <button
                   onClick={() => toggleItem(item.id)}
                   aria-expanded={isOpen}
-                  className="w-full px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between text-left gap-4 hover:bg-slate-50/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 cursor-pointer"
+                  className="w-full px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between text-left gap-4 hover:bg-slate-100/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 cursor-pointer"
                 >
                   <span className="font-bold text-slate-900 text-sm sm:text-base leading-snug">
                     {item.question}
                   </span>
                   <div
-                    className={`w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center shrink-0 transition-transform duration-200 ${
+                    className={`w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 transition-transform duration-200 ${
                       isOpen ? 'rotate-180 bg-purple-50 text-purple-600' : 'text-slate-500'
                     }`}
                   >
@@ -96,7 +80,7 @@ export const FAQ: React.FC = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-100 animate-fadeIn">
+                  <div className="px-5 sm:px-6 pb-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-200/70 animate-fadeIn">
                     <p>{item.answer}</p>
                   </div>
                 )}

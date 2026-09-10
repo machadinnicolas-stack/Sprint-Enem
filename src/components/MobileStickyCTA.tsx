@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { PRICE, handleCheckoutClick } from '../config';
-import { SprintEnemLogo } from './SprintEnemLogo';
+import { PRODUCT_NAME, PRICE, scrollToOffer } from '../config';
 
 export const MobileStickyCTA: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show sticky CTA after scrolling 480px (past hero)
+      // Show sticky CTA after scrolling past the first fold
       if (window.scrollY > 480) {
         setIsVisible(true);
       } else {
@@ -24,24 +23,19 @@ export const MobileStickyCTA: React.FC = () => {
 
   return (
     <div className="fixed bottom-3 inset-x-3 z-40 sm:hidden transition-all duration-300 transform translate-y-0">
-      <div className="bg-slate-950/95 text-white rounded-2xl p-3 shadow-2xl border border-purple-800/60 flex items-center justify-between gap-3 backdrop-blur-md">
-        <div className="flex items-center gap-2 pl-1">
-          <SprintEnemLogo size="sm" />
-          <div className="flex flex-col">
-            <span className="text-[10px] text-purple-300 font-bold leading-none uppercase tracking-wider">Acesso total</span>
-            <span className="text-base font-black text-white leading-tight mt-0.5 animate-pulse-price">{PRICE}</span>
-          </div>
-        </div>
-
-        <button
-          id="sticky-mobile-cta"
-          onClick={() => handleCheckoutClick('sticky_cta_click')}
-          className="flex-1 max-w-[210px] inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 text-white font-black text-sm shadow-lg shadow-purple-600/40 animate-pulse-cta transition-all active:scale-[0.98] cursor-pointer"
-        >
-          <span>COMEÇAR AGORA</span>
-          <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-        </button>
-      </div>
+      <button
+        id="sticky-mobile-cta"
+        onClick={() => scrollToOffer('sticky_cta_click')}
+        className="w-full bg-slate-950/95 text-white rounded-2xl px-4 py-3.5 shadow-2xl border border-purple-800/60 flex items-center justify-between gap-3 backdrop-blur-md cursor-pointer active:scale-[0.99] transition-transform"
+      >
+        <span className="text-sm font-bold text-left leading-snug">
+          {PRODUCT_NAME} a partir de <span className="text-white animate-pulse-price">{PRICE}</span>
+        </span>
+        <span className="inline-flex items-center gap-1.5 py-2 px-4 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 font-black text-xs shrink-0 shadow-lg shadow-purple-600/40">
+          COMEÇAR
+          <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
+        </span>
+      </button>
     </div>
   );
 };

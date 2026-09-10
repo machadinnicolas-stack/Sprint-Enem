@@ -53,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         {/* Disclaimer & Copyright */}
         <div className="pt-8 space-y-4 text-center sm:text-left">
           <p className="text-xs text-slate-400 leading-relaxed max-w-3xl">
-            <strong>Aviso Legal:</strong> O {PRODUCT_NAME} é uma ferramenta de organização e prática. Os resultados dependem da dedicação de cada estudante e não há garantia de aprovação ou nota específica. Este produto não possui relação institucional com o INEP, MEC ou qualquer entidade governamental.
+            <strong>Aviso Legal:</strong> O {PRODUCT_NAME} é uma ferramenta educacional de organização e prática. O desempenho de cada estudante depende de diversos fatores individuais e não há garantia de aprovação ou nota específica. Este produto não possui relação institucional com o INEP, MEC ou qualquer entidade governamental.
           </p>
 
           <p className="text-[11px] text-slate-500">

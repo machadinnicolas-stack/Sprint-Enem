@@ -1,66 +1,66 @@
 import React from 'react';
 import { ArrowRight, Check, ShieldCheck, Sparkles } from 'lucide-react';
-import { PRODUCT_NAME, PRICE, BUNDLE_PRICE, handleCheckoutClick } from '../config';
+import {
+  PRODUCT_NAME,
+  PRICE,
+  BUNDLE_PRICE,
+  ESSAY_ADDON_PRICE,
+  CHECKOUT_URL,
+  BUNDLE_CHECKOUT_URL,
+  handleCheckoutClick,
+} from '../config';
 import { SprintEnemLogo } from './SprintEnemLogo';
 
-const commonFeatures = [
-  'Cronograma personalizado com base na sua rotina real',
-  'Raio-X de incidência para priorizar o que mais cai no ENEM',
-  'Simulados TRI e acompanhamento estratégico de desempenho',
-  'Modo Foco com timer para sessões mais produtivas',
-  'Sistema de progresso com XP, níveis e sequência diária',
+const enemFeatures = [
+  'Cronograma personalizado',
+  'Raio-X de incidência',
+  'Questões e simulados',
+  'Oficina de Redação',
+  'Modo Foco',
+  'Acompanhamento de progresso',
 ];
 
 const bundleFeatures = [
-  'Todo o conteúdo do Sprint ENEM',
-  'Acesso ao Sprint Redação com repertórios e temas',
-  'Mais suporte para organização e revisão da redação',
+  'Tudo do Sprint ENEM',
+  'Sprint Redação completo',
+  '5 competências',
+  'Planejamento de tese e argumentos',
+  'Introdução e desenvolvimento',
+  'Proposta de intervenção',
+  'Checklists de revisão',
+  'Exercícios e materiais práticos',
 ];
 
 export const Offer: React.FC = () => {
   return (
-    <section id="oferta" className="py-16 sm:py-24 bg-slate-50 border-b border-slate-200/80">
+    <section id="oferta" className="py-14 sm:py-20 bg-slate-50 border-b border-slate-200/80">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-purple-800 bg-purple-50 px-3 py-1 rounded-full border border-purple-200">
-            Escolha seu plano
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Comece com o caminho certo para o ENEM.
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Escolha como começar.
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Você pode entrar pelo Sprint ENEM ou aproveitar o combo com Sprint Redação para ampliar seu suporte e sua organização.
-          </p>
         </div>
 
         <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* OFERTA 1: Sprint ENEM */}
           <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3.5">
-                <SprintEnemLogo size="lg" />
-                <div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-purple-50 text-purple-700 text-xs font-bold uppercase tracking-wider mb-1">
-                    <Sparkles className="w-3.5 h-3.5 text-purple-600" />
-                    <span>Plano base</span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
-                    {PRODUCT_NAME}
-                  </h3>
-                </div>
-              </div>
+            <div className="flex items-center gap-3.5">
+              <SprintEnemLogo size="lg" />
+              <h3 className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
+                {PRODUCT_NAME}
+              </h3>
             </div>
 
             <div className="mt-6 flex items-end gap-2">
               <span className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight">{PRICE}</span>
-              <span className="pb-1 text-sm font-bold text-slate-500">acesso único</span>
             </div>
 
             <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
-              Ideal para quem quer organizar a rotina, priorizar o que importa e começar a estudar com direção.
+              Para quem quer organizar os estudos e saber o que fazer todos os dias até o ENEM.
             </p>
 
             <ul className="mt-6 space-y-3">
-              {commonFeatures.map((item) => (
+              {enemFeatures.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-slate-700">
                   <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 shrink-0">
                     <Check className="h-3.5 w-3.5 stroke-[2.5]" />
@@ -72,7 +72,7 @@ export const Offer: React.FC = () => {
 
             <button
               id="offer-cta-btn"
-              onClick={() => handleCheckoutClick('offer_cta_click')}
+              onClick={() => handleCheckoutClick('offer_enem_cta_click', CHECKOUT_URL)}
               className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 px-6 py-4 text-base sm:text-lg font-black text-white shadow-xl shadow-purple-500/20 transition-all hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 active:scale-[0.99] focus:outline-none focus-visible:ring-4 focus-visible:ring-purple-300 cursor-pointer"
             >
               <span>QUERO O SPRINT ENEM</span>
@@ -80,9 +80,10 @@ export const Offer: React.FC = () => {
             </button>
           </div>
 
+          {/* OFERTA 2: Sprint ENEM + Sprint Redação */}
           <div className="rounded-3xl border-2 border-purple-500 bg-gradient-to-b from-purple-50 to-white p-6 sm:p-8 shadow-2xl shadow-purple-500/10 relative overflow-hidden">
             <div className="absolute right-5 top-5 rounded-full bg-purple-600 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-white">
-              MAIS VANTAJOSO
+              MAIS COMPLETO
             </div>
 
             <div className="flex items-center gap-3.5">
@@ -90,7 +91,7 @@ export const Offer: React.FC = () => {
               <div>
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-white text-purple-700 text-xs font-bold uppercase tracking-wider mb-1 border border-purple-200">
                   <Sparkles className="w-3.5 h-3.5 text-purple-600" />
-                  <span>Combo completo</span>
+                  <span>Combo</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
                   Sprint ENEM + Sprint Redação
@@ -98,13 +99,16 @@ export const Offer: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-6 flex items-end gap-2">
+            <p className="mt-4 text-xs font-semibold text-slate-500">
+              {PRODUCT_NAME} {PRICE} + Sprint Redação {ESSAY_ADDON_PRICE}
+            </p>
+
+            <div className="mt-2 flex items-end gap-2">
               <span className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600 tracking-tight">{BUNDLE_PRICE}</span>
-              <span className="pb-1 text-sm font-bold text-slate-500">por tudo</span>
             </div>
 
             <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
-              Para quem quer levar a organização e a escrita do ENEM para o próximo nível, com foco em leitura, planejamento e redação.
+              Para quem quer organizar toda a preparação e também ter um material prático para planejar, escrever e revisar a redação.
             </p>
 
             <ul className="mt-6 space-y-3">
@@ -120,10 +124,10 @@ export const Offer: React.FC = () => {
 
             <button
               id="bundle-cta-btn"
-              onClick={() => handleCheckoutClick('offer_cta_click')}
+              onClick={() => handleCheckoutClick('offer_bundle_cta_click', BUNDLE_CHECKOUT_URL)}
               className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-slate-950 px-6 py-4 text-base sm:text-lg font-black text-white shadow-xl shadow-slate-900/20 transition-all hover:bg-slate-800 active:scale-[0.99] focus:outline-none focus-visible:ring-4 focus-visible:ring-purple-300 cursor-pointer"
             >
-              <span>QUERO O COMBO COMPLETO</span>
+              <span>QUERO O PACOTE COMPLETO</span>
               <ArrowRight className="h-5 w-5" />
             </button>
           </div>

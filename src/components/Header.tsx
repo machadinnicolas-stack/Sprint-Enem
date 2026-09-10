@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { PRODUCT_NAME, PRICE, handleCheckoutClick } from '../config';
+import { PRODUCT_NAME, PRICE, scrollToOffer } from '../config';
 import { SprintEnemLogo } from './SprintEnemLogo';
 
 export const Header: React.FC = () => {
@@ -33,7 +33,7 @@ export const Header: React.FC = () => {
 
           <button
             id="header-cta-btn"
-            onClick={() => handleCheckoutClick('header_cta_click')}
+            onClick={() => scrollToOffer('header_cta_click')}
             className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-black text-white bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 active:scale-[0.98] rounded-xl shadow-lg shadow-purple-500/25 animate-pulse-cta transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 cursor-pointer"
           >
             <span>COMEÇAR</span>

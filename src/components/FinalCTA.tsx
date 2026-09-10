@@ -1,46 +1,47 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { PRICE, handleCheckoutClick } from '../config';
+import { ArrowRight } from 'lucide-react';
+import {
+  PRICE,
+  BUNDLE_PRICE,
+  CHECKOUT_URL,
+  BUNDLE_CHECKOUT_URL,
+  handleCheckoutClick,
+} from '../config';
 
 export const FinalCTA: React.FC = () => {
   return (
-    <section className="py-20 sm:py-28 bg-white text-center">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        
-        <div className="max-w-3xl mx-auto space-y-5">
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.2] text-balance">
-            O tempo que passou não volta.{' '}
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 mt-1">
-              Seu próximo estudo ainda está nas suas mãos.
-            </span>
-          </h2>
+    <section className="py-16 sm:py-24 bg-slate-950 text-center">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
 
-          <p className="text-base sm:text-xl text-slate-600 max-w-xl mx-auto leading-relaxed">
-            Pare de gastar energia tentando decidir por onde começar. O próximo passo para entrar na faculdade e se formar pode começar hoje.
-          </p>
+        <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-snug text-balance">
+          O ENEM está chegando.{' '}
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 mt-1">
+            Pare de perder tempo decidindo o que estudar.
+          </span>
+        </h2>
 
-          <div className="pt-4 flex flex-col items-center justify-center gap-4">
-            <div className="w-full sm:w-auto flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                id="final-cta-btn"
-                onClick={() => handleCheckoutClick('final_cta_click')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 sm:px-12 py-5 sm:py-5 text-lg sm:text-xl font-black text-white bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 active:scale-[0.98] rounded-2xl shadow-2xl shadow-purple-500/30 animate-pulse-cta transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-purple-300 cursor-pointer"
-              >
-                <span>COMEÇAR MEU SPRINT</span>
-                <ArrowRight className="w-6 h-6 stroke-[2.5]" />
-              </button>
+        <p className="mt-4 text-base sm:text-lg text-slate-300">
+          Organize sua preparação e comece hoje.
+        </p>
 
-              <div className="flex items-center gap-2.5 px-6 py-4 rounded-2xl bg-purple-50 text-slate-800 border-2 border-purple-200 shadow-sm">
-                <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-600">Por apenas</span>
-                <span className="font-black text-purple-700 text-2xl sm:text-3xl animate-pulse-price tracking-tight">{PRICE}</span>
-              </div>
-            </div>
+        <div className="mt-9 flex flex-col sm:flex-row items-stretch justify-center gap-4">
+          <button
+            id="final-enem-cta-btn"
+            onClick={() => handleCheckoutClick('final_enem_cta_click', CHECKOUT_URL)}
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-white text-slate-950 font-black text-sm sm:text-base shadow-xl transition-all hover:bg-slate-100 active:scale-[0.98] cursor-pointer"
+          >
+            <span>Sprint ENEM — {PRICE}</span>
+            <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+          </button>
 
-            <p className="text-xs sm:text-sm text-slate-700 flex items-center gap-1.5 font-medium">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Acesso imediato à plataforma após a confirmação.</span>
-            </p>
-          </div>
+          <button
+            id="final-bundle-cta-btn"
+            onClick={() => handleCheckoutClick('final_bundle_cta_click', BUNDLE_CHECKOUT_URL)}
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-black text-sm sm:text-base shadow-xl shadow-purple-900/40 transition-all hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 active:scale-[0.98] cursor-pointer"
+          >
+            <span>Sprint ENEM + Sprint Redação — {BUNDLE_PRICE}</span>
+            <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+          </button>
         </div>
 
       </div>

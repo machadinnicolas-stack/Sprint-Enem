@@ -6,18 +6,24 @@
 export const PRODUCT_NAME = "Sprint ENEM";
 export const PRICE = "R$ 12,99";
 export const BUNDLE_PRICE = "R$ 22,98";
+export const ESSAY_ADDON_PRICE = "R$ 9,99";
 
-// Central Checkout Destination URL:
-// Alter this single variable to change checkout destination across all CTAs
+// Central Checkout Destination URLs:
+// Alter these variables to change checkout destinations across all CTAs.
 export const CHECKOUT_URL: string = "https://perfectpay.com.br";
 
-export type AnalyticsEvent = 
+// TODO: replace with the real "Sprint ENEM + Sprint Redação" checkout link
+// once it exists. Falls back to CHECKOUT_URL so no link is invented.
+export const BUNDLE_CHECKOUT_URL: string = CHECKOUT_URL;
+
+export type AnalyticsEvent =
   | 'hero_cta_click'
   | 'header_cta_click'
   | 'sticky_cta_click'
-  | 'offer_cta_click'
-  | 'final_cta_click'
-  | 'mid_page_cta_click'
+  | 'offer_enem_cta_click'
+  | 'offer_bundle_cta_click'
+  | 'final_enem_cta_click'
+  | 'final_bundle_cta_click'
   | 'faq_open'
   | 'checkout_click';
 
@@ -65,18 +71,31 @@ export function trackEvent(eventName: AnalyticsEvent, payload?: Record<string, u
 /**
  * Common handler for all checkout buttons
  */
-export function handleCheckoutClick(source: AnalyticsEvent) {
+export function handleCheckoutClick(source: AnalyticsEvent, url: string = CHECKOUT_URL) {
   trackEvent(source, { timestamp: new Date().toISOString() });
   trackEvent('checkout_click', { source });
-  
+
   // Navigate to checkout
-  if (CHECKOUT_URL && CHECKOUT_URL !== '#') {
-    window.location.href = CHECKOUT_URL;
+  if (url && url !== '#') {
+    window.location.href = url;
   } else {
     // If URL is '#', scroll smoothly to offer section
     const offerEl = document.getElementById('oferta');
     if (offerEl) {
       offerEl.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+}
+
+/**
+ * Scrolls to the offers section instead of jumping straight to checkout.
+ * Used by top-of-page CTAs so the visitor can compare both offers first.
+ */
+export function scrollToOffer(source: AnalyticsEvent) {
+  trackEvent(source, { timestamp: new Date().toISOString() });
+
+  const offerEl = document.getElementById('oferta');
+  if (offerEl) {
+    offerEl.scrollIntoView({ behavior: 'smooth' });
   }
 }

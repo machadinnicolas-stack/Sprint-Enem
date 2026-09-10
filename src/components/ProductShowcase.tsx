@@ -1,16 +1,45 @@
 import React, { useState } from 'react';
-import { 
-  LayoutDashboard, 
-  Calendar, 
-  CheckSquare, 
-  Target, 
-  PenTool, 
+import {
+  LayoutDashboard,
+  Calendar,
+  CheckSquare,
+  Target,
+  PenTool,
   Timer,
   Play,
   CheckCircle2,
-  AlertCircle
+  Sliders,
 } from 'lucide-react';
 import { SprintEnemLogo } from './SprintEnemLogo';
+
+interface SolutionBlock {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+}
+
+const solutionBlocks: SolutionBlock[] = [
+  {
+    icon: Sliders,
+    title: 'Plano personalizado',
+    description: 'Organize sua semana de acordo com seus dias disponíveis, tempo de estudo e objetivo.',
+  },
+  {
+    icon: Target,
+    title: 'Saiba o que priorizar',
+    description: 'Use o Raio-X de incidência para direcionar seus estudos aos conteúdos mais relevantes.',
+  },
+  {
+    icon: CheckSquare,
+    title: 'Pratique de verdade',
+    description: 'Resolva questões, faça simulados e acompanhe sua evolução.',
+  },
+  {
+    icon: PenTool,
+    title: 'Redação, foco e progresso',
+    description: 'Use ferramentas para treinar redação, manter a concentração e acompanhar sua consistência.',
+  },
+];
 
 /* =========================================================================
    NOTE FOR DEVELOPERS / PRODUCT TEAM:
@@ -85,19 +114,16 @@ export const ProductShowcase: React.FC = () => {
   const currentScreen = screens.find((s) => s.id === activeTab) || screens[0];
 
   return (
-    <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+    <section className="py-14 sm:py-20 bg-white border-b border-slate-200/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        
+
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center">
-          <span className="text-xs font-bold uppercase tracking-wider text-purple-800 bg-purple-50 px-3 py-1 rounded-full border border-purple-200">
-            Prévia da plataforma
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug">
-            Veja como o Sprint acompanha seus estudos.
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug">
+            O Sprint transforma sua rotina em um plano claro.
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Uma plataforma limpa, sem distrações, projetada para você entrar, saber o que fazer e começar.
+            Informe sua rotina, seu objetivo e suas dificuldades. O Sprint ajuda a transformar isso em uma estratégia de estudos mais organizada.
           </p>
         </div>
 
@@ -387,6 +413,29 @@ export const ProductShowcase: React.FC = () => {
 
             </div>
           </div>
+        </div>
+
+        {/* 4 Solution Blocks */}
+        <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {solutionBlocks.map((block) => {
+            const Icon = block.icon;
+            return (
+              <div
+                key={block.title}
+                className="rounded-2xl p-5 sm:p-6 bg-slate-50 border border-slate-200/90"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white border border-purple-100 flex items-center justify-center text-purple-600 mb-4 shadow-2xs">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900 leading-snug">
+                  {block.title}
+                </h3>
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                  {block.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
 
       </div>
