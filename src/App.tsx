@@ -15,15 +15,15 @@ export default function App() {
   const [legalModal, setLegalModal] = useState<'terms' | 'privacy' | 'contact' | null>(null);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-indigo-500 selection:text-white pb-14 sm:pb-0">
+    <div className="min-h-screen bg-gradient-to-b from-violet-100 via-fuchsia-50 to-purple-100 text-slate-900 flex flex-col selection:bg-indigo-500 selection:text-white pb-14 sm:pb-0">
       <Header />
 
       <main className="flex-1">
         <Hero />
+        <Offer />
         <PainSection />
         <ProductShowcase />
         <HowItWorks />
-        <Offer />
         <FAQ />
         <FinalCTA />
       </main>

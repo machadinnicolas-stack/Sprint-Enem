@@ -27,7 +27,7 @@ const painPoints: PainPoint[] = [
 
 export const PainSection: React.FC = () => {
   return (
-    <section className="py-14 sm:py-20 bg-white border-y border-slate-200/80">
+    <section className="py-14 sm:py-20 bg-gradient-to-b from-purple-100 via-fuchsia-50 to-violet-100 border-y border-slate-200/60">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* Section Heading */}
@@ -47,7 +47,7 @@ export const PainSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="rounded-2xl p-5 sm:p-6 bg-slate-50 border border-slate-200/90 hover:border-slate-300 transition-colors"
+                className="rounded-2xl p-5 sm:p-6 bg-slate-50 border border-slate-200/90 hover:border-purple-200 hover:shadow-lg hover:shadow-slate-900/5 hover:-translate-y-1 transition-all"
               >
                 <div className="w-10 h-10 rounded-xl bg-white border border-purple-100 flex items-center justify-center text-slate-700 mb-4 shadow-2xs">
                   <Icon className="w-5 h-5 text-purple-600" />

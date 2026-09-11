@@ -5,8 +5,8 @@
 
 export const PRODUCT_NAME = "Sprint ENEM";
 export const PRICE = "R$ 12,99";
-export const BUNDLE_PRICE = "R$ 22,98";
-export const ESSAY_ADDON_PRICE = "R$ 9,99";
+export const BUNDLE_PRICE = "R$ 21,99";
+export const ESSAY_ADDON_PRICE = "R$ 9,00";
 
 // Central Checkout Destination URLs:
 // Alter these variables to change checkout destinations across all CTAs.

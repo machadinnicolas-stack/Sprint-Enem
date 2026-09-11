@@ -31,7 +31,7 @@ const steps: Step[] = [
 
 export const HowItWorks: React.FC = () => {
   return (
-    <section className="py-14 sm:py-20 bg-slate-50">
+    <section className="py-14 sm:py-20 bg-gradient-to-b from-violet-100 to-fuchsia-100">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
@@ -48,7 +48,7 @@ export const HowItWorks: React.FC = () => {
             return (
               <div
                 key={step.number}
-                className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-2xs"
+                className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-2xs hover:shadow-lg hover:shadow-slate-900/5 hover:-translate-y-1 hover:border-purple-200 transition-all"
               >
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-2xl font-black text-purple-600/30">{step.number}</span>

@@ -114,8 +114,15 @@ export const ProductShowcase: React.FC = () => {
   const currentScreen = screens.find((s) => s.id === activeTab) || screens[0];
 
   return (
-    <section className="py-14 sm:py-20 bg-white border-b border-slate-200/80">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section className="relative py-14 sm:py-20 bg-gradient-to-b from-fuchsia-100 via-violet-50 to-purple-100 border-b border-slate-200/60 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-1/3 -z-0 flex justify-center blur-3xl"
+      >
+        <div className="h-64 w-[36rem] rounded-full bg-gradient-to-r from-purple-200/40 via-fuchsia-200/30 to-violet-200/40" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center">
@@ -422,7 +429,7 @@ export const ProductShowcase: React.FC = () => {
             return (
               <div
                 key={block.title}
-                className="rounded-2xl p-5 sm:p-6 bg-slate-50 border border-slate-200/90"
+                className="rounded-2xl p-5 sm:p-6 bg-slate-50 border border-slate-200/90 hover:border-purple-200 hover:shadow-lg hover:shadow-slate-900/5 hover:-translate-y-1 transition-all"
               >
                 <div className="w-10 h-10 rounded-xl bg-white border border-purple-100 flex items-center justify-center text-purple-600 mb-4 shadow-2xs">
                   <Icon className="w-5 h-5" />

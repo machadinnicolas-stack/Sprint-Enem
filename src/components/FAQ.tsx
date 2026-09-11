@@ -27,7 +27,7 @@ const faqData: FAQItem[] = [
   {
     id: 4,
     question: 'Qual a diferença entre as duas opções?',
-    answer: 'O Sprint ENEM por R$12,99 dá acesso à plataforma. No pacote de R$22,98 você recebe o Sprint ENEM e também o Sprint Redação, material complementar para planejamento, escrita e revisão.',
+    answer: 'O Sprint ENEM por R$12,99 dá acesso à plataforma. No pacote de R$21,99 você recebe o Sprint ENEM e também o Sprint Redação, material complementar para planejamento, escrita e revisão.',
   },
 ];
 
@@ -43,7 +43,7 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section className="py-14 sm:py-20 bg-white">
+    <section className="py-14 sm:py-20 bg-gradient-to-b from-fuchsia-100 to-violet-200/70">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
