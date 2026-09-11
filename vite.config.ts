@@ -66,6 +66,9 @@ function aistudioMediaPlugin(): Plugin {
 
 export default defineConfig(() => {
   return {
+    // Relative base so the built assets resolve correctly whether the site
+    // is served from a domain root or a GitHub Pages project subpath.
+    base: './',
     plugins: [react(), tailwindcss(), aistudioMediaPlugin()],
     resolve: {
       alias: {
