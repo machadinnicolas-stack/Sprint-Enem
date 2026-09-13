@@ -1,6 +1,7 @@
 import { ExamQuestion, RedacaoTheme, TopicItem, SubjectType, UserPreferences, DaySchedule, GeneratedPlan, StudyBlock } from '../types';
 import { MATEMATICA_QUESTIONS } from './questions/matematica';
 import { NATUREZA_QUESTIONS } from './questions/natureza';
+import { HUMANAS_QUESTIONS } from './questions/humanas';
 
 // Ordered with the most commonly searched courses first — the first few entries
 // are used as the default "popular" quick-picks before the user types anything.
@@ -323,26 +324,6 @@ export const ENEN_TOPICS: TopicItem[] = [
 const OUTRAS_QUESTOES: ExamQuestion[] = [
   ,
   ,
-  {
-    id: 'q-3',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Sociologia - Cidadania e Constituição de 1988',
-    difficulty: 'Média',
-    question: 'A Constituição Cidadã de 1988 representou um marco fundamental na história brasileira ao institucionalizar direitos sociais inéditos. Dentre esses avanços fundamentais, destaca-se:',
-    options: [
-      { letter: 'A', text: 'A centralização das decisões de saúde na União sem participação social.' },
-      { letter: 'B', text: 'A criação do Sistema Único de Saúde (SUS) universal, público e descentralizado.' },
-      { letter: 'C', text: 'A restrição do direito de voto para analfabetos durante eleições municipais.' },
-      { letter: 'D', text: 'A proibição do direito de greve para os servidores públicos civis.' },
-      { letter: 'E', text: 'A censura prévia mantida para espetáculos culturais e produções teatrais.' }
-    ],
-    correctLetter: 'B',
-    explanation: 'O Artigo 196 da CF/88 consagrou que a saúde é direito de todos e dever do Estado, dando origem ao SUS.',
-    triTip: 'Use o Artigo 196 e a CF/88 como repertório coringa de Redação para quase qualquer tema de saúde, educação ou segurança!'
-  },
-  ,
   ,
   {
     id: 'q-4',
@@ -364,133 +345,6 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Funções da linguagem são garantia de 2 a 3 questões rápidas no 1º dia.'
   },
   ,
-  ,
-
-  // ---- Ciências Humanas (adicionais) ----
-  {
-    id: 'q-17',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Era Vargas e Ditadura Militar (História do Brasil)',
-    difficulty: 'Média',
-    question: 'Durante o Estado Novo (1937-1945), Getúlio Vargas consolidou uma extensa legislação trabalhista no Brasil, ao mesmo tempo em que promovia forte censura e perseguição política. Essa combinação de concessões sociais com autoritarismo político é frequentemente descrita pelos historiadores como:',
-    options: [
-      { letter: 'A', text: 'Populismo Liberal' },
-      { letter: 'B', text: 'Trabalhismo Autoritário' },
-      { letter: 'C', text: 'Parlamentarismo Corporativo' },
-      { letter: 'D', text: 'Federalismo Oligárquico' },
-      { letter: 'E', text: 'Republicanismo Positivista' }
-    ],
-    correctLetter: 'B',
-    explanation: 'O período do Estado Novo combinou ampliação de direitos trabalhistas (CLT, salário mínimo) com repressão política e centralização do poder, característica identificada pelos historiadores como "trabalhismo autoritário" ou populismo de Estado.',
-    triTip: 'Associe sempre "direitos trabalhistas + autoritarismo político" ao Estado Novo de Vargas — é um dos temas mais recorrentes de História do Brasil no ENEM.'
-  },
-  ,
-  ,
-  {
-    id: 'q-18',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Geografia Agrária e Urbanização (Geografia)',
-    difficulty: 'Média',
-    question: 'A modernização da agropecuária brasileira, especialmente no Centro-Oeste, é marcada pelo uso intensivo de maquinário, insumos químicos e biotecnologia, processo conhecido como:',
-    options: [
-      { letter: 'A', text: 'Reforma Agrária' },
-      { letter: 'B', text: 'Agricultura de Subsistência' },
-      { letter: 'C', text: 'Revolução Verde' },
-      { letter: 'D', text: 'Êxodo Rural' },
-      { letter: 'E', text: 'Extrativismo Vegetal' }
-    ],
-    correctLetter: 'C',
-    explanation: 'A Revolução Verde refere-se à modernização técnico-científica da agricultura, baseada em mecanização, fertilizantes químicos e sementes melhoradas geneticamente, fortemente presente no agronegócio do Centro-Oeste brasileiro.',
-    triTip: '"Revolução Verde" é um repertório útil também para Redação em temas de meio ambiente e agronegócio — associe seus impactos positivos (produtividade) e negativos (concentração de terra, impacto ambiental).'
-  },
-  ,
-  ,
-  {
-    id: 'q-19',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Cidadania, Direitos Humanos e Democracia (Sociologia/Filosofia)',
-    difficulty: 'Difícil',
-    question: 'O sociólogo polonês Zygmunt Bauman utiliza o conceito de "modernidade líquida" para descrever a sociedade contemporânea. Esse conceito está mais diretamente relacionado a qual característica do mundo atual?',
-    options: [
-      { letter: 'A', text: 'Estabilidade das instituições tradicionais e dos vínculos sociais duradouros.' },
-      { letter: 'B', text: 'Fluidez, incerteza e fragilidade dos vínculos sociais e das relações humanas.' },
-      { letter: 'C', text: 'Retorno a modelos econômicos exclusivamente agrários.' },
-      { letter: 'D', text: 'Fortalecimento definitivo das fronteiras nacionais.' },
-      { letter: 'E', text: 'Extinção completa das tecnologias de comunicação digital.' }
-    ],
-    correctLetter: 'B',
-    explanation: 'Bauman usa a metáfora do "líquido" (que não tem forma fixa) para descrever a fluidez, a instabilidade e a fragilidade das relações sociais, profissionais e afetivas na contemporaneidade, em contraste com a "solidez" das estruturas do passado.',
-    triTip: 'Zygmunt Bauman é repertório curinga tanto para Humanas quanto para Redação — domine o conceito de "modernidade líquida" aplicado a relações de consumo, afetivas e digitais.'
-  },
-  ,
-  ,
-  {
-    id: 'q-20',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Globalização e Geopolítica Contemporânea',
-    difficulty: 'Média',
-    question: 'Blocos econômicos regionais, como o Mercosul e a União Europeia, têm como principal objetivo:',
-    options: [
-      { letter: 'A', text: 'Isolar economicamente seus países-membros do restante do mundo.' },
-      { letter: 'B', text: 'Reduzir barreiras comerciais e fortalecer a integração econômica entre os países-membros.' },
-      { letter: 'C', text: 'Eliminar completamente a soberania política dos países envolvidos.' },
-      { letter: 'D', text: 'Impedir qualquer tipo de fluxo migratório entre os países-membros.' },
-      { letter: 'E', text: 'Restringir o comércio exclusivamente a produtos agrícolas.' }
-    ],
-    correctLetter: 'B',
-    explanation: 'Blocos econômicos regionais buscam reduzir tarifas e barreiras alfandegárias, ampliando o comércio e a cooperação entre os países-membros, fortalecendo sua posição em um cenário de economia globalizada.',
-    triTip: 'Diferencie os níveis de integração dos blocos (zona de livre comércio, união aduaneira, mercado comum) — o Mercosul é uma união aduaneira imperfeita, enquanto a UE avançou para união econômica e monetária.'
-  },
-  ,
-  ,
-  {
-    id: 'q-21',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Cidadania, Direitos Humanos e Democracia (Sociologia/Filosofia)',
-    difficulty: 'Difícil',
-    question: 'O filósofo francês Michel Foucault desenvolveu o conceito de "sociedade disciplinar" para analisar como instituições como escolas, prisões e hospitais exercem controle sobre os indivíduos. Segundo Foucault, esse poder disciplinar atua principalmente por meio de:',
-    options: [
-      { letter: 'A', text: 'Uso exclusivo da força militar direta.' },
-      { letter: 'B', text: 'Vigilância constante e normalização dos comportamentos.' },
-      { letter: 'C', text: 'Ausência total de qualquer forma de controle institucional.' },
-      { letter: 'D', text: 'Concessão irrestrita de liberdade individual sem regras.' },
-      { letter: 'E', text: 'Extinção das instituições públicas de ensino.' }
-    ],
-    correctLetter: 'B',
-    explanation: 'Para Foucault, o poder disciplinar moderno não se baseia apenas na violência explícita, mas em mecanismos sutis de vigilância, controle do tempo/espaço e normalização dos comportamentos dos indivíduos dentro das instituições.',
-    triTip: 'Foucault e o conceito de "vigilância e normalização" são úteis para redações sobre tecnologia, privacidade e controle social (câmeras, redes sociais, big data).'
-  },
-  ,
-  ,
-  {
-    id: 'q-22',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Climatologia e Mudanças Climáticas',
-    difficulty: 'Fácil',
-    question: 'O aumento da concentração de gases como o CO₂ na atmosfera intensifica a retenção de calor irradiado pela Terra, fenômeno natural essencial à vida, mas que, quando potencializado pela ação humana, contribui para o aquecimento global. Esse fenômeno é conhecido como:',
-    options: [
-      { letter: 'A', text: 'Efeito Estufa' },
-      { letter: 'B', text: 'Inversão Térmica' },
-      { letter: 'C', text: 'El Niño' },
-      { letter: 'D', text: 'Corrente de Ressurgência' },
-      { letter: 'E', text: 'Efeito Coriolis' }
-    ],
-    correctLetter: 'A',
-    explanation: 'O efeito estufa é o fenômeno natural de retenção de calor pela atmosfera; a intensificação artificial desse processo, causada pela emissão excessiva de gases como o CO₂ por atividades humanas, é apontada como principal causa do aquecimento global.',
-    triTip: 'Não confunda efeito estufa (fenômeno natural intensificado) com "camada de ozônio" (protege contra radiação UV) — são temas ambientais distintos que o ENEM adora confundir nas alternativas.'
-  },
   ,
   ,
 
@@ -516,6 +370,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
   },
   ,
   ,
+  ,
   {
     id: 'q-24',
     subject: 'linguagens',
@@ -535,6 +390,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'A Semana de Arte Moderna de 1922 rompeu com os padrões estéticos tradicionais (parnasianismo, academicismo) e propôs uma renovação da linguagem artística, valorizando a cultura e identidade nacionais de forma inovadora.',
     triTip: 'Associe a Semana de 22 a nomes como Mário de Andrade, Oswald de Andrade e Tarsila do Amaral — recorrente tanto em Linguagens quanto como repertório de Redação.'
   },
+  ,
   ,
   ,
   {
@@ -558,6 +414,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
   },
   ,
   ,
+  ,
   {
     id: 'q-26',
     subject: 'linguagens',
@@ -577,6 +434,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'A personificação (ou prosopopeia) consiste em atribuir ações, sentimentos ou características humanas a seres inanimados ou não humanos — no exemplo, o sol "sorri", ação tipicamente humana.',
     triTip: 'Não confunda personificação (atribuir traços humanos) com comparação/símile (usa conectivo "como") nem com metáfora (comparação implícita sem conectivo).'
   },
+  ,
   ,
   ,
   {
@@ -600,6 +458,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
   },
   ,
   ,
+  ,
   {
     id: 'q-28',
     subject: 'linguagens',
@@ -620,70 +479,6 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Domine os conectivos de oposição (contudo, entretanto, todavia, no entanto) — eles são essenciais tanto para interpretação de texto quanto para a Competência 4 da Redação.'
   },
   ,
-  ,
-
-  // ---- Ciências Humanas (Simulado Completo) ----
-  {
-    id: 'q-35',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Geografia - Urbanização',
-    difficulty: 'Média',
-    question: 'O fenômeno da "macrocefalia urbana", observado em diversas metrópoles brasileiras ao longo do século XX, refere-se a:',
-    options: [
-      { letter: 'A', text: 'Crescimento equilibrado entre todas as cidades de um estado.' },
-      { letter: 'B', text: 'Concentração excessiva da população e das atividades econômicas em uma única cidade, em detrimento das demais.' },
-      { letter: 'C', text: 'Êxodo urbano em massa rumo às áreas rurais.' },
-      { letter: 'D', text: 'Distribuição uniforme da renda entre centro e periferia.' },
-      { letter: 'E', text: 'Ausência de problemas de infraestrutura urbana.' }
-    ],
-    correctLetter: 'B',
-    explanation: 'Macrocefalia urbana é o crescimento desproporcional de uma cidade (geralmente a capital ou maior polo econômico) em relação às demais do mesmo estado ou região, concentrando população, empregos e serviços.',
-    triTip: 'Urbanização, êxodo rural e macrocefalia urbana são temas recorrentes em Geografia — conecte sempre com desigualdade socioespacial, ótimo repertório de Redação também.'
-  },
-  ,
-  ,
-  {
-    id: 'q-36',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'História - Era Vargas e CLT',
-    difficulty: 'Média',
-    question: 'A Consolidação das Leis do Trabalho (CLT), instituída em 1943 durante o governo de Getúlio Vargas, teve como principal objetivo:',
-    options: [
-      { letter: 'A', text: 'Extinguir todos os direitos trabalhistas conquistados anteriormente.' },
-      { letter: 'B', text: 'Unificar e regulamentar a legislação trabalhista brasileira, garantindo direitos como salário mínimo e férias.' },
-      { letter: 'C', text: 'Proibir qualquer forma de sindicalização dos trabalhadores.' },
-      { letter: 'D', text: 'Privatizar todas as empresas estatais existentes.' },
-      { letter: 'E', text: 'Estabelecer o voto obrigatório apenas para trabalhadores urbanos.' }
-    ],
-    correctLetter: 'B',
-    explanation: 'A CLT unificou a legislação trabalhista dispersa até então, regulamentando direitos como carteira assinada, salário mínimo, férias remuneradas e jornada de trabalho, no contexto do populismo trabalhista de Vargas.',
-    triTip: 'Era Vargas + direitos trabalhistas é combo certo no ENEM — associe CLT, sindicalismo atrelado ao Estado e o populismo varguista.'
-  },
-  ,
-  ,
-  {
-    id: 'q-37',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Filosofia - Contratualismo',
-    difficulty: 'Difícil',
-    question: 'Filósofos iluministas como Locke e Rousseau desenvolveram teorias contratualistas para explicar a origem do Estado. Segundo essas teorias, o Estado surge a partir de:',
-    options: [
-      { letter: 'A', text: 'Uma imposição divina direta sobre os súditos.' },
-      { letter: 'B', text: 'Um pacto entre os indivíduos, que abrem mão de parte de sua liberdade natural em troca de ordem e proteção coletiva.' },
-      { letter: 'C', text: 'Uma conquista militar sem qualquer forma de consentimento popular.' },
-      { letter: 'D', text: 'Uma seleção natural entre as sociedades mais fortes.' },
-      { letter: 'E', text: 'Uma decisão exclusiva da aristocracia hereditária.' }
-    ],
-    correctLetter: 'B',
-    explanation: 'As teorias contratualistas (Hobbes, Locke, Rousseau) explicam que o Estado nasce de um "contrato social": um pacto no qual os indivíduos cedem parte de sua liberdade natural em troca da segurança e da ordem garantidas pela vida em sociedade.',
-    triTip: 'Contratualismo é repertório sociocultural coringa pra Redação — cite Rousseau ou Hobbes ao discutir o "papel do Estado" em praticamente qualquer tema.'
-  },
   ,
   ,
 
@@ -709,6 +504,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
   },
   ,
   ,
+  ,
   {
     id: 'q-39',
     subject: 'linguagens',
@@ -728,6 +524,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'A adaptação da linguagem ao contexto/situação de comunicação é chamada de variação diafásica ou estilística — o falante escolhe o registro (formal ou informal) conforme a situação, sem que isso configure "erro".',
     triTip: 'O ENEM valoriza a ideia de adequação linguística, não de "certo x errado" — toda variedade linguística é legítima em seu contexto de uso.'
   },
+  ,
   ,
   ,
   {
@@ -751,6 +548,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
   },
   ,
   ,
+  ,
   {
     id: 'q-45',
     subject: 'linguagens',
@@ -772,6 +570,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
   },
   ,
   ,
+  ,
   {
     id: 'q-46',
     subject: 'linguagens',
@@ -790,48 +589,6 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     correctLetter: 'C',
     explanation: 'Intertextualidade é o diálogo entre textos, que pode ocorrer por citação direta, paródia (tom crítico ou humorístico) ou paráfrase (reafirmação da ideia original com outras palavras).',
     triTip: 'Charges e propagandas do ENEM costumam explorar intertextualidade com obras de arte, provérbios ou músicas — fique atento a referências implícitas no texto motivador.'
-  },
-  ,
-  ,
-  {
-    id: 'q-47',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'Geografia - Urbanização Brasileira',
-    difficulty: 'Fácil',
-    question: 'O intenso deslocamento populacional do campo para as cidades brasileiras, acentuado principalmente a partir da segunda metade do século XX, é conhecido como:',
-    options: [
-      { letter: 'A', text: 'Fluxo pendular' },
-      { letter: 'B', text: 'Êxodo rural' },
-      { letter: 'C', text: 'Segregação socioespacial' },
-      { letter: 'D', text: 'Conurbação' },
-      { letter: 'E', text: 'Gentrificação' }
-    ],
-    correctLetter: 'B',
-    explanation: 'Êxodo rural é a migração da população do campo para as cidades, impulsionada pela mecanização agrícola e pela busca de emprego e serviços urbanos — processo que acelerou fortemente a urbanização brasileira a partir das décadas de 1950-1970.',
-    triTip: 'Associe êxodo rural à mecanização do campo e ao crescimento desordenado das periferias urbanas — ótimo tema de Humanas e também repertório de Redação.'
-  },
-  ,
-  ,
-  {
-    id: 'q-48',
-    subject: 'humanas',
-    areaName: 'Ciências Humanas',
-    origin: 'Questão Inédita',
-    topic: 'História - Era Vargas e Direitos Políticos',
-    difficulty: 'Média',
-    question: 'No Brasil, o direito de voto às mulheres foi conquistado formalmente durante o governo de:',
-    options: [
-      { letter: 'A', text: 'Getúlio Vargas' },
-      { letter: 'B', text: 'Juscelino Kubitschek' },
-      { letter: 'C', text: 'Dom Pedro II' },
-      { letter: 'D', text: 'Deodoro da Fonseca' },
-      { letter: 'E', text: 'João Goulart' }
-    ],
-    correctLetter: 'A',
-    explanation: 'O direito de voto feminino foi instituído pelo Código Eleitoral de 1932, durante o Governo Provisório de Getúlio Vargas, sendo posteriormente confirmado pela Constituição de 1934.',
-    triTip: 'Conquistas de direitos políticos (voto feminino, voto do analfabeto, redemocratização) são tema constante em Humanas — monte uma linha do tempo dos direitos civis no Brasil.'
   }
 ];
 
@@ -839,6 +596,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
 export const MOCK_QUESTIONS: ExamQuestion[] = [
   ...MATEMATICA_QUESTIONS,
   ...NATUREZA_QUESTIONS,
+  ...HUMANAS_QUESTIONS,
   ...OUTRAS_QUESTOES
 ];
 

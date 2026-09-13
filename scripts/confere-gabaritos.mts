@@ -11,6 +11,7 @@
 import { ExamQuestion } from '../src/types.js';
 import { MATEMATICA_QUESTIONS } from '../src/data/questions/matematica.js';
 import { NATUREZA_QUESTIONS } from '../src/data/questions/natureza.js';
+import { HUMANAS_QUESTIONS } from '../src/data/questions/humanas.js';
 
 type Esperado = number | { texto: string };
 
@@ -140,7 +141,63 @@ const CALCULOS: Record<string, () => Esperado> = {
   'nat-45': () => t('sofre oxidação, perde massa'),
   'nat-46': () => t('se oxida preferencialmente'),
   'nat-47': () => 2 * 890,
-  'nat-48': () => t('enxofre')
+  'nat-48': () => t('enxofre'),
+
+  // ---- Humanas: História
+  'hum-01': () => t('construindo comunidades autônomas'),
+  'hum-02': () => t('monocultura'),
+  'hum-03': () => t('manteve-se a monarquia'),
+  'hum-04': () => t('marginalização socioeconômica'),
+  'hum-05': () => t('cabresto'),
+  'hum-06': () => t('caráter autoritário da campanha'),
+  'hum-07': () => t('controle estatal sobre os trabalhadores'),
+  'hum-08': () => t('silenciava a crítica'),
+  'hum-09': () => t('fechar o Congresso'),
+  'hum-10': () => t('força da mobilização popular'),
+  'hum-11': () => t('classe operária urbana'),
+  'hum-12': () => t('sociedade estamental'),
+  'hum-13': () => t('corrida armamentista'),
+  'hum-14': () => t('partido único'),
+
+  // ---- Humanas: Geografia
+  'hum-15': () => t('Êxodo rural'),
+  'hum-16': () => t('Segregação socioespacial'),
+  'hum-17': () => t('Conurbação'),
+  'hum-18': () => t('Revolução Verde'),
+  'hum-19': () => t('concentração fundiária'),
+  'hum-20': () => t('Cerrado'),
+  'hum-21': () => t('Inversão térmica'),
+  'hum-22': () => t('envelhecimento da população'),
+  'hum-23': () => t('altas taxas de natalidade'),
+  'hum-24': () => t('Divisão internacional do trabalho'),
+  'hum-25': () => t('reduzir barreiras comerciais'),
+  'hum-26': () => t('fontes renováveis'),
+  'hum-27': () => t('distribuição desigual'),
+  'hum-28': () => (6 * 50000) / 100000,
+
+  // ---- Humanas: Filosofia
+  'hum-29': () => t('Maiêutica'),
+  'hum-30': () => t('mundo inteligível'),
+  'hum-31': () => t('justo meio'),
+  'hum-32': () => t('poder soberano'),
+  'hum-33': () => t('vontade geral'),
+  'hum-34': () => t('dever e na intenção'),
+  'hum-35': () => t('crítica ao absolutismo'),
+  'hum-36': () => t('construções históricas'),
+  'hum-37': () => t('padronizar os produtos culturais'),
+  'hum-38': () => t('pessoas comuns'),
+
+  // ---- Humanas: Sociologia
+  'hum-39': () => t('Fato social'),
+  'hum-40': () => t('jaula de ferro'),
+  'hum-41': () => t('Mais-valia'),
+  'hum-42': () => t('Etnocentrismo'),
+  'hum-43': () => t('relativismo cultural'),
+  'hum-44': () => t('tarefas repetitivas e fragmentadas'),
+  'hum-45': () => t('just in time'),
+  'hum-46': () => t('ampliação de direitos'),
+  'hum-47': () => t('reproduzir entre gerações'),
+  'hum-48': () => t('fluidez e à fragilidade')
 };
 
 // Converte "R$ 6.655,00", "2 880 peças", "5,4 m", "80 km/h" e "1/3" em número.
@@ -234,7 +291,9 @@ function confere(nome: string, banco: ExamQuestion[]): number {
 }
 
 const problemas =
-  confere('Matemática', MATEMATICA_QUESTIONS) + confere('Ciências da Natureza', NATUREZA_QUESTIONS);
+  confere('Matemática', MATEMATICA_QUESTIONS) +
+  confere('Ciências da Natureza', NATUREZA_QUESTIONS) +
+  confere('Ciências Humanas', HUMANAS_QUESTIONS);
 
 console.log(problemas === 0 ? '\nTODOS OS GABARITOS CONFEREM\n' : `\n${problemas} problema(s) encontrado(s)\n`);
 process.exit(problemas === 0 ? 0 : 1);
