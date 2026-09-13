@@ -12,10 +12,10 @@ import {
   estimatedLineCount,
   evaluateWithGemini,
   buildWritingChecklist,
-} from './server/redacaoService';
-import { getUserFromAuthHeader } from './server/supabaseServer';
-import { hasActiveEntitlement, NO_ACCESS_MESSAGE } from './server/entitlements';
-import { getAiQuotaStatus, recordAiEvaluationUsed } from './server/redacaoRateLimit';
+} from './server/redacaoService.js';
+import { getUserFromAuthHeader } from './server/supabaseServer.js';
+import { hasActiveEntitlement, NO_ACCESS_MESSAGE } from './server/entitlements.js';
+import { getAiQuotaStatus, recordAiEvaluationUsed } from './server/redacaoRateLimit.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

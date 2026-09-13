@@ -1,4 +1,8 @@
-import { supabaseAdmin } from './supabaseServer';
+// Extensão .js obrigatória: package.json declara "type": "module", então as
+// funções da Vercel rodam como ESM, e o resolvedor ESM do Node não completa
+// extensões. Sem isso o import quebra em produção (ERR_MODULE_NOT_FOUND),
+// mesmo funcionando localmente sob tsx.
+import { supabaseAdmin } from './supabaseServer.js';
 
 export const NO_ACCESS_MESSAGE =
   'Não encontramos uma compra ativa para este e-mail. Se você já comprou, use o mesmo e-mail do pagamento.';

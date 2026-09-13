@@ -1,5 +1,5 @@
 import { createHash, timingSafeEqual } from 'node:crypto';
-import { grantEntitlement, revokeEntitlement } from '../server/entitlements';
+import { grantEntitlement, revokeEntitlement } from '../server/entitlements.js';
 
 // Vercel Serverless Function: POST /api/perfectpay-webhook
 //

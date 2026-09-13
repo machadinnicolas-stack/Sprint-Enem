@@ -1,4 +1,4 @@
-import { supabaseAdmin } from './supabaseServer';
+import { supabaseAdmin } from './supabaseServer.js';
 
 // Daily cap on Gemini-backed evaluations per user. Sprint ENEM is sold as a
 // one-time purchase (no recurring revenue), so there's nothing to offset

@@ -4,10 +4,10 @@ import {
   estimatedLineCount,
   evaluateWithGemini,
   buildWritingChecklist,
-} from '../server/redacaoService';
-import { getUserFromAuthHeader } from '../server/supabaseServer';
-import { hasActiveEntitlement, NO_ACCESS_MESSAGE } from '../server/entitlements';
-import { getAiQuotaStatus, recordAiEvaluationUsed } from '../server/redacaoRateLimit';
+} from '../server/redacaoService.js';
+import { getUserFromAuthHeader } from '../server/supabaseServer.js';
+import { hasActiveEntitlement, NO_ACCESS_MESSAGE } from '../server/entitlements.js';
+import { getAiQuotaStatus, recordAiEvaluationUsed } from '../server/redacaoRateLimit.js';
 
 // Vercel Serverless Function: POST /api/evaluate-redacao
 // Mirrors the logic used for local dev via `npm run dev` (server.ts) — both
