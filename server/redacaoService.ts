@@ -2,13 +2,49 @@ import { GoogleGenAI, Type } from '@google/genai';
 
 export const MINIMUM_LINES = 8;
 
-// Pinned rather than using a floating alias so grading behaviour can't shift
-// under students mid-cycle. Revisit when Google deprecates it: gemini-3.7-flash
-// was the previous pick and began returning sustained 503s.
-const GEMINI_MODEL = 'gemini-3.8-flash';
+// Primeiro da lista é o modelo de referência; o segundo só entra quando o
+// primeiro está indisponível. Em 13/09/2026, gemini-3.7-flash ficou horas em 503
+// e o 3.8-flash caiu num pico no meio da tarde — com um único modelo fixo, cada
+// pico desses vira "correção indisponível" para o aluno.
+const GEMINI_MODELS = ['gemini-3.8-flash', 'gemini-flash-latest'];
 
-const MAX_ATTEMPTS = 3;
+const ATTEMPTS_PER_MODEL = 2;
 const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504]);
+
+// Um 503 do Gemini pode levar mais de 20s para voltar, então quatro tentativas
+// no pior caso passariam do tempo limite da função. Estourar o limite devolve um
+// erro de gateway cru ao aluno; desistir dentro do orçamento devolve a nossa
+// mensagem, com o texto preservado e o botão de tentar de novo.
+const TOTAL_BUDGET_MS = 45_000;
+
+// Correções legítimas já levaram 27s, então o teto por chamada precisa ficar
+// acima disso; o que ele impede é uma chamada pendurada consumir o orçamento
+// inteiro sozinha.
+const PER_CALL_TIMEOUT_MS = 30_000;
+
+// Mensagem sem dígitos de propósito: isRetryable procura códigos HTTP no texto
+// do erro, e um número aqui faria um timeout ser confundido com um 500.
+class GeminiTimeoutError extends Error {
+  constructor() {
+    super('Gemini call timed out');
+  }
+}
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new GeminiTimeoutError()), ms);
+    promise.then(
+      (valor) => {
+        clearTimeout(timer);
+        resolve(valor);
+      },
+      (erro) => {
+        clearTimeout(timer);
+        reject(erro);
+      }
+    );
+  });
+}
 
 // Shared by both runtimes so the wording can't drift between local dev and Vercel.
 export const AI_UNAVAILABLE_MESSAGE =
@@ -86,48 +122,62 @@ Seja rigoroso e fiel aos critérios do INEP: atribua notas baixas quando o texto
 
 Retorne em formato JSON estrito com o total, comentário geral e notas/dicas por competência.`;
 
-  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-    try {
-      const response = await ai.models.generateContent({
-        model: GEMINI_MODEL,
-        contents: prompt,
-        config: {
-          responseMimeType: 'application/json',
-          responseSchema: {
+  const config = {
+    responseMimeType: 'application/json',
+    responseSchema: {
+      type: Type.OBJECT,
+      properties: {
+        totalScore: { type: Type.INTEGER },
+        generalComment: { type: Type.STRING },
+        competencies: {
+          type: Type.ARRAY,
+          items: {
             type: Type.OBJECT,
             properties: {
-              totalScore: { type: Type.INTEGER },
-              generalComment: { type: Type.STRING },
-              competencies: {
-                type: Type.ARRAY,
-                items: {
-                  type: Type.OBJECT,
-                  properties: {
-                    name: { type: Type.STRING },
-                    score: { type: Type.INTEGER },
-                    tip: { type: Type.STRING },
-                  },
-                  required: ['name', 'score', 'tip'],
-                },
-              },
+              name: { type: Type.STRING },
+              score: { type: Type.INTEGER },
+              tip: { type: Type.STRING },
             },
-            required: ['totalScore', 'generalComment', 'competencies'],
+            required: ['name', 'score', 'tip'],
           },
         },
-      });
+      },
+      required: ['totalScore', 'generalComment', 'competencies'],
+    },
+  };
 
-      if (response.text) return JSON.parse(response.text.trim());
-      console.warn(`Gemini returned an empty response (attempt ${attempt}/${MAX_ATTEMPTS}).`);
-    } catch (err) {
-      if (attempt < MAX_ATTEMPTS && isRetryable(err)) {
-        await delay(attempt * 1500);
-        continue;
+  const startedAt = Date.now();
+  const restante = () => TOTAL_BUDGET_MS - (Date.now() - startedAt);
+
+  for (const model of GEMINI_MODELS) {
+    for (let attempt = 1; attempt <= ATTEMPTS_PER_MODEL; attempt++) {
+      const orcamento = restante();
+      if (orcamento <= 0) {
+        console.error('Gemini time budget exhausted before a grade could be produced.');
+        return null;
       }
-      console.error(`Gemini evaluation failed (attempt ${attempt}/${MAX_ATTEMPTS}):`, err);
-      return null;
+
+      try {
+        const response = await withTimeout(
+          ai.models.generateContent({ model, contents: prompt, config }),
+          Math.min(orcamento, PER_CALL_TIMEOUT_MS)
+        );
+
+        if (response.text) return JSON.parse(response.text.trim());
+        console.warn(`Gemini (${model}) returned an empty response, attempt ${attempt}/${ATTEMPTS_PER_MODEL}.`);
+      } catch (err) {
+        console.error(`Gemini (${model}) failed on attempt ${attempt}/${ATTEMPTS_PER_MODEL}:`, err);
+
+        // Erro permanente (modelo removido, chave inválida) e timeout não
+        // melhoram com repetição imediata — vão direto para o próximo modelo.
+        if (!isRetryable(err)) break;
+
+        if (attempt < ATTEMPTS_PER_MODEL && restante() > 5_000) await delay(2_000);
+      }
     }
   }
 
+  console.error('All Gemini models failed — reporting the essay as ungradable rather than inventing a score.');
   return null;
 }
 
