@@ -25,10 +25,19 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
   const [answeredCount, setAnsweredCount] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
+  // Embaralha a cada sessão: o banco é pequeno e, em ordem fixa, o aluno
+  // reencontra exatamente a mesma sequência toda vez que abre o treino.
   const questions = useMemo<ExamQuestion[]>(() => {
-    return areaFilter === 'todos'
-      ? MOCK_QUESTIONS
-      : MOCK_QUESTIONS.filter((q) => q.subject === areaFilter);
+    const pool =
+      areaFilter === 'todos'
+        ? [...MOCK_QUESTIONS]
+        : MOCK_QUESTIONS.filter((q) => q.subject === areaFilter);
+
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool;
   }, [areaFilter]);
 
   const currentQ = questions[currentIndex];
