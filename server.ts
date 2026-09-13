@@ -14,6 +14,7 @@ import {
   buildWritingChecklist,
 } from './server/redacaoService';
 import { getUserFromAuthHeader } from './server/supabaseServer';
+import { hasActiveEntitlement, NO_ACCESS_MESSAGE } from './server/entitlements';
 import { getAiQuotaStatus, recordAiEvaluationUsed } from './server/redacaoRateLimit';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -55,6 +56,12 @@ app.post('/api/evaluate-redacao', async (req: Request, res: Response) => {
   const authUser = await getUserFromAuthHeader(req.headers.authorization);
   if (!authUser) {
     return res.status(401).json({ error: 'É necessário estar autenticado para avaliar a redação.' });
+  }
+
+  // O portão do cliente pode ser contornado por quem edita o JS da página; este
+  // aqui não. É o que impede alguém sem compra de gastar orçamento de IA.
+  if (!(await hasActiveEntitlement(authUser.email))) {
+    return res.status(403).json({ error: NO_ACCESS_MESSAGE });
   }
 
   const quota = await getAiQuotaStatus(authUser.id);

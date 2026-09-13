@@ -25,6 +25,7 @@ export const supabaseAdmin: SupabaseClient | null =
 
 export interface AuthenticatedUser {
   id: string;
+  email: string | undefined;
 }
 
 // Verifies the bearer token from an incoming request's Authorization header
@@ -41,5 +42,5 @@ export async function getUserFromAuthHeader(
   const { data, error } = await supabaseAuthClient.auth.getUser(token);
   if (error || !data.user) return null;
 
-  return { id: data.user.id };
+  return { id: data.user.id, email: data.user.email };
 }

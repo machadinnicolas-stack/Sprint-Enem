@@ -45,6 +45,30 @@ create policy "Users can update own data"
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
+-- Sprint ENEM: quem comprou o produto e portanto pode usar o app.
+-- A chave é o e-mail e não o user_id porque a compra acontece na Perfect Pay
+-- antes de a conta existir: o webhook grava o e-mail do comprador e o vínculo se
+-- fecha quando essa pessoa se cadastra com o mesmo e-mail.
+create table if not exists public.entitlements (
+  email text primary key check (email = lower(email)),
+  status text not null default 'active' check (status in ('active', 'revoked')),
+  source text not null,
+  product text,
+  external_id text,
+  granted_at timestamptz not null default now(),
+  revoked_at timestamptz
+);
+
+alter table public.entitlements enable row level security;
+
+-- O aluno lê apenas a própria linha; ninguém escreve pelo navegador. Conceder
+-- acesso é decisão do servidor (webhook da Perfect Pay ou concessão manual com
+-- a service role), nunca do cliente.
+drop policy if exists "Users can read own entitlement" on public.entitlements;
+create policy "Users can read own entitlement"
+  on public.entitlements for select
+  using (lower(auth.jwt() ->> 'email') = email);
+
 -- Sprint ENEM: contador diário de avaliações de redação feitas com IA (Gemini).
 -- Como o produto é vendido em pagamento único (sem recorrência), esse contador
 -- limita o custo de API por usuário (ver server/redacaoRateLimit.ts).

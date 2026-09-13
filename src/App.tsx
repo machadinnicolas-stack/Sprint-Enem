@@ -4,8 +4,10 @@ import { UserPreferences, GeneratedPlan, StudyBlock, UserGamificationState, Badg
 import { generateStudyPlan, buildDaySchedule, regenerateDaySubject } from './data/enemData';
 import { getInitialGamificationState, reconcileGamificationState, processGamificationEvent, getLevelInfo } from './data/gamificationData';
 import { useAuth } from './hooks/useAuth';
+import { useEntitlement } from './hooks/useEntitlement';
 import { loadUserData, saveUserData } from './services/userData';
 import { AuthScreen } from './components/AuthScreen';
+import { AccessPendingScreen } from './components/AccessPendingScreen';
 import { ResetPasswordScreen } from './components/ResetPasswordScreen';
 import { OnboardingForm } from './components/OnboardingForm';
 import { Header } from './components/Header';
@@ -31,6 +33,8 @@ const DEFAULT_PREFERENCES: UserPreferences = {
 
 export default function App() {
   const { user, authLoading, logout, passwordRecovery, updatePassword } = useAuth();
+  const { access, recheck: recheckAccess } = useEntitlement(user);
+  const hasAccess = access === 'active';
 
   const [preferences, setPreferences] = useState<UserPreferences>(DEFAULT_PREFERENCES);
   const [gamification, setGamification] = useState<UserGamificationState>(getInitialGamificationState());
@@ -54,7 +58,7 @@ export default function App() {
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (!user) {
+    if (!user || !hasAccess) {
       setDataReady(false);
       return;
     }
@@ -83,10 +87,10 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [user, hasAccess]);
 
   useEffect(() => {
-    if (!user || !dataReady) return;
+    if (!user || !hasAccess || !dataReady) return;
 
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
     saveTimeoutRef.current = setTimeout(() => {
@@ -98,7 +102,7 @@ export default function App() {
     return () => {
       if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
     };
-  }, [user, dataReady, preferences, gamification, plan]);
+  }, [user, hasAccess, dataReady, preferences, gamification, plan]);
 
   const handleGeneratePlan = (newPrefs: UserPreferences) => {
     setPreferences(newPrefs);
@@ -356,21 +360,36 @@ export default function App() {
     }
   };
 
+  const spinner = (
+    <div className="min-h-screen bg-[#f9fafb]/70 flex items-center justify-center">
+      <div className="w-8 h-8 border-[3px] border-[#ede0ff] border-t-[#7c3aed] rounded-full animate-spin" />
+    </div>
+  );
+
   if (passwordRecovery) {
     return <ResetPasswordScreen onUpdatePassword={updatePassword} />;
   }
 
-  if (authLoading || (user && !dataReady)) {
-    return (
-      <div className="min-h-screen bg-[#f9fafb]/70 flex items-center justify-center">
-        <div className="w-8 h-8 border-[3px] border-[#ede0ff] border-t-[#7c3aed] rounded-full animate-spin" />
-      </div>
-    );
-  }
+  if (authLoading) return spinner;
 
   if (!user) {
     return <AuthScreen />;
   }
+
+  if (access === 'checking') return spinner;
+
+  if (access !== 'active') {
+    return (
+      <AccessPendingScreen
+        email={user.email}
+        access={access}
+        onRecheck={recheckAccess}
+        onLogout={logout}
+      />
+    );
+  }
+
+  if (!dataReady) return spinner;
 
   return (
     <div className="app-shell min-h-screen bg-[#f9fafb]/70 text-[#191c1d] flex flex-col font-sans selection:bg-[#eaddff] selection:text-[#630ed4]">
