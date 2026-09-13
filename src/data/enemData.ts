@@ -1,4 +1,5 @@
 import { ExamQuestion, RedacaoTheme, TopicItem, SubjectType, UserPreferences, DaySchedule, GeneratedPlan, StudyBlock } from '../types';
+import { MATEMATICA_QUESTIONS } from './questions/matematica';
 
 // Ordered with the most commonly searched courses first — the first few entries
 // are used as the default "popular" quick-picks before the user types anything.
@@ -318,26 +319,8 @@ export const ENEN_TOPICS: TopicItem[] = [
   }
 ];
 
-export const MOCK_QUESTIONS: ExamQuestion[] = [
-  {
-    id: 'q-1',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Razão e Proporção',
-    difficulty: 'Fácil',
-    question: 'Um mapa é construído na escala 1 : 50 000. Dois pontos A e B situados nesse mapa estão separados por uma distância de 4 cm. Qual é a distância real, em quilômetros, entre esses dois pontos?',
-    options: [
-      { letter: 'A', text: '0,2 km' },
-      { letter: 'B', text: '2 km' },
-      { letter: 'C', text: '20 km' },
-      { letter: 'D', text: '200 km' },
-      { letter: 'E', text: '2 000 km' }
-    ],
-    correctLetter: 'B',
-    explanation: 'A distância real D = 4 cm × 50 000 = 200 000 cm. Convertendo centímetros para metros: 200 000 / 100 = 2 000 m. Convertendo para quilômetros: 2 000 / 1 000 = 2 km.',
-    triTip: 'Questão de nível fácil! Na TRI do ENEM, errar uma questão de escala derruba sua nota média mesmo se você acertar questões complexas de logaritmo.'
-  },
+const OUTRAS_QUESTOES: ExamQuestion[] = [
+  ,
   {
     id: 'q-2',
     subject: 'natureza',
@@ -357,6 +340,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Na bioacumulação/magnificação trófica, compostos não biodegradáveis têm sua concentração amplificada a cada nível trófico. O consumidor do topo da cadeia (aves que comem peixes carnívoros) acumula a maior dose residual.',
     triTip: 'Tema clássico do ENEM! Quase todos os anos há pelo menos 1 questão de relações ecológicas ou desequilíbrio ambiental.'
   },
+  ,
   {
     id: 'q-3',
     subject: 'humanas',
@@ -376,6 +360,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'O Artigo 196 da CF/88 consagrou que a saúde é direito de todos e dever do Estado, dando origem ao SUS.',
     triTip: 'Use o Artigo 196 e a CF/88 como repertório coringa de Redação para quase qualquer tema de saúde, educação ou segurança!'
   },
+  ,
   {
     id: 'q-4',
     subject: 'linguagens',
@@ -395,122 +380,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A função Conativa/Apelativa tem foco no receptor, marcada pelo uso de verbos no imperativo ("Vacine", "Proteja") e pronomes de segunda pessoa com o objetivo de convencer e mudar o comportamento do leitor.',
     triTip: 'Funções da linguagem são garantia de 2 a 3 questões rápidas no 1º dia.'
   },
-
-  // ---- Matemática (adicionais) ----
-  {
-    id: 'q-5',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Estatística (Média, Moda e Mediana)',
-    difficulty: 'Fácil',
-    question: 'Um professor aplicou uma prova para 7 alunos e obteve as seguintes notas: 6, 7, 7, 8, 8, 8, 9. Qual é a moda dessas notas?',
-    options: [
-      { letter: 'A', text: '6' },
-      { letter: 'B', text: '7' },
-      { letter: 'C', text: '7,5' },
-      { letter: 'D', text: '8' },
-      { letter: 'E', text: '9' }
-    ],
-    correctLetter: 'D',
-    explanation: 'A moda é o valor que mais se repete no conjunto de dados. Entre as notas 6, 7, 7, 8, 8, 8, 9, o valor 8 aparece três vezes, mais que qualquer outro, portanto a moda é 8.',
-    triTip: 'Questões de moda/média/mediana são garantidas na prova e resolvidas em segundos — não pule essas por medo de "estatística difícil".'
-  },
-  {
-    id: 'q-6',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Geometria Espacial e Planar (Áreas e Volumes)',
-    difficulty: 'Média',
-    question: 'Uma caixa d\'água tem formato cilíndrico, com raio da base igual a 1 m e altura de 2 m. Considerando π = 3, qual é a capacidade dessa caixa d\'água, em litros? (1 m³ = 1000 L)',
-    options: [
-      { letter: 'A', text: '600 L' },
-      { letter: 'B', text: '2 000 L' },
-      { letter: 'C', text: '3 000 L' },
-      { letter: 'D', text: '6 000 L' },
-      { letter: 'E', text: '12 000 L' }
-    ],
-    correctLetter: 'D',
-    explanation: 'O volume do cilindro é V = π·r²·h = 3 × 1² × 2 = 6 m³. Como 1 m³ equivale a 1000 L, o volume é 6 × 1000 = 6000 L.',
-    triTip: 'Nas questões de volume, o ENEM costuma fornecer valores redondos para π (3 ou 3,14) — sempre confira qual foi dado no enunciado antes de calcular.'
-  },
-  {
-    id: 'q-7',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Funções de 1º e 2º Grau',
-    difficulty: 'Média',
-    question: 'O lucro mensal L, em reais, de uma pequena fábrica de bolos é modelado pela função L(x) = -2x² + 80x - 600, em que x é o número de bolos vendidos no mês. Qual é o número de bolos que maximiza o lucro dessa fábrica?',
-    options: [
-      { letter: 'A', text: '10' },
-      { letter: 'B', text: '20' },
-      { letter: 'C', text: '30' },
-      { letter: 'D', text: '40' },
-      { letter: 'E', text: '80' }
-    ],
-    correctLetter: 'B',
-    explanation: 'O lucro máximo de uma função quadrática ocorre no vértice da parábola, calculado por x = -b/(2a). Substituindo a = -2 e b = 80: x = -80/(2×(-2)) = 20 bolos.',
-    triTip: 'Toda questão de "máximo/mínimo" com função do 2º grau se resolve com a fórmula do vértice (xv = -b/2a) — decore essa fórmula, ela cai quase todo ano.'
-  },
-  {
-    id: 'q-8',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Porcentagem e Matemática Financeira',
-    difficulty: 'Fácil',
-    question: 'Um produto custava R$ 250,00 e sofreu um aumento de 20%. Em seguida, devido a uma promoção, o novo preço recebeu um desconto de 10%. Qual é o preço final do produto, após o aumento e o desconto sucessivos?',
-    options: [
-      { letter: 'A', text: 'R$ 225,00' },
-      { letter: 'B', text: 'R$ 230,00' },
-      { letter: 'C', text: 'R$ 260,00' },
-      { letter: 'D', text: 'R$ 270,00' },
-      { letter: 'E', text: 'R$ 300,00' }
-    ],
-    correctLetter: 'D',
-    explanation: 'Aumento de 20%: 250 × 1,20 = R$ 300,00. Desconto de 10% sobre o novo valor: 300 × 0,90 = R$ 270,00.',
-    triTip: 'Em aumentos/descontos sucessivos, nunca some ou subtraia as porcentagens diretamente (20% - 10% ≠ 10%) — sempre aplique uma de cada vez sobre o valor atualizado.'
-  },
-  {
-    id: 'q-9',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Probabilidade e Análise Combinatória',
-    difficulty: 'Difícil',
-    question: 'Uma urna contém 4 bolas vermelhas e 6 bolas azuis, indistinguíveis pelo tato. Retirando-se uma bola ao acaso, qual é a probabilidade de ela ser vermelha?',
-    options: [
-      { letter: 'A', text: '10%' },
-      { letter: 'B', text: '20%' },
-      { letter: 'C', text: '40%' },
-      { letter: 'D', text: '60%' },
-      { letter: 'E', text: '70%' }
-    ],
-    correctLetter: 'C',
-    explanation: 'A probabilidade é dada pela razão entre casos favoráveis e casos possíveis: 4 bolas vermelhas em um total de 10 bolas, ou seja, 4/10 = 0,4 = 40%.',
-    triTip: 'A maioria das questões de probabilidade do ENEM (nível fácil/médio) se resume a "casos favoráveis dividido por casos possíveis" — não complique com fórmulas de combinatória se o enunciado não pedir.'
-  },
-  {
-    id: 'q-10',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Razão, Proporção e Regra de Três',
-    difficulty: 'Média',
-    question: 'Uma equipe de 6 pedreiros constrói um muro de 90 metros em 15 dias. Mantendo o mesmo ritmo de trabalho, em quantos dias uma equipe de 9 pedreiros construiria um muro de 135 metros?',
-    options: [
-      { letter: 'A', text: '10 dias' },
-      { letter: 'B', text: '12 dias' },
-      { letter: 'C', text: '15 dias' },
-      { letter: 'D', text: '18 dias' },
-      { letter: 'E', text: '20 dias' }
-    ],
-    correctLetter: 'C',
-    explanation: 'Trata-se de uma regra de três composta. O número de dias é diretamente proporcional aos metros e inversamente proporcional ao número de pedreiros: d = 15 × (135/90) × (6/9) = 15 dias — o aumento de pedreiros compensa exatamente o aumento do comprimento do muro.',
-    triTip: 'Em regra de três composta, identifique com cuidado se cada grandeza é diretamente ou inversamente proporcional à grandeza pedida antes de montar a equação — esse é o erro mais comum na prova.'
-  },
+  ,
 
   // ---- Ciências da Natureza (adicionais) ----
   {
@@ -532,6 +402,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Pela equação balanceada CH₄ + 2O₂ → CO₂ + 2H₂O, a proporção estequiométrica é de 1 mol de metano para 2 mols de gás oxigênio.',
     triTip: 'Questões de estequiometria do ENEM raramente exigem cálculos complexos — na maioria das vezes, basta ler os coeficientes da equação já balanceada.'
   },
+  ,
   {
     id: 'q-12',
     subject: 'natureza',
@@ -551,6 +422,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A potência elétrica é dada por P = V × i. Substituindo os valores: P = 220 × 25 = 5500 W.',
     triTip: 'A fórmula P = V × i é a base de quase toda questão de circuitos no ENEM — combine com P = R × i² e P = V²/R apenas se o enunciado pedir resistência.'
   },
+  ,
   {
     id: 'q-13',
     subject: 'natureza',
@@ -570,6 +442,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'No cruzamento Rr × Rr, o quadro de Punnett resulta em 1 RR : 2 Rr : 1 rr. Como R é dominante, os genótipos RR e Rr expressam a cor vermelha, resultando na proporção fenotípica clássica de 3 vermelhas para 1 branca.',
     triTip: 'A proporção 3:1 é a "assinatura" de um cruzamento monoíbrido entre heterozigotos — reconhecer esse padrão rapidamente economiza tempo precioso na prova.'
   },
+  ,
   {
     id: 'q-14',
     subject: 'natureza',
@@ -589,6 +462,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'O calor sensível é calculado por Q = m·c·ΔT. Substituindo: Q = 200 × 1 × (70-20) = 200 × 50 = 10 000 cal.',
     triTip: 'Sempre confira a unidade do calor específico fornecida (cal/g°C ou J/g°C) — trocar a unidade sem perceber é a armadilha mais comum nessas questões.'
   },
+  ,
   {
     id: 'q-15',
     subject: 'natureza',
@@ -608,6 +482,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A presença do grupo hidroxila (-OH) ligado a um carbono saturado é a característica que define a função álcool, como no caso do etanol.',
     triTip: 'Memorize os grupos funcionais principais (álcool -OH, ácido carboxílico -COOH, aldeído -CHO, cetona C=O) — é a base para resolver quase toda questão de química orgânica do 1º dia.'
   },
+  ,
   {
     id: 'q-16',
     subject: 'natureza',
@@ -627,6 +502,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Como a luz se propaga quase instantaneamente e o som viaja a 340 m/s, a distância é d = v × t = 340 × 3 = 1020 m.',
     triTip: 'Em problemas de ondas sonoras que envolvem "atraso" entre dois eventos, a fórmula direta d = v×t resolve a questão sem necessidade de fórmulas de ondulatória mais complexas.'
   },
+  ,
 
   // ---- Ciências Humanas (adicionais) ----
   {
@@ -648,6 +524,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'O período do Estado Novo combinou ampliação de direitos trabalhistas (CLT, salário mínimo) com repressão política e centralização do poder, característica identificada pelos historiadores como "trabalhismo autoritário" ou populismo de Estado.',
     triTip: 'Associe sempre "direitos trabalhistas + autoritarismo político" ao Estado Novo de Vargas — é um dos temas mais recorrentes de História do Brasil no ENEM.'
   },
+  ,
   {
     id: 'q-18',
     subject: 'humanas',
@@ -667,6 +544,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A Revolução Verde refere-se à modernização técnico-científica da agricultura, baseada em mecanização, fertilizantes químicos e sementes melhoradas geneticamente, fortemente presente no agronegócio do Centro-Oeste brasileiro.',
     triTip: '"Revolução Verde" é um repertório útil também para Redação em temas de meio ambiente e agronegócio — associe seus impactos positivos (produtividade) e negativos (concentração de terra, impacto ambiental).'
   },
+  ,
   {
     id: 'q-19',
     subject: 'humanas',
@@ -686,6 +564,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Bauman usa a metáfora do "líquido" (que não tem forma fixa) para descrever a fluidez, a instabilidade e a fragilidade das relações sociais, profissionais e afetivas na contemporaneidade, em contraste com a "solidez" das estruturas do passado.',
     triTip: 'Zygmunt Bauman é repertório curinga tanto para Humanas quanto para Redação — domine o conceito de "modernidade líquida" aplicado a relações de consumo, afetivas e digitais.'
   },
+  ,
   {
     id: 'q-20',
     subject: 'humanas',
@@ -705,6 +584,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Blocos econômicos regionais buscam reduzir tarifas e barreiras alfandegárias, ampliando o comércio e a cooperação entre os países-membros, fortalecendo sua posição em um cenário de economia globalizada.',
     triTip: 'Diferencie os níveis de integração dos blocos (zona de livre comércio, união aduaneira, mercado comum) — o Mercosul é uma união aduaneira imperfeita, enquanto a UE avançou para união econômica e monetária.'
   },
+  ,
   {
     id: 'q-21',
     subject: 'humanas',
@@ -724,6 +604,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Para Foucault, o poder disciplinar moderno não se baseia apenas na violência explícita, mas em mecanismos sutis de vigilância, controle do tempo/espaço e normalização dos comportamentos dos indivíduos dentro das instituições.',
     triTip: 'Foucault e o conceito de "vigilância e normalização" são úteis para redações sobre tecnologia, privacidade e controle social (câmeras, redes sociais, big data).'
   },
+  ,
   {
     id: 'q-22',
     subject: 'humanas',
@@ -743,6 +624,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'O efeito estufa é o fenômeno natural de retenção de calor pela atmosfera; a intensificação artificial desse processo, causada pela emissão excessiva de gases como o CO₂ por atividades humanas, é apontada como principal causa do aquecimento global.',
     triTip: 'Não confunda efeito estufa (fenômeno natural intensificado) com "camada de ozônio" (protege contra radiação UV) — são temas ambientais distintos que o ENEM adora confundir nas alternativas.'
   },
+  ,
 
   // ---- Linguagens e Códigos (adicionais) ----
   {
@@ -764,6 +646,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Expressões como "kkkkk" são marcas da oralidade transposta para a escrita, típicas dos gêneros digitais informais (chats, redes sociais), que priorizam a informalidade e a proximidade entre interlocutores.',
     triTip: 'Questões sobre gêneros digitais avaliam se você reconhece o contexto de uso da linguagem — informal em redes sociais, mais formal em e-mails corporativos, por exemplo.'
   },
+  ,
   {
     id: 'q-24',
     subject: 'linguagens',
@@ -783,6 +666,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A Semana de Arte Moderna de 1922 rompeu com os padrões estéticos tradicionais (parnasianismo, academicismo) e propôs uma renovação da linguagem artística, valorizando a cultura e identidade nacionais de forma inovadora.',
     triTip: 'Associe a Semana de 22 a nomes como Mário de Andrade, Oswald de Andrade e Tarsila do Amaral — recorrente tanto em Linguagens quanto como repertório de Redação.'
   },
+  ,
   {
     id: 'q-25',
     subject: 'linguagens',
@@ -802,6 +686,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A Linguística reconhece que variações como a concordância verbal não-padrão refletem a diversidade linguística natural (regional, social, histórica) e não devem ser tratadas como "erro" ou inferioridade — trata-se de preconceito linguístico quando isso ocorre.',
     triTip: 'O ENEM valoriza respostas que reconhecem a variação linguística como legítima — evite alternativas que tratem variantes populares como "erradas".'
   },
+  ,
   {
     id: 'q-26',
     subject: 'linguagens',
@@ -821,6 +706,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A personificação (ou prosopopeia) consiste em atribuir ações, sentimentos ou características humanas a seres inanimados ou não humanos — no exemplo, o sol "sorri", ação tipicamente humana.',
     triTip: 'Não confunda personificação (atribuir traços humanos) com comparação/símile (usa conectivo "como") nem com metáfora (comparação implícita sem conectivo).'
   },
+  ,
   {
     id: 'q-27',
     subject: 'linguagens',
@@ -840,6 +726,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'O Realismo machadiano se caracteriza pela análise crítica e psicológica dos personagens e da sociedade da época, com uso frequente de ironia e um narrador que questiona convenções sociais, rompendo com o idealismo romântico.',
     triTip: 'Machado de Assis é o autor mais cobrado de Literatura no ENEM — memorize a ironia e a crítica social como suas marcas registradas.'
   },
+  ,
   {
     id: 'q-28',
     subject: 'linguagens',
@@ -859,65 +746,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'O conectivo "contudo" é um operador argumentativo que introduz uma ideia de oposição ou contraste em relação ao que foi dito anteriormente, sinalizando uma ressalva ao argumento inicial.',
     triTip: 'Domine os conectivos de oposição (contudo, entretanto, todavia, no entanto) — eles são essenciais tanto para interpretação de texto quanto para a Competência 4 da Redação.'
   },
-
-  // ---- Matemática (Simulado Completo) ----
-  {
-    id: 'q-29',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Porcentagem (descontos sucessivos)',
-    difficulty: 'Fácil',
-    question: 'Uma loja anuncia dois descontos sucessivos de 20% sobre um produto de R$ 500,00. Qual é o valor final pago pelo cliente após os dois descontos?',
-    options: [
-      { letter: 'A', text: 'R$ 300,00' },
-      { letter: 'B', text: 'R$ 320,00' },
-      { letter: 'C', text: 'R$ 350,00' },
-      { letter: 'D', text: 'R$ 360,00' },
-      { letter: 'E', text: 'R$ 400,00' }
-    ],
-    correctLetter: 'B',
-    explanation: 'Aplicando o primeiro desconto: R$ 500,00 × 0,8 = R$ 400,00. Aplicando o segundo desconto sobre o novo valor: R$ 400,00 × 0,8 = R$ 320,00. Descontos sucessivos não se somam diretamente (não equivalem a 40% de uma vez).',
-    triTip: 'Desconto sucessivo é pegadinha clássica do ENEM — nunca some as porcentagens diretamente, aplique uma de cada vez sobre o valor já reduzido.'
-  },
-  {
-    id: 'q-30',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Probabilidade',
-    difficulty: 'Média',
-    question: 'Uma urna contém 4 bolas vermelhas, 3 bolas azuis e 3 bolas verdes, totalizando 10 bolas idênticas ao tato. Retirando-se uma bola ao acaso, qual é a probabilidade de ela não ser vermelha?',
-    options: [
-      { letter: 'A', text: '40%' },
-      { letter: 'B', text: '50%' },
-      { letter: 'C', text: '60%' },
-      { letter: 'D', text: '70%' },
-      { letter: 'E', text: '80%' }
-    ],
-    correctLetter: 'C',
-    explanation: 'Há 6 bolas que não são vermelhas (3 azuis + 3 verdes) em um total de 10 bolas. A probabilidade é 6/10 = 0,6 = 60%.',
-    triTip: 'Em questões de evento complementar ("não ser algo"), conte diretamente os casos favoráveis restantes em vez de calcular 1 menos a probabilidade do evento oposto — é mais rápido em prova.'
-  },
-  {
-    id: 'q-31',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Função Afim',
-    difficulty: 'Média',
-    question: 'O preço P (em reais) de uma corrida de aplicativo é dado pela função P(d) = 4 + 2d, em que d é a distância percorrida em quilômetros. Qual é o preço de uma corrida de 12 km?',
-    options: [
-      { letter: 'A', text: 'R$ 16,00' },
-      { letter: 'B', text: 'R$ 24,00' },
-      { letter: 'C', text: 'R$ 26,00' },
-      { letter: 'D', text: 'R$ 28,00' },
-      { letter: 'E', text: 'R$ 32,00' }
-    ],
-    correctLetter: 'D',
-    explanation: 'Substituindo d = 12 na função: P(12) = 4 + 2×12 = 4 + 24 = 28 reais.',
-    triTip: 'Funções afins (P = a + bx) aparecem quase todo ano disfarçadas de contexto de tarifas, corridas de app ou consumo de energia — identifique o "valor fixo" e a "taxa variável" no enunciado.'
-  },
+  ,
 
   // ---- Ciências da Natureza (Simulado Completo) ----
   {
@@ -939,6 +768,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Velocidade média = distância / tempo = 60 km / 3 h = 20 km/h.',
     triTip: 'Cinemática básica (v = ΔS/Δt) é garantia de pelo menos 1 questão fácil de Física no ENEM.'
   },
+  ,
   {
     id: 'q-33',
     subject: 'natureza',
@@ -958,6 +788,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Na escala de pH, valores menores que 7 indicam solução ácida; pH igual a 7 é neutro; pH maior que 7 é básico (alcalino). Como pH = 3 é menor que 7, a solução é ácida.',
     triTip: 'Decore a escala: pH < 7 ácido, pH = 7 neutro, pH > 7 básico — base de praticamente toda questão de Química envolvendo soluções.'
   },
+  ,
   {
     id: 'q-34',
     subject: 'natureza',
@@ -977,6 +808,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'No cruzamento Aa × Aa, a proporção genotípica esperada é 1AA : 2Aa : 1aa. Como A é dominante, tanto AA quanto Aa expressam o fenótipo amarelo, resultando na clássica proporção fenotípica de 3 amarelas : 1 verde.',
     triTip: 'A proporção 3:1 é a marca registrada da 1ª Lei de Mendel (segregação de um único par de alelos) — decore esse padrão, ele se repete em várias questões de genética.'
   },
+  ,
 
   // ---- Ciências Humanas (Simulado Completo) ----
   {
@@ -998,6 +830,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Macrocefalia urbana é o crescimento desproporcional de uma cidade (geralmente a capital ou maior polo econômico) em relação às demais do mesmo estado ou região, concentrando população, empregos e serviços.',
     triTip: 'Urbanização, êxodo rural e macrocefalia urbana são temas recorrentes em Geografia — conecte sempre com desigualdade socioespacial, ótimo repertório de Redação também.'
   },
+  ,
   {
     id: 'q-36',
     subject: 'humanas',
@@ -1017,6 +850,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A CLT unificou a legislação trabalhista dispersa até então, regulamentando direitos como carteira assinada, salário mínimo, férias remuneradas e jornada de trabalho, no contexto do populismo trabalhista de Vargas.',
     triTip: 'Era Vargas + direitos trabalhistas é combo certo no ENEM — associe CLT, sindicalismo atrelado ao Estado e o populismo varguista.'
   },
+  ,
   {
     id: 'q-37',
     subject: 'humanas',
@@ -1036,6 +870,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'As teorias contratualistas (Hobbes, Locke, Rousseau) explicam que o Estado nasce de um "contrato social": um pacto no qual os indivíduos cedem parte de sua liberdade natural em troca da segurança e da ordem garantidas pela vida em sociedade.',
     triTip: 'Contratualismo é repertório sociocultural coringa pra Redação — cite Rousseau ou Hobbes ao discutir o "papel do Estado" em praticamente qualquer tema.'
   },
+  ,
 
   // ---- Linguagens e Códigos (Simulado Completo) ----
   {
@@ -1057,6 +892,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Metonímia é a figura de linguagem que substitui um termo por outro com o qual mantém relação lógica de contiguidade — nesse caso, o lugar (Brasil) pelo que nele habita (o povo brasileiro).',
     triTip: 'Metonímia (lugar pelo habitante, autor pela obra, marca pelo produto) é uma das figuras mais cobradas no ENEM — não confunda com metáfora, que é uma comparação implícita.'
   },
+  ,
   {
     id: 'q-39',
     subject: 'linguagens',
@@ -1076,6 +912,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A adaptação da linguagem ao contexto/situação de comunicação é chamada de variação diafásica ou estilística — o falante escolhe o registro (formal ou informal) conforme a situação, sem que isso configure "erro".',
     triTip: 'O ENEM valoriza a ideia de adequação linguística, não de "certo x errado" — toda variedade linguística é legítima em seu contexto de uso.'
   },
+  ,
   {
     id: 'q-40',
     subject: 'linguagens',
@@ -1095,46 +932,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A Semana de Arte Moderna de 1922 inaugurou o Modernismo no Brasil, rompendo com as estéticas parnasiana e simbolista ao propor uma linguagem mais livre, experimental e voltada para a valorização da cultura e identidade nacional.',
     triTip: 'Semana de 22 é presença garantida em Literatura — associe a Oswald de Andrade (Manifesto Antropófago) e Mário de Andrade (Macunaíma).'
   },
-
-  // ---- Lote adicional (expansão do banco) ----
-  {
-    id: 'q-41',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Porcentagem',
-    difficulty: 'Fácil',
-    question: 'Um produto que custava R$ 250,00 recebeu um desconto de 12% em uma promoção. Qual é o novo preço do produto?',
-    options: [
-      { letter: 'A', text: 'R$ 200,00' },
-      { letter: 'B', text: 'R$ 210,00' },
-      { letter: 'C', text: 'R$ 220,00' },
-      { letter: 'D', text: 'R$ 230,00' },
-      { letter: 'E', text: 'R$ 238,00' }
-    ],
-    correctLetter: 'C',
-    explanation: 'O desconto corresponde a 12% de R$ 250,00: 0,12 × 250 = R$ 30,00. O novo preço é 250 − 30 = R$ 220,00.',
-    triTip: 'Porcentagem aparece em praticamente toda prova — treine calcular o valor do desconto/acréscimo antes de somar ou subtrair do preço original.'
-  },
-  {
-    id: 'q-42',
-    subject: 'matematica',
-    areaName: 'Matemática e suas Tecnologias',
-    origin: 'Questão Inédita',
-    topic: 'Geometria Plana - Área do Círculo',
-    difficulty: 'Média',
-    question: 'Um jardim circular tem raio de 7 metros. Usando π ≈ 22/7, qual é a área aproximada desse jardim, em metros quadrados?',
-    options: [
-      { letter: 'A', text: '44 m²' },
-      { letter: 'B', text: '88 m²' },
-      { letter: 'C', text: '132 m²' },
-      { letter: 'D', text: '154 m²' },
-      { letter: 'E', text: '196 m²' }
-    ],
-    correctLetter: 'D',
-    explanation: 'A área do círculo é A = π·r². Com r = 7 e π ≈ 22/7: A = (22/7) × 7² = (22/7) × 49 = 154 m².',
-    triTip: 'Decore A = π·r² e pratique com π ≈ 3,14 e π ≈ 22/7 — o ENEM costuma escolher o valor que simplifica a conta.'
-  },
+  ,
   {
     id: 'q-43',
     subject: 'natureza',
@@ -1154,6 +952,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Pela Segunda Lei de Newton, F = m·a, logo a = F/m = 12/4 = 3 m/s².',
     triTip: 'Dinâmica é praticamente garantida no caderno de Natureza — memorize F = m·a e confira sempre as unidades antes de calcular.'
   },
+  ,
   {
     id: 'q-44',
     subject: 'natureza',
@@ -1173,6 +972,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'O cruzamento Aa × Aa gera proporção genotípica 1 AA : 2 Aa : 1 aa. Como A é dominante, tanto AA quanto Aa manifestam o fenótipo amarelo, resultando na clássica proporção mendeliana de 3 amarelas para 1 verde.',
     triTip: 'A proporção 3:1 do monoibridismo é a base de quase toda questão de genética do ENEM — treine montar o quadro de Punnett rapidamente.'
   },
+  ,
   {
     id: 'q-45',
     subject: 'linguagens',
@@ -1192,6 +992,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'A personificação (ou prosopopeia) atribui características e ações humanas — como "sussurrar segredos" — a seres inanimados ou não humanos, no caso, o vento.',
     triTip: 'Figuras de linguagem garantem pontos fáceis — associe personificação a "atribuir vida ou ação humana a algo que não é humano".'
   },
+  ,
   {
     id: 'q-46',
     subject: 'linguagens',
@@ -1211,6 +1012,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Intertextualidade é o diálogo entre textos, que pode ocorrer por citação direta, paródia (tom crítico ou humorístico) ou paráfrase (reafirmação da ideia original com outras palavras).',
     triTip: 'Charges e propagandas do ENEM costumam explorar intertextualidade com obras de arte, provérbios ou músicas — fique atento a referências implícitas no texto motivador.'
   },
+  ,
   {
     id: 'q-47',
     subject: 'humanas',
@@ -1230,6 +1032,7 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     explanation: 'Êxodo rural é a migração da população do campo para as cidades, impulsionada pela mecanização agrícola e pela busca de emprego e serviços urbanos — processo que acelerou fortemente a urbanização brasileira a partir das décadas de 1950-1970.',
     triTip: 'Associe êxodo rural à mecanização do campo e ao crescimento desordenado das periferias urbanas — ótimo tema de Humanas e também repertório de Redação.'
   },
+  ,
   {
     id: 'q-48',
     subject: 'humanas',
@@ -1250,6 +1053,9 @@ export const MOCK_QUESTIONS: ExamQuestion[] = [
     triTip: 'Conquistas de direitos políticos (voto feminino, voto do analfabeto, redemocratização) são tema constante em Humanas — monte uma linha do tempo dos direitos civis no Brasil.'
   }
 ];
+
+// O banco cresce por matéria: cada uma tem seu próprio arquivo em ./questions.
+export const MOCK_QUESTIONS: ExamQuestion[] = [...MATEMATICA_QUESTIONS, ...OUTRAS_QUESTOES];
 
 // Simplified, transparent approximation of an ENEM-scale score (0-1000) from raw
 // accuracy — NOT the official INEP TRI calculation, which requires calibrated item
