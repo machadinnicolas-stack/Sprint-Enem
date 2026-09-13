@@ -2,12 +2,15 @@
 // independente do que está gravado em correctLetter, e comparando com o texto da
 // alternativa marcada como correta.
 //
-//   npx tsx scripts/confere-gabaritos.mts
+//   npm run confere-questoes
 //
-// A conferência é deliberadamente redundante: se o gabarito e este script
-// discordarem, um dos dois está errado e a questão não deve ir para o ar.
+// A redundância é deliberada: se o gabarito e este script discordarem, um dos
+// dois está errado e a questão não deve ir para o ar. Questões conceituais, que
+// não têm resultado calculável, são conferidas por um trecho esperado do texto.
 
+import { ExamQuestion } from '../src/types.js';
 import { MATEMATICA_QUESTIONS } from '../src/data/questions/matematica.js';
+import { NATUREZA_QUESTIONS } from '../src/data/questions/natureza.js';
 
 type Esperado = number | { texto: string };
 
@@ -31,15 +34,18 @@ const moda = (v: number[]): number => {
   return [...c.entries()].sort((a, b) => b[1] - a[1])[0][0];
 };
 
+const t = (texto: string): Esperado => ({ texto });
+
 // Cada função recalcula a resposta a partir do enunciado, sem olhar o gabarito.
 const CALCULOS: Record<string, () => Esperado> = {
+  // ---- Matemática
   'mat-01': () => 180 * 0.75 * 1.2,
   'mat-02': () => 2400 * 1.08 * 0.91,
   'mat-03': () => 1200 - 1200 * 0.85,
   'mat-04': () => 5000 * Math.pow(1.1, 3),
   'mat-05': () => 800 * 0.02 * 5,
   'mat-06': () => ((50 - 40) / 40) * 100,
-  'mat-07': () => ({ texto: '9% menor' }),
+  'mat-07': () => t('9% menor'),
   'mat-08': () => (300 * 10) / 4,
   'mat-09': () => (8 * 25000) / 100000,
   'mat-10': () => 1200 * (8 / 5) * (6 / 4),
@@ -50,7 +56,7 @@ const CALCULOS: Record<string, () => Esperado> = {
   'mat-15': () => (6 * 2 + 8 * 3) / (2 + 3),
   'mat-16': () => (9 * 7 - 5) / 8,
   'mat-17': () => moda([2, 3, 3, 4, 5, 5, 5, 6]),
-  'mat-18': () => ({ texto: 'Abril' }),
+  'mat-18': () => t('Abril'),
   'mat-19': () => media([10, 12, 15, 18, 20, 25, 40]) - mediana([10, 12, 15, 18, 20, 25, 40]),
   'mat-20': () => 12 * 8,
   'mat-21': () => Math.sqrt(5 ** 2 - 3 ** 2),
@@ -80,97 +86,155 @@ const CALCULOS: Record<string, () => Esperado> = {
   'mat-45': () => (540 / 12) * 5.8,
   'mat-46': () => 900 / 15 / 60,
   'mat-47': () => 5 + 19 * 3,
-  'mat-48': () => ((3 + (3 + 7 * 0.5)) * 8) / 2
+  'mat-48': () => ((3 + (3 + 7 * 0.5)) * 8) / 2,
+
+  // ---- Natureza: Biologia
+  'nat-01': () => 10000 * 0.1 * 0.1,
+  'nat-02': () => t('aves piscívoras'),
+  'nat-03': () => t('Fotossíntese'),
+  'nat-04': () => t('Mutualismo'),
+  'nat-05': () => t('consome o oxigênio dissolvido'),
+  'nat-06': () => (1 / 4) * (1 / 4),
+  'nat-07': () => t('A, B, AB ou O'),
+  'nat-08': () => t('Uracila'),
+  'nat-09': () => t('Mitocôndria'),
+  'nat-10': () => t('plasmólise'),
+  'nat-11': () => 6,
+  'nat-12': () => t('produzir seus próprios anticorpos'),
+  'nat-13': () => t('Artéria pulmonar'),
+  'nat-14': () => t('Aedes aegypti'),
+  'nat-15': () => t('já existiam variantes resistentes'),
+  'nat-16': () => t('Lamarckismo'),
+
+  // ---- Natureza: Física
+  'nat-17': () => 240 / 3,
+  'nat-18': () => 20 ** 2 / (2 * 4),
+  'nat-19': () => 20 / 5,
+  'nat-20': () => 2 * 10 * 10,
+  'nat-21': () => Math.sqrt(2 * 10 * 20),
+  'nat-22': () => (5500 / 1000) * 0.5 * 30,
+  'nat-23': () => 12 / 4,
+  'nat-24': () => t('3,3'),
+  'nat-25': () => (60 / 1000) * 5 * 30 * 0.75,
+  'nat-26': () => 500 * 1 * (75 - 25),
+  'nat-27': () => t('romper as ligações'),
+  'nat-28': () => (300 / 1000) * 100,
+  'nat-29': () => 1.7 * 200,
+  'nat-30': () => t('Raios gama'),
+  'nat-31': () => t('refração'),
+  'nat-32': () => t('Virtual, direita e maior'),
+
+  // ---- Natureza: Química
+  'nat-33': () => 90 / 18,
+  'nat-34': () => 2 * 3,
+  'nat-35': () => 44,
+  'nat-36': () => 20 / 0.5,
+  'nat-37': () => (0.5 * 0.2) / 1,
+  'nat-38': () => 0.5 / 2,
+  'nat-39': () => t('Ácido carboxílico'),
+  'nat-40': () => t('Isomeria de cadeia'),
+  'nat-41': () => t('adição'),
+  'nat-42': () => t('a cana absorveu'),
+  'nat-43': () => t('pH 5'),
+  'nat-44': () => t('sal (NaCl) e água'),
+  'nat-45': () => t('sofre oxidação, perde massa'),
+  'nat-46': () => t('se oxida preferencialmente'),
+  'nat-47': () => 2 * 890,
+  'nat-48': () => t('enxofre')
 };
 
-// Converte "R$ 6.655,00", "2 880 peças", "5,4 m" e "1/3" em número.
+// Converte "R$ 6.655,00", "2 880 peças", "5,4 m", "80 km/h" e "1/3" em número.
+// A barra exige cuidado: em "1/3" ela é fração, em "km/h" faz parte da unidade.
 function paraNumero(texto: string): number | null {
-  const limpo = texto.replace(/R\$|\s|[a-zA-Zçãáéíóúâêô²³%]+\.?/g, '');
-  if (limpo.includes('/')) {
-    const [a, b] = limpo.split('/').map(Number);
-    if (Number.isFinite(a) && Number.isFinite(b) && b !== 0) return a / b;
-    return null;
-  }
-  const normalizado = limpo.replace(/\.(?=\d{3}\b)/g, '').replace(',', '.');
+  const semMoeda = texto.replace(/R\$/g, '').trim();
+
+  // Fração pura — formato que o ENEM usa nas alternativas de probabilidade.
+  const fracao = semMoeda.replace(/\s/g, '').match(/^(\d+)\/(\d+)$/);
+  if (fracao) return Number(fracao[1]) / Number(fracao[2]);
+
+  // Caso geral: primeiro número do texto, no formato brasileiro (1.234,56).
+  const encontrado = semMoeda.match(/\d[\d.\s]*(?:,\d+)?/);
+  if (!encontrado) return null;
+
+  const normalizado = encontrado[0]
+    .replace(/\s/g, '')
+    .replace(/\.(?=\d{3}\b)/g, '')
+    .replace(',', '.')
+    .replace(/[.,]$/, '');
+
   const n = Number(normalizado);
   return Number.isFinite(n) ? n : null;
 }
 
-let falhas = 0;
-let semCalculo = 0;
+function confere(nome: string, banco: ExamQuestion[]): number {
+  let falhas = 0;
+  let semCalculo = 0;
 
-console.log(`Conferindo ${MATEMATICA_QUESTIONS.length} questões de Matemática\n`);
+  console.log(`\n=== ${nome} — ${banco.length} questões ===`);
 
-for (const q of MATEMATICA_QUESTIONS) {
-  const alternativa = q.options.find((o) => o.letter === q.correctLetter);
+  for (const q of banco) {
+    const alternativa = q.options.find((o) => o.letter === q.correctLetter);
 
-  if (!alternativa) {
-    console.log(`  ${q.id}  FALHA: correctLetter "${q.correctLetter}" não existe nas alternativas`);
-    falhas++;
-    continue;
+    if (!alternativa) {
+      console.log(`  ${q.id}  FALHA: correctLetter "${q.correctLetter}" não existe nas alternativas`);
+      falhas++;
+      continue;
+    }
+    if (q.options.length !== 5) {
+      console.log(`  ${q.id}  FALHA: ${q.options.length} alternativas (esperado 5)`);
+      falhas++;
+      continue;
+    }
+
+    const calc = CALCULOS[q.id];
+    if (!calc) {
+      console.log(`  ${q.id}  SEM CÁLCULO independente cadastrado`);
+      semCalculo++;
+      continue;
+    }
+
+    const esperado = calc();
+
+    if (typeof esperado === 'object') {
+      if (alternativa.text.toLowerCase().includes(esperado.texto.toLowerCase())) continue;
+      console.log(`  ${q.id}  FALHA: esperava conter "${esperado.texto}", gabarito ${q.correctLetter} diz "${alternativa.text}"`);
+      falhas++;
+      continue;
+    }
+
+    const obtido = paraNumero(alternativa.text);
+    if (obtido === null) {
+      console.log(`  ${q.id}  FALHA: não consegui ler número em "${alternativa.text}"`);
+      falhas++;
+      continue;
+    }
+    if (Math.abs(obtido - esperado) > Math.max(0.01, Math.abs(esperado) * 0.001)) {
+      console.log(`  ${q.id}  FALHA: cálculo dá ${esperado}, gabarito ${q.correctLetter} diz "${alternativa.text}" (${obtido})`);
+      falhas++;
+    }
   }
 
-  if (q.options.length !== 5) {
-    console.log(`  ${q.id}  FALHA: ${q.options.length} alternativas (esperado 5)`);
-    falhas++;
-    continue;
+  const dif = new Map<string, number>();
+  banco.forEach((q) => dif.set(q.difficulty, (dif.get(q.difficulty) ?? 0) + 1));
+  const letras = new Map<string, number>();
+  banco.forEach((q) => letras.set(q.correctLetter, (letras.get(q.correctLetter) ?? 0) + 1));
+
+  console.log('  dificuldade: ' + ['Fácil', 'Média', 'Difícil'].map((d) => `${d} ${dif.get(d) ?? 0}`).join(' | '));
+  console.log('  gabaritos:   ' + ['A', 'B', 'C', 'D', 'E'].map((l) => `${l}=${letras.get(l) ?? 0}`).join(' '));
+
+  const ids = banco.map((q) => q.id);
+  const repetidos = ids.filter((id, i) => ids.indexOf(id) !== i);
+  if (repetidos.length) {
+    console.log('  IDS DUPLICADOS: ' + repetidos.join(', '));
+    falhas += repetidos.length;
   }
 
-  const calc = CALCULOS[q.id];
-  if (!calc) {
-    console.log(`  ${q.id}  SEM CÁLCULO independente cadastrado`);
-    semCalculo++;
-    continue;
-  }
-
-  const esperado = calc();
-
-  if (typeof esperado === 'object') {
-    if (alternativa.text.toLowerCase().includes(esperado.texto.toLowerCase())) continue;
-    console.log(`  ${q.id}  FALHA: esperava "${esperado.texto}", gabarito ${q.correctLetter} diz "${alternativa.text}"`);
-    falhas++;
-    continue;
-  }
-
-  const obtido = paraNumero(alternativa.text);
-  if (obtido === null) {
-    console.log(`  ${q.id}  FALHA: não consegui ler número em "${alternativa.text}"`);
-    falhas++;
-    continue;
-  }
-
-  if (Math.abs(obtido - esperado) > Math.max(0.01, Math.abs(esperado) * 0.001)) {
-    console.log(
-      `  ${q.id}  FALHA: cálculo dá ${esperado}, mas o gabarito ${q.correctLetter} diz "${alternativa.text}" (${obtido})`
-    );
-    falhas++;
-  }
+  console.log(`  ${falhas === 0 && semCalculo === 0 ? 'OK — todos conferem' : `${falhas} falha(s), ${semCalculo} sem cálculo`}`);
+  return falhas + semCalculo;
 }
 
-// Duplicatas de conceito passariam despercebidas na leitura.
-const topicos = new Map<string, string[]>();
-MATEMATICA_QUESTIONS.forEach((q) => {
-  const k = q.topic.split('—')[0].trim().toLowerCase();
-  topicos.set(k, [...(topicos.get(k) ?? []), q.id]);
-});
+const problemas =
+  confere('Matemática', MATEMATICA_QUESTIONS) + confere('Ciências da Natureza', NATUREZA_QUESTIONS);
 
-console.log('\nDistribuição por tópico:');
-[...topicos.entries()].sort().forEach(([t, ids]) => console.log(`  ${String(ids.length).padStart(2)}x  ${t}`));
-
-const dif = new Map<string, number>();
-MATEMATICA_QUESTIONS.forEach((q) => dif.set(q.difficulty, (dif.get(q.difficulty) ?? 0) + 1));
-console.log('\nDificuldade: ' + [...dif.entries()].map(([d, n]) => `${d} ${n}`).join(' | '));
-
-const letras = new Map<string, number>();
-MATEMATICA_QUESTIONS.forEach((q) => letras.set(q.correctLetter, (letras.get(q.correctLetter) ?? 0) + 1));
-console.log('Gabaritos: ' + [...letras.entries()].sort().map(([l, n]) => `${l}=${n}`).join(' '));
-
-const ids = MATEMATICA_QUESTIONS.map((q) => q.id);
-const repetidos = ids.filter((id, i) => ids.indexOf(id) !== i);
-if (repetidos.length) console.log('\nIDs DUPLICADOS: ' + repetidos.join(', '));
-
-console.log(
-  `\n${falhas === 0 && semCalculo === 0 ? 'TODOS OS GABARITOS CONFEREM' : `${falhas} falha(s), ${semCalculo} sem cálculo`}`
-);
-
-process.exit(falhas === 0 && semCalculo === 0 ? 0 : 1);
+console.log(problemas === 0 ? '\nTODOS OS GABARITOS CONFEREM\n' : `\n${problemas} problema(s) encontrado(s)\n`);
+process.exit(problemas === 0 ? 0 : 1);

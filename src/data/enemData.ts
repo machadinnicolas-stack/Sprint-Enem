@@ -1,5 +1,6 @@
 import { ExamQuestion, RedacaoTheme, TopicItem, SubjectType, UserPreferences, DaySchedule, GeneratedPlan, StudyBlock } from '../types';
 import { MATEMATICA_QUESTIONS } from './questions/matematica';
+import { NATUREZA_QUESTIONS } from './questions/natureza';
 
 // Ordered with the most commonly searched courses first — the first few entries
 // are used as the default "popular" quick-picks before the user types anything.
@@ -321,25 +322,6 @@ export const ENEN_TOPICS: TopicItem[] = [
 
 const OUTRAS_QUESTOES: ExamQuestion[] = [
   ,
-  {
-    id: 'q-2',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Ecologia - Bioacumulação',
-    difficulty: 'Média',
-    question: 'Metais pesados despejados irregularmente em corpos hídricos acumulam-se progressivamente ao longo dos níveis tróficos de uma cadeia alimentar aquática (magnificação trófica). Qual organismo apresentará a maior concentração desse poluente por unidade de biomassa?',
-    options: [
-      { letter: 'A', text: 'Fitoplâncton (produtor primário)' },
-      { letter: 'B', text: 'Zooplâncton (consumidor primário)' },
-      { letter: 'C', text: 'Pequenos peixes herbívoros' },
-      { letter: 'D', text: 'Aves piscívoras de topo de cadeia' },
-      { letter: 'E', text: 'Bactérias decompositoras' }
-    ],
-    correctLetter: 'D',
-    explanation: 'Na bioacumulação/magnificação trófica, compostos não biodegradáveis têm sua concentração amplificada a cada nível trófico. O consumidor do topo da cadeia (aves que comem peixes carnívoros) acumula a maior dose residual.',
-    triTip: 'Tema clássico do ENEM! Quase todos os anos há pelo menos 1 questão de relações ecológicas ou desequilíbrio ambiental.'
-  },
   ,
   {
     id: 'q-3',
@@ -361,6 +343,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Use o Artigo 196 e a CF/88 como repertório coringa de Redação para quase qualquer tema de saúde, educação ou segurança!'
   },
   ,
+  ,
   {
     id: 'q-4',
     subject: 'linguagens',
@@ -381,127 +364,6 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Funções da linguagem são garantia de 2 a 3 questões rápidas no 1º dia.'
   },
   ,
-
-  // ---- Ciências da Natureza (adicionais) ----
-  {
-    id: 'q-11',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Estequiometria e Soluções (Química)',
-    difficulty: 'Média',
-    question: 'Na reação de combustão completa do metano (CH₄ + 2O₂ → CO₂ + 2H₂O), a queima de 1 mol de metano consome quantos mols de gás oxigênio (O₂)?',
-    options: [
-      { letter: 'A', text: '1 mol' },
-      { letter: 'B', text: '2 mols' },
-      { letter: 'C', text: '3 mols' },
-      { letter: 'D', text: '4 mols' },
-      { letter: 'E', text: '6 mols' }
-    ],
-    correctLetter: 'B',
-    explanation: 'Pela equação balanceada CH₄ + 2O₂ → CO₂ + 2H₂O, a proporção estequiométrica é de 1 mol de metano para 2 mols de gás oxigênio.',
-    triTip: 'Questões de estequiometria do ENEM raramente exigem cálculos complexos — na maioria das vezes, basta ler os coeficientes da equação já balanceada.'
-  },
-  ,
-  {
-    id: 'q-12',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Circuitos Elétricos e Potência (Física)',
-    difficulty: 'Média',
-    question: 'Um chuveiro elétrico opera em uma tensão de 220 V e é percorrido por uma corrente elétrica de 25 A. Qual é a potência elétrica desse chuveiro, em watts?',
-    options: [
-      { letter: 'A', text: '1 100 W' },
-      { letter: 'B', text: '2 200 W' },
-      { letter: 'C', text: '4 400 W' },
-      { letter: 'D', text: '5 500 W' },
-      { letter: 'E', text: '8 800 W' }
-    ],
-    correctLetter: 'D',
-    explanation: 'A potência elétrica é dada por P = V × i. Substituindo os valores: P = 220 × 25 = 5500 W.',
-    triTip: 'A fórmula P = V × i é a base de quase toda questão de circuitos no ENEM — combine com P = R × i² e P = V²/R apenas se o enunciado pedir resistência.'
-  },
-  ,
-  {
-    id: 'q-13',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Genética e Biotecnologia (Biologia)',
-    difficulty: 'Difícil',
-    question: 'Em uma espécie de planta, a cor vermelha da flor (alelo R) é dominante sobre a cor branca (alelo r). Cruzando-se duas plantas heterozigotas (Rr × Rr), qual é a proporção fenotípica esperada na prole?',
-    options: [
-      { letter: 'A', text: '1 vermelha : 1 branca' },
-      { letter: 'B', text: '1 vermelha : 3 brancas' },
-      { letter: 'C', text: '3 vermelhas : 1 branca' },
-      { letter: 'D', text: 'Todas vermelhas' },
-      { letter: 'E', text: 'Todas brancas' }
-    ],
-    correctLetter: 'C',
-    explanation: 'No cruzamento Rr × Rr, o quadro de Punnett resulta em 1 RR : 2 Rr : 1 rr. Como R é dominante, os genótipos RR e Rr expressam a cor vermelha, resultando na proporção fenotípica clássica de 3 vermelhas para 1 branca.',
-    triTip: 'A proporção 3:1 é a "assinatura" de um cruzamento monoíbrido entre heterozigotos — reconhecer esse padrão rapidamente economiza tempo precioso na prova.'
-  },
-  ,
-  {
-    id: 'q-14',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Termodinâmica e Calorimetria (Física)',
-    difficulty: 'Média',
-    question: 'Uma amostra de 200 g de água (calor específico de 1 cal/g°C) é aquecida de 20°C para 70°C. Qual é a quantidade de calor sensível absorvida por essa amostra?',
-    options: [
-      { letter: 'A', text: '1 000 cal' },
-      { letter: 'B', text: '5 000 cal' },
-      { letter: 'C', text: '10 000 cal' },
-      { letter: 'D', text: '14 000 cal' },
-      { letter: 'E', text: '20 000 cal' }
-    ],
-    correctLetter: 'C',
-    explanation: 'O calor sensível é calculado por Q = m·c·ΔT. Substituindo: Q = 200 × 1 × (70-20) = 200 × 50 = 10 000 cal.',
-    triTip: 'Sempre confira a unidade do calor específico fornecida (cal/g°C ou J/g°C) — trocar a unidade sem perceber é a armadilha mais comum nessas questões.'
-  },
-  ,
-  {
-    id: 'q-15',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Química Orgânica (Funções e Isomeria)',
-    difficulty: 'Média',
-    question: 'O etanol (CH₃-CH₂-OH), amplamente usado como biocombustível no Brasil, pertence a qual função orgânica, caracterizada pela presença do grupo hidroxila (-OH) ligado a um carbono saturado?',
-    options: [
-      { letter: 'A', text: 'Ácido carboxílico' },
-      { letter: 'B', text: 'Aldeído' },
-      { letter: 'C', text: 'Álcool' },
-      { letter: 'D', text: 'Cetona' },
-      { letter: 'E', text: 'Éter' }
-    ],
-    correctLetter: 'C',
-    explanation: 'A presença do grupo hidroxila (-OH) ligado a um carbono saturado é a característica que define a função álcool, como no caso do etanol.',
-    triTip: 'Memorize os grupos funcionais principais (álcool -OH, ácido carboxílico -COOH, aldeído -CHO, cetona C=O) — é a base para resolver quase toda questão de química orgânica do 1º dia.'
-  },
-  ,
-  {
-    id: 'q-16',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Ondulatória - Velocidade do Som',
-    difficulty: 'Média',
-    question: 'Um estudante observa um raio e, 3 segundos depois, ouve o trovão correspondente. Considerando a velocidade do som no ar igual a 340 m/s, qual é a distância aproximada, em metros, entre o estudante e o local da descarga elétrica?',
-    options: [
-      { letter: 'A', text: '113 m' },
-      { letter: 'B', text: '340 m' },
-      { letter: 'C', text: '680 m' },
-      { letter: 'D', text: '1 020 m' },
-      { letter: 'E', text: '1 360 m' }
-    ],
-    correctLetter: 'D',
-    explanation: 'Como a luz se propaga quase instantaneamente e o som viaja a 340 m/s, a distância é d = v × t = 340 × 3 = 1020 m.',
-    triTip: 'Em problemas de ondas sonoras que envolvem "atraso" entre dois eventos, a fórmula direta d = v×t resolve a questão sem necessidade de fórmulas de ondulatória mais complexas.'
-  },
   ,
 
   // ---- Ciências Humanas (adicionais) ----
@@ -525,6 +387,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Associe sempre "direitos trabalhistas + autoritarismo político" ao Estado Novo de Vargas — é um dos temas mais recorrentes de História do Brasil no ENEM.'
   },
   ,
+  ,
   {
     id: 'q-18',
     subject: 'humanas',
@@ -544,6 +407,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'A Revolução Verde refere-se à modernização técnico-científica da agricultura, baseada em mecanização, fertilizantes químicos e sementes melhoradas geneticamente, fortemente presente no agronegócio do Centro-Oeste brasileiro.',
     triTip: '"Revolução Verde" é um repertório útil também para Redação em temas de meio ambiente e agronegócio — associe seus impactos positivos (produtividade) e negativos (concentração de terra, impacto ambiental).'
   },
+  ,
   ,
   {
     id: 'q-19',
@@ -565,6 +429,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Zygmunt Bauman é repertório curinga tanto para Humanas quanto para Redação — domine o conceito de "modernidade líquida" aplicado a relações de consumo, afetivas e digitais.'
   },
   ,
+  ,
   {
     id: 'q-20',
     subject: 'humanas',
@@ -584,6 +449,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'Blocos econômicos regionais buscam reduzir tarifas e barreiras alfandegárias, ampliando o comércio e a cooperação entre os países-membros, fortalecendo sua posição em um cenário de economia globalizada.',
     triTip: 'Diferencie os níveis de integração dos blocos (zona de livre comércio, união aduaneira, mercado comum) — o Mercosul é uma união aduaneira imperfeita, enquanto a UE avançou para união econômica e monetária.'
   },
+  ,
   ,
   {
     id: 'q-21',
@@ -605,6 +471,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Foucault e o conceito de "vigilância e normalização" são úteis para redações sobre tecnologia, privacidade e controle social (câmeras, redes sociais, big data).'
   },
   ,
+  ,
   {
     id: 'q-22',
     subject: 'humanas',
@@ -624,6 +491,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'O efeito estufa é o fenômeno natural de retenção de calor pela atmosfera; a intensificação artificial desse processo, causada pela emissão excessiva de gases como o CO₂ por atividades humanas, é apontada como principal causa do aquecimento global.',
     triTip: 'Não confunda efeito estufa (fenômeno natural intensificado) com "camada de ozônio" (protege contra radiação UV) — são temas ambientais distintos que o ENEM adora confundir nas alternativas.'
   },
+  ,
   ,
 
   // ---- Linguagens e Códigos (adicionais) ----
@@ -647,6 +515,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Questões sobre gêneros digitais avaliam se você reconhece o contexto de uso da linguagem — informal em redes sociais, mais formal em e-mails corporativos, por exemplo.'
   },
   ,
+  ,
   {
     id: 'q-24',
     subject: 'linguagens',
@@ -666,6 +535,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'A Semana de Arte Moderna de 1922 rompeu com os padrões estéticos tradicionais (parnasianismo, academicismo) e propôs uma renovação da linguagem artística, valorizando a cultura e identidade nacionais de forma inovadora.',
     triTip: 'Associe a Semana de 22 a nomes como Mário de Andrade, Oswald de Andrade e Tarsila do Amaral — recorrente tanto em Linguagens quanto como repertório de Redação.'
   },
+  ,
   ,
   {
     id: 'q-25',
@@ -687,6 +557,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'O ENEM valoriza respostas que reconhecem a variação linguística como legítima — evite alternativas que tratem variantes populares como "erradas".'
   },
   ,
+  ,
   {
     id: 'q-26',
     subject: 'linguagens',
@@ -706,6 +577,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'A personificação (ou prosopopeia) consiste em atribuir ações, sentimentos ou características humanas a seres inanimados ou não humanos — no exemplo, o sol "sorri", ação tipicamente humana.',
     triTip: 'Não confunda personificação (atribuir traços humanos) com comparação/símile (usa conectivo "como") nem com metáfora (comparação implícita sem conectivo).'
   },
+  ,
   ,
   {
     id: 'q-27',
@@ -727,6 +599,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Machado de Assis é o autor mais cobrado de Literatura no ENEM — memorize a ironia e a crítica social como suas marcas registradas.'
   },
   ,
+  ,
   {
     id: 'q-28',
     subject: 'linguagens',
@@ -747,67 +620,6 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Domine os conectivos de oposição (contudo, entretanto, todavia, no entanto) — eles são essenciais tanto para interpretação de texto quanto para a Competência 4 da Redação.'
   },
   ,
-
-  // ---- Ciências da Natureza (Simulado Completo) ----
-  {
-    id: 'q-32',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Física - Cinemática (Velocidade Média)',
-    difficulty: 'Fácil',
-    question: 'Um ciclista percorre 60 km em 3 horas, mantendo velocidade constante. Qual é a velocidade média desenvolvida, em km/h?',
-    options: [
-      { letter: 'A', text: '15 km/h' },
-      { letter: 'B', text: '18 km/h' },
-      { letter: 'C', text: '20 km/h' },
-      { letter: 'D', text: '24 km/h' },
-      { letter: 'E', text: '30 km/h' }
-    ],
-    correctLetter: 'C',
-    explanation: 'Velocidade média = distância / tempo = 60 km / 3 h = 20 km/h.',
-    triTip: 'Cinemática básica (v = ΔS/Δt) é garantia de pelo menos 1 questão fácil de Física no ENEM.'
-  },
-  ,
-  {
-    id: 'q-33',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Química - Escala de pH',
-    difficulty: 'Fácil',
-    question: 'Uma solução aquosa apresenta pH igual a 3. Essa solução é classificada como:',
-    options: [
-      { letter: 'A', text: 'Ácida' },
-      { letter: 'B', text: 'Básica (alcalina)' },
-      { letter: 'C', text: 'Neutra' },
-      { letter: 'D', text: 'Anfótera' },
-      { letter: 'E', text: 'Indefinida, faltam dados' }
-    ],
-    correctLetter: 'A',
-    explanation: 'Na escala de pH, valores menores que 7 indicam solução ácida; pH igual a 7 é neutro; pH maior que 7 é básico (alcalino). Como pH = 3 é menor que 7, a solução é ácida.',
-    triTip: 'Decore a escala: pH < 7 ácido, pH = 7 neutro, pH > 7 básico — base de praticamente toda questão de Química envolvendo soluções.'
-  },
-  ,
-  {
-    id: 'q-34',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Biologia - 1ª Lei de Mendel',
-    difficulty: 'Média',
-    question: 'Em ervilhas, o alelo para semente amarela (A) é dominante sobre o alelo para semente verde (a). Cruzando-se duas plantas heterozigotas (Aa × Aa), qual é a proporção fenotípica esperada na geração seguinte?',
-    options: [
-      { letter: 'A', text: '1 amarela : 1 verde' },
-      { letter: 'B', text: '3 amarelas : 1 verde' },
-      { letter: 'C', text: '1 amarela : 3 verdes' },
-      { letter: 'D', text: '100% amarela' },
-      { letter: 'E', text: '100% verde' }
-    ],
-    correctLetter: 'B',
-    explanation: 'No cruzamento Aa × Aa, a proporção genotípica esperada é 1AA : 2Aa : 1aa. Como A é dominante, tanto AA quanto Aa expressam o fenótipo amarelo, resultando na clássica proporção fenotípica de 3 amarelas : 1 verde.',
-    triTip: 'A proporção 3:1 é a marca registrada da 1ª Lei de Mendel (segregação de um único par de alelos) — decore esse padrão, ele se repete em várias questões de genética.'
-  },
   ,
 
   // ---- Ciências Humanas (Simulado Completo) ----
@@ -831,6 +643,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Urbanização, êxodo rural e macrocefalia urbana são temas recorrentes em Geografia — conecte sempre com desigualdade socioespacial, ótimo repertório de Redação também.'
   },
   ,
+  ,
   {
     id: 'q-36',
     subject: 'humanas',
@@ -851,6 +664,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Era Vargas + direitos trabalhistas é combo certo no ENEM — associe CLT, sindicalismo atrelado ao Estado e o populismo varguista.'
   },
   ,
+  ,
   {
     id: 'q-37',
     subject: 'humanas',
@@ -870,6 +684,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'As teorias contratualistas (Hobbes, Locke, Rousseau) explicam que o Estado nasce de um "contrato social": um pacto no qual os indivíduos cedem parte de sua liberdade natural em troca da segurança e da ordem garantidas pela vida em sociedade.',
     triTip: 'Contratualismo é repertório sociocultural coringa pra Redação — cite Rousseau ou Hobbes ao discutir o "papel do Estado" em praticamente qualquer tema.'
   },
+  ,
   ,
 
   // ---- Linguagens e Códigos (Simulado Completo) ----
@@ -893,6 +708,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Metonímia (lugar pelo habitante, autor pela obra, marca pelo produto) é uma das figuras mais cobradas no ENEM — não confunda com metáfora, que é uma comparação implícita.'
   },
   ,
+  ,
   {
     id: 'q-39',
     subject: 'linguagens',
@@ -912,6 +728,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'A adaptação da linguagem ao contexto/situação de comunicação é chamada de variação diafásica ou estilística — o falante escolhe o registro (formal ou informal) conforme a situação, sem que isso configure "erro".',
     triTip: 'O ENEM valoriza a ideia de adequação linguística, não de "certo x errado" — toda variedade linguística é legítima em seu contexto de uso.'
   },
+  ,
   ,
   {
     id: 'q-40',
@@ -933,45 +750,6 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Semana de 22 é presença garantida em Literatura — associe a Oswald de Andrade (Manifesto Antropófago) e Mário de Andrade (Macunaíma).'
   },
   ,
-  {
-    id: 'q-43',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Física - Leis de Newton (Dinâmica)',
-    difficulty: 'Fácil',
-    question: 'Um bloco de massa 4 kg está em repouso sobre uma superfície horizontal sem atrito. Uma força horizontal constante de 12 N passa a atuar sobre o bloco. Qual é a aceleração adquirida, segundo a Segunda Lei de Newton?',
-    options: [
-      { letter: 'A', text: '1 m/s²' },
-      { letter: 'B', text: '2 m/s²' },
-      { letter: 'C', text: '3 m/s²' },
-      { letter: 'D', text: '4 m/s²' },
-      { letter: 'E', text: '48 m/s²' }
-    ],
-    correctLetter: 'C',
-    explanation: 'Pela Segunda Lei de Newton, F = m·a, logo a = F/m = 12/4 = 3 m/s².',
-    triTip: 'Dinâmica é praticamente garantida no caderno de Natureza — memorize F = m·a e confira sempre as unidades antes de calcular.'
-  },
-  ,
-  {
-    id: 'q-44',
-    subject: 'natureza',
-    areaName: 'Ciências da Natureza',
-    origin: 'Questão Inédita',
-    topic: 'Biologia - Genética Mendeliana (1ª Lei de Mendel)',
-    difficulty: 'Média',
-    question: 'Em ervilhas, o alelo para semente amarela (A) é dominante sobre o alelo para semente verde (a). Cruzando-se dois indivíduos heterozigotos (Aa × Aa), qual é a proporção fenotípica esperada na geração seguinte?',
-    options: [
-      { letter: 'A', text: '1 amarela : 1 verde' },
-      { letter: 'B', text: '3 amarelas : 1 verde' },
-      { letter: 'C', text: '1 amarela : 3 verdes' },
-      { letter: 'D', text: '100% amarelas' },
-      { letter: 'E', text: '100% verdes' }
-    ],
-    correctLetter: 'B',
-    explanation: 'O cruzamento Aa × Aa gera proporção genotípica 1 AA : 2 Aa : 1 aa. Como A é dominante, tanto AA quanto Aa manifestam o fenótipo amarelo, resultando na clássica proporção mendeliana de 3 amarelas para 1 verde.',
-    triTip: 'A proporção 3:1 do monoibridismo é a base de quase toda questão de genética do ENEM — treine montar o quadro de Punnett rapidamente.'
-  },
   ,
   {
     id: 'q-45',
@@ -993,6 +771,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Figuras de linguagem garantem pontos fáceis — associe personificação a "atribuir vida ou ação humana a algo que não é humano".'
   },
   ,
+  ,
   {
     id: 'q-46',
     subject: 'linguagens',
@@ -1013,6 +792,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     triTip: 'Charges e propagandas do ENEM costumam explorar intertextualidade com obras de arte, provérbios ou músicas — fique atento a referências implícitas no texto motivador.'
   },
   ,
+  ,
   {
     id: 'q-47',
     subject: 'humanas',
@@ -1032,6 +812,7 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
     explanation: 'Êxodo rural é a migração da população do campo para as cidades, impulsionada pela mecanização agrícola e pela busca de emprego e serviços urbanos — processo que acelerou fortemente a urbanização brasileira a partir das décadas de 1950-1970.',
     triTip: 'Associe êxodo rural à mecanização do campo e ao crescimento desordenado das periferias urbanas — ótimo tema de Humanas e também repertório de Redação.'
   },
+  ,
   ,
   {
     id: 'q-48',
@@ -1055,7 +836,11 @@ const OUTRAS_QUESTOES: ExamQuestion[] = [
 ];
 
 // O banco cresce por matéria: cada uma tem seu próprio arquivo em ./questions.
-export const MOCK_QUESTIONS: ExamQuestion[] = [...MATEMATICA_QUESTIONS, ...OUTRAS_QUESTOES];
+export const MOCK_QUESTIONS: ExamQuestion[] = [
+  ...MATEMATICA_QUESTIONS,
+  ...NATUREZA_QUESTIONS,
+  ...OUTRAS_QUESTOES
+];
 
 // Simplified, transparent approximation of an ENEM-scale score (0-1000) from raw
 // accuracy — NOT the official INEP TRI calculation, which requires calibrated item
