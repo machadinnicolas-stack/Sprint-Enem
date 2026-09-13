@@ -8,6 +8,8 @@ import { useEntitlement } from './hooks/useEntitlement';
 import { loadUserData, saveUserData } from './services/userData';
 import { AuthScreen } from './components/AuthScreen';
 import { AccessPendingScreen } from './components/AccessPendingScreen';
+import { LegalModal } from './components/LegalModal';
+import { LegalDocument, TERMOS_DE_USO, POLITICA_DE_PRIVACIDADE } from './data/legalContent';
 import { ResetPasswordScreen } from './components/ResetPasswordScreen';
 import { OnboardingForm } from './components/OnboardingForm';
 import { Header } from './components/Header';
@@ -43,6 +45,7 @@ export default function App() {
   const [plan, setPlan] = useState<GeneratedPlan>(() => generateStudyPlan(DEFAULT_PREFERENCES));
   const [selectedBlockForTimer, setSelectedBlockForTimer] = useState<StudyBlock | null>(null);
   const [isBadgesModalOpen, setIsBadgesModalOpen] = useState(false);
+  const [legalDoc, setLegalDoc] = useState<LegalDocument | null>(null);
 
   const [celebration, setCelebration] = useState<{
     badge?: Badge | null;
@@ -505,6 +508,28 @@ export default function App() {
           onClose={() => setCelebration(null)}
         />
       )}
+
+      <footer className="border-t border-[#e1e3e4] py-4 px-4 mt-auto">
+        <div className="flex items-center justify-center gap-3 text-xs text-[#7b7487]">
+          <button
+            type="button"
+            onClick={() => setLegalDoc(TERMOS_DE_USO)}
+            className="hover:text-[#630ed4] hover:underline cursor-pointer"
+          >
+            Termos de Uso
+          </button>
+          <span aria-hidden="true">·</span>
+          <button
+            type="button"
+            onClick={() => setLegalDoc(POLITICA_DE_PRIVACIDADE)}
+            className="hover:text-[#630ed4] hover:underline cursor-pointer"
+          >
+            Política de Privacidade
+          </button>
+        </div>
+      </footer>
+
+      {legalDoc && <LegalModal document={legalDoc} onClose={() => setLegalDoc(null)} />}
 
       <UpdateNotifier />
     </div>

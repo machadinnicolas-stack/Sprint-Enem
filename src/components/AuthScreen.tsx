@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useAuth, translateAuthError } from '../hooks/useAuth';
+import { LegalModal } from './LegalModal';
+import { LegalDocument, TERMOS_DE_USO, POLITICA_DE_PRIVACIDADE } from '../data/legalContent';
 
 export const AuthScreen: React.FC = () => {
   const { signIn, signUp, resetPassword } = useAuth();
@@ -10,6 +12,7 @@ export const AuthScreen: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resetSent, setResetSent] = useState(false);
+  const [openDoc, setOpenDoc] = useState<LegalDocument | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -178,6 +181,35 @@ export const AuthScreen: React.FC = () => {
                 />
               </div>
 
+              {mode === 'signup' && (
+                <label className="flex items-start gap-2.5 text-xs text-[#4a4455] leading-relaxed cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    className="mt-0.5 w-4 h-4 shrink-0 accent-[#7c3aed] cursor-pointer"
+                  />
+                  <span>
+                    Li e aceito os{' '}
+                    <button
+                      type="button"
+                      onClick={() => setOpenDoc(TERMOS_DE_USO)}
+                      className="text-[#630ed4] font-semibold hover:underline cursor-pointer"
+                    >
+                      Termos de Uso
+                    </button>{' '}
+                    e a{' '}
+                    <button
+                      type="button"
+                      onClick={() => setOpenDoc(POLITICA_DE_PRIVACIDADE)}
+                      className="text-[#630ed4] font-semibold hover:underline cursor-pointer"
+                    >
+                      Política de Privacidade
+                    </button>
+                    . Se sou menor de 18 anos, tenho autorização do meu responsável.
+                  </span>
+                </label>
+              )}
+
               {error && (
                 <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-3 py-2">{error}</p>
               )}
@@ -203,7 +235,27 @@ export const AuthScreen: React.FC = () => {
             </p>
           </>
         )}
+
+        <div className="flex items-center justify-center gap-3 mt-8 text-xs text-[#7b7487]">
+          <button
+            type="button"
+            onClick={() => setOpenDoc(TERMOS_DE_USO)}
+            className="hover:text-[#630ed4] hover:underline cursor-pointer"
+          >
+            Termos de Uso
+          </button>
+          <span aria-hidden="true">·</span>
+          <button
+            type="button"
+            onClick={() => setOpenDoc(POLITICA_DE_PRIVACIDADE)}
+            className="hover:text-[#630ed4] hover:underline cursor-pointer"
+          >
+            Política de Privacidade
+          </button>
+        </div>
       </motion.div>
+
+      {openDoc && <LegalModal document={openDoc} onClose={() => setOpenDoc(null)} />}
     </div>
   );
 };
