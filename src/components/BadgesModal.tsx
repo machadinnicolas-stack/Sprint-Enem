@@ -250,7 +250,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
                       <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md ${style.tagBg}`}>
                         {style.label}
                       </span>
-                      <span className="text-[10px] font-bold text-[#630ed4] bg-[#ede0ff] px-1.5 py-0.2 rounded">
+                      <span className="text-[10px] font-bold text-[#630ed4] bg-[#ede0ff] px-1.5 py-0.5 rounded">
                         +{badge.xpReward} XP
                       </span>
                     </div>

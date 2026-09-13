@@ -37,8 +37,12 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="font-bold text-sm tracking-tight text-white truncate max-[380px]:hidden">Sprint ENEM</span>
-              <span className="bg-[#eaddff] text-[#630ed4] text-[10px] font-bold px-1.5 py-0.2 rounded-sm uppercase max-[380px]:hidden">
+              {/* min-w-0 para o truncate valer: sem ele o item flex não encolhe
+                  abaixo do próprio conteúdo, e quem era espremido virava o selo. */}
+              <span className="font-bold text-sm tracking-tight text-white truncate min-w-0 max-[380px]:hidden">
+                Sprint ENEM
+              </span>
+              <span className="bg-[#eaddff] text-[#630ed4] text-[10px] font-bold px-1.5 py-0.5 rounded-sm uppercase whitespace-nowrap shrink-0 max-[380px]:hidden">
                 TRI Pro
               </span>
             </div>
@@ -139,7 +143,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             {/* Badges count badge */}
-            <span className="bg-amber-200 text-amber-900 text-[10px] font-black px-1.5 py-0.2 rounded-full hidden md:inline-block">
+            <span className="bg-amber-200 text-amber-900 text-[10px] font-black px-1.5 py-0.5 rounded-full hidden md:inline-block">
               {unlockedBadgesCount} 🏆
             </span>
           </button>
