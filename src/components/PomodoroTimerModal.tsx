@@ -80,13 +80,13 @@ export const PomodoroTimerModal: React.FC<PomodoroTimerModalProps> = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="pomodoro-modal-title"
-        className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200"
+        className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-[#d6cce8] relative animate-in fade-in zoom-in-95 duration-200"
       >
         {/* Close button */}
         <button
           onClick={onClose}
           aria-label="Fechar"
-          className="absolute top-4 right-4 text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f3f4f5] transition-colors cursor-pointer"
+          className="absolute top-4 right-4 text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f5f0ff] transition-colors cursor-pointer"
         >
           <span className="material-symbols-outlined text-2xl">close</span>
         </button>
@@ -146,7 +146,7 @@ export const PomodoroTimerModal: React.FC<PomodoroTimerModalProps> = ({
               className={`text-xs px-3 py-1.5 rounded-lg border font-semibold transition-all cursor-pointer ${
                 selectedDuration === mins
                   ? 'bg-[#ede0ff] text-[#630ed4] border-[#7c3aed]'
-                  : 'bg-white text-[#4a4455] border-[#e1e3e4] hover:border-[#7c3aed]'
+                  : 'bg-white text-[#4a4455] border-[#d6cce8] hover:border-[#7c3aed]'
               }`}
             >
               {mins} min
@@ -185,7 +185,7 @@ export const PomodoroTimerModal: React.FC<PomodoroTimerModalProps> = ({
 
         {/* Quick study tip */}
         {block.tip && (
-          <div className="mt-4 p-3 bg-[#f9fafb] border border-[#e1e3e4] rounded-xl text-xs text-[#4a4455] flex items-start gap-2">
+          <div className="mt-4 p-3 bg-[#f5f0ff] border border-[#d6cce8] rounded-xl text-xs text-[#4a4455] flex items-start gap-2">
             <span className="material-symbols-outlined text-amber-500 text-sm mt-0.5">lightbulb</span>
             <span>{block.tip}</span>
           </div>

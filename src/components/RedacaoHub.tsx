@@ -110,7 +110,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
       </div>
 
       {/* Select theme banner */}
-      <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-6">
+      <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#d6cce8] shadow-xs mb-6">
         <h2 className="text-xs font-bold uppercase tracking-wider text-[#7b7487] mb-3">
           Escolha um Tema para Treinar:
         </h2>
@@ -126,7 +126,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
               className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
                 selectedTheme.id === theme.id
                   ? 'bg-[#ede0ff] border-[#7c3aed] text-[#630ed4] shadow-xs'
-                  : 'bg-[#f9fafb] border-[#e1e3e4] text-[#4a4455] hover:border-[#7c3aed]'
+                  : 'bg-[#f5f0ff] border-[#d6cce8] text-[#4a4455] hover:border-[#7c3aed]'
               }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-wider opacity-75 block mb-1">
@@ -138,7 +138,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
         </div>
 
         {/* Selected Theme Details */}
-        <div className="p-4 bg-[#f8f9fa] rounded-2xl border border-[#e1e3e4] space-y-4">
+        <div className="p-4 bg-[#f5f0ff] rounded-2xl border border-[#d6cce8] space-y-4">
           <div>
             <span className="text-xs font-bold text-[#be185d] uppercase tracking-wider block mb-1">
               Contexto Motivador
@@ -148,7 +148,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-[#e1e3e4]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-[#d6cce8]">
             <div>
               <span className="text-xs font-bold text-[#7c3aed] flex items-center gap-1 mb-1">
                 <span className="material-symbols-outlined text-[16px]">menu_book</span>
@@ -183,7 +183,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
       </div>
 
       {/* Writing Box */}
-      <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-6">
+      <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#d6cce8] shadow-xs mb-6">
         <div className="flex items-center justify-between gap-2 mb-3">
           <h2 className="text-base font-bold text-[#191c1d] flex items-center gap-2">
             <span className="material-symbols-outlined text-[#7c3aed]">edit_note</span>
@@ -200,7 +200,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
           onChange={(e) => setDraftText(e.target.value)}
           rows={8}
           placeholder="Escreva sua introdução, parágrafos de desenvolvimento ou rascunho completo aqui... Dica: Utilize conectivos como 'Ademais', 'Nesse sentido' e estruture a intervenção com os 5 elementos."
-          className="w-full p-4 bg-[#f9fafb] border border-[#ccc3d8] rounded-2xl text-sm text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed] outline-none transition-all leading-relaxed"
+          className="w-full p-4 bg-[#f5f0ff] border border-[#ccc3d8] rounded-2xl text-sm text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed] outline-none transition-all leading-relaxed"
         />
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
@@ -270,7 +270,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {result.competencies.map((comp, idx) => (
-                <div key={idx} className="bg-white p-3.5 rounded-xl border border-[#e1e3e4]">
+                <div key={idx} className="bg-white p-3.5 rounded-xl border border-[#d6cce8]">
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-bold text-xs text-[#191c1d]">{comp.name}</span>
                     <span className="text-xs font-black text-[#630ed4] bg-[#ede0ff] px-2 py-0.5 rounded-md">
@@ -291,7 +291,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
 
         {/* Daily AI quota spent — structural checklist only, deliberately no score. */}
         {result?.kind === 'checklist' && (
-          <div className="mt-6 p-5 rounded-2xl bg-[#f8f9fa] border border-[#e1e3e4] space-y-4 animate-in fade-in duration-300">
+          <div className="mt-6 p-5 rounded-2xl bg-[#f5f0ff] border border-[#d6cce8] space-y-4 animate-in fade-in duration-300">
             <div className="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2">
               {result.reason === 'limite_diario'
                 ? 'Você já usou suas correções por IA de hoje. Abaixo está uma verificação estrutural automática do seu texto — ela não atribui nota. Volte amanhã para uma nova correção por IA.'
@@ -304,7 +304,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
                 {result.items.map((item, idx) => (
-                  <div key={idx} className="bg-white p-3.5 rounded-xl border border-[#e1e3e4]">
+                  <div key={idx} className="bg-white p-3.5 rounded-xl border border-[#d6cce8]">
                     <div className="flex items-center gap-1.5 mb-1">
                       <span
                         className={`material-symbols-outlined text-[16px] ${

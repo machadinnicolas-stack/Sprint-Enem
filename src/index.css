@@ -9,10 +9,10 @@
     --primary-fixed: #eaddff;
     --primary-light: #f5f0ff;
     --on-primary-container: #ede0ff;
-    --surface-variant: #e1e3e4;
+    --surface-variant: #d6cce8;
     --outline: #7b7487;
     --outline-variant: #ccc3d8;
-    --background: #f9fafb;
+    --background: #e9e3f4;
     --on-background: #191c1d;
     --on-surface-variant: #4a4455;
     --surface: #ffffff;
@@ -27,10 +27,11 @@
   body {
     min-width: 320px;
     background-color: var(--background);
+    /* Sem o véu branco que havia aqui: ele cobria o fundo com 62% de branco e
+       anulava qualquer cor escolhida para --background. */
     background-image:
-      radial-gradient(circle at 8% 0%, rgba(124, 58, 237, 0.08), transparent 28rem),
-      radial-gradient(circle at 92% 18%, rgba(245, 158, 11, 0.07), transparent 24rem),
-      linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(249, 250, 251, 0.3));
+      radial-gradient(circle at 8% 0%, rgba(124, 58, 237, 0.12), transparent 28rem),
+      radial-gradient(circle at 92% 18%, rgba(245, 158, 11, 0.07), transparent 24rem);
     font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
   }
 
@@ -63,14 +64,14 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: linear-gradient(rgba(99, 14, 212, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99, 14, 212, 0.025) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(99, 14, 212, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 14, 212, 0.05) 1px, transparent 1px);
   background-size: 32px 32px;
   mask-image: linear-gradient(to bottom, black, transparent 75%);
 }
 
 .app-header {
-  box-shadow: 0 1px 0 rgba(99, 14, 212, 0.04), 0 8px 22px rgba(71, 42, 112, 0.05);
+  box-shadow: 0 8px 22px rgba(71, 42, 112, 0.18);
 }
 
 @media (max-width: 380px) {

@@ -30,7 +30,7 @@ export const AccessPendingScreen: React.FC<AccessPendingScreenProps> = ({
   const isError = access === 'error';
 
   return (
-    <div className="min-h-screen bg-[#f9fafb] flex items-center justify-center px-4 py-10">
+    <div className="min-h-screen bg-[#e9e3f4] flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md">
         <div className="text-center mb-6">
           <div className="w-12 h-12 rounded-2xl bg-[#ede0ff] flex items-center justify-center mx-auto mb-3">
@@ -43,7 +43,7 @@ export const AccessPendingScreen: React.FC<AccessPendingScreenProps> = ({
           </h1>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 border border-[#e1e3e4] shadow-xs space-y-4">
+        <div className="bg-white rounded-3xl p-6 border border-[#d6cce8] shadow-xs space-y-4">
           {isError ? (
             <p className="text-sm text-[#4a4455] leading-relaxed">
               Houve uma falha ao consultar sua compra. Isso costuma ser temporário — tente novamente em alguns
@@ -54,7 +54,7 @@ export const AccessPendingScreen: React.FC<AccessPendingScreenProps> = ({
               <p className="text-sm text-[#4a4455] leading-relaxed">
                 Não encontramos uma compra ativa vinculada a este e-mail:
               </p>
-              <p className="text-sm font-bold text-[#191c1d] bg-[#f8f9fa] border border-[#e1e3e4] rounded-xl px-3 py-2.5 break-all">
+              <p className="text-sm font-bold text-[#191c1d] bg-[#f5f0ff] border border-[#d6cce8] rounded-xl px-3 py-2.5 break-all">
                 {email ?? '—'}
               </p>
               <p className="text-sm text-[#4a4455] leading-relaxed">

@@ -38,7 +38,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
   const getRarityBadgeStyle = (rarity: Badge['rarity'], unlocked: boolean) => {
     if (!unlocked) {
       return {
-        cardBorder: 'border-[#e1e3e4] bg-[#f9fafb] opacity-80',
+        cardBorder: 'border-[#d6cce8] bg-[#f5f0ff] opacity-80',
         iconBg: 'bg-[#e2e8f0] text-[#7b7487]',
         tagBg: 'bg-[#f1f5f9] text-[#64748b]',
         label: 'Bloqueado'
@@ -83,10 +83,10 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="badges-modal-title"
-        className="bg-white rounded-3xl p-5 md:p-7 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200 no-scrollbar"
+        className="bg-white rounded-3xl p-5 md:p-7 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#d6cce8] relative animate-in fade-in zoom-in-95 duration-200 no-scrollbar"
       >
         {/* Top Header */}
-        <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#e1e3e4]">
+        <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#d6cce8]">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#5a00c6] text-white flex items-center justify-center shadow-md shadow-[#7c3aed]/20">
               <span className="material-symbols-outlined text-[24px]">workspace_premium</span>
@@ -104,7 +104,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
           <button
             onClick={onClose}
             aria-label="Fechar"
-            className="text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f3f4f5] transition-colors cursor-pointer"
+            className="text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f5f0ff] transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-2xl">close</span>
           </button>
@@ -173,7 +173,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
         {/* Filters Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
           {/* Status filter */}
-          <div className="flex items-center bg-[#f3f4f5] p-1 rounded-xl">
+          <div className="flex items-center bg-[#f5f0ff] p-1 rounded-xl">
             <button
               onClick={() => setFilterStatus('all')}
               className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
@@ -216,7 +216,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
                 className={`px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   filterCategory === cat.id
                     ? 'bg-[#ede0ff] text-[#630ed4] border border-[#7c3aed]'
-                    : 'text-[#7b7487] hover:bg-[#f3f4f5]'
+                    : 'text-[#7b7487] hover:bg-[#f5f0ff]'
                 }`}
               >
                 {cat.label}
@@ -265,7 +265,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
                 </div>
 
                 {/* Progress bar or Unlock status */}
-                <div className="pt-2 border-t border-[#e1e3e4]/60">
+                <div className="pt-2 border-t border-[#d6cce8]/60">
                   {badge.unlocked ? (
                     <div className="flex items-center justify-between text-[11px] font-bold text-emerald-700">
                       <span className="flex items-center gap-1">
@@ -299,7 +299,7 @@ export const BadgesModal: React.FC<BadgesModalProps> = ({
         </div>
 
         {/* Footer info & close */}
-        <div className="pt-4 border-t border-[#e1e3e4] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="pt-4 border-t border-[#d6cce8] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="text-xs text-[#7b7487] flex items-center gap-1.5">
             <span className="material-symbols-outlined text-amber-500 text-[18px]">bolt</span>
             <span>Complete blocos no cronograma e mantenha seu streak para subir de nível!</span>

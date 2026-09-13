@@ -47,7 +47,7 @@ export const UpdateNotifier: React.FC = () => {
 
   return (
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[60] w-[calc(100%-2rem)] max-w-md animate-in fade-in slide-in-from-bottom-4 duration-300">
-      <div className="bg-white rounded-2xl shadow-2xl border border-[#e1e3e4] p-4 flex items-center gap-3">
+      <div className="bg-white rounded-2xl shadow-2xl border border-[#d6cce8] p-4 flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7c3aed] via-[#c026d3] to-amber-400 text-white flex items-center justify-center shrink-0">
           <span className="material-symbols-outlined text-[20px]">auto_awesome</span>
         </div>
@@ -59,7 +59,7 @@ export const UpdateNotifier: React.FC = () => {
           type="button"
           onClick={() => setDismissed(true)}
           aria-label="Fechar aviso de atualização"
-          className="text-[#7b7487] hover:text-[#191c1d] p-1 rounded-full hover:bg-[#f3f4f5] transition-colors cursor-pointer shrink-0"
+          className="text-[#7b7487] hover:text-[#191c1d] p-1 rounded-full hover:bg-[#f5f0ff] transition-colors cursor-pointer shrink-0"
         >
           <span className="material-symbols-outlined text-[18px]">close</span>
         </button>

@@ -364,7 +364,7 @@ export default function App() {
   };
 
   const spinner = (
-    <div className="min-h-screen bg-[#f9fafb]/70 flex items-center justify-center">
+    <div className="min-h-screen bg-[#e9e3f4]/70 flex items-center justify-center">
       <div className="w-8 h-8 border-[3px] border-[#ede0ff] border-t-[#7c3aed] rounded-full animate-spin" />
     </div>
   );
@@ -395,7 +395,7 @@ export default function App() {
   if (!dataReady) return spinner;
 
   return (
-    <div className="app-shell min-h-screen bg-[#f9fafb]/70 text-[#191c1d] flex flex-col font-sans selection:bg-[#eaddff] selection:text-[#630ed4]">
+    <div className="app-shell min-h-screen bg-[#e9e3f4]/70 text-[#191c1d] flex flex-col font-sans selection:bg-[#eaddff] selection:text-[#630ed4]">
       {/* Top Header Navigation */}
       {activeTab !== 'personalizar' && (
         <Header
@@ -449,7 +449,7 @@ export default function App() {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     simuladoMode === 'rapido'
                       ? 'bg-[#7c3aed] text-white shadow-xs'
-                      : 'bg-white border border-[#e1e3e4] text-[#4a4455] hover:border-[#7c3aed]'
+                      : 'bg-white border border-[#d6cce8] text-[#4a4455] hover:border-[#7c3aed]'
                   }`}
                 >
                   Treino Rápido
@@ -460,7 +460,7 @@ export default function App() {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     simuladoMode === 'completo'
                       ? 'bg-[#7c3aed] text-white shadow-xs'
-                      : 'bg-white border border-[#e1e3e4] text-[#4a4455] hover:border-[#7c3aed]'
+                      : 'bg-white border border-[#d6cce8] text-[#4a4455] hover:border-[#7c3aed]'
                   }`}
                 >
                   Simulado Completo
@@ -509,7 +509,7 @@ export default function App() {
         />
       )}
 
-      <footer className="border-t border-[#e1e3e4] py-4 px-4 mt-auto">
+      <footer className="border-t border-[#d6cce8] py-4 px-4 mt-auto">
         <div className="flex items-center justify-center gap-3 text-xs text-[#7b7487]">
           <button
             type="button"

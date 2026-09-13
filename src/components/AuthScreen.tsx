@@ -52,7 +52,7 @@ export const AuthScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f9fafb]/70 text-[#191c1d] flex flex-col items-center justify-center px-5 py-10">
+    <div className="min-h-screen bg-[#e9e3f4]/70 text-[#191c1d] flex flex-col items-center justify-center px-5 py-10">
       <motion.div
         key={mode}
         initial={{ opacity: 0, y: 8 }}
@@ -74,7 +74,7 @@ export const AuthScreen: React.FC = () => {
 
         {mode === 'forgot' ? (
           resetSent ? (
-            <div className="surface-lift bg-white rounded-2xl p-5 md:p-6 shadow-xs border border-[#e1e3e4] flex flex-col gap-3 text-center">
+            <div className="surface-lift bg-white rounded-2xl p-5 md:p-6 shadow-xs border border-[#d6cce8] flex flex-col gap-3 text-center">
               <p className="text-sm text-[#191c1d]">
                 Se houver uma conta com o e-mail <strong>{email}</strong>, enviamos um link para redefinir sua senha.
               </p>
@@ -89,7 +89,7 @@ export const AuthScreen: React.FC = () => {
           ) : (
             <form
               onSubmit={handleResetPassword}
-              className="surface-lift bg-white rounded-2xl p-5 md:p-6 shadow-xs border border-[#e1e3e4] flex flex-col gap-4"
+              className="surface-lift bg-white rounded-2xl p-5 md:p-6 shadow-xs border border-[#d6cce8] flex flex-col gap-4"
             >
               <div>
                 <label htmlFor="reset-email" className="block text-sm font-semibold text-[#191c1d] mb-1.5">
@@ -104,7 +104,7 @@ export const AuthScreen: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="voce@exemplo.com"
-                  className="w-full bg-[#f9fafb] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
+                  className="w-full bg-[#f5f0ff] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
                 />
               </div>
 
@@ -133,7 +133,7 @@ export const AuthScreen: React.FC = () => {
           <>
             <form
               onSubmit={handleSubmit}
-              className="surface-lift bg-white rounded-2xl p-5 md:p-6 shadow-xs border border-[#e1e3e4] flex flex-col gap-4"
+              className="surface-lift bg-white rounded-2xl p-5 md:p-6 shadow-xs border border-[#d6cce8] flex flex-col gap-4"
             >
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold text-[#191c1d] mb-1.5">
@@ -148,7 +148,7 @@ export const AuthScreen: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="voce@exemplo.com"
-                  className="w-full bg-[#f9fafb] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
+                  className="w-full bg-[#f5f0ff] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
                 />
               </div>
 
@@ -177,7 +177,7 @@ export const AuthScreen: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Mínimo de 6 caracteres"
-                  className="w-full bg-[#f9fafb] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
+                  className="w-full bg-[#f5f0ff] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
                 />
               </div>
 

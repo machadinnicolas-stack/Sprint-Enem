@@ -342,7 +342,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                   className={`min-w-[105px] md:min-w-[125px] p-3 rounded-2xl border text-left transition-all duration-200 cursor-pointer shrink-0 ${
                     isSelected
                       ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-md scale-[1.02]'
-                      : 'bg-white text-[#4a4455] border-[#e1e3e4] hover:border-[#7c3aed]'
+                      : 'bg-white text-[#4a4455] border-[#d6cce8] hover:border-[#7c3aed]'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
@@ -370,8 +370,8 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
         </div>
 
         {/* Selected Day Study Blocks */}
-        <div className="surface-lift bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-[#e1e3e4]">
+        <div className="surface-lift bg-white rounded-3xl p-5 md:p-6 border border-[#d6cce8] shadow-xs mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-[#d6cce8]">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed]">
                 {activeDay.dayName} • Foco do Dia
@@ -381,7 +381,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
               </h3>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold bg-[#f3f4f5] text-[#4a4455] px-3 py-1.5 rounded-full flex items-center gap-1">
+              <span className="text-xs font-semibold bg-[#f5f0ff] text-[#4a4455] px-3 py-1.5 rounded-full flex items-center gap-1">
                 <span className="material-symbols-outlined text-[14px]">schedule</span>
                 {activeDay.totalTimeMinutes} minutos programados
               </span>
@@ -398,8 +398,8 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                   key={block.id}
                   className={`p-4 md:p-5 rounded-2xl border transition-all ${
                     block.completed
-                      ? 'bg-[#f8f9fa] border-[#e1e3e4] opacity-75'
-                      : 'bg-white border-[#e1e3e4] shadow-xs hover:border-[#7c3aed]'
+                      ? 'bg-[#f5f0ff] border-[#d6cce8] opacity-75'
+                      : 'bg-white border-[#d6cce8] shadow-xs hover:border-[#7c3aed]'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -435,7 +435,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                             </span>
                           )}
 
-                          <span className="text-[11px] font-semibold text-[#7b7487] bg-[#f3f4f5] px-2 py-0.5 rounded-md">
+                          <span className="text-[11px] font-semibold text-[#7b7487] bg-[#f5f0ff] px-2 py-0.5 rounded-md">
                             {block.durationMinutes} min
                           </span>
 
@@ -458,7 +458,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                         </p>
 
                         {block.tip && (
-                          <div className="mt-2.5 p-2.5 bg-[#f9fafb] border border-[#e1e3e4] rounded-xl text-xs text-[#4a4455] flex items-start gap-1.5">
+                          <div className="mt-2.5 p-2.5 bg-[#f5f0ff] border border-[#d6cce8] rounded-xl text-xs text-[#4a4455] flex items-start gap-1.5">
                             <span className="material-symbols-outlined text-amber-500 text-[16px] shrink-0 mt-0.5">tips_and_updates</span>
                             <span>{block.tip}</span>
                           </div>
@@ -470,7 +470,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                     <button
                       type="button"
                       onClick={() => onOpenTimer(block)}
-                      className="p-2.5 rounded-xl border border-[#e1e3e4] hover:border-[#7c3aed] text-[#630ed4] hover:bg-[#ede0ff] transition-all cursor-pointer shrink-0 flex items-center gap-1 text-xs font-semibold"
+                      className="p-2.5 rounded-xl border border-[#d6cce8] hover:border-[#7c3aed] text-[#630ed4] hover:bg-[#ede0ff] transition-all cursor-pointer shrink-0 flex items-center gap-1 text-xs font-semibold"
                       title="Iniciar cronômetro de foco para este bloco"
                     >
                       <span className="material-symbols-outlined text-[18px]">timer</span>
@@ -484,7 +484,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
         </div>
 
         {/* Gamification & Level Progress Card */}
-        <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-6 relative overflow-hidden">
+        <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#d6cce8] shadow-xs mb-6 relative overflow-hidden">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
             {/* Level info & XP Bar */}
             <div className="flex items-start sm:items-center gap-4 flex-1">
@@ -522,7 +522,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
             </div>
 
             {/* Streak & Badges shelf trigger */}
-            <div className="flex flex-wrap items-center gap-3 pt-3 lg:pt-0 border-t lg:border-t-0 border-[#e1e3e4]">
+            <div className="flex flex-wrap items-center gap-3 pt-3 lg:pt-0 border-t lg:border-t-0 border-[#d6cce8]">
               {/* Streak info box */}
               <div className="flex items-center gap-2.5 bg-amber-50 border border-amber-200 px-3.5 py-2 rounded-2xl">
                 <span className="material-symbols-outlined text-amber-500 text-[24px] fill-1 animate-pulse">
@@ -554,8 +554,8 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
         </div>
 
         {/* Interactive Donut Chart & Weekly Metrics Dashboard Card */}
-        <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#e1e3e4] shadow-xs mb-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#e1e3e4]">
+        <div className="bg-white rounded-3xl p-5 md:p-6 border border-[#d6cce8] shadow-xs mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#d6cce8]">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-xl bg-[#ede0ff] text-[#630ed4] flex items-center justify-center">
                 <span className="material-symbols-outlined text-[20px]">donut_large</span>
@@ -571,7 +571,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
             </div>
 
             {/* Toggle Mode Buttons */}
-            <div className="flex items-center bg-[#f3f4f5] p-1 rounded-xl self-start sm:self-auto">
+            <div className="flex items-center bg-[#f5f0ff] p-1 rounded-xl self-start sm:self-auto">
               <button
                 type="button"
                 onClick={() => setChartMode('status')}
@@ -660,7 +660,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
             {/* Metrics and Legend breakdown */}
             <div className="md:col-span-7 space-y-3">
               <div className="grid grid-cols-2 gap-3">
-                <div className="bg-[#f9fafb] p-3.5 rounded-2xl border border-[#e1e3e4]">
+                <div className="bg-[#f5f0ff] p-3.5 rounded-2xl border border-[#d6cce8]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]"></span>
                     <span className="text-xs font-semibold text-[#7b7487]">Blocos Concluídos</span>
@@ -673,7 +673,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                   </div>
                 </div>
 
-                <div className="bg-[#f9fafb] p-3.5 rounded-2xl border border-[#e1e3e4]">
+                <div className="bg-[#f5f0ff] p-3.5 rounded-2xl border border-[#d6cce8]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="material-symbols-outlined text-[16px] text-[#630ed4]">timer</span>
                     <span className="text-xs font-semibold text-[#7b7487]">Tempo Estudado</span>
@@ -688,7 +688,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
               </div>
 
               {/* Dynamic Legend / Area Progress */}
-              <div className="bg-[#f8f9fa] p-3.5 rounded-2xl border border-[#e1e3e4]">
+              <div className="bg-[#f5f0ff] p-3.5 rounded-2xl border border-[#d6cce8]">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-[#7b7487] block mb-2">
                   {chartMode === 'status' ? 'Status Geral' : 'Distribuição por Área & Progresso:'}
                 </span>
@@ -714,7 +714,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     {areaChartData.map((area, idx) => (
-                      <div key={idx} className="flex items-center justify-between bg-white p-2 rounded-xl border border-[#e1e3e4]">
+                      <div key={idx} className="flex items-center justify-between bg-white p-2 rounded-xl border border-[#d6cce8]">
                         <div className="flex items-center gap-1.5 truncate mr-2">
                           <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: area.color }}></span>
                           <span className="font-semibold text-[#191c1d] truncate">{area.name}</span>
@@ -732,7 +732,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
         </div>
 
         {/* AI Strategy Insights Card */}
-        <div className="bg-white rounded-2xl p-5 border border-[#e1e3e4] shadow-xs mb-6">
+        <div className="bg-white rounded-2xl p-5 border border-[#d6cce8] shadow-xs mb-6">
           <div className="flex items-center justify-between gap-2 mb-3">
             <div className="flex items-center gap-2">
               <div className="w-7 h-7 rounded-lg bg-[#ede0ff] text-[#630ed4] flex items-center justify-center">
@@ -753,7 +753,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm text-[#4a4455]">
             {plan.aiRecommendations.map((rec, i) => (
-              <div key={i} className="flex items-start gap-2 bg-[#f9fafb] p-3 rounded-xl border border-[#e1e3e4]/70">
+              <div key={i} className="flex items-start gap-2 bg-[#f5f0ff] p-3 rounded-xl border border-[#d6cce8]/70">
                 <span className="material-symbols-outlined text-[#7c3aed] text-[18px] shrink-0 mt-0.5">check</span>
                 <span dangerouslySetInnerHTML={{ __html: renderRecommendationHtml(rec) }} />
               </div>
@@ -767,14 +767,14 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                className="mt-4 pt-4 border-t border-[#e1e3e4] overflow-hidden"
+                className="mt-4 pt-4 border-t border-[#d6cce8] overflow-hidden"
               >
                 <h4 className="text-xs font-bold uppercase tracking-wider text-[#7b7487] mb-2">
                   Diretrizes por Área de Conhecimento
                 </h4>
                 <div className="space-y-3">
                   {plan.triStrategy.map((strat, idx) => (
-                    <div key={idx} className="bg-[#f9fafb] p-3.5 rounded-xl border border-[#e1e3e4]">
+                    <div key={idx} className="bg-[#f5f0ff] p-3.5 rounded-xl border border-[#d6cce8]">
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-bold text-sm text-[#191c1d]">{strat.subject}</span>
                         <span className="text-[11px] font-semibold text-[#630ed4] bg-[#ede0ff] px-2 py-0.5 rounded-full">
@@ -798,7 +798,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
         </div>
 
         {/* Action Footer */}
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-[#e1e3e4]">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-[#d6cce8]">
           <button
             onClick={onEditPreferences}
             className="px-4 py-2.5 rounded-xl border border-[#ccc3d8] text-[#4a4455] text-xs md:text-sm font-semibold hover:border-[#7c3aed] transition-all flex items-center gap-1.5 cursor-pointer"
@@ -831,8 +831,8 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
       {/* Print Preview Modal */}
       {showPrintModal && (
         <div className="no-print fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#e1e3e4]">
+          <div className="bg-white rounded-3xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#d6cce8] relative animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#d6cce8]">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-[#ede0ff] text-[#630ed4] flex items-center justify-center">
                   <span className="material-symbols-outlined text-[20px]">picture_as_pdf</span>
@@ -845,15 +845,15 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
 
               <button
                 onClick={() => setShowPrintModal(false)}
-                className="text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f3f4f5] transition-colors cursor-pointer"
+                className="text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f5f0ff] transition-colors cursor-pointer"
               >
                 <span className="material-symbols-outlined text-2xl">close</span>
               </button>
             </div>
 
             {/* Preview Sheet Card */}
-            <div className="bg-[#f9fafb] p-4 rounded-2xl border border-[#e1e3e4] text-xs text-[#191c1d] mb-6 space-y-3">
-              <div className="flex justify-between items-center border-b border-[#e1e3e4] pb-2">
+            <div className="bg-[#f5f0ff] p-4 rounded-2xl border border-[#d6cce8] text-xs text-[#191c1d] mb-6 space-y-3">
+              <div className="flex justify-between items-center border-b border-[#d6cce8] pb-2">
                 <div>
                   <span className="font-extrabold text-sm text-[#7c3aed]">SPRINT ENEM</span>
                   <p className="text-xs font-semibold">Plano: {plan.preferences.curso} ({plan.preferences.diasSemana} dias • {plan.preferences.tempoDia}/dia)</p>
@@ -865,7 +865,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                 <p className="font-bold text-[#4a4455] mb-1">Visão Geral dos Dias Programados:</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {plan.weeklySchedule.map((d) => (
-                    <div key={d.dayNumber} className="bg-white p-2 rounded-xl border border-[#e1e3e4]">
+                    <div key={d.dayNumber} className="bg-white p-2 rounded-xl border border-[#d6cce8]">
                       <span className="font-bold text-[#7c3aed] block">{d.dayName}</span>
                       <span className="text-[11px] text-[#4a4455] line-clamp-1">{d.focusArea}</span>
                       <span className="text-[10px] text-[#7b7487]">{d.blocks.length} blocos • {d.totalTimeMinutes} min</span>
@@ -885,7 +885,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
             <div className="flex items-center justify-end gap-3">
               <button
                 onClick={() => setShowPrintModal(false)}
-                className="px-4 py-2.5 rounded-xl border border-[#ccc3d8] text-[#4a4455] text-xs md:text-sm font-semibold hover:bg-[#f3f4f5] transition-all cursor-pointer"
+                className="px-4 py-2.5 rounded-xl border border-[#ccc3d8] text-[#4a4455] text-xs md:text-sm font-semibold hover:bg-[#f5f0ff] transition-all cursor-pointer"
               >
                 Fechar
               </button>
@@ -912,9 +912,9 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
             role="dialog"
             aria-modal="true"
             aria-labelledby="edit-days-modal-title"
-            className="bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200"
+            className="bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-[#d6cce8] relative animate-in fade-in zoom-in-95 duration-200"
           >
-            <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#e1e3e4]">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#d6cce8]">
               <div>
                 <h3 id="edit-days-modal-title" className="text-lg font-bold text-[#191c1d]">
                   Editar dias e matérias
@@ -927,7 +927,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                 type="button"
                 onClick={() => setShowEditDaysModal(false)}
                 aria-label="Fechar"
-                className="text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f3f4f5] transition-colors cursor-pointer shrink-0"
+                className="text-[#7b7487] hover:text-[#191c1d] p-1.5 rounded-full hover:bg-[#f5f0ff] transition-colors cursor-pointer shrink-0"
               >
                 <span className="material-symbols-outlined text-2xl">close</span>
               </button>
@@ -939,7 +939,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
                 return (
                   <div
                     key={day.dayNumber}
-                    className="flex items-center gap-2.5 bg-[#f9fafb] border border-[#e1e3e4] rounded-xl px-3.5 py-2.5"
+                    className="flex items-center gap-2.5 bg-[#f5f0ff] border border-[#d6cce8] rounded-xl px-3.5 py-2.5"
                   >
                     <span className="text-xs font-bold text-[#191c1d] w-16 shrink-0">{day.dayName}</span>
                     <select
@@ -971,7 +971,7 @@ export const CronogramaView: React.FC<CronogramaViewProps> = ({
               type="button"
               onClick={onAddDay}
               disabled={plan.weeklySchedule.length >= 7}
-              className="w-full py-2.5 rounded-xl border border-dashed border-[#ccc3d8] text-[#7c3aed] hover:bg-[#f9fafb] font-semibold text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed mb-5"
+              className="w-full py-2.5 rounded-xl border border-dashed border-[#ccc3d8] text-[#7c3aed] hover:bg-[#f5f0ff] font-semibold text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed mb-5"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>
               <span>Adicionar dia de estudo</span>

@@ -43,7 +43,7 @@ export const BadgeUnlockCelebration: React.FC<BadgeUnlockCelebrationProps> = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="celebration-modal-title"
-        className="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full text-center shadow-2xl border border-[#e1e3e4] relative animate-in zoom-in-95 duration-300"
+        className="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full text-center shadow-2xl border border-[#d6cce8] relative animate-in zoom-in-95 duration-300"
       >
         {/* Glow backdrop */}
         <div className="w-24 h-24 mx-auto mb-4 relative flex items-center justify-center">

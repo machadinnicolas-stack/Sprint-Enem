@@ -85,14 +85,14 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
   };
 
   return (
-    <div id="onboarding-container" className="onboarding-shell min-h-screen bg-[#f9fafb]/70 text-[#191c1d] pb-[130px]">
+    <div id="onboarding-container" className="onboarding-shell min-h-screen bg-[#e9e3f4]/70 text-[#191c1d] pb-[130px]">
       {/* Header Context */}
       <header className="flex items-center justify-between gap-2 px-5 py-4 max-w-2xl mx-auto mt-2">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-[#7c3aed] text-2xl fill-1">bolt</span>
           <span className="font-bold text-xs tracking-wider text-[#7c3aed] uppercase">Sprint ENEM</span>
         </div>
-        <span className="text-xs font-semibold text-[#7b7487] bg-white border border-[#e1e3e4] px-2.5 py-1 rounded-full shadow-xs">
+        <span className="text-xs font-semibold text-[#7b7487] bg-white border border-[#d6cce8] px-2.5 py-1 rounded-full shadow-xs">
           Passo 1 de 2 • Personalização
         </span>
       </header>
@@ -112,7 +112,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
           {/* Question 1: Course */}
           <div
             id="card-curso"
-            className="surface-lift bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#e1e3e4] transition-all hover:border-[#ccc3d8]"
+            className="surface-lift bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#d6cce8] transition-all hover:border-[#ccc3d8]"
           >
             <label htmlFor="curso" className="block text-base md:text-lg font-semibold text-[#191c1d] mb-3 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#7b7487]">school</span>
@@ -125,7 +125,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
               value={curso}
               onChange={(e) => setCurso(e.target.value)}
               placeholder="Ex: Medicina, Direito, Engenharia..."
-              className="w-full bg-[#f9fafb] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
+              className="w-full bg-[#f5f0ff] border border-[#ccc3d8] rounded-xl px-4 py-3 text-base text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/20 outline-none transition-all"
             />
             {/* Quick suggestions / smart search results */}
             {courseSuggestions.length > 0 ? (
@@ -141,7 +141,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                     className={`text-xs px-2.5 py-1 rounded-full border transition-all cursor-pointer ${
                       curso.toLowerCase() === pop.toLowerCase()
                         ? 'bg-[#ede0ff] text-[#630ed4] border-[#7c3aed] font-medium'
-                        : 'bg-white text-[#4a4455] border-[#e1e3e4] hover:border-[#7c3aed]'
+                        : 'bg-white text-[#4a4455] border-[#d6cce8] hover:border-[#7c3aed]'
                     }`}
                   >
                     {pop}
@@ -158,7 +158,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
           {/* Question 2: Time Available per day */}
           <div
             id="card-tempo"
-            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#e1e3e4] transition-all hover:border-[#ccc3d8]"
+            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#d6cce8] transition-all hover:border-[#ccc3d8]"
           >
             <p className="text-base md:text-lg font-semibold text-[#191c1d] mb-3 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#7b7487]">schedule</span>
@@ -181,7 +181,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                       className={`px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-[#7c3aed] peer-focus-visible:ring-offset-2 ${
                         isSelected
                           ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-xs'
-                          : 'bg-[#f9fafb] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
+                          : 'bg-[#f5f0ff] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
                       }`}
                     >
                       {time}
@@ -195,7 +195,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
           {/* Question 3: Days per week */}
           <div
             id="card-dias"
-            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#e1e3e4] transition-all hover:border-[#ccc3d8]"
+            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#d6cce8] transition-all hover:border-[#ccc3d8]"
           >
             <p className="text-base md:text-lg font-semibold text-[#191c1d] mb-3 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#7b7487]">calendar_month</span>
@@ -218,7 +218,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                       className={`w-12 h-12 flex items-center justify-center rounded-xl border text-base font-semibold transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-[#7c3aed] peer-focus-visible:ring-offset-2 ${
                         isSelected
                           ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-xs scale-105'
-                          : 'bg-[#f9fafb] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
+                          : 'bg-[#f5f0ff] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
                       }`}
                     >
                       {num}
@@ -232,7 +232,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
           {/* Question 4: Current Level */}
           <div
             id="card-nivel"
-            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#e1e3e4] transition-all hover:border-[#ccc3d8]"
+            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#d6cce8] transition-all hover:border-[#ccc3d8]"
           >
             <p className="text-base md:text-lg font-semibold text-[#191c1d] mb-3 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#7b7487]">trending_up</span>
@@ -274,7 +274,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                       className={`flex items-center justify-between p-3.5 rounded-xl border transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-[#7c3aed] peer-focus-visible:ring-offset-2 ${
                         isSelected
                           ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-xs'
-                          : 'bg-[#f9fafb] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
+                          : 'bg-[#f5f0ff] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
                       }`}
                     >
                       <div className="flex flex-col">
@@ -304,7 +304,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
           {/* Question 5: Difficulties (Multi-select) */}
           <div
             id="card-dificuldades"
-            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#e1e3e4] transition-all hover:border-[#ccc3d8]"
+            className="bg-white rounded-2xl p-4 md:p-6 shadow-xs border border-[#d6cce8] transition-all hover:border-[#ccc3d8]"
           >
             <p className="text-base md:text-lg font-semibold text-[#191c1d] mb-1 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#7b7487]">psychology_alt</span>
@@ -336,7 +336,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                       className={`px-4 py-2.5 rounded-xl border text-sm font-medium transition-all duration-200 flex items-center gap-1.5 peer-focus-visible:ring-2 peer-focus-visible:ring-[#7c3aed] peer-focus-visible:ring-offset-2 ${
                         isSelected
                           ? 'bg-[#eaddff] text-[#630ed4] border-[#7c3aed] font-semibold shadow-xs'
-                          : 'bg-[#f9fafb] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
+                          : 'bg-[#f5f0ff] text-[#4a4455] border-[#ccc3d8] hover:border-[#7c3aed]'
                       }`}
                     >
                       <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
@@ -351,7 +351,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
       </main>
 
       {/* Sticky Bottom Action Bar */}
-      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-[#e1e3e4] p-4 z-40 shadow-lg">
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-[#d6cce8] p-4 z-40 shadow-lg">
         <div className="max-w-2xl mx-auto">
           <button
             id="btn-gerar-plano"
@@ -382,7 +382,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
             role="dialog"
             aria-modal="true"
             aria-labelledby="confirm-modal-title"
-            className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-[#e1e3e4] relative animate-in fade-in zoom-in-95 duration-200"
+            className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-[#d6cce8] relative animate-in fade-in zoom-in-95 duration-200"
           >
             <div className="text-center mb-5">
               <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#630ed4] bg-[#ede0ff] px-3 py-1 rounded-full mb-3">
@@ -395,23 +395,23 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
             </div>
 
             <div className="space-y-2.5 mb-6 text-sm">
-              <div className="flex justify-between items-center bg-[#f9fafb] border border-[#e1e3e4] rounded-xl px-4 py-2.5">
+              <div className="flex justify-between items-center bg-[#f5f0ff] border border-[#d6cce8] rounded-xl px-4 py-2.5">
                 <span className="text-[#7b7487] font-medium">Curso</span>
                 <span className="font-bold text-[#191c1d]">{curso.trim() || 'Geral ENEM'}</span>
               </div>
-              <div className="flex justify-between items-center bg-[#f9fafb] border border-[#e1e3e4] rounded-xl px-4 py-2.5">
+              <div className="flex justify-between items-center bg-[#f5f0ff] border border-[#d6cce8] rounded-xl px-4 py-2.5">
                 <span className="text-[#7b7487] font-medium">Tempo por dia</span>
                 <span className="font-bold text-[#191c1d]">{tempoDia}</span>
               </div>
-              <div className="flex justify-between items-center bg-[#f9fafb] border border-[#e1e3e4] rounded-xl px-4 py-2.5">
+              <div className="flex justify-between items-center bg-[#f5f0ff] border border-[#d6cce8] rounded-xl px-4 py-2.5">
                 <span className="text-[#7b7487] font-medium">Dias por semana</span>
                 <span className="font-bold text-[#191c1d]">{diasSemana}</span>
               </div>
-              <div className="flex justify-between items-center bg-[#f9fafb] border border-[#e1e3e4] rounded-xl px-4 py-2.5">
+              <div className="flex justify-between items-center bg-[#f5f0ff] border border-[#d6cce8] rounded-xl px-4 py-2.5">
                 <span className="text-[#7b7487] font-medium">Nível</span>
                 <span className="font-bold text-[#191c1d] capitalize">{nivel}</span>
               </div>
-              <div className="flex justify-between items-center bg-[#f9fafb] border border-[#e1e3e4] rounded-xl px-4 py-2.5 gap-3">
+              <div className="flex justify-between items-center bg-[#f5f0ff] border border-[#d6cce8] rounded-xl px-4 py-2.5 gap-3">
                 <span className="text-[#7b7487] font-medium shrink-0">Dificuldades</span>
                 <span className="font-bold text-[#191c1d] text-right">
                   {dificuldades.length > 0
@@ -430,7 +430,7 @@ export const OnboardingForm: React.FC<OnboardingFormProps> = ({ initialValues, o
                 type="button"
                 onClick={() => setShowConfirm(false)}
                 disabled={isGenerating}
-                className="flex-1 py-3 px-4 rounded-xl font-semibold text-sm border border-[#ccc3d8] text-[#4a4455] hover:bg-[#f3f4f5] transition-all cursor-pointer disabled:opacity-60"
+                className="flex-1 py-3 px-4 rounded-xl font-semibold text-sm border border-[#ccc3d8] text-[#4a4455] hover:bg-[#f5f0ff] transition-all cursor-pointer disabled:opacity-60"
               >
                 Voltar e editar
               </button>

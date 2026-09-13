@@ -25,9 +25,9 @@ export const LegalModal: React.FC<LegalModalProps> = ({ document: doc, onClose }
         aria-modal="true"
         aria-label={doc.title}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white w-full sm:max-w-2xl max-h-[88vh] rounded-t-3xl sm:rounded-3xl border border-[#e1e3e4] shadow-lg flex flex-col"
+        className="bg-white w-full sm:max-w-2xl max-h-[88vh] rounded-t-3xl sm:rounded-3xl border border-[#d6cce8] shadow-lg flex flex-col"
       >
-        <div className="flex items-start justify-between gap-3 p-5 border-b border-[#e1e3e4] shrink-0">
+        <div className="flex items-start justify-between gap-3 p-5 border-b border-[#d6cce8] shrink-0">
           <div>
             <h2 className="text-lg font-extrabold text-[#191c1d]">{doc.title}</h2>
             <p className="text-xs text-[#7b7487] mt-0.5">Última atualização: {doc.updatedAt}</p>
@@ -36,7 +36,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ document: doc, onClose }
             type="button"
             onClick={onClose}
             aria-label="Fechar"
-            className="w-9 h-9 rounded-xl border border-[#e1e3e4] text-[#4a4455] hover:border-[#7c3aed] hover:text-[#630ed4] transition-all flex items-center justify-center cursor-pointer shrink-0"
+            className="w-9 h-9 rounded-xl border border-[#d6cce8] text-[#4a4455] hover:border-[#7c3aed] hover:text-[#630ed4] transition-all flex items-center justify-center cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>

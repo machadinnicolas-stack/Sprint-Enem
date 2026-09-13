@@ -120,7 +120,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
           </p>
         </div>
 
-        <div className="bg-white px-4 py-2 rounded-2xl border border-[#e1e3e4] text-xs font-bold text-[#4a4455] shadow-xs flex items-center gap-2 self-start sm:self-auto">
+        <div className="bg-white px-4 py-2 rounded-2xl border border-[#d6cce8] text-xs font-bold text-[#4a4455] shadow-xs flex items-center gap-2 self-start sm:self-auto">
           <span>Acertos:</span>
           <span className="text-[#630ed4] text-sm font-black">{correctCount}</span>
           <span className="text-[#7b7487]">/ {answeredCount}</span>
@@ -137,7 +137,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 ${
               areaFilter === area.id
                 ? 'bg-[#7c3aed] text-white shadow-xs'
-                : 'bg-white border border-[#e1e3e4] text-[#4a4455] hover:border-[#7c3aed]'
+                : 'bg-white border border-[#d6cce8] text-[#4a4455] hover:border-[#7c3aed]'
             }`}
           >
             {area.label}
@@ -153,7 +153,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.25 }}
-            className="bg-white rounded-3xl p-6 md:p-10 border border-[#e1e3e4] shadow-sm text-center"
+            className="bg-white rounded-3xl p-6 md:p-10 border border-[#d6cce8] shadow-sm text-center"
           >
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7c3aed] via-[#c026d3] to-amber-400 text-white flex items-center justify-center mx-auto mb-4 shadow-md shadow-[#c026d3]/30">
               <span className="material-symbols-outlined text-[32px]">emoji_events</span>
@@ -166,12 +166,12 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
                 <p className="text-sm text-[#4a4455] mb-6">
                   Você acertou {correctCount} de {answeredCount} questões respondidas nesta rodada.
                 </p>
-                <div className="inline-flex items-center gap-6 bg-[#f9fafb] border border-[#e1e3e4] rounded-2xl px-6 py-4 mb-6">
+                <div className="inline-flex items-center gap-6 bg-[#f5f0ff] border border-[#d6cce8] rounded-2xl px-6 py-4 mb-6">
                   <div>
                     <span className="block text-3xl font-black text-[#630ed4]">{scorePercent}%</span>
                     <span className="text-[10px] font-bold text-[#7b7487] uppercase tracking-wider">Aproveitamento</span>
                   </div>
-                  <div className="w-px h-10 bg-[#e1e3e4]" />
+                  <div className="w-px h-10 bg-[#d6cce8]" />
                   <div>
                     <span className="block text-3xl font-black text-[#191c1d]">{questions.length}</span>
                     <span className="text-[10px] font-bold text-[#7b7487] uppercase tracking-wider">Questões na área</span>
@@ -204,10 +204,10 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -12 }}
             transition={{ duration: 0.2 }}
-            className="bg-white rounded-3xl p-5 md:p-7 border border-[#e1e3e4] shadow-sm mb-6"
+            className="bg-white rounded-3xl p-5 md:p-7 border border-[#d6cce8] shadow-sm mb-6"
           >
             {/* Question metadata */}
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-4 border-b border-[#e1e3e4]">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-4 border-b border-[#d6cce8]">
               <div className="flex items-center gap-2">
                 <span
                   className="text-xs font-bold px-2.5 py-1 rounded-md"
@@ -215,7 +215,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
                 >
                   {currentQ.areaName}
                 </span>
-                <span className="text-xs font-semibold text-[#7b7487] bg-[#f3f4f5] px-2.5 py-1 rounded-md">
+                <span className="text-xs font-semibold text-[#7b7487] bg-[#f5f0ff] px-2.5 py-1 rounded-md">
                   {currentQ.origin}
                 </span>
               </div>
@@ -238,7 +238,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
             <div className="space-y-3 mb-6">
               {currentQ.options.map((opt) => {
                 const isSelected = selectedOption === opt.letter;
-                let optionStyle = 'bg-[#f9fafb] border-[#e1e3e4] text-[#191c1d] hover:border-[#7c3aed]';
+                let optionStyle = 'bg-[#f5f0ff] border-[#d6cce8] text-[#191c1d] hover:border-[#7c3aed]';
 
                 if (isAnswered) {
                   if (opt.letter === currentQ.correctLetter) {
@@ -246,7 +246,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
                   } else if (isSelected && opt.letter !== currentQ.correctLetter) {
                     optionStyle = 'bg-[#fee2e2] border-[#ef4444] text-[#b91c1c]';
                   } else {
-                    optionStyle = 'bg-[#f9fafb] border-[#e1e3e4] text-[#7b7487] opacity-60';
+                    optionStyle = 'bg-[#f5f0ff] border-[#d6cce8] text-[#7b7487] opacity-60';
                   }
                 } else if (isSelected) {
                   optionStyle = 'bg-[#ede0ff] border-[#7c3aed] text-[#630ed4] font-semibold shadow-xs';
@@ -279,7 +279,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
 
             {/* Answer explanation card */}
             {isAnswered && (
-              <div className="p-4 md:p-5 rounded-2xl bg-[#f8f9fa] border border-[#e1e3e4] space-y-3 animate-in fade-in duration-300">
+              <div className="p-4 md:p-5 rounded-2xl bg-[#f5f0ff] border border-[#d6cce8] space-y-3 animate-in fade-in duration-300">
                 <div className="flex items-center gap-2">
                   <span
                     className={`material-symbols-outlined text-xl ${

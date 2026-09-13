@@ -25,24 +25,24 @@ export const Header: React.FC<HeaderProps> = ({
   const unlockedBadgesCount = gamification.badges.filter((b) => b.unlocked).length;
 
   return (
-    <header className="app-header sticky top-0 z-30 bg-white/88 backdrop-blur-xl border-b border-[#e1e3e4]/80 px-3 sm:px-4 pt-[max(0.625rem,env(safe-area-inset-top))] pb-2.5 transition-all overflow-hidden">
+    <header className="app-header sticky top-0 z-30 bg-gradient-to-r from-[#630ed4] to-[#7c3aed] px-3 sm:px-4 pt-[max(0.625rem,env(safe-area-inset-top))] pb-2.5 transition-all overflow-hidden">
       <div className="max-w-4xl mx-auto w-full min-w-0 flex items-center justify-between gap-2 md:gap-3">
         {/* Brand */}
         <button
           onClick={() => setActiveTab('cronograma')}
           className="flex items-center gap-2 text-left cursor-pointer group min-w-0 shrink"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#ede0ff] text-[#630ed4] flex items-center justify-center transition-transform group-hover:scale-105">
+          <div className="w-8 h-8 rounded-lg bg-white/20 text-white flex items-center justify-center transition-transform group-hover:scale-105">
             <span className="material-symbols-outlined text-[20px] fill-1">bolt</span>
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="font-bold text-sm tracking-tight text-[#191c1d] truncate max-[380px]:hidden">Sprint ENEM</span>
+              <span className="font-bold text-sm tracking-tight text-white truncate max-[380px]:hidden">Sprint ENEM</span>
               <span className="bg-[#eaddff] text-[#630ed4] text-[10px] font-bold px-1.5 py-0.2 rounded-sm uppercase max-[380px]:hidden">
                 TRI Pro
               </span>
             </div>
-            <p className="text-[11px] text-[#7b7487] font-medium hidden sm:block truncate">
+            <p className="text-[11px] text-[#e3d7fa] font-medium hidden sm:block truncate">
               {preferences.curso || 'Plano de Estudos'} • {preferences.tempoDia}/dia
             </p>
           </div>
@@ -54,8 +54,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => setActiveTab('cronograma')}
             className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
               activeTab === 'cronograma'
-                ? 'bg-[#7c3aed] text-white shadow-xs'
-                : 'text-[#4a4455] hover:bg-[#f3f4f5]'
+                ? 'bg-white/20 text-white'
+                : 'text-[#e3d7fa] hover:bg-white/10'
             }`}
           >
             <span className="material-symbols-outlined text-[18px]">calendar_today</span>
@@ -66,8 +66,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => setActiveTab('incidencia')}
             className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
               activeTab === 'incidencia'
-                ? 'bg-[#7c3aed] text-white shadow-xs'
-                : 'text-[#4a4455] hover:bg-[#f3f4f5]'
+                ? 'bg-white/20 text-white'
+                : 'text-[#e3d7fa] hover:bg-white/10'
             }`}
           >
             <span className="material-symbols-outlined text-[18px]">fact_check</span>
@@ -78,8 +78,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => setActiveTab('simulado')}
             className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
               activeTab === 'simulado'
-                ? 'bg-[#7c3aed] text-white shadow-xs'
-                : 'text-[#4a4455] hover:bg-[#f3f4f5]'
+                ? 'bg-white/20 text-white'
+                : 'text-[#e3d7fa] hover:bg-white/10'
             }`}
           >
             <span className="material-symbols-outlined text-[18px]">quiz</span>
@@ -90,8 +90,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => setActiveTab('redacao')}
             className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
               activeTab === 'redacao'
-                ? 'bg-[#7c3aed] text-white shadow-xs'
-                : 'text-[#4a4455] hover:bg-[#f3f4f5]'
+                ? 'bg-white/20 text-white'
+                : 'text-[#e3d7fa] hover:bg-white/10'
             }`}
           >
             <span className="material-symbols-outlined text-[18px]">edit_note</span>
@@ -102,8 +102,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => setActiveTab('personalizar')}
             className={`px-2 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 cursor-pointer shrink-0 ${
               activeTab === 'personalizar'
-                ? 'bg-[#ede0ff] text-[#630ed4] font-bold border border-[#7c3aed]'
-                : 'text-[#7b7487] hover:bg-[#f3f4f5]'
+                ? 'bg-[#ede0ff] text-[#630ed4] font-bold border border-white/50'
+                : 'text-[#e3d7fa] hover:bg-white/10'
             }`}
             title="Ajustar preferências de estudo"
           >
@@ -149,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               onClick={onLogout}
               title={userEmail ? `Sair (${userEmail})` : 'Sair'}
-              className="w-8 h-8 flex items-center justify-center rounded-full text-[#7b7487] hover:bg-[#f3f4f5] hover:text-[#191c1d] transition-all cursor-pointer shrink-0"
+              className="w-8 h-8 flex items-center justify-center rounded-full text-[#e3d7fa] hover:bg-white/15 hover:text-white transition-all cursor-pointer shrink-0"
             >
               <span className="material-symbols-outlined text-[19px]">logout</span>
             </button>
@@ -157,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      <nav className="mobile-bottom-nav md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[#e1e3e4]/90 bg-white/95 px-1.5 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(71,42,112,0.1)] backdrop-blur-xl">
+      <nav className="mobile-bottom-nav md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[#4c0b9f] bg-gradient-to-r from-[#630ed4] to-[#7c3aed] px-1.5 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(71,42,112,0.28)]">
         <div className="grid grid-cols-5 gap-1 max-w-lg mx-auto">
           {[
             { id: 'cronograma' as const, label: 'Plano', icon: 'calendar_today' },
@@ -175,8 +175,8 @@ export const Header: React.FC<HeaderProps> = ({
                 aria-current={isActive ? 'page' : undefined}
                 className={`min-w-0 min-h-14 rounded-xl flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold transition-colors cursor-pointer ${
                   isActive
-                    ? 'bg-[#ede0ff] text-[#630ed4]'
-                    : 'text-[#7b7487] active:bg-[#f3f4f5]'
+                    ? 'bg-white/20 text-white'
+                    : 'text-[#e3d7fa] active:bg-white/10'
                 }`}
               >
                 <span className="material-symbols-outlined text-[21px]">{item.icon}</span>

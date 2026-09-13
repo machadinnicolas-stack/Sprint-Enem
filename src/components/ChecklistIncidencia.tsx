@@ -61,12 +61,12 @@ export const ChecklistIncidencia: React.FC = () => {
           </div>
 
           {/* Progress metric */}
-          <div className="bg-white p-4 rounded-2xl border border-[#e1e3e4] shadow-xs min-w-[200px]">
+          <div className="bg-white p-4 rounded-2xl border border-[#d6cce8] shadow-xs min-w-[200px]">
             <div className="flex justify-between items-baseline mb-1.5">
               <span className="text-xs font-bold text-[#7b7487]">Domínio dos Tópicos</span>
               <span className="text-base font-black text-[#630ed4]">{progressPercent}%</span>
             </div>
-            <div className="w-full bg-[#f3f4f5] rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-[#f5f0ff] rounded-full h-2 overflow-hidden">
               <div
                 className="bg-[#7c3aed] h-full rounded-full transition-all duration-300"
                 style={{ width: `${progressPercent}%` }}
@@ -80,7 +80,7 @@ export const ChecklistIncidencia: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-[#e1e3e4] shadow-xs mb-6 space-y-3">
+      <div className="bg-white p-4 rounded-2xl border border-[#d6cce8] shadow-xs mb-6 space-y-3">
         {/* Search */}
         <div className="relative">
           <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7b7487]">
@@ -91,7 +91,7 @@ export const ChecklistIncidencia: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar por tópico (ex: Geometria, Ecologia, Vargas...)"
-            className="w-full pl-10 pr-4 py-2.5 bg-[#f9fafb] border border-[#ccc3d8] rounded-xl text-sm text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed] outline-none"
+            className="w-full pl-10 pr-4 py-2.5 bg-[#f5f0ff] border border-[#ccc3d8] rounded-xl text-sm text-[#191c1d] placeholder:text-[#7b7487] focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed] outline-none"
           />
         </div>
 
@@ -102,7 +102,7 @@ export const ChecklistIncidencia: React.FC = () => {
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 ${
               selectedSubject === 'todos'
                 ? 'bg-[#7c3aed] text-white shadow-xs'
-                : 'bg-[#f3f4f5] text-[#4a4455] hover:bg-[#e1e3e4]'
+                : 'bg-[#f5f0ff] text-[#4a4455] hover:bg-[#d6cce8]'
             }`}
           >
             Todas as Áreas
@@ -119,7 +119,7 @@ export const ChecklistIncidencia: React.FC = () => {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
                     isSelected
                       ? 'bg-[#7c3aed] text-white shadow-xs'
-                      : 'bg-[#f3f4f5] text-[#4a4455] hover:bg-[#e1e3e4]'
+                      : 'bg-[#f5f0ff] text-[#4a4455] hover:bg-[#d6cce8]'
                   }`}
                 >
                   <span className="material-symbols-outlined text-[16px]">{info.icon}</span>
@@ -144,8 +144,8 @@ export const ChecklistIncidencia: React.FC = () => {
               aria-label={`${item.title} — ${item.completed ? 'concluído, clique para desmarcar' : 'não concluído, clique para marcar como concluído'}`}
               className={`w-full text-left p-4 rounded-2xl border transition-all cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7c3aed] focus-visible:ring-offset-2 ${
                 item.completed
-                  ? 'bg-[#f8f9fa] border-[#e1e3e4] opacity-80'
-                  : 'bg-white border-[#e1e3e4] hover:border-[#7c3aed] shadow-xs'
+                  ? 'bg-[#f5f0ff] border-[#d6cce8] opacity-80'
+                  : 'bg-white border-[#d6cce8] hover:border-[#7c3aed] shadow-xs'
               }`}
             >
               <div className="flex items-start gap-3">

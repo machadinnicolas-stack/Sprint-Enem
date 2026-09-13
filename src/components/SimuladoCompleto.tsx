@@ -197,7 +197,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
             const resultado = completedDias[dia.id];
             const totalQuestions = dia.questionIds.length;
             return (
-              <div key={dia.id} className="bg-white rounded-3xl p-5 border border-[#e1e3e4] shadow-sm flex flex-col">
+              <div key={dia.id} className="bg-white rounded-3xl p-5 border border-[#d6cce8] shadow-sm flex flex-col">
                 <div className="flex items-center gap-2 mb-2">
                   {dia.subjects.map((s) => (
                     <span
@@ -216,7 +216,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
 
                 {resultado ? (
                   <div className="mt-auto">
-                    <div className="bg-[#f9fafb] border border-[#e1e3e4] rounded-2xl px-4 py-3 mb-3">
+                    <div className="bg-[#f5f0ff] border border-[#d6cce8] rounded-2xl px-4 py-3 mb-3">
                       <p className="text-xs text-[#7b7487] font-semibold uppercase tracking-wider mb-1">Concluído</p>
                       <p className="text-sm text-[#191c1d]">
                         <span className="font-black text-[#630ed4]">{resultado.acertos}</span> de {resultado.total} acertos
@@ -289,7 +289,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
     return (
       <div className="max-w-3xl mx-auto px-4 py-6 pb-24">
         {/* Timer + progress */}
-        <div className="sticky top-0 z-10 bg-[#f9fafb]/95 backdrop-blur-sm pt-2 pb-3 mb-4">
+        <div className="sticky top-0 z-10 bg-[#e9e3f4]/95 backdrop-blur-sm pt-2 pb-3 mb-4">
           <div className="flex items-center justify-between gap-3 mb-3">
             <span className="text-sm font-bold text-[#191c1d]">{activeDia.label}</span>
             <span
@@ -317,7 +317,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
                       ? 'bg-[#7c3aed] text-white shadow-xs ring-2 ring-[#7c3aed] ring-offset-2'
                       : isAnswered
                       ? 'bg-[#ede0ff] text-[#630ed4]'
-                      : 'bg-white border border-[#e1e3e4] text-[#7b7487]'
+                      : 'bg-white border border-[#d6cce8] text-[#7b7487]'
                   }`}
                 >
                   {idx + 1}
@@ -327,8 +327,8 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl p-5 md:p-7 border border-[#e1e3e4] shadow-sm mb-6">
-          <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-4 border-b border-[#e1e3e4]">
+        <div className="bg-white rounded-3xl p-5 md:p-7 border border-[#d6cce8] shadow-sm mb-6">
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-4 border-b border-[#d6cce8]">
             <span
               className="text-xs font-bold px-2.5 py-1 rounded-md"
               style={{ backgroundColor: subj.bgColor, color: subj.textColor }}
@@ -355,7 +355,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
                   className={`w-full p-3.5 rounded-2xl border text-left text-xs md:text-sm flex items-start gap-3 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7c3aed] focus-visible:ring-offset-2 ${
                     isSelected
                       ? 'bg-[#ede0ff] border-[#7c3aed] text-[#630ed4] font-semibold shadow-xs'
-                      : 'bg-[#f9fafb] border-[#e1e3e4] text-[#191c1d] hover:border-[#7c3aed]'
+                      : 'bg-[#f5f0ff] border-[#d6cce8] text-[#191c1d] hover:border-[#7c3aed]'
                   }`}
                 >
                   <span
@@ -419,7 +419,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
           initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.25 }}
-          className="bg-white rounded-3xl p-6 md:p-10 border border-[#e1e3e4] shadow-sm text-center mb-6"
+          className="bg-white rounded-3xl p-6 md:p-10 border border-[#d6cce8] shadow-sm text-center mb-6"
         >
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7c3aed] via-[#c026d3] to-amber-400 text-white flex items-center justify-center mx-auto mb-4 shadow-md shadow-[#c026d3]/30">
             <span className="material-symbols-outlined text-[32px]">emoji_events</span>
@@ -430,14 +430,14 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
             {formatTime(activeResultado.tempoGastoSegundos)}.
           </p>
 
-          <div className="inline-flex flex-wrap items-center justify-center gap-6 bg-[#f9fafb] border border-[#e1e3e4] rounded-2xl px-6 py-4 mb-4">
+          <div className="inline-flex flex-wrap items-center justify-center gap-6 bg-[#f5f0ff] border border-[#d6cce8] rounded-2xl px-6 py-4 mb-4">
             <div>
               <span className="block text-3xl font-black text-[#630ed4]">{scorePercent}%</span>
               <span className="text-[10px] font-bold text-[#7b7487] uppercase tracking-wider">Aproveitamento</span>
             </div>
             {Object.entries(activeResultado.notaEstimadaPorArea).map(([subject, nota]) => (
               <React.Fragment key={subject}>
-                <div className="w-px h-10 bg-[#e1e3e4]" />
+                <div className="w-px h-10 bg-[#d6cce8]" />
                 <div>
                   <span className="block text-3xl font-black text-[#191c1d]">≈{nota}</span>
                   <span className="text-[10px] font-bold text-[#7b7487] uppercase tracking-wider">
@@ -469,7 +469,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
             const userAnswer = answers[q.id];
             const isCorrect = userAnswer === q.correctLetter;
             return (
-              <div key={q.id} className="bg-white rounded-2xl p-4 md:p-5 border border-[#e1e3e4] shadow-xs">
+              <div key={q.id} className="bg-white rounded-2xl p-4 md:p-5 border border-[#d6cce8] shadow-xs">
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-xs font-semibold text-[#7b7487]">Questão {idx + 1}</span>
                   <span
@@ -488,7 +488,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
                     <span> • Sua resposta: <strong>{userAnswer}</strong></span>
                   )}
                 </p>
-                <div className="p-3 bg-[#f8f9fa] border border-[#e1e3e4] rounded-xl text-xs text-[#4a4455] leading-relaxed">
+                <div className="p-3 bg-[#f5f0ff] border border-[#d6cce8] rounded-xl text-xs text-[#4a4455] leading-relaxed">
                   {q.explanation}
                 </div>
               </div>
