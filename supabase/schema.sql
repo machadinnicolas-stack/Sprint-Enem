@@ -44,3 +44,31 @@ create policy "Users can update own data"
   on public.user_data for update
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+-- Sprint ENEM: contador diário de avaliações de redação feitas com IA (Gemini).
+-- Como o produto é vendido em pagamento único (sem recorrência), esse contador
+-- limita o custo de API por usuário (ver server/redacaoRateLimit.ts) — acima do
+-- limite diário, a avaliação cai automaticamente no feedback algorítmico gratuito.
+create table if not exists public.redacao_ai_usage (
+  user_id uuid primary key references auth.users (id) on delete cascade,
+  usage_date date not null default current_date,
+  count int not null default 0
+);
+
+alter table public.redacao_ai_usage enable row level security;
+
+drop policy if exists "Users can read own ai usage" on public.redacao_ai_usage;
+create policy "Users can read own ai usage"
+  on public.redacao_ai_usage for select
+  using (auth.uid() = user_id);
+
+drop policy if exists "Users can insert own ai usage" on public.redacao_ai_usage;
+create policy "Users can insert own ai usage"
+  on public.redacao_ai_usage for insert
+  with check (auth.uid() = user_id);
+
+drop policy if exists "Users can update own ai usage" on public.redacao_ai_usage;
+create policy "Users can update own ai usage"
+  on public.redacao_ai_usage for update
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);

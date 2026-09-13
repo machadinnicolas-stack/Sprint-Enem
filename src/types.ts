@@ -92,7 +92,7 @@ export interface ExamQuestion {
   id: string;
   subject: SubjectType;
   areaName: string;
-  year: string;
+  origin: string; // e.g. "Questão Inédita" — original practice question, not a reproduction of a real past exam
   topic: string;
   difficulty: 'Fácil' | 'Média' | 'Difícil';
   question: string;

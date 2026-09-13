@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { REDACAO_THEMES } from '../data/enemData';
 import { RedacaoTheme } from '../types';
+import { supabase } from '../services/supabase';
 
 interface RedacaoHubProps {
   onEvaluationComplete?: (score: number) => void;
@@ -17,6 +18,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
     competencies: { name: string; score: number; tip: string }[];
     totalScore: number;
     generalComment: string;
+    limitReached?: boolean;
   } | null>(null);
 
   const wordCount = draftText.trim() ? draftText.trim().split(/\s+/).length : 0;
@@ -31,9 +33,15 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
 
     // Call server endpoint or fallback to pedagogical evaluation
     try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData.session?.access_token;
+
       const response = await fetch('/api/evaluate-redacao', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+        },
         body: JSON.stringify({
           theme: selectedTheme.title,
           text: draftText
@@ -225,6 +233,12 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
         {/* Feedback Section */}
         {feedback && (
           <div className="mt-6 p-5 rounded-2xl bg-[#ede0ff]/50 border border-[#7c3aed]/30 space-y-4 animate-in fade-in duration-300">
+            {feedback.limitReached && (
+              <div className="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2">
+                Você atingiu o limite diário de correções por Inteligência Artificial. Este feedback usa nossa análise
+                automática por critérios — volte amanhã para mais correções por IA.
+              </div>
+            )}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#7c3aed]/20">
               <div>
                 <span className="text-xs font-bold text-[#630ed4] uppercase tracking-wider">

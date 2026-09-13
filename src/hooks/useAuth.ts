@@ -12,6 +12,7 @@ const AUTH_ERROR_MESSAGES: Record<string, string> = {
   email_not_confirmed: 'Confirme seu e-mail antes de entrar. Verifique sua caixa de entrada.',
   over_email_send_rate_limit: 'Muitas tentativas. Aguarde um momento e tente de novo.',
   over_request_rate_limit: 'Muitas tentativas. Aguarde um momento e tente de novo.',
+  same_password: 'A nova senha precisa ser diferente da senha atual.',
 };
 
 export function translateAuthError(err: unknown): string {
@@ -23,6 +24,10 @@ export function translateAuthError(err: unknown): string {
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
+  // Set when the user arrived via a password-reset email link, so the app can
+  // show a "set new password" screen instead of dropping them straight in —
+  // Supabase's recovery link signs them in with a temporary session.
+  const [passwordRecovery, setPasswordRecovery] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -32,9 +37,10 @@ export function useAuth() {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
       setAuthLoading(false);
+      if (event === 'PASSWORD_RECOVERY') setPasswordRecovery(true);
     });
 
     return () => subscription.unsubscribe();
@@ -55,5 +61,18 @@ export function useAuth() {
     if (error) throw error;
   };
 
-  return { user, authLoading, signUp, signIn, logout };
+  const resetPassword = async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin,
+    });
+    if (error) throw error;
+  };
+
+  const updatePassword = async (newPassword: string) => {
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) throw error;
+    setPasswordRecovery(false);
+  };
+
+  return { user, authLoading, passwordRecovery, signUp, signIn, logout, resetPassword, updatePassword };
 }

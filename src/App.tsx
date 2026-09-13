@@ -6,6 +6,7 @@ import { getInitialGamificationState, reconcileGamificationState, processGamific
 import { useAuth } from './hooks/useAuth';
 import { loadUserData, saveUserData } from './services/userData';
 import { AuthScreen } from './components/AuthScreen';
+import { ResetPasswordScreen } from './components/ResetPasswordScreen';
 import { OnboardingForm } from './components/OnboardingForm';
 import { Header } from './components/Header';
 import { CronogramaView } from './components/CronogramaView';
@@ -29,7 +30,7 @@ const DEFAULT_PREFERENCES: UserPreferences = {
 };
 
 export default function App() {
-  const { user, authLoading, logout } = useAuth();
+  const { user, authLoading, logout, passwordRecovery, updatePassword } = useAuth();
 
   const [preferences, setPreferences] = useState<UserPreferences>(DEFAULT_PREFERENCES);
   const [gamification, setGamification] = useState<UserGamificationState>(getInitialGamificationState());
@@ -46,9 +47,9 @@ export default function App() {
     newLevelNumber?: number;
   } | null>(null);
 
-  // Cloud sync: load the signed-in user's data from Firestore, then debounce-save
+  // Cloud sync: load the signed-in user's data from Supabase, then debounce-save
   // any local changes back. `dataReady` gates the save effect so we never overwrite
-  // Firestore with default state before the initial load completes.
+  // Supabase with default state before the initial load completes.
   const [dataReady, setDataReady] = useState(false);
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -354,6 +355,10 @@ export default function App() {
       });
     }
   };
+
+  if (passwordRecovery) {
+    return <ResetPasswordScreen onUpdatePassword={updatePassword} />;
+  }
 
   if (authLoading || (user && !dataReady)) {
     return (

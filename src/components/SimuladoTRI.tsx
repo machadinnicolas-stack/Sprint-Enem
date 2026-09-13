@@ -207,7 +207,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
                   {currentQ.areaName}
                 </span>
                 <span className="text-xs font-semibold text-[#7b7487] bg-[#f3f4f5] px-2.5 py-1 rounded-md">
-                  {currentQ.year}
+                  {currentQ.origin}
                 </span>
               </div>
 
