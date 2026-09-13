@@ -2,28 +2,37 @@ import { GoogleGenAI, Type } from '@google/genai';
 
 export const MINIMUM_LINES = 8;
 
-// Primeiro da lista é o modelo de referência; o segundo só entra quando o
-// primeiro está indisponível. Em 13/09/2026, gemini-3.7-flash ficou horas em 503
-// e o 3.8-flash caiu num pico no meio da tarde — com um único modelo fixo, cada
-// pico desses vira "correção indisponível" para o aluno.
-const GEMINI_MODELS = ['gemini-3.8-flash', 'gemini-flash-latest'];
+// Modelos de qualidade equivalente para esta tarefa, em ordem de preferência.
+// Cada um tem um pool de capacidade próprio, e em 13/09/2026 eles oscilaram de
+// forma independente ao longo do dia: o 3.7-flash passou a manhã em 503 e voltou
+// à tarde, o 3.8-flash fez o inverso. Uma lista curta transforma cada oscilação
+// dessas em "correção indisponível" para o aluno.
+//
+// Sem variantes "lite" de propósito: elas respondem em menos de 1s mesmo sob
+// carga, mas corrigir redação com um modelo mais fraco devolveria nota pior sem
+// avisar ninguém — que é a mesma desonestidade que o fallback heurístico tinha.
+const GEMINI_MODELS = [
+  'gemini-3.8-flash',
+  'gemini-3.7-flash',
+  'gemini-3.6-flash',
+  'gemini-flash-latest',
+];
 
-const ATTEMPTS_PER_MODEL = 2;
-const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504]);
+// Uma tentativa por modelo, sem repetir o mesmo: diante de um 503 por
+// congestionamento, gastar o tempo restante em outro modelo rende mais do que
+// insistir em quem acabou de recusar.
+//
+// Um 503 pode levar mais de 20s para voltar, então percorrer a lista inteira sem
+// teto passaria do tempo limite da função. Estourar o limite devolve um erro de
+// gateway cru ao aluno; desistir dentro do orçamento devolve a nossa mensagem,
+// com o texto preservado e o botão de tentar de novo.
+const TOTAL_BUDGET_MS = 50_000;
 
-// Um 503 do Gemini pode levar mais de 20s para voltar, então quatro tentativas
-// no pior caso passariam do tempo limite da função. Estourar o limite devolve um
-// erro de gateway cru ao aluno; desistir dentro do orçamento devolve a nossa
-// mensagem, com o texto preservado e o botão de tentar de novo.
-const TOTAL_BUDGET_MS = 45_000;
+// Correções bem-sucedidas já levaram 22s, então o teto por chamada fica acima
+// disso; o que ele impede é uma chamada pendurada consumir sozinha o orçamento
+// que outro modelo poderia aproveitar.
+const PER_CALL_TIMEOUT_MS = 25_000;
 
-// Correções legítimas já levaram 27s, então o teto por chamada precisa ficar
-// acima disso; o que ele impede é uma chamada pendurada consumir o orçamento
-// inteiro sozinha.
-const PER_CALL_TIMEOUT_MS = 30_000;
-
-// Mensagem sem dígitos de propósito: isRetryable procura códigos HTTP no texto
-// do erro, e um número aqui faria um timeout ser confundido com um 500.
 class GeminiTimeoutError extends Error {
   constructor() {
     super('Gemini call timed out');
@@ -82,18 +91,6 @@ export function estimatedLineCount(text: string): number {
   return Math.ceil(text.trim().split(/\s+/).length / 10);
 }
 
-// Gemini overload (503) and rate limiting (429) are routine and usually clear in
-// seconds; a hard failure on the first blip would send a paying student to the
-// "unavailable" screen for no reason.
-function isRetryable(err: unknown): boolean {
-  const status = (err as { status?: number })?.status;
-  if (typeof status === 'number') return RETRYABLE_STATUS.has(status);
-  const message = String((err as { message?: string })?.message ?? '');
-  return /\b(429|500|502|503|504)\b|UNAVAILABLE|RESOURCE_EXHAUSTED|overloaded|high demand/i.test(message);
-}
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 // Grades against the 5 official ENEM competencies. Returns null when grading
 // could not be completed — callers must surface that to the student rather than
 // substituting a made-up score.
@@ -150,30 +147,25 @@ Retorne em formato JSON estrito com o total, comentário geral e notas/dicas por
   const restante = () => TOTAL_BUDGET_MS - (Date.now() - startedAt);
 
   for (const model of GEMINI_MODELS) {
-    for (let attempt = 1; attempt <= ATTEMPTS_PER_MODEL; attempt++) {
-      const orcamento = restante();
-      if (orcamento <= 0) {
-        console.error('Gemini time budget exhausted before a grade could be produced.');
-        return null;
+    const orcamento = restante();
+    if (orcamento <= 2_000) {
+      console.error('Gemini time budget exhausted before a grade could be produced.');
+      return null;
+    }
+
+    try {
+      const response = await withTimeout(
+        ai.models.generateContent({ model, contents: prompt, config }),
+        Math.min(orcamento, PER_CALL_TIMEOUT_MS)
+      );
+
+      if (response.text) {
+        console.info(`Gemini (${model}) graded the essay in ${Date.now() - startedAt}ms.`);
+        return JSON.parse(response.text.trim());
       }
-
-      try {
-        const response = await withTimeout(
-          ai.models.generateContent({ model, contents: prompt, config }),
-          Math.min(orcamento, PER_CALL_TIMEOUT_MS)
-        );
-
-        if (response.text) return JSON.parse(response.text.trim());
-        console.warn(`Gemini (${model}) returned an empty response, attempt ${attempt}/${ATTEMPTS_PER_MODEL}.`);
-      } catch (err) {
-        console.error(`Gemini (${model}) failed on attempt ${attempt}/${ATTEMPTS_PER_MODEL}:`, err);
-
-        // Erro permanente (modelo removido, chave inválida) e timeout não
-        // melhoram com repetição imediata — vão direto para o próximo modelo.
-        if (!isRetryable(err)) break;
-
-        if (attempt < ATTEMPTS_PER_MODEL && restante() > 5_000) await delay(2_000);
-      }
+      console.warn(`Gemini (${model}) returned an empty response.`);
+    } catch (err) {
+      console.error(`Gemini (${model}) failed:`, err);
     }
   }
 
