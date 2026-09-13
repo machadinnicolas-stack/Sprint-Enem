@@ -81,7 +81,10 @@
   }
 }
 
-@media (min-width: 768px) {
+/* Precisa acompanhar o breakpoint lg: usado no Header.tsx. Entre 768px e 1024px
+   a navegação do topo não cabe — "Redação 1000" ficava cortado contra a pílula
+   de gamificação —, então essa faixa usa a barra inferior. */
+@media (min-width: 1024px) {
   .mobile-bottom-nav {
     display: none;
   }

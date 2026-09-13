@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
 
         {/* Navigation Tabs */}
-        <nav className="hidden md:flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
+        <nav className="hidden lg:flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
           <button
             onClick={() => setActiveTab('cronograma')}
             className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
@@ -161,7 +161,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      <nav className="mobile-bottom-nav md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[#4c0b9f] bg-gradient-to-r from-[#630ed4] to-[#7c3aed] px-1.5 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(71,42,112,0.28)]">
+      <nav className="mobile-bottom-nav lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[#4c0b9f] bg-gradient-to-r from-[#630ed4] to-[#7c3aed] px-1.5 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(71,42,112,0.28)]">
         <div className="grid grid-cols-5 gap-1 max-w-lg mx-auto">
           {[
             { id: 'cronograma' as const, label: 'Plano', icon: 'calendar_today' },
