@@ -56,7 +56,6 @@ export const SUBJECT_INFO: Record<SubjectType, {
   bgColor: string;
   borderColor: string;
   textColor: string;
-  triMaxScore: string;
 }> = {
   matematica: {
     name: 'Matemática',
@@ -64,8 +63,7 @@ export const SUBJECT_INFO: Record<SubjectType, {
     color: '#7c3aed',
     bgColor: '#ede0ff',
     borderColor: '#7c3aed',
-    textColor: '#630ed4',
-    triMaxScore: 'Até 980+ pontos na TRI'
+    textColor: '#630ed4'
   },
   natureza: {
     name: 'Natureza',
@@ -73,8 +71,7 @@ export const SUBJECT_INFO: Record<SubjectType, {
     color: '#059669',
     bgColor: '#d1fae5',
     borderColor: '#10b981',
-    textColor: '#047857',
-    triMaxScore: 'Foco em Biologia, Física e Química'
+    textColor: '#047857'
   },
   linguagens: {
     name: 'Linguagens',
@@ -82,8 +79,7 @@ export const SUBJECT_INFO: Record<SubjectType, {
     color: '#2563eb',
     bgColor: '#dbeafe',
     borderColor: '#3b82f6',
-    textColor: '#1d4ed8',
-    triMaxScore: 'Interpretação e Funções da Linguagem'
+    textColor: '#1d4ed8'
   },
   humanas: {
     name: 'Humanas',
@@ -91,8 +87,7 @@ export const SUBJECT_INFO: Record<SubjectType, {
     color: '#d97706',
     bgColor: '#fef3c7',
     borderColor: '#f59e0b',
-    textColor: '#b45309',
-    triMaxScore: 'História, Geografia, Filosofia e Sociologia'
+    textColor: '#b45309'
   },
   redacao: {
     name: 'Redação',
@@ -100,8 +95,7 @@ export const SUBJECT_INFO: Record<SubjectType, {
     color: '#db2777',
     bgColor: '#fce7f3',
     borderColor: '#ec4899',
-    textColor: '#be185d',
-    triMaxScore: 'Garante 1000 pontos diretos'
+    textColor: '#be185d'
   }
 };
 

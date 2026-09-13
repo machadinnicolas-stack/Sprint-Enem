@@ -439,9 +439,9 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
               <React.Fragment key={subject}>
                 <div className="w-px h-10 bg-[#e1e3e4]" />
                 <div>
-                  <span className="block text-3xl font-black text-[#191c1d]">{nota}</span>
+                  <span className="block text-3xl font-black text-[#191c1d]">≈{nota}</span>
                   <span className="text-[10px] font-bold text-[#7b7487] uppercase tracking-wider">
-                    Nota est. {SUBJECT_INFO[subject as SubjectType].name}
+                    Estimativa {SUBJECT_INFO[subject as SubjectType].name}
                   </span>
                 </div>
               </React.Fragment>

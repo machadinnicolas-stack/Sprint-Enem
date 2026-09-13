@@ -101,7 +101,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
         <div className="relative">
           <div className="inline-flex items-center gap-1.5 bg-[#ede0ff] text-[#630ed4] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
             <span className="material-symbols-outlined text-[14px]">psychology</span>
-            Treino Rápido TRI
+            Treino Rápido
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-[#191c1d] tracking-tight">
             Questões Estratégicas do ENEM
