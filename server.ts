@@ -6,9 +6,15 @@ import 'dotenv/config';
 import express, { Request, Response } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { MINIMUM_LINES, estimatedLineCount, evaluateWithGemini, evaluateAlgorithmically } from './server/redacaoService';
+import {
+  MINIMUM_LINES,
+  AI_UNAVAILABLE_MESSAGE,
+  estimatedLineCount,
+  evaluateWithGemini,
+  buildWritingChecklist,
+} from './server/redacaoService';
 import { getUserFromAuthHeader } from './server/supabaseServer';
-import { hasAiQuotaRemaining, recordAiEvaluationUsed } from './server/redacaoRateLimit';
+import { getAiQuotaStatus, recordAiEvaluationUsed } from './server/redacaoRateLimit';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +33,10 @@ app.get('/api/health', (req: Request, res: Response) => {
 // serverless function used in production). Both share ./server/redacaoService
 // and ./server/redacaoRateLimit so the grading prompt and quota rules never
 // drift between the two runtimes.
+//
+// A score is only ever returned when it came from the grader. If grading fails
+// this responds 503 rather than substituting a heuristic number: telling a
+// student they scored 760 when the real grade is 200 is worse than no answer.
 app.post('/api/evaluate-redacao', async (req: Request, res: Response) => {
   const { theme, text } = req.body;
 
@@ -47,22 +57,27 @@ app.post('/api/evaluate-redacao', async (req: Request, res: Response) => {
     return res.status(401).json({ error: 'É necessário estar autenticado para avaliar a redação.' });
   }
 
-  const quotaAvailable = await hasAiQuotaRemaining(authUser.id, authUser.token);
+  const quota = await getAiQuotaStatus(authUser.id);
 
-  if (quotaAvailable) {
-    const aiResult = await evaluateWithGemini(theme, text);
-    if (aiResult) {
-      await recordAiEvaluationUsed(authUser.id, authUser.token);
-      return res.status(200).json({ ...aiResult, aiEvaluated: true });
-    }
+  if (quota === 'unavailable') {
+    return res.status(503).json({ error: AI_UNAVAILABLE_MESSAGE });
   }
 
-  const fallback = evaluateAlgorithmically(theme, text);
-  return res.status(200).json({
-    ...fallback,
-    aiEvaluated: false,
-    ...(quotaAvailable ? {} : { limitReached: true })
-  });
+  if (quota === 'exhausted') {
+    return res.status(200).json({
+      aiEvaluated: false,
+      limitReached: true,
+      checklist: buildWritingChecklist(text)
+    });
+  }
+
+  const aiResult = await evaluateWithGemini(theme, text);
+  if (!aiResult) {
+    return res.status(503).json({ error: AI_UNAVAILABLE_MESSAGE });
+  }
+
+  await recordAiEvaluationUsed(authUser.id);
+  return res.status(200).json({ ...aiResult, aiEvaluated: true });
 });
 
 // Start Server with Vite Middleware in Development

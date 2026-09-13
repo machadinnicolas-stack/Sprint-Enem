@@ -1,49 +1,39 @@
-import { supabaseForToken } from './supabaseServer';
+import { supabaseAdmin } from './supabaseServer';
 
 // Daily cap on Gemini-backed evaluations per user. Sprint ENEM is sold as a
 // one-time purchase (no recurring revenue), so there's nothing to offset
-// unbounded AI spend — this keeps per-user cost predictable. The algorithmic
-// fallback in redacaoService stays unlimited once this quota is hit.
+// unbounded AI spend — this keeps per-user cost predictable.
 export const DAILY_AI_EVALUATION_LIMIT = 5;
 
-function today(): string {
-  return new Date().toISOString().slice(0, 10);
-}
+// 'unavailable' is distinct from 'exhausted' on purpose: if the counter can't be
+// read we must not tell the student they hit a daily limit they never reached.
+export type QuotaStatus = 'available' | 'exhausted' | 'unavailable';
 
-// Read-only check: does this user still have AI evaluations left today?
-// Deliberately does NOT record usage — only a successful Gemini call (see
-// recordAiEvaluationUsed) should spend quota, so a missing API key or a
-// failed Gemini request never burns the user's daily allowance for nothing.
-export async function hasAiQuotaRemaining(userId: string, accessToken: string): Promise<boolean> {
-  const client = supabaseForToken(accessToken);
+// Read-only check. Deliberately does NOT record usage — only a successful Gemini
+// call (see recordAiEvaluationUsed) should spend quota, so a failed request
+// never burns the user's daily allowance for nothing.
+export async function getAiQuotaStatus(userId: string): Promise<QuotaStatus> {
+  if (!supabaseAdmin) {
+    console.error('SUPABASE_SECRET_KEY is not set — cannot meter AI usage, refusing AI evaluation.');
+    return 'unavailable';
+  }
 
-  const { data: existing } = await client
-    .from('redacao_ai_usage')
-    .select('usage_date, count')
-    .eq('user_id', userId)
-    .maybeSingle();
+  const { data, error } = await supabaseAdmin.rpc('redacao_ai_usage_today', { p_user_id: userId });
 
-  if (!existing || existing.usage_date !== today()) return true;
-  return existing.count < DAILY_AI_EVALUATION_LIMIT;
+  if (error) {
+    console.error('Failed to read AI usage counter:', error);
+    return 'unavailable';
+  }
+
+  return (data ?? 0) < DAILY_AI_EVALUATION_LIMIT ? 'available' : 'exhausted';
 }
 
 // Call only after a Gemini evaluation actually succeeded, to record the spend.
-export async function recordAiEvaluationUsed(userId: string, accessToken: string): Promise<void> {
-  const client = supabaseForToken(accessToken);
+// A failure here is logged but not surfaced: the student already has a valid
+// grading, and losing one tick of accounting is better than erroring on them.
+export async function recordAiEvaluationUsed(userId: string): Promise<void> {
+  if (!supabaseAdmin) return;
 
-  const { data: existing } = await client
-    .from('redacao_ai_usage')
-    .select('usage_date, count')
-    .eq('user_id', userId)
-    .maybeSingle();
-
-  if (!existing || existing.usage_date !== today()) {
-    await client.from('redacao_ai_usage').upsert({ user_id: userId, usage_date: today(), count: 1 });
-    return;
-  }
-
-  await client
-    .from('redacao_ai_usage')
-    .update({ count: existing.count + 1 })
-    .eq('user_id', userId);
+  const { error } = await supabaseAdmin.rpc('redacao_ai_usage_increment', { p_user_id: userId });
+  if (error) console.error('Failed to record AI usage:', error);
 }

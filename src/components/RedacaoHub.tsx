@@ -9,17 +9,28 @@ interface RedacaoHubProps {
 
 const MINIMUM_LINES = 8;
 
+const GENERIC_ERROR =
+  'A correção por IA está indisponível no momento. Seu texto não foi perdido — tente novamente em alguns minutos.';
+
+// A grade is only ever shown when it came from the grader. The checklist variant
+// carries no score on purpose: a keyword scan cannot tell whether an essay is
+// good, and showing a number next to it would read as a grade.
+type EvaluationResult =
+  | {
+      kind: 'ai';
+      totalScore: number;
+      generalComment: string;
+      competencies: { name: string; score: number; tip: string }[];
+    }
+  | { kind: 'checklist'; items: { name: string; ok: boolean; tip: string }[] };
+
 export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) => {
   const [themes] = useState<RedacaoTheme[]>(REDACAO_THEMES);
   const [selectedTheme, setSelectedTheme] = useState<RedacaoTheme>(REDACAO_THEMES[0]);
   const [draftText, setDraftText] = useState('');
   const [isEvaluating, setIsEvaluating] = useState(false);
-  const [feedback, setFeedback] = useState<{
-    competencies: { name: string; score: number; tip: string }[];
-    totalScore: number;
-    generalComment: string;
-    limitReached?: boolean;
-  } | null>(null);
+  const [result, setResult] = useState<EvaluationResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const wordCount = draftText.trim() ? draftText.trim().split(/\s+/).length : 0;
   const lineEstimate = Math.ceil(wordCount / 10);
@@ -29,9 +40,9 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
   const handleEvaluate = async () => {
     if (!draftText.trim() || !hasMinimumLines) return;
     setIsEvaluating(true);
-    setFeedback(null);
+    setResult(null);
+    setError(null);
 
-    // Call server endpoint or fallback to pedagogical evaluation
     try {
       const { data: sessionData } = await supabase.auth.getSession();
       const accessToken = sessionData.session?.access_token;
@@ -48,47 +59,29 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
         })
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setFeedback(data);
-        setIsEvaluating(false);
-        if (onEvaluationComplete) {
-          onEvaluationComplete(data.totalScore || 800);
-        }
-      } else {
-        throw new Error('Fallback needed');
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        setError(data?.error ?? GENERIC_ERROR);
+        return;
       }
-    } catch {
-      // Local instant feedback fallback
-      setTimeout(() => {
-        const hasConnectives = draftText.toLowerCase().includes('portanto') || draftText.toLowerCase().includes('ademais') || draftText.toLowerCase().includes('outrossim');
-        const hasRepertoire = draftText.toLowerCase().includes('constitui') || draftText.toLowerCase().includes('bauman') || draftText.toLowerCase().includes('segundo') || draftText.toLowerCase().includes('conforme');
-        const hasIntervention = draftText.toLowerCase().includes('ministério') || draftText.toLowerCase().includes('governo') || draftText.toLowerCase().includes('cabe ao') || draftText.toLowerCase().includes('afim de');
 
-        const c1 = wordCount > 150 ? 160 : 120;
-        const c2 = hasRepertoire ? 200 : 160;
-        const c3 = wordCount > 200 ? 160 : 120;
-        const c4 = hasConnectives ? 200 : 160;
-        const c5 = hasIntervention ? 200 : 160;
-        const total = c1 + c2 + c3 + c4 + c5;
-
-        setFeedback({
-          totalScore: total,
-          generalComment: `Excelente desenvolvimento! Seu texto demonstra boa articulação e compreensão do eixo temático "${selectedTheme.axis}".`,
-          competencies: [
-            { name: 'C1: Norma Culta', score: c1, tip: 'Atenção à concordância e pontuação em orações subordinadas.' },
-            { name: 'C2: Tema e Repertório', score: c2, tip: hasRepertoire ? 'Repertório legitimado e produtivo bem articulado.' : 'Recomendamos citar a CF/88 ou um filósofo de autoridade.' },
-            { name: 'C3: Projeto de Texto e Argumentação', score: c3, tip: 'Defesa consistente da tese apresentada na introdução.' },
-            { name: 'C4: Coesão e Conectivos', score: c4, tip: hasConnectives ? 'Ótimo uso de operadores interparágrafos (Ademais, Portanto).' : 'Diversifique o uso de conectivos no início dos parágrafos.' },
-            { name: 'C5: Proposta de Intervenção', score: c5, tip: hasIntervention ? 'Proposta de intervenção completa com os 5 elementos.' : 'Lembre-se de explicitar o Detalhamento do Meio/Modo.' }
-          ]
+      if (data?.aiEvaluated) {
+        setResult({
+          kind: 'ai',
+          totalScore: data.totalScore,
+          generalComment: data.generalComment,
+          competencies: data.competencies ?? []
         });
+        onEvaluationComplete?.(data.totalScore);
+        return;
+      }
 
-        setIsEvaluating(false);
-        if (onEvaluationComplete) {
-          onEvaluationComplete(total);
-        }
-      }, 700);
+      setResult({ kind: 'checklist', items: data?.checklist ?? [] });
+    } catch {
+      setError(GENERIC_ERROR);
+    } finally {
+      setIsEvaluating(false);
     }
   };
 
@@ -121,7 +114,8 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
               key={theme.id}
               onClick={() => {
                 setSelectedTheme(theme);
-                setFeedback(null);
+                setResult(null);
+                setError(null);
               }}
               className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
                 selectedTheme.id === theme.id
@@ -230,33 +224,46 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
           </button>
         </div>
 
-        {/* Feedback Section */}
-        {feedback && (
+        {/* Grading unavailable — no score is invented to fill the gap. */}
+        {error && (
+          <div className="mt-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3 animate-in fade-in duration-300">
+            <span className="material-symbols-outlined text-amber-700 text-[20px]">cloud_off</span>
+            <div>
+              <h3 className="text-sm font-bold text-amber-900">Não foi possível corrigir agora</h3>
+              <p className="text-xs text-amber-800 mt-0.5">{error}</p>
+              <button
+                type="button"
+                onClick={handleEvaluate}
+                disabled={isEvaluating}
+                className="mt-2.5 px-4 py-2 rounded-xl bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs transition-all cursor-pointer disabled:opacity-50"
+              >
+                Tentar novamente
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Real AI grading — the only path that shows a score. */}
+        {result?.kind === 'ai' && (
           <div className="mt-6 p-5 rounded-2xl bg-[#ede0ff]/50 border border-[#7c3aed]/30 space-y-4 animate-in fade-in duration-300">
-            {feedback.limitReached && (
-              <div className="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2">
-                Você atingiu o limite diário de correções por Inteligência Artificial. Este feedback usa nossa análise
-                automática por critérios — volte amanhã para mais correções por IA.
-              </div>
-            )}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#7c3aed]/20">
               <div>
                 <span className="text-xs font-bold text-[#630ed4] uppercase tracking-wider">
-                  Diagnóstico TRI das Competências
+                  Diagnóstico por Competências (INEP)
                 </span>
                 <h3 className="text-lg font-extrabold text-[#191c1d]">
-                  {feedback.generalComment}
+                  {result.generalComment}
                 </h3>
               </div>
-              <div className="bg-[#7c3aed] text-white px-4 py-2 rounded-xl text-center shadow-xs">
+              <div className="bg-[#7c3aed] text-white px-4 py-2 rounded-xl text-center shadow-xs shrink-0">
                 <span className="text-[10px] uppercase block opacity-80">Nota Estimada</span>
-                <span className="text-2xl font-black">{feedback.totalScore}</span>
+                <span className="text-2xl font-black">{result.totalScore}</span>
                 <span className="text-[10px] block opacity-80">/ 1000</span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {feedback.competencies.map((comp, idx) => (
+              {result.competencies.map((comp, idx) => (
                 <div key={idx} className="bg-white p-3.5 rounded-xl border border-[#e1e3e4]">
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-bold text-xs text-[#191c1d]">{comp.name}</span>
@@ -267,6 +274,44 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
                   <p className="text-xs text-[#4a4455]">{comp.tip}</p>
                 </div>
               ))}
+            </div>
+
+            <p className="text-[11px] text-[#7b7487]">
+              Estimativa gerada por IA com base nos critérios do INEP. A nota oficial do ENEM é atribuída por
+              avaliadores humanos e pode divergir.
+            </p>
+          </div>
+        )}
+
+        {/* Daily AI quota spent — structural checklist only, deliberately no score. */}
+        {result?.kind === 'checklist' && (
+          <div className="mt-6 p-5 rounded-2xl bg-[#f8f9fa] border border-[#e1e3e4] space-y-4 animate-in fade-in duration-300">
+            <div className="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2">
+              Você já usou suas correções por IA de hoje. Abaixo está uma verificação estrutural automática do seu
+              texto — ela não atribui nota. Volte amanhã para uma nova correção por IA.
+            </div>
+
+            <div>
+              <span className="text-xs font-bold text-[#4a4455] uppercase tracking-wider">
+                Verificação estrutural
+              </span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                {result.items.map((item, idx) => (
+                  <div key={idx} className="bg-white p-3.5 rounded-xl border border-[#e1e3e4]">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <span
+                        className={`material-symbols-outlined text-[16px] ${
+                          item.ok ? 'text-[#047857]' : 'text-amber-700'
+                        }`}
+                      >
+                        {item.ok ? 'check_circle' : 'error'}
+                      </span>
+                      <span className="font-bold text-xs text-[#191c1d]">{item.name}</span>
+                    </div>
+                    <p className="text-xs text-[#4a4455]">{item.tip}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}

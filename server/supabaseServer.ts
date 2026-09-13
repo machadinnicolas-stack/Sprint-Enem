@@ -1,7 +1,8 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
+const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY;
 
 // Fall back to well-formed placeholders (mirrors src/services/supabase.ts) so a
 // misconfigured environment fails each request with a normal 401 instead of
@@ -9,22 +10,21 @@ const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
 const FALLBACK_URL = 'https://placeholder.supabase.co';
 const FALLBACK_ANON_KEY = 'placeholder-anon-key';
 
-// Used only to validate a user's access token via supabase.auth.getUser(jwt) —
-// never for RLS-scoped table reads/writes (see supabaseForToken below).
+// Used only to validate a user's access token via supabase.auth.getUser(jwt).
 const supabaseAuthClient = createClient(supabaseUrl || FALLBACK_URL, supabaseAnonKey || FALLBACK_ANON_KEY);
 
-// Returns a client that sends the user's own JWT on every request, so table
-// queries run under that user's Row Level Security policies instead of an
-// unscoped service role.
-export function supabaseForToken(accessToken: string) {
-  return createClient(supabaseUrl || FALLBACK_URL, supabaseAnonKey || FALLBACK_ANON_KEY, {
-    global: { headers: { Authorization: `Bearer ${accessToken}` } },
-  });
-}
+// Service-role client, server-side only — never import this from src/.
+// The AI usage counter is deliberately not writable by the browser: with the
+// public anon key and their own JWT, a user could reset their own counter and
+// spend unbounded Gemini budget. RLS denies user writes on that table and only
+// this key can move it (see supabase/schema.sql).
+export const supabaseAdmin: SupabaseClient | null =
+  supabaseUrl && supabaseSecretKey
+    ? createClient(supabaseUrl, supabaseSecretKey, { auth: { persistSession: false } })
+    : null;
 
 export interface AuthenticatedUser {
   id: string;
-  token: string;
 }
 
 // Verifies the bearer token from an incoming request's Authorization header
@@ -41,5 +41,5 @@ export async function getUserFromAuthHeader(
   const { data, error } = await supabaseAuthClient.auth.getUser(token);
   if (error || !data.user) return null;
 
-  return { id: data.user.id, token };
+  return { id: data.user.id };
 }
