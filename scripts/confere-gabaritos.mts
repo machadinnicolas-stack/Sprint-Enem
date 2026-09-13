@@ -12,6 +12,7 @@ import { ExamQuestion } from '../src/types.js';
 import { MATEMATICA_QUESTIONS } from '../src/data/questions/matematica.js';
 import { NATUREZA_QUESTIONS } from '../src/data/questions/natureza.js';
 import { HUMANAS_QUESTIONS } from '../src/data/questions/humanas.js';
+import { LINGUAGENS_QUESTIONS } from '../src/data/questions/linguagens.js';
 
 type Esperado = number | { texto: string };
 
@@ -197,7 +198,73 @@ const CALCULOS: Record<string, () => Esperado> = {
   'hum-45': () => t('just in time'),
   'hum-46': () => t('ampliação de direitos'),
   'hum-47': () => t('reproduzir entre gerações'),
-  'hum-48': () => t('fluidez e à fragilidade')
+  'hum-48': () => t('fluidez e à fragilidade'),
+
+  // ---- Linguagens: Interpretação
+  'lin-01': () => t('descompasso entre a exigência legal'),
+  'lin-02': () => t('devolução de livros atrasados'),
+  'lin-03': () => t('limitações de tempo e de conexão'),
+  'lin-04': () => t('cético quanto à continuidade'),
+  'lin-05': () => t('acessível ao leitor não especializado'),
+  'lin-06': () => t('incoerência de quem prega sacrifício'),
+  'lin-07': () => t('procedimentos corretos de instalação'),
+  'lin-08': () => t('refutá-la com evidência'),
+  'lin-09': () => t('contradição entre o objetivo declarado'),
+  'lin-10': () => t('diminui conforme a renda aumenta'),
+  'lin-11': () => t('solicito a prorrogação'),
+  'lin-12': () => t('já pratica a reciclagem'),
+
+  // ---- Linguagens: Variação linguística
+  'lin-13': () => t('regional (diatópica)'),
+  'lin-14': () => t('competência comunicativa'),
+  'lin-15': () => t('preconceito linguístico'),
+  'lin-16': () => t('histórica (diacrônica)'),
+  'lin-17': () => t('não coincidem integralmente'),
+
+  // ---- Linguagens: Funções da linguagem
+  'lin-18': () => t('conativa'),
+  'lin-19': () => t('emotiva'),
+  'lin-20': () => t('metalinguística'),
+  'lin-21': () => t('fática'),
+
+  // ---- Linguagens: Figuras de linguagem
+  'lin-22': () => t('Metáfora'),
+  'lin-23': () => t('Metonímia'),
+  'lin-24': () => t('Hipérbole'),
+  'lin-25': () => t('Antítese'),
+
+  // ---- Linguagens: Literatura
+  'lin-26': () => t('nacionalismo ufanista'),
+  'lin-27': () => t('ironia e a liberdade'),
+  'lin-28': () => t('Parnasianismo'),
+  'lin-29': () => t('musicalidade obtida'),
+  'lin-30': () => t('legitimidade da fala brasileira'),
+  'lin-31': () => t('romance regionalista de 30'),
+  'lin-32': () => t('dualismo barroco'),
+  'lin-33': () => t('ideais neoclássicos'),
+
+  // ---- Linguagens: Gêneros textuais
+  'lin-34': () => t('Meme'),
+  'lin-35': () => t('Resumo e resenha crítica'),
+  'lin-36': () => t('editorial'),
+  'lin-37': () => t('Verbete de dicionário'),
+
+  // ---- Linguagens: Coesão e coerência
+  'lin-38': () => t('no entanto'),
+  'lin-39': () => t('portanto'),
+  'lin-40': () => t('retomar por coesão referencial'),
+  'lin-41': () => t('quebra de coerência'),
+
+  // ---- Linguagens: Artes, cultura e corpo
+  'lin-42': () => t('imaterial'),
+  'lin-43': () => t('apropriação crítica e criativa'),
+  'lin-44': () => t('garantir participação'),
+  'lin-45': () => t('apropriação cultural'),
+
+  // ---- Linguagens: Semântica
+  'lin-46': () => t('conotativo, com sentido figurado'),
+  'lin-47': () => t('ambiguidade'),
+  'lin-48': () => t('polissemia')
 };
 
 // Converte "R$ 6.655,00", "2 880 peças", "5,4 m", "80 km/h" e "1/3" em número.
@@ -293,7 +360,8 @@ function confere(nome: string, banco: ExamQuestion[]): number {
 const problemas =
   confere('Matemática', MATEMATICA_QUESTIONS) +
   confere('Ciências da Natureza', NATUREZA_QUESTIONS) +
-  confere('Ciências Humanas', HUMANAS_QUESTIONS);
+  confere('Ciências Humanas', HUMANAS_QUESTIONS) +
+  confere('Linguagens e Códigos', LINGUAGENS_QUESTIONS);
 
 console.log(problemas === 0 ? '\nTODOS OS GABARITOS CONFEREM\n' : `\n${problemas} problema(s) encontrado(s)\n`);
 process.exit(problemas === 0 ? 0 : 1);

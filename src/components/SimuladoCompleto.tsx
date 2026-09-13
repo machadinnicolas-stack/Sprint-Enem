@@ -10,6 +10,15 @@ interface SimuladoCompletoProps {
 
 type Screen = 'landing' | 'intro' | 'exam' | 'resultado';
 
+const SIMULADO_STORAGE_KEY = 'sprint_enem_simulado_em_andamento';
+
+interface ProvaEmAndamento {
+  diaId: 'dia1' | 'dia2';
+  deadlineAt: number;
+  answers: Record<string, string>;
+  currentIndex: number;
+}
+
 function interleave<T>(a: T[], b: T[]): T[] {
   const result: T[] = [];
   const max = Math.max(a.length, b.length);
@@ -20,9 +29,26 @@ function interleave<T>(a: T[], b: T[]): T[] {
   return result;
 }
 
+// "336 minutos" é tecnicamente correto e ilegível. "5h36" corresponde à duração
+// real que um dia de 96 questões passou a ter.
+function formatDuration(minutes: number): string {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  if (h === 0) return `${m} min`;
+  if (m === 0) return `${h}h`;
+  return `${h}h${String(m).padStart(2, '0')}`;
+}
+
 function formatTime(totalSeconds: number): string {
-  const m = Math.floor(totalSeconds / 60);
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
   const s = totalSeconds % 60;
+  // Com 48 questões por área, uma prova completa passa de 5 horas — perto do
+  // tempo real do ENEM. Sem essa ramificação, o cronômetro mostraria algo como
+  // "336:00" em vez de horas.
+  if (h > 0) {
+    return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
   return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
@@ -33,26 +59,36 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
     return map;
   }, []);
 
+  // O ENEM real reserva cerca de 3,5 minutos por questão (330 min para 90 itens
+  // no 1º dia, com redação; 300 min para 90 no 2º). Fixar a duração em 70 min
+  // fazia sentido com 24 questões por dia; com o banco de 48 por área, manter o
+  // valor fixo daria menos de 1 minuto por questão.
+  const MINUTOS_POR_QUESTAO = 3.5;
+
   const dias = useMemo<SimuladoCompletoDia[]>(() => {
     const bySubject = (s: SubjectType) => MOCK_QUESTIONS.filter((q) => q.subject === s);
     const linguagens = bySubject('linguagens');
     const humanas = bySubject('humanas');
     const natureza = bySubject('natureza');
     const matematica = bySubject('matematica');
+
+    const dia1Questoes = interleave(linguagens, humanas);
+    const dia2Questoes = interleave(natureza, matematica);
+
     return [
       {
         id: 'dia1',
         label: 'Dia 1 — Linguagens e Humanas',
         subjects: ['linguagens', 'humanas'],
-        questionIds: interleave(linguagens, humanas).map((q) => q.id),
-        durationMinutes: 70
+        questionIds: dia1Questoes.map((q) => q.id),
+        durationMinutes: Math.round(dia1Questoes.length * MINUTOS_POR_QUESTAO)
       },
       {
         id: 'dia2',
         label: 'Dia 2 — Natureza e Matemática',
         subjects: ['natureza', 'matematica'],
-        questionIds: interleave(natureza, matematica).map((q) => q.id),
-        durationMinutes: 70
+        questionIds: dia2Questoes.map((q) => q.id),
+        durationMinutes: Math.round(dia2Questoes.length * MINUTOS_POR_QUESTAO)
       }
     ];
   }, []);
@@ -66,6 +102,43 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
   const [completedDias, setCompletedDias] = useState<Partial<Record<'dia1' | 'dia2', SimuladoCompletoResultado>>>({});
   const [activeResultado, setActiveResultado] = useState<SimuladoCompletoResultado | null>(null);
   const finishedRef = useRef(false);
+
+  // Com 48 questões por área, um dia completo passa de 5 horas — perto da duração
+  // real do ENEM. Sem persistir, um F5 acidental ou a aba fechando no celular
+  // custaria a prova inteira; 70 minutos era um risco pequeno, 5h36 não é.
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(SIMULADO_STORAGE_KEY);
+      if (!raw) return;
+      const salvo = JSON.parse(raw) as ProvaEmAndamento;
+      const dia = dias.find((d) => d.id === salvo.diaId);
+      if (!dia || salvo.deadlineAt <= Date.now()) {
+        localStorage.removeItem(SIMULADO_STORAGE_KEY);
+        return;
+      }
+      setActiveDia(dia);
+      setAnswers(salvo.answers);
+      setCurrentIndex(salvo.currentIndex);
+      setDeadlineAt(salvo.deadlineAt);
+      setRemainingSeconds(Math.max(0, Math.round((salvo.deadlineAt - Date.now()) / 1000)));
+      setScreen('exam');
+    } catch {
+      // estado salvo corrompido: ignora e começa do zero
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Persiste a cada resposta e a cada troca de questão, enquanto a prova estiver
+  // em andamento.
+  useEffect(() => {
+    if (screen !== 'exam' || !activeDia || !deadlineAt) return;
+    try {
+      const salvo: ProvaEmAndamento = { diaId: activeDia.id, deadlineAt, answers, currentIndex };
+      localStorage.setItem(SIMULADO_STORAGE_KEY, JSON.stringify(salvo));
+    } catch {
+      // sem storage disponível: a prova segue funcionando, só sem recuperação
+    }
+  }, [screen, activeDia, deadlineAt, answers, currentIndex]);
 
   const activeQuestions = useMemo(
     () => (activeDia ? activeDia.questionIds.map((id) => questionsById.get(id)!).filter(Boolean) : []),
@@ -107,6 +180,11 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
     setCompletedDias((prev) => ({ ...prev, [activeDia.id]: resultado }));
     setActiveResultado(resultado);
     setScreen('resultado');
+    try {
+      localStorage.removeItem(SIMULADO_STORAGE_KEY);
+    } catch {
+      // sem storage disponível: nada a limpar
+    }
 
     if (acertos > 0) {
       try {
@@ -211,7 +289,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
                 </div>
                 <h2 className="text-lg font-bold text-[#191c1d]">{dia.label}</h2>
                 <p className="text-xs text-[#7b7487] mt-1 mb-4">
-                  {totalQuestions} questões • {dia.durationMinutes} minutos
+                  {totalQuestions} questões • {formatDuration(dia.durationMinutes)}
                 </p>
 
                 {resultado ? (
@@ -257,7 +335,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
         </div>
         <h1 className="text-xl md:text-2xl font-black text-[#191c1d] mb-2">{activeDia.label}</h1>
         <p className="text-sm text-[#4a4455] mb-6">
-          Você terá <strong>{activeDia.durationMinutes} minutos</strong> para responder{' '}
+          Você terá <strong>{formatDuration(activeDia.durationMinutes)}</strong> para responder{' '}
           <strong>{activeDia.questionIds.length} questões</strong>. As respostas corretas só aparecem no final —
           assim como na prova real, não há feedback imediato. O cronômetro não pausa depois de iniciado.
         </p>
