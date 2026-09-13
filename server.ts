@@ -8,6 +8,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import {
   MINIMUM_LINES,
+  AI_GRADING_ENABLED,
   AI_UNAVAILABLE_MESSAGE,
   estimatedLineCount,
   evaluateWithGemini,
@@ -64,6 +65,14 @@ app.post('/api/evaluate-redacao', async (req: Request, res: Response) => {
     return res.status(403).json({ error: NO_ACCESS_MESSAGE });
   }
 
+  if (!AI_GRADING_ENABLED) {
+    return res.status(200).json({
+      aiEvaluated: false,
+      reason: 'ai_desativada',
+      checklist: buildWritingChecklist(text)
+    });
+  }
+
   const quota = await getAiQuotaStatus(authUser.id);
 
   if (quota === 'unavailable') {
@@ -73,7 +82,7 @@ app.post('/api/evaluate-redacao', async (req: Request, res: Response) => {
   if (quota === 'exhausted') {
     return res.status(200).json({
       aiEvaluated: false,
-      limitReached: true,
+      reason: 'limite_diario',
       checklist: buildWritingChecklist(text)
     });
   }

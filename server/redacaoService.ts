@@ -2,6 +2,17 @@ import { GoogleGenAI, Type } from '@google/genai';
 
 export const MINIMUM_LINES = 8;
 
+// Correção por IA desligada enquanto a chave do Gemini estiver no tier gratuito,
+// que dá 20 requisições por dia por modelo. Nesse teto, o aluno recebia "correção
+// indisponível" com mais frequência do que recebia nota — pior do que não
+// oferecer o botão. Com a IA desligada, a Oficina segue entregando temas,
+// repertórios, fórmula da intervenção e a verificação estrutural do texto.
+//
+// Para religar: habilite o faturamento no projeto Google Cloud da chave
+// (ai.dev/rate-limit), troque para true e publique. Nada mais precisa mudar —
+// a cota diária por aluno e a cadeia de modelos continuam prontas.
+export const AI_GRADING_ENABLED = false;
+
 // Modelos de qualidade equivalente para esta tarefa, em ordem de preferência.
 // Cada um tem um pool de capacidade próprio, e em 13/09/2026 eles oscilaram de
 // forma independente ao longo do dia: o 3.7-flash passou a manhã em 503 e voltou

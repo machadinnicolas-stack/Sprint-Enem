@@ -15,6 +15,8 @@ const GENERIC_ERROR =
 // A grade is only ever shown when it came from the grader. The checklist variant
 // carries no score on purpose: a keyword scan cannot tell whether an essay is
 // good, and showing a number next to it would read as a grade.
+type ChecklistReason = 'ai_desativada' | 'limite_diario';
+
 type EvaluationResult =
   | {
       kind: 'ai';
@@ -22,7 +24,7 @@ type EvaluationResult =
       generalComment: string;
       competencies: { name: string; score: number; tip: string }[];
     }
-  | { kind: 'checklist'; items: { name: string; ok: boolean; tip: string }[] };
+  | { kind: 'checklist'; reason: ChecklistReason; items: { name: string; ok: boolean; tip: string }[] };
 
 export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) => {
   const [themes] = useState<RedacaoTheme[]>(REDACAO_THEMES);
@@ -77,7 +79,11 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
         return;
       }
 
-      setResult({ kind: 'checklist', items: data?.checklist ?? [] });
+      setResult({
+        kind: 'checklist',
+        reason: data?.reason === 'limite_diario' ? 'limite_diario' : 'ai_desativada',
+        items: data?.checklist ?? []
+      });
     } catch {
       setError(GENERIC_ERROR);
     } finally {
@@ -218,7 +224,7 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
             ) : (
               <>
                 <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
-                <span>Avaliar Redação com IA</span>
+                <span>Analisar meu texto</span>
               </>
             )}
           </button>
@@ -287,8 +293,9 @@ export const RedacaoHub: React.FC<RedacaoHubProps> = ({ onEvaluationComplete }) 
         {result?.kind === 'checklist' && (
           <div className="mt-6 p-5 rounded-2xl bg-[#f8f9fa] border border-[#e1e3e4] space-y-4 animate-in fade-in duration-300">
             <div className="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2">
-              Você já usou suas correções por IA de hoje. Abaixo está uma verificação estrutural automática do seu
-              texto — ela não atribui nota. Volte amanhã para uma nova correção por IA.
+              {result.reason === 'limite_diario'
+                ? 'Você já usou suas correções por IA de hoje. Abaixo está uma verificação estrutural automática do seu texto — ela não atribui nota. Volte amanhã para uma nova correção por IA.'
+                : 'A correção com nota por IA está temporariamente desativada. Abaixo está uma verificação estrutural automática do seu texto — ela aponta o que falta, mas não atribui nota.'}
             </div>
 
             <div>

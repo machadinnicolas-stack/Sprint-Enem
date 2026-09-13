@@ -1,5 +1,6 @@
 import {
   MINIMUM_LINES,
+  AI_GRADING_ENABLED,
   AI_UNAVAILABLE_MESSAGE,
   estimatedLineCount,
   evaluateWithGemini,
@@ -49,6 +50,14 @@ export default async function handler(req: any, res: any) {
     return res.status(403).json({ error: NO_ACCESS_MESSAGE });
   }
 
+  if (!AI_GRADING_ENABLED) {
+    return res.status(200).json({
+      aiEvaluated: false,
+      reason: 'ai_desativada',
+      checklist: buildWritingChecklist(text),
+    });
+  }
+
   const quota = await getAiQuotaStatus(authUser.id);
 
   if (quota === 'unavailable') {
@@ -58,7 +67,7 @@ export default async function handler(req: any, res: any) {
   if (quota === 'exhausted') {
     return res.status(200).json({
       aiEvaluated: false,
-      limitReached: true,
+      reason: 'limite_diario',
       checklist: buildWritingChecklist(text),
     });
   }
