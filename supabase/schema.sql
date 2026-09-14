@@ -9,6 +9,11 @@ create table if not exists public.user_data (
   updated_at timestamptz not null default now()
 );
 
+-- Revisão espaçada (Leitner): estado por questão { box, nextReviewAt,
+-- timesSeen, timesCorrect }, chaveado pelo id da questão. add column if not
+-- exists é seguro rodar de novo em uma tabela que já existe.
+alter table public.user_data add column if not exists spaced_repetition jsonb;
+
 -- Mantém updated_at sempre atualizado em cada UPDATE, sem precisar setar no client.
 create or replace function public.set_updated_at()
 returns trigger

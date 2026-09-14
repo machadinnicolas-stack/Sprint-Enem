@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion } from 'motion/react';
-import { UserPreferences, GeneratedPlan, StudyBlock, UserGamificationState, Badge, SubjectType } from './types';
-import { generateStudyPlan, buildDaySchedule, regenerateDaySubject } from './data/enemData';
+import { UserPreferences, GeneratedPlan, StudyBlock, UserGamificationState, Badge, SubjectType, ExamQuestion, SpacedRepetitionState } from './types';
+import { generateStudyPlan, buildDaySchedule, regenerateDaySubject, MOCK_QUESTIONS } from './data/enemData';
 import { getInitialGamificationState, reconcileGamificationState, processGamificationEvent, getLevelInfo } from './data/gamificationData';
+import { registrarResposta, questoesPendentes } from './data/spacedRepetition';
 import { useAuth } from './hooks/useAuth';
 import { useEntitlement } from './hooks/useEntitlement';
 import { loadUserData, saveUserData } from './services/userData';
@@ -17,6 +18,7 @@ import { CronogramaView } from './components/CronogramaView';
 import { ChecklistIncidencia } from './components/ChecklistIncidencia';
 import { SimuladoTRI } from './components/SimuladoTRI';
 import { SimuladoCompleto } from './components/SimuladoCompleto';
+import { RevisaoEspacada } from './components/RevisaoEspacada';
 import { RedacaoHub } from './components/RedacaoHub';
 import { PomodoroTimerModal } from './components/PomodoroTimerModal';
 import { BadgesModal } from './components/BadgesModal';
@@ -40,8 +42,9 @@ export default function App() {
 
   const [preferences, setPreferences] = useState<UserPreferences>(DEFAULT_PREFERENCES);
   const [gamification, setGamification] = useState<UserGamificationState>(getInitialGamificationState());
+  const [spacedRepetition, setSpacedRepetition] = useState<SpacedRepetitionState>({});
   const [activeTab, setActiveTab] = useState<'personalizar' | 'cronograma' | 'incidencia' | 'simulado' | 'redacao'>('personalizar');
-  const [simuladoMode, setSimuladoMode] = useState<'rapido' | 'completo'>('rapido');
+  const [simuladoMode, setSimuladoMode] = useState<'rapido' | 'completo' | 'revisao'>('rapido');
   const [plan, setPlan] = useState<GeneratedPlan>(() => generateStudyPlan(DEFAULT_PREFERENCES));
   const [selectedBlockForTimer, setSelectedBlockForTimer] = useState<StudyBlock | null>(null);
   const [isBadgesModalOpen, setIsBadgesModalOpen] = useState(false);
@@ -76,6 +79,7 @@ export default function App() {
         setPreferences(loadedPrefs);
         setGamification(reconcileGamificationState(data.gamification));
         setPlan(data.plan ?? generateStudyPlan(loadedPrefs));
+        setSpacedRepetition(data.spacedRepetition ?? {});
         // Returning users with an existing plan land on their cronograma, not back at onboarding.
         if (data.preferences) setActiveTab('cronograma');
         setDataReady(true);
@@ -97,7 +101,7 @@ export default function App() {
 
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
     saveTimeoutRef.current = setTimeout(() => {
-      saveUserData(user.id, { preferences, gamification, plan }).catch(() => {
+      saveUserData(user.id, { preferences, gamification, plan, spacedRepetition }).catch(() => {
         // safe fallback: next change will retry the save
       });
     }, 800);
@@ -105,7 +109,7 @@ export default function App() {
     return () => {
       if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
     };
-  }, [user, hasAccess, dataReady, preferences, gamification, plan]);
+  }, [user, hasAccess, dataReady, preferences, gamification, plan, spacedRepetition]);
 
   const handleGeneratePlan = (newPrefs: UserPreferences) => {
     setPreferences(newPrefs);
@@ -300,7 +304,16 @@ export default function App() {
     }
   };
 
-  const handleSimuladoAnswered = (isCorrect: boolean) => {
+  // Alimenta o sistema de revisão espaçada — chamado a partir do Treino Rápido,
+  // do Simulado Completo e da própria tela de Revisão, sempre que uma questão
+  // é respondida.
+  const handleSpacedRepetitionAnswer = (question: ExamQuestion, isCorrect: boolean) => {
+    setSpacedRepetition((prev) => registrarResposta(prev, question.id, isCorrect));
+  };
+
+  const handleSimuladoAnswered = (question: ExamQuestion, isCorrect: boolean) => {
+    handleSpacedRepetitionAnswer(question, isCorrect);
+
     if (!isCorrect) return;
     const { newState, newlyUnlocked, levelUp } = processGamificationEvent(gamification, {
       type: 'simulado_answered'
@@ -362,6 +375,11 @@ export default function App() {
       });
     }
   };
+
+  const revisoesPendentes = useMemo(
+    () => questoesPendentes(spacedRepetition, MOCK_QUESTIONS).length,
+    [spacedRepetition]
+  );
 
   const spinner = (
     <div className="min-h-screen bg-[#e9e3f4]/70 flex items-center justify-center">
@@ -465,12 +483,37 @@ export default function App() {
                 >
                   Simulado Completo
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setSimuladoMode('revisao')}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                    simuladoMode === 'revisao'
+                      ? 'bg-[#7c3aed] text-white shadow-xs'
+                      : 'bg-white border border-[#d6cce8] text-[#4a4455] hover:border-[#7c3aed]'
+                  }`}
+                >
+                  <span>Revisão</span>
+                  {revisoesPendentes > 0 && (
+                    <span
+                      className={`text-[10px] font-black px-1.5 rounded-full ${
+                        simuladoMode === 'revisao' ? 'bg-white/25 text-white' : 'bg-amber-200 text-amber-900'
+                      }`}
+                    >
+                      {revisoesPendentes}
+                    </span>
+                  )}
+                </button>
               </div>
 
-              {simuladoMode === 'rapido' ? (
-                <SimuladoTRI onAnswerQuestion={handleSimuladoAnswered} />
-              ) : (
-                <SimuladoCompleto onFinishedDia={handleSimuladoCompletoFinished} />
+              {simuladoMode === 'rapido' && <SimuladoTRI onAnswerQuestion={handleSimuladoAnswered} />}
+              {simuladoMode === 'completo' && (
+                <SimuladoCompleto
+                  onFinishedDia={handleSimuladoCompletoFinished}
+                  onQuestionAnswered={handleSpacedRepetitionAnswer}
+                />
+              )}
+              {simuladoMode === 'revisao' && (
+                <RevisaoEspacada spacedRepetition={spacedRepetition} onAnswer={handleSpacedRepetitionAnswer} />
               )}
             </div>
           )}

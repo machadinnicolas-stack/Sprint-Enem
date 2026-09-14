@@ -138,3 +138,15 @@ export interface SimuladoCompletoResultado {
   tempoGastoSegundos: number;
   notaEstimadaPorArea: Record<string, number>;
 }
+
+// Estado de uma questão dentro do sistema de revisão espaçada (Leitner, 5
+// caixas). Só existe uma entrada aqui para questões que o aluno já errou pelo
+// menos uma vez — ver src/data/spacedRepetition.ts.
+export interface RevisaoQuestaoState {
+  box: number;
+  nextReviewAt: string;
+  timesSeen: number;
+  timesCorrect: number;
+}
+
+export type SpacedRepetitionState = Record<string, RevisaoQuestaoState>;

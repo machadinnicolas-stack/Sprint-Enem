@@ -5,7 +5,7 @@ import { ExamQuestion, SubjectType } from '../types';
 import confetti from 'canvas-confetti';
 
 interface SimuladoTRIProps {
-  onAnswerQuestion?: (isCorrect: boolean) => void;
+  onAnswerQuestion?: (question: ExamQuestion, isCorrect: boolean) => void;
 }
 
 const AREA_FILTERS: { id: SubjectType | 'todos'; label: string }[] = [
@@ -76,7 +76,7 @@ export const SimuladoTRI: React.FC<SimuladoTRIProps> = ({ onAnswerQuestion }) =>
     }
 
     if (onAnswerQuestion) {
-      onAnswerQuestion(isCorrect);
+      onAnswerQuestion(currentQ, isCorrect);
     }
   };
 

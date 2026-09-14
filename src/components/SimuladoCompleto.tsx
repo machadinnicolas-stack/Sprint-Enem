@@ -6,6 +6,7 @@ import confetti from 'canvas-confetti';
 
 interface SimuladoCompletoProps {
   onFinishedDia?: (correctCount: number, totalCount: number) => void;
+  onQuestionAnswered?: (question: ExamQuestion, isCorrect: boolean) => void;
 }
 
 type Screen = 'landing' | 'intro' | 'exam' | 'resultado';
@@ -68,7 +69,7 @@ function formatTime(totalSeconds: number): string {
   return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
-export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDia }) => {
+export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDia, onQuestionAnswered }) => {
   const questionsById = useMemo(() => {
     const map = new Map<string, ExamQuestion>();
     MOCK_QUESTIONS.forEach((q) => map.set(q.id, q));
@@ -176,9 +177,16 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
 
     activeQuestions.forEach((q) => {
       bySubject[q.subject].total += 1;
-      if (answers[q.id] === q.correctLetter) {
+      const respondida = answers[q.id];
+      const acertou = respondida === q.correctLetter;
+      if (acertou) {
         acertos += 1;
         bySubject[q.subject].acertos += 1;
+      }
+      // Questão em branco não entra na revisão espaçada — o aluno não deu
+      // nenhum sinal sobre ela, diferente de tê-la respondido errada.
+      if (respondida !== undefined) {
+        onQuestionAnswered?.(q, acertou);
       }
     });
 
@@ -213,7 +221,7 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
     }
 
     onFinishedDia?.(acertos, activeQuestions.length);
-  }, [activeDia, activeQuestions, answers, remainingSeconds, onFinishedDia]);
+  }, [activeDia, activeQuestions, answers, remainingSeconds, onFinishedDia, onQuestionAnswered]);
 
   // Countdown ticks every second while an exam is in progress; auto-submits at zero.
   useEffect(() => {
