@@ -999,5 +999,487 @@ export const MATEMATICA_QUESTIONS: ExamQuestion[] = [
       'Trata-se de uma PA com a₁ = 3 km e razão 0,5 km. O oitavo termo é a₈ = 3 + 7 × 0,5 = 6,5 km. A soma dos 8 termos é Sₙ = (a₁ + aₙ) · n / 2 = (3 + 6,5) × 8 / 2 = 9,5 × 4 = 38 km.',
     triTip:
       'A questão pede o TOTAL acumulado, não a distância da última semana. Calcule o último termo e aplique a fórmula da soma — parar no a₈ é o erro que a alternativa de 6,5 km exploraria.'
+  },
+
+  // ---------------------------------------------------------------- Lote 2 (mat-49 a mat-72)
+  {
+    ...base,
+    id: 'mat-49',
+    topic: 'Porcentagem — reajuste',
+    difficulty: 'Fácil',
+    question:
+      'Uma prestação de serviço custava R$ 180,00 e sofreu reajuste de 15%. Qual é o novo valor da prestação?',
+    options: [
+      { letter: 'A', text: 'R$ 207,00' },
+      { letter: 'B', text: 'R$ 216,00' },
+      { letter: 'C', text: 'R$ 225,00' },
+      { letter: 'D', text: 'R$ 234,00' },
+      { letter: 'E', text: 'R$ 270,00' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O reajuste de 15% aplicado ao valor original: 180 × 1,15 = R$ 207,00.',
+    triTip:
+      'Reajuste direto: multiplique o valor por (1 + a taxa em decimal). Não some a porcentagem ao número de reais.'
+  },
+  {
+    ...base,
+    id: 'mat-50',
+    topic: 'Porcentagem — variação percentual em desconto',
+    difficulty: 'Média',
+    question:
+      'Uma bicicleta custava R$ 900,00 e, após promoção, passou a custar R$ 720,00. Qual foi o percentual de desconto aplicado?',
+    options: [
+      { letter: 'A', text: '15%' },
+      { letter: 'B', text: '20%' },
+      { letter: 'C', text: '25%' },
+      { letter: 'D', text: '30%' },
+      { letter: 'E', text: '80%' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'O desconto é calculado sobre o valor original: (900 − 720) / 900 = 180/900 = 0,20 = 20%.',
+    triTip:
+      'A variação percentual sempre se divide pelo valor de PARTIDA, nunca pelo valor final.'
+  },
+  {
+    ...base,
+    id: 'mat-51',
+    topic: 'Matemática financeira — juros compostos curtos',
+    difficulty: 'Média',
+    question:
+      'Um valor de R$ 4.000,00 é aplicado a juros compostos de 5% ao mês, por 2 meses. Qual é o montante final?',
+    options: [
+      { letter: 'A', text: 'R$ 4.200,00' },
+      { letter: 'B', text: 'R$ 4.400,00' },
+      { letter: 'C', text: 'R$ 4.410,00' },
+      { letter: 'D', text: 'R$ 4.420,00' },
+      { letter: 'E', text: 'R$ 4.500,00' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'No regime composto, M = C × (1 + i)ⁿ = 4000 × 1,05² = 4000 × 1,1025 = R$ 4.410,00. A alternativa R$ 4.400,00 corresponde ao regime de juros simples (4000 + 2 × 200).',
+    triTip:
+      'Mesmo em prazos curtos, composto e simples já divergem. Confira sempre qual regime o enunciado pede antes de escolher a fórmula.'
+  },
+  {
+    ...base,
+    id: 'mat-52',
+    topic: 'Estatística — média aritmética',
+    difficulty: 'Fácil',
+    question:
+      'As notas de um aluno em quatro provas foram 6, 7, 9 e 10. Qual é a média aritmética dessas notas?',
+    options: [
+      { letter: 'A', text: '6,5' },
+      { letter: 'B', text: '7,0' },
+      { letter: 'C', text: '7,5' },
+      { letter: 'D', text: '8,0' },
+      { letter: 'E', text: '9,0' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A média é a soma dividida pela quantidade de valores: (6 + 7 + 9 + 10) / 4 = 32 / 4 = 8,0.',
+    triTip:
+      'Sempre confira a quantidade de valores que está dividindo a soma — esquecer um termo é o erro mais comum nessas contas.'
+  },
+  {
+    ...base,
+    id: 'mat-53',
+    topic: 'Estatística — mediana em conjunto par',
+    difficulty: 'Média',
+    question:
+      'Uma pesquisa registrou as idades de seis participantes: 22, 25, 19, 31, 28 e 24. Qual é a mediana dessas idades?',
+    options: [
+      { letter: 'A', text: '19' },
+      { letter: 'B', text: '22' },
+      { letter: 'C', text: '23' },
+      { letter: 'D', text: '24' },
+      { letter: 'E', text: '24,5' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'Ordenando: 19, 22, 24, 25, 28, 31. Com seis valores, a mediana é a média dos dois centrais: (24 + 25) / 2 = 24,5.',
+    triTip:
+      'Mediana exige os dados ORDENADOS primeiro. Com quantidade par de valores, é sempre a média dos dois centrais, não um deles isoladamente.'
+  },
+  {
+    ...base,
+    id: 'mat-54',
+    topic: 'Estatística — moda',
+    difficulty: 'Média',
+    question:
+      'Uma turma registrou as seguintes notas em uma prova: 4, 5, 5, 5, 6, 8, 9, 9, 10 e 10. Qual é a moda dessa distribuição?',
+    options: [
+      { letter: 'A', text: '5' },
+      { letter: 'B', text: '6' },
+      { letter: 'C', text: '7' },
+      { letter: 'D', text: '7,1' },
+      { letter: 'E', text: '9' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O valor 5 aparece três vezes, mais que qualquer outro na distribuição — é a moda. O valor 7,1 corresponde à média [(4+5+5+5+6+8+9+9+10+10)/10], não à moda.',
+    triTip:
+      'Moda é frequência, não posição nem cálculo. Basta contar qual valor mais se repete.'
+  },
+  {
+    ...base,
+    id: 'mat-55',
+    topic: 'Geometria plana — perímetro do retângulo',
+    difficulty: 'Fácil',
+    question:
+      'Um retângulo tem perímetro de 40 metros e largura de 6 metros. Qual é o comprimento desse retângulo?',
+    options: [
+      { letter: 'A', text: '10 m' },
+      { letter: 'B', text: '14 m' },
+      { letter: 'C', text: '16 m' },
+      { letter: 'D', text: '20 m' },
+      { letter: 'E', text: '34 m' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'O perímetro é 2 × (comprimento + largura): 40 = 2 × (c + 6), logo c + 6 = 20 e c = 14 metros.',
+    triTip:
+      'Divida o perímetro por 2 para obter a soma de um comprimento com uma largura — a partir daí, isolar a incógnita é direto.'
+  },
+  {
+    ...base,
+    id: 'mat-56',
+    topic: 'Geometria plana — teorema de Pitágoras',
+    difficulty: 'Média',
+    question:
+      'Uma escada de 13 metros está apoiada em uma parede, com a base a 5 metros do pé da parede. A que altura da parede o topo da escada se encontra?',
+    options: [
+      { letter: 'A', text: '8 m' },
+      { letter: 'B', text: '10 m' },
+      { letter: 'C', text: '12 m' },
+      { letter: 'D', text: '13 m' },
+      { letter: 'E', text: '18 m' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'A escada é a hipotenusa: 13² = 5² + h², logo h² = 169 − 25 = 144 e h = 12 metros — o trio pitagórico 5-12-13.',
+    triTip:
+      'Além do trio 3-4-5, memorize também 5-12-13 e 6-8-10 — eles aparecem com frequência e dispensam a raiz quadrada.'
+  },
+  {
+    ...base,
+    id: 'mat-57',
+    topic: 'Geometria plana — área do trapézio',
+    difficulty: 'Média',
+    question:
+      'Um terreno tem formato de trapézio, com bases paralelas de 20 m e 30 m e altura de 10 m. Qual é a área desse terreno?',
+    options: [
+      { letter: 'A', text: '200 m²' },
+      { letter: 'B', text: '220 m²' },
+      { letter: 'C', text: '240 m²' },
+      { letter: 'D', text: '250 m²' },
+      { letter: 'E', text: '300 m²' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A área do trapézio é (base maior + base menor) / 2 × altura: (30 + 20) / 2 × 10 = 25 × 10 = 250 m².',
+    triTip:
+      'A fórmula do trapézio é a média das duas bases multiplicada pela altura — pense nela como um retângulo "equivalente".'
+  },
+  {
+    ...base,
+    id: 'mat-58',
+    topic: 'Função afim — corrida de táxi',
+    difficulty: 'Fácil',
+    question:
+      'Uma empresa de táxi cobra bandeirada de R$ 5,00 mais R$ 3,00 por quilômetro rodado. Qual é o valor de uma corrida de 15 km?',
+    options: [
+      { letter: 'A', text: 'R$ 20,00' },
+      { letter: 'B', text: 'R$ 32,00' },
+      { letter: 'C', text: 'R$ 41,00' },
+      { letter: 'D', text: 'R$ 47,00' },
+      { letter: 'E', text: 'R$ 50,00' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'O valor total é P(d) = 5 + 3d. Para d = 15: P(15) = 5 + 3 × 15 = 5 + 45 = R$ 50,00.',
+    triTip:
+      'Identifique a bandeirada como o valor fixo e o custo por km como a taxa variável — é a mesma estrutura de toda função afim de tarifa.'
+  },
+  {
+    ...base,
+    id: 'mat-59',
+    topic: 'Função quadrática — vértice em contexto de lucro',
+    difficulty: 'Difícil',
+    question:
+      'O lucro L, em milhares de reais, de uma empresa é dado por L(x) = −x² + 12x − 20, sendo x a quantidade de unidades vendidas, em centenas. Qual é a quantidade de unidades (em centenas) que maximiza o lucro?',
+    options: [
+      { letter: 'A', text: '6' },
+      { letter: 'B', text: '8' },
+      { letter: 'C', text: '10' },
+      { letter: 'D', text: '12' },
+      { letter: 'E', text: '20' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O lucro máximo ocorre no vértice da parábola: x = −b / (2a) = −12 / (2 × −1) = 6.',
+    triTip:
+      'A fórmula do vértice (xv = −b/2a) resolve qualquer questão de máximo ou mínimo de função quadrática — não é preciso testar valores.'
+  },
+  {
+    ...base,
+    id: 'mat-60',
+    topic: 'Função exponencial — depreciação',
+    difficulty: 'Difícil',
+    question:
+      'O valor de um carro se deprecia 10% ao ano. Se ele custa hoje R$ 50.000,00, qual será seu valor aproximado após 2 anos?',
+    options: [
+      { letter: 'A', text: 'R$ 40.000,00' },
+      { letter: 'B', text: 'R$ 40.500,00' },
+      { letter: 'C', text: 'R$ 45.000,00' },
+      { letter: 'D', text: 'R$ 49.000,00' },
+      { letter: 'E', text: 'R$ 50.000,00' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'A depreciação composta multiplica o valor por (1 − taxa) a cada ano: 50000 × 0,9² = 50000 × 0,81 = R$ 40.500,00.',
+    triTip:
+      'Depreciação funciona como juros compostos, mas com fator menor que 1 — o valor cai progressivamente mais devagar em termos absolutos.'
+  },
+  {
+    ...base,
+    id: 'mat-61',
+    topic: 'Razão e proporção — produção industrial',
+    difficulty: 'Média',
+    question:
+      'Uma fábrica de sucos usa 3 kg de polpa de fruta para produzir 50 litros de suco. Mantendo essa proporção, quantos quilogramas de polpa são necessários para produzir 175 litros?',
+    options: [
+      { letter: 'A', text: '8 kg' },
+      { letter: 'B', text: '9 kg' },
+      { letter: 'C', text: '10,5 kg' },
+      { letter: 'D', text: '12 kg' },
+      { letter: 'E', text: '15 kg' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'Regra de três direta: 3 × (175 / 50) = 3 × 3,5 = 10,5 kg.',
+    triTip:
+      'Antes de multiplicar, confirme que a proporção é direta: mais suco exige mais polpa, na mesma razão.'
+  },
+  {
+    ...base,
+    id: 'mat-62',
+    topic: 'Razão e proporção — taxas de trabalho conjunto',
+    difficulty: 'Difícil',
+    question:
+      'Uma torneira enche sozinha um tanque em 6 horas. Duas torneiras idênticas, operando juntas, enchem o mesmo tanque em quanto tempo?',
+    options: [
+      { letter: 'A', text: '1,5 hora' },
+      { letter: 'B', text: '2 horas' },
+      { letter: 'C', text: '2,5 horas' },
+      { letter: 'D', text: '3 horas' },
+      { letter: 'E', text: '6 horas' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A taxa de uma torneira é 1/6 do tanque por hora. Duas juntas somam 2/6 = 1/3 do tanque por hora, e o tempo é o inverso: 3 horas.',
+    triTip:
+      'Em problemas de torneiras ou trabalho conjunto, some as TAXAS (frações do trabalho por hora), nunca os tempos diretamente.'
+  },
+  {
+    ...base,
+    id: 'mat-63',
+    topic: 'Razão e proporção — escala de miniatura',
+    difficulty: 'Média',
+    question:
+      'Uma miniatura de carro é construída na escala 1:20. Se o carro real mede 3 metros de comprimento, qual é o comprimento da miniatura, em centímetros?',
+    options: [
+      { letter: 'A', text: '0,15 cm' },
+      { letter: 'B', text: '6 cm' },
+      { letter: 'C', text: '10 cm' },
+      { letter: 'D', text: '12 cm' },
+      { letter: 'E', text: '15 cm' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'Convertendo primeiro: 3 m = 300 cm. Aplicando a escala: 300 / 20 = 15 cm.',
+    triTip:
+      'Converta para a mesma unidade ANTES de aplicar a escala — misturar metros e centímetros na divisão é o erro mais comum.'
+  },
+  {
+    ...base,
+    id: 'mat-64',
+    topic: 'Geometria espacial — volume do paralelepípedo',
+    difficulty: 'Fácil',
+    question:
+      'Uma caixa de sapato tem formato de paralelepípedo com dimensões 30 cm × 20 cm × 12 cm. Qual é o volume dessa caixa, em centímetros cúbicos?',
+    options: [
+      { letter: 'A', text: '600 cm³' },
+      { letter: 'B', text: '2 400 cm³' },
+      { letter: 'C', text: '3 600 cm³' },
+      { letter: 'D', text: '6 000 cm³' },
+      { letter: 'E', text: '7 200 cm³' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'O volume é o produto das três dimensões: 30 × 20 × 12 = 7 200 cm³. O valor 2 400 cm² corresponde à área da superfície total da caixa, não ao volume.',
+    triTip:
+      'Volume multiplica as três dimensões; área de superfície soma as áreas das faces. São grandezas diferentes e não devem ser confundidas.'
+  },
+  {
+    ...base,
+    id: 'mat-65',
+    topic: 'Geometria espacial — volume do cone',
+    difficulty: 'Média',
+    question:
+      'Um cone tem raio da base igual a 3 cm e altura de 4 cm. Usando π ≈ 3, qual é o volume desse cone?',
+    options: [
+      { letter: 'A', text: '12 cm³' },
+      { letter: 'B', text: '27 cm³' },
+      { letter: 'C', text: '36 cm³' },
+      { letter: 'D', text: '48 cm³' },
+      { letter: 'E', text: '108 cm³' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'O volume do cone é V = (1/3) × π × r² × h = (1/3) × 3 × 9 × 4 = 36 cm³. Esquecer o fator 1/3 levaria a 108 cm³.',
+    triTip:
+      'O volume do cone é sempre um terço do volume do cilindro de mesma base e altura — não esqueça esse fator na fórmula.'
+  },
+  {
+    ...base,
+    id: 'mat-66',
+    topic: 'Probabilidade — dois eventos simultâneos',
+    difficulty: 'Fácil',
+    question:
+      'Duas moedas honestas são lançadas simultaneamente. Qual é a probabilidade de sair pelo menos uma cara?',
+    options: [
+      { letter: 'A', text: '12,5%' },
+      { letter: 'B', text: '25%' },
+      { letter: 'C', text: '50%' },
+      { letter: 'D', text: '75%' },
+      { letter: 'E', text: '100%' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'O espaço amostral tem 4 resultados (cara-cara, cara-coroa, coroa-cara, coroa-coroa). Apenas coroa-coroa não tem nenhuma cara, então "pelo menos uma cara" ocorre em 3 dos 4 casos: 75%.',
+    triTip:
+      '"Pelo menos um" costuma ser mais fácil de calcular pelo complementar: 100% menos a probabilidade de não ocorrer nenhuma vez.'
+  },
+  {
+    ...base,
+    id: 'mat-67',
+    topic: 'Probabilidade — eventos sucessivos sem reposição',
+    difficulty: 'Difícil',
+    question:
+      'Uma urna tem 3 bolas vermelhas e 2 azuis. Duas bolas são retiradas sucessivamente, sem reposição. Qual é a probabilidade de as duas serem vermelhas?',
+    options: [
+      { letter: 'A', text: '24%' },
+      { letter: 'B', text: '30%' },
+      { letter: 'C', text: '50%' },
+      { letter: 'D', text: '60%' },
+      { letter: 'E', text: '36%' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'A primeira retirada tem probabilidade 3/5; sem reposição, a segunda tem probabilidade 2/4. O produto é (3/5) × (2/4) = 6/20 = 30%.',
+    triTip:
+      '"Sem reposição" muda o total disponível na segunda retirada — esquecer isso e usar 3/5 nas duas vezes é o erro que a alternativa de 36% testa.'
+  },
+  {
+    ...base,
+    id: 'mat-68',
+    topic: 'Combinatória — anagramas',
+    difficulty: 'Fácil',
+    question:
+      'Quantos anagramas distintos podem ser formados com as letras da palavra AMOR?',
+    options: [
+      { letter: 'A', text: '4' },
+      { letter: 'B', text: '12' },
+      { letter: 'C', text: '16' },
+      { letter: 'D', text: '24' },
+      { letter: 'E', text: '256' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'Com 4 letras distintas, o número de anagramas é 4! = 4 × 3 × 2 × 1 = 24.',
+    triTip:
+      'Quando todas as letras são diferentes, o número de anagramas é sempre o fatorial da quantidade de letras.'
+  },
+  {
+    ...base,
+    id: 'mat-69',
+    topic: 'Combinatória — combinação simples',
+    difficulty: 'Média',
+    question:
+      'Uma pizzaria oferece 6 sabores diferentes. De quantas formas um cliente pode escolher 2 sabores diferentes para uma pizza meio a meio?',
+    options: [
+      { letter: 'A', text: '6' },
+      { letter: 'B', text: '15' },
+      { letter: 'C', text: '30' },
+      { letter: 'D', text: '36' },
+      { letter: 'E', text: '720' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'Como não há distinção de "metades", a ordem não importa: C(6,2) = (6 × 5) / 2 = 15. O valor 30 corresponde ao arranjo, usado quando a ordem importaria.',
+    triTip:
+      'Pizza meio a meio não tem posição fixa para cada sabor — a escolha é uma combinação, não um arranjo.'
+  },
+  {
+    ...base,
+    id: 'mat-70',
+    topic: 'Grandezas e medidas — velocidade',
+    difficulty: 'Média',
+    question:
+      'Um trem percorre 90 km em 45 minutos, mantendo velocidade constante. Qual é a velocidade desse trem em km/h?',
+    options: [
+      { letter: 'A', text: '45 km/h' },
+      { letter: 'B', text: '90 km/h' },
+      { letter: 'C', text: '108 km/h' },
+      { letter: 'D', text: '120 km/h' },
+      { letter: 'E', text: '135 km/h' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'Convertendo 45 minutos para horas (0,75 h): velocidade = 90 / 0,75 = 120 km/h.',
+    triTip:
+      'Para obter km/h, o tempo precisa estar em horas. Converter minutos para horas antes de dividir evita o erro mais comum dessas questões.'
+  },
+  {
+    ...base,
+    id: 'mat-71',
+    topic: 'Progressão aritmética — soma dos termos',
+    difficulty: 'Média',
+    question:
+      'Numa progressão aritmética, o primeiro termo é 4 e a razão é 5. Qual é a soma dos 10 primeiros termos?',
+    options: [
+      { letter: 'A', text: '130' },
+      { letter: 'B', text: '220' },
+      { letter: 'C', text: '245' },
+      { letter: 'D', text: '265' },
+      { letter: 'E', text: '490' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'O décimo termo é a₁₀ = 4 + 9 × 5 = 49. A soma é Sₙ = (a₁ + aₙ) × n / 2 = (4 + 49) × 10 / 2 = 265.',
+    triTip:
+      'Calcule sempre o último termo antes da soma — tentar somar termo a termo é lento e propenso a erro.'
+  },
+  {
+    ...base,
+    id: 'mat-72',
+    topic: 'Progressão geométrica — termo geral',
+    difficulty: 'Difícil',
+    question:
+      'Numa progressão geométrica, o primeiro termo é 3 e a razão é 2. Qual é o quinto termo dessa sequência?',
+    options: [
+      { letter: 'A', text: '11' },
+      { letter: 'B', text: '24' },
+      { letter: 'C', text: '32' },
+      { letter: 'D', text: '48' },
+      { letter: 'E', text: '96' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'O termo geral da PG é aₙ = a₁ × qⁿ⁻¹. Para n = 5: a₅ = 3 × 2⁴ = 3 × 16 = 48. A alternativa 11 resulta de aplicar a fórmula da PA por engano (3 + 2 × 4).',
+    triTip:
+      'Não confunda o termo geral da PG (multiplicação por potência da razão) com o da PA (soma de múltiplos da razão) — são estruturas diferentes.'
   }
 ];

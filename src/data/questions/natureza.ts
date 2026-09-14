@@ -1021,5 +1021,501 @@ export const NATUREZA_QUESTIONS: ExamQuestion[] = [
       'Os óxidos de enxofre e de nitrogênio reagem com a água da atmosfera formando ácido sulfúrico e ácido nítrico. Os óxidos de metais alcalinos e alcalinoterrosos são básicos e teriam efeito oposto.',
     triTip:
       'Óxidos de não metais são ácidos; óxidos de metais são básicos. Essa regra sozinha elimina três alternativas nessa questão e em muitas outras de química ambiental.'
+  },
+
+  // ================================================================ LOTE 2 (nat-49 a nat-72)
+  // ---- Biologia (8)
+  {
+    ...base,
+    id: 'nat-49',
+    topic: 'Ecologia — sucessão ecológica',
+    difficulty: 'Média',
+    question:
+      'Após um incêndio florestal, uma área anteriormente coberta por floresta é inicialmente colonizada por líquens e gramíneas, sendo gradualmente substituída por arbustos e, décadas depois, por árvores de grande porte. Esse processo de substituição progressiva de comunidades é denominado:',
+    options: [
+      { letter: 'A', text: 'Sucessão ecológica secundária' },
+      { letter: 'B', text: 'Sucessão primária' },
+      { letter: 'C', text: 'Deriva genética' },
+      { letter: 'D', text: 'Especiação simpátrica' },
+      { letter: 'E', text: 'Bioacumulação' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'A sucessão secundária ocorre em área que já teve vida e mantém solo formado, como após um incêndio ou desmatamento. A sucessão primária, por sua vez, parte de substrato estéril, como rocha nua ou lava vulcânica.',
+    triTip:
+      'Diferencie sucessão primária (substrato estéril, sem solo) de secundária (solo preservado, após perturbação como fogo ou desmatamento).'
+  },
+  {
+    ...base,
+    id: 'nat-50',
+    topic: 'Ecologia — pirâmide de energia',
+    difficulty: 'Fácil',
+    question:
+      'Em uma pirâmide ecológica de energia, o valor no topo (últimos consumidores) é sempre:',
+    options: [
+      { letter: 'A', text: 'maior que a base' },
+      { letter: 'B', text: 'igual à base' },
+      { letter: 'C', text: 'menor que a base' },
+      { letter: 'D', text: 'inexistente' },
+      { letter: 'E', text: 'variável de forma aleatória' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'A energia se dissipa a cada nível trófico, principalmente como calor da respiração celular, de modo que a pirâmide de energia é sempre decrescente da base ao topo, sem exceção.',
+    triTip:
+      'A pirâmide de energia nunca se inverte — diferente da pirâmide de biomassa ou de números, que pode se inverter em certos ecossistemas aquáticos.'
+  },
+  {
+    ...base,
+    id: 'nat-51',
+    topic: 'Genética — herança ligada ao sexo',
+    difficulty: 'Difícil',
+    question:
+      'O daltonismo é uma condição recessiva ligada ao cromossomo X. Uma mulher não daltônica, mas portadora do alelo (heterozigota), tem filhos com um homem não daltônico. Qual é a probabilidade de um filho HOMEM desse casal nascer daltônico?',
+    options: [
+      { letter: 'A', text: '0%' },
+      { letter: 'B', text: '25%' },
+      { letter: 'C', text: '50%' },
+      { letter: 'D', text: '75%' },
+      { letter: 'E', text: '100%' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'Os filhos homens recebem o cromossomo X da mãe. Como ela é heterozigota (metade dos óvulos carrega o alelo daltônico), 50% dos filhos homens serão daltônicos (genótipo XdY).',
+    triTip:
+      'Em herança ligada ao X, homens são hemizigotos — basta um único alelo recessivo herdado da mãe para a condição se manifestar.'
+  },
+  {
+    ...base,
+    id: 'nat-52',
+    topic: 'Citologia — transporte ativo',
+    difficulty: 'Média',
+    question:
+      'O transporte de íons contra o gradiente de concentração através da membrana plasmática, com consumo de ATP, é denominado:',
+    options: [
+      { letter: 'A', text: 'Difusão simples' },
+      { letter: 'B', text: 'Osmose' },
+      { letter: 'C', text: 'Difusão facilitada' },
+      { letter: 'D', text: 'Transporte ativo' },
+      { letter: 'E', text: 'Pinocitose' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'O transporte ativo move substâncias contra o gradiente de concentração, exigindo energia na forma de ATP — como na bomba de sódio e potássio. Difusão simples, facilitada e osmose são processos passivos, a favor do gradiente.',
+    triTip:
+      'Se a questão mencionar "contra o gradiente" combinado a "gasto de energia", a resposta é sempre transporte ativo.'
+  },
+  {
+    ...base,
+    id: 'nat-53',
+    topic: 'Fisiologia — sinapse nervosa',
+    difficulty: 'Difícil',
+    question:
+      'Na transmissão do impulso nervoso entre dois neurônios, a comunicação na sinapse química ocorre principalmente por meio de:',
+    options: [
+      { letter: 'A', text: 'contato elétrico direto entre as membranas dos dois neurônios.' },
+      {
+        letter: 'B',
+        text: 'circulação sanguínea entre os dois neurônios.'
+      },
+      { letter: 'C', text: 'transporte direto do próprio impulso elétrico, sem qualquer intermediário.' },
+      { letter: 'D', text: 'fusão total das membranas dos dois neurônios envolvidos.' },
+      {
+        letter: 'E',
+        text: 'liberação de neurotransmissores no espaço sináptico, que se ligam a receptores do neurônio seguinte.'
+      }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'Na sinapse química, o neurônio pré-sináptico libera neurotransmissores (como a acetilcolina) na fenda sináptica; eles se ligam a receptores específicos do neurônio pós-sináptico, propagando o impulso.',
+    triTip:
+      'A sinapse elétrica (mais rara) tem contato direto entre membranas; a química, mais comum e mais lenta, depende de neurotransmissores atravessando a fenda.'
+  },
+  {
+    ...base,
+    id: 'nat-54',
+    topic: 'Fisiologia — digestão enzimática',
+    difficulty: 'Fácil',
+    question:
+      'A enzima pepsina, presente no suco gástrico, atua especificamente na digestão de:',
+    options: [
+      { letter: 'A', text: 'Carboidratos' },
+      { letter: 'B', text: 'Sais minerais' },
+      { letter: 'C', text: 'Lipídios' },
+      { letter: 'D', text: 'Ácidos nucleicos' },
+      { letter: 'E', text: 'Proteínas' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'A pepsina, ativada em meio ácido no estômago, hidrolisa proteínas em peptídeos menores, dando início à digestão proteica.',
+    triTip:
+      'Associe cada enzima ao seu substrato: amilase digere carboidratos, pepsina e tripsina digerem proteínas, lipase digere lipídios.'
+  },
+  {
+    ...base,
+    id: 'nat-55',
+    topic: 'Evolução — especiação alopátrica',
+    difficulty: 'Difícil',
+    question:
+      'Duas populações da mesma espécie de sapo são separadas pela formação de um novo rio e, ao longo de milhares de gerações, deixam de conseguir se reproduzir entre si mesmo quando reaproximadas. Esse processo de formação de novas espécies por barreira geográfica é chamado de:',
+    options: [
+      { letter: 'A', text: 'Especiação simpátrica' },
+      { letter: 'B', text: 'Deriva genética' },
+      { letter: 'C', text: 'Especiação alopátrica' },
+      { letter: 'D', text: 'Mutação pontual' },
+      { letter: 'E', text: 'Seleção artificial' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'A especiação alopátrica ocorre quando uma barreira geográfica separa populações, que acumulam diferenças genéticas independentes até se tornarem reprodutivamente isoladas — o rio, nesse caso, é a barreira.',
+    triTip:
+      'Alopátrica tem barreira geográfica; simpátrica ocorre sem separação espacial, geralmente por isolamento reprodutivo comportamental ou temporal.'
+  },
+  {
+    ...base,
+    id: 'nat-56',
+    topic: 'Microbiologia — vírus e bactérias',
+    difficulty: 'Média',
+    question:
+      'Diferentemente das bactérias, os vírus:',
+    options: [
+      { letter: 'A', text: 'não possuem estrutura celular e dependem de uma célula hospedeira para se replicar.' },
+      { letter: 'B', text: 'realizam respiração celular própria.' },
+      { letter: 'C', text: 'possuem parede celular de peptideoglicano.' },
+      { letter: 'D', text: 'são sempre sensíveis a tratamento com antibióticos.' },
+      { letter: 'E', text: 'possuem ribossomos próprios para síntese de proteínas.' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'Vírus são acelulares, formados basicamente por material genético e cápsula proteica, sem maquinaria própria para se reproduzir — dependem inteiramente da célula hospedeira. Bactérias, ao contrário, são células completas.',
+    triTip:
+      'Antibióticos atuam em estruturas bacterianas (parede celular, ribossomos); por isso são ineficazes contra vírus, que não as possuem.'
+  },
+
+  // ---- Física (8)
+  {
+    ...base,
+    id: 'nat-57',
+    topic: 'Mecânica — peso',
+    difficulty: 'Fácil',
+    question:
+      'Um objeto de massa 8 kg está sujeito à aceleração da gravidade de 10 m/s². Qual é o peso desse objeto?',
+    options: [
+      { letter: 'A', text: '0,8 N' },
+      { letter: 'B', text: '8 N' },
+      { letter: 'C', text: '18 N' },
+      { letter: 'D', text: '80 N' },
+      { letter: 'E', text: '800 N' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'O peso é P = m × g = 8 × 10 = 80 N. Peso é força, medida em newtons, e não deve ser confundido com massa (8 kg), medida em quilogramas.',
+    triTip:
+      'Massa é escalar em kg; peso é força em N. São grandezas diferentes, embora popularmente confundidas no dia a dia.'
+  },
+  {
+    ...base,
+    id: 'nat-58',
+    topic: 'Mecânica — potência',
+    difficulty: 'Média',
+    question:
+      'Um motor realiza um trabalho de 3 000 J em 5 segundos. Qual é a potência desse motor?',
+    options: [
+      { letter: 'A', text: '15 W' },
+      { letter: 'B', text: '150 W' },
+      { letter: 'C', text: '600 W' },
+      { letter: 'D', text: '3 000 W' },
+      { letter: 'E', text: '15 000 W' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'A potência é a razão entre o trabalho e o tempo: P = W / t = 3000 / 5 = 600 W.',
+    triTip:
+      'Potência mede a rapidez de realizar um trabalho: o mesmo trabalho feito em menos tempo corresponde a uma potência maior.'
+  },
+  {
+    ...base,
+    id: 'nat-59',
+    topic: 'Eletricidade — associação em série',
+    difficulty: 'Difícil',
+    question:
+      'Três resistores de 4 Ω, 6 Ω e 10 Ω são associados em série a uma bateria de 20 V. Qual é a intensidade da corrente elétrica no circuito?',
+    options: [
+      { letter: 'A', text: '0,5 A' },
+      { letter: 'B', text: '1 A' },
+      { letter: 'C', text: '2 A' },
+      { letter: 'D', text: '5 A' },
+      { letter: 'E', text: '20 A' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'Em série, a resistência equivalente é a soma das resistências: 4 + 6 + 10 = 20 Ω. A corrente é i = U / Req = 20 / 20 = 1 A.',
+    triTip:
+      'Em série, a corrente é igual em todos os resistores; a resistência equivalente sempre soma, nunca reduz.'
+  },
+  {
+    ...base,
+    id: 'nat-60',
+    topic: 'Eletricidade — Lei de Coulomb',
+    difficulty: 'Difícil',
+    question:
+      'Duas cargas elétricas puntiformes de mesmo sinal, separadas por certa distância, exercem entre si uma força de repulsão de intensidade F. Se a distância entre elas for dobrada, mantendo as cargas constantes, a nova força de repulsão será:',
+    options: [
+      { letter: 'A', text: 'o dobro de F' },
+      { letter: 'B', text: 'igual a F' },
+      { letter: 'C', text: 'a metade de F' },
+      { letter: 'D', text: 'um quarto de F' },
+      { letter: 'E', text: 'um oitavo de F' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'Pela Lei de Coulomb, F = k × q₁ × q₂ / d². Dobrando a distância d, o denominador quadruplica, reduzindo a força para F/4.',
+    triTip:
+      'A Lei de Coulomb tem a mesma estrutura da lei da gravitação universal — ambas dependem do inverso do quadrado da distância.'
+  },
+  {
+    ...base,
+    id: 'nat-61',
+    topic: 'Termologia — dilatação linear',
+    difficulty: 'Média',
+    question:
+      'Uma barra metálica de 2 metros de comprimento é aquecida e sofre dilatação linear de 0,004 metro. Qual foi a deformação percentual do comprimento da barra?',
+    options: [
+      { letter: 'A', text: '0,02%' },
+      { letter: 'B', text: '4%' },
+      { letter: 'C', text: '2%' },
+      { letter: 'D', text: '0,2%' },
+      { letter: 'E', text: '20%' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A deformação percentual é a razão entre a variação e o comprimento inicial: 0,004 / 2 = 0,002 = 0,2%.',
+    triTip:
+      'A dilatação percentual é sempre a razão entre a variação de comprimento e o comprimento ORIGINAL, nunca o final.'
+  },
+  {
+    ...base,
+    id: 'nat-62',
+    topic: 'Ondulatória — eco',
+    difficulty: 'Fácil',
+    question:
+      'Uma pessoa grita próxima a um paredão e ouve o eco 2 segundos depois. Considerando a velocidade do som no ar igual a 340 m/s, qual é a distância entre a pessoa e o paredão?',
+    options: [
+      { letter: 'A', text: '170 m' },
+      { letter: 'B', text: '340 m' },
+      { letter: 'C', text: '680 m' },
+      { letter: 'D', text: '170 km' },
+      { letter: 'E', text: 'Não é possível calcular com esses dados' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'O som percorre a ida e a volta em 2 segundos: distância total = 340 × 2 = 680 m. A distância até o paredão é a metade desse percurso: 340 m.',
+    triTip:
+      'Em eco, o tempo medido corresponde ao percurso de IDA e VOLTA — sempre divida a distância total por 2 para achar a distância até o obstáculo.'
+  },
+  {
+    ...base,
+    id: 'nat-63',
+    topic: 'Óptica — lentes convergentes',
+    difficulty: 'Difícil',
+    question:
+      'Uma lente convergente forma, de um objeto real posicionado além do ponto antiprincipal (a mais que o dobro da distância focal), uma imagem:',
+    options: [
+      { letter: 'A', text: 'real, direita e maior que o objeto.' },
+      { letter: 'B', text: 'real, invertida e do mesmo tamanho do objeto.' },
+      { letter: 'C', text: 'virtual, direita e maior que o objeto.' },
+      { letter: 'D', text: 'virtual, invertida e menor que o objeto.' },
+      { letter: 'E', text: 'real, invertida e menor que o objeto.' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'Com o objeto além do ponto antiprincipal (2F), a lente convergente forma imagem real, invertida e reduzida — é o princípio usado em câmeras fotográficas e no olho humano.',
+    triTip:
+      'Quanto mais longe do ponto 2F o objeto estiver, posicionado além dele, menor e mais próxima do foco fica a imagem real invertida.'
+  },
+  {
+    ...base,
+    id: 'nat-64',
+    topic: 'Física moderna — meia-vida radioativa',
+    difficulty: 'Difícil',
+    question:
+      'Um isótopo radioativo tem meia-vida de 10 dias. Partindo de uma amostra de 80 gramas, qual será a massa restante após 30 dias?',
+    options: [
+      { letter: 'A', text: '5 g' },
+      { letter: 'B', text: '60 g' },
+      { letter: 'C', text: '20 g' },
+      { letter: 'D', text: '40 g' },
+      { letter: 'E', text: '10 g' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'Em 30 dias ocorrem 3 meias-vidas (30/10). A massa se reduz à metade a cada uma: 80 → 40 → 20 → 10 g.',
+    triTip:
+      'Conte quantas meias-vidas cabem no tempo total e divida a massa inicial por 2 elevado a esse número.'
+  },
+
+  // ---- Química (8)
+  {
+    ...base,
+    id: 'nat-65',
+    topic: 'Estrutura atômica — camada de valência',
+    difficulty: 'Fácil',
+    question:
+      'O átomo de sódio (Z = 11) possui configuração eletrônica 1s² 2s² 2p⁶ 3s¹. Quantos elétrons estão presentes na camada de valência desse átomo?',
+    options: [
+      { letter: 'A', text: '1' },
+      { letter: 'B', text: '2' },
+      { letter: 'C', text: '3' },
+      { letter: 'D', text: '8' },
+      { letter: 'E', text: '11' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'A camada de valência é a última camada ocupada (n = 3), que contém apenas o elétron do subnível 3s¹ — por isso o sódio tende a perder esse elétron, formando Na⁺.',
+    triTip:
+      'A camada de valência é sempre a de maior número quântico principal (n) ocupada; conte só os elétrons dela, não o total do átomo.'
+  },
+  {
+    ...base,
+    id: 'nat-66',
+    topic: 'Tabela periódica — propriedades periódicas',
+    difficulty: 'Média',
+    question:
+      'Comparando os elementos flúor (F) e iodo (I), ambos do grupo 17 (halogênios), o flúor apresenta:',
+    options: [
+      { letter: 'A', text: 'maior raio atômico e menor eletronegatividade que o iodo.' },
+      { letter: 'B', text: 'menor raio atômico e maior eletronegatividade que o iodo.' },
+      { letter: 'C', text: 'mesmo raio atômico e mesma eletronegatividade do iodo.' },
+      { letter: 'D', text: 'maior raio atômico e maior eletronegatividade que o iodo.' },
+      { letter: 'E', text: 'menor raio atômico e menor eletronegatividade que o iodo.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'Descendo em um grupo, o raio atômico aumenta (mais camadas) e a eletronegatividade diminui. Como o flúor está acima do iodo no mesmo grupo, tem menor raio e é o elemento mais eletronegativo da tabela periódica.',
+    triTip:
+      'Eletronegatividade cresce da esquerda para a direita e de baixo para cima na tabela — o flúor ocupa o canto mais eletronegativo possível.'
+  },
+  {
+    ...base,
+    id: 'nat-67',
+    topic: 'Ligações químicas — ligação iônica',
+    difficulty: 'Fácil',
+    question:
+      'A molécula de cloreto de sódio (NaCl) é formada pela transferência completa de um elétron do átomo de sódio para o átomo de cloro. Esse tipo de ligação química é classificado como:',
+    options: [
+      { letter: 'A', text: 'Ligação iônica' },
+      { letter: 'B', text: 'Ligação covalente polar' },
+      { letter: 'C', text: 'Ligação covalente apolar' },
+      { letter: 'D', text: 'Ligação metálica' },
+      { letter: 'E', text: 'Ligação de hidrogênio' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'Na ligação iônica, ocorre transferência efetiva de elétrons entre átomos de eletronegatividades muito diferentes (metal e não metal), formando íons de cargas opostas que se atraem eletrostaticamente.',
+    triTip:
+      'Transferência de elétron caracteriza ligação iônica; compartilhamento caracteriza ligação covalente. Metal com não metal costuma formar ligação iônica.'
+  },
+  {
+    ...base,
+    id: 'nat-68',
+    topic: 'Estequiometria — reagente limitante',
+    difficulty: 'Difícil',
+    question:
+      'Na reação N₂ + 3 H₂ → 2 NH₃, misturam-se 2 mols de N₂ com 3 mols de H₂. Qual é o reagente limitante e quantos mols de NH₃ são formados?',
+    options: [
+      { letter: 'A', text: 'H₂ é limitante; formam-se 2 mols de NH₃.' },
+      { letter: 'B', text: 'N₂ é limitante; formam-se 2 mols de NH₃.' },
+      { letter: 'C', text: 'H₂ é limitante; formam-se 6 mols de NH₃.' },
+      { letter: 'D', text: 'N₂ é limitante; formam-se 4 mols de NH₃.' },
+      { letter: 'E', text: 'Nenhum reagente é limitante; formam-se 4 mols de NH₃.' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'A proporção da equação é 1 N₂ : 3 H₂. Os 3 mols de H₂ disponíveis reagem completamente com apenas 1 mol de N₂ (sobrando 1 mol de N₂), produzindo 2 mols de NH₃ pela proporção 3 H₂ : 2 NH₃. O H₂ é o reagente limitante.',
+    triTip:
+      'Para achar o limitante, divida a quantidade de cada reagente pelo seu coeficiente na equação balanceada — o menor resultado indica o limitante.'
+  },
+  {
+    ...base,
+    id: 'nat-69',
+    topic: 'Cinética química — efeito da temperatura',
+    difficulty: 'Média',
+    question:
+      'Alimentos são conservados por mais tempo quando armazenados sob refrigeração. Do ponto de vista da cinética química, isso ocorre porque a redução da temperatura:',
+    options: [
+      { letter: 'A', text: 'aumenta a energia cinética das moléculas, acelerando as reações de decomposição.' },
+      {
+        letter: 'B',
+        text: 'diminui a energia cinética média das moléculas, reduzindo a frequência e a energia das colisões efetivas.'
+      },
+      { letter: 'C', text: 'elimina completamente a possibilidade de qualquer reação química.' },
+      { letter: 'D', text: 'aumenta a concentração dos reagentes envolvidos na decomposição.' },
+      { letter: 'E', text: 'atua como um catalisador negativo, mudando o mecanismo da reação.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'A temperatura mais baixa reduz a energia cinética média das partículas, diminuindo a frequência e a energia das colisões — por isso as reações de decomposição dos alimentos ficam mais lentas.',
+    triTip:
+      'Os quatro fatores clássicos que aumentam a velocidade de reação são temperatura, concentração, superfície de contato e catalisador. Refrigerar age no primeiro, na direção oposta.'
+  },
+  {
+    ...base,
+    id: 'nat-70',
+    topic: 'Equilíbrio químico — princípio de Le Chatelier',
+    difficulty: 'Difícil',
+    question:
+      'Em um sistema em equilíbrio N₂(g) + 3 H₂(g) ⇌ 2 NH₃(g), reação exotérmica no sentido direto, um aumento da temperatura do sistema desloca o equilíbrio:',
+    options: [
+      { letter: 'A', text: 'no sentido direto, aumentando a produção de NH₃.' },
+      { letter: 'B', text: 'no sentido inverso, favorecendo a decomposição de NH₃.' },
+      { letter: 'C', text: 'não altera a posição do equilíbrio, apenas a velocidade da reação.' },
+      { letter: 'D', text: 'elimina completamente os reagentes do sistema.' },
+      { letter: 'E', text: 'converte todo o NH₃ em N₂ instantaneamente.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'Pelo princípio de Le Chatelier, um aumento de temperatura favorece o sentido endotérmico da reação. Como o sentido direto é exotérmico, o inverso é endotérmico, e o equilíbrio se desloca para a decomposição do NH₃.',
+    triTip:
+      'Aumentar a temperatura sempre favorece o sentido ENDOTÉRMICO da reação, seja ele direto ou inverso — memorize essa regra e derive o resto.'
+  },
+  {
+    ...base,
+    id: 'nat-71',
+    topic: 'Química orgânica — esterificação',
+    difficulty: 'Média',
+    question:
+      'A reação entre um ácido carboxílico e um álcool, com liberação de água, produzindo um composto de cheiro frequentemente agradável usado em essências e aromatizantes, é chamada de:',
+    options: [
+      { letter: 'A', text: 'Saponificação' },
+      { letter: 'B', text: 'Esterificação' },
+      { letter: 'C', text: 'Halogenação' },
+      { letter: 'D', text: 'Hidrogenação' },
+      { letter: 'E', text: 'Fermentação' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'A esterificação combina ácido carboxílico e álcool, liberando água e formando um éster — muitos ésteres têm odores frutados, usados como aromatizantes.',
+    triTip:
+      'Esterificação libera água (reação de condensação); a reação inversa, hidrólise do éster em meio básico, é a saponificação, que produz sabão.'
+  },
+  {
+    ...base,
+    id: 'nat-72',
+    topic: 'Gases — Lei de Boyle',
+    difficulty: 'Difícil',
+    question:
+      'Um gás ideal ocupa volume de 4 litros a uma pressão de 2 atm e temperatura de 300 K. Se esse gás for comprimido para 2 litros à mesma temperatura, qual será sua nova pressão?',
+    options: [
+      { letter: 'A', text: '1 atm' },
+      { letter: 'B', text: '2 atm' },
+      { letter: 'C', text: '4 atm' },
+      { letter: 'D', text: '6 atm' },
+      { letter: 'E', text: '8 atm' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'À temperatura constante, aplica-se a Lei de Boyle: P₁V₁ = P₂V₂ → 2 × 4 = P₂ × 2 → P₂ = 4 atm.',
+    triTip:
+      'Quando a temperatura não muda, use diretamente P₁V₁ = P₂V₂ — não é preciso recorrer à equação geral dos gases com a temperatura.'
   }
 ];

@@ -1079,5 +1079,522 @@ export const LINGUAGENS_QUESTIONS: ExamQuestion[] = [
       'Trata-se de uma única palavra cujos múltiplos sentidos se relacionam e são determinados pelo contexto — definição de polissemia. Na homonímia, as palavras têm origens distintas e apenas coincidem na forma, como "manga" (fruta) e "manga" (da camisa).',
     triTip:
       'Polissemia é uma palavra com vários sentidos relacionados; homonímia são palavras diferentes que coincidem na forma. A pista é se os sentidos guardam parentesco entre si.'
+  },
+
+  // ================================================================ LOTE 2 (lin-49 a lin-72)
+  // ---- Interpretação de texto (6)
+  {
+    ...base,
+    id: 'lin-49',
+    topic: 'Interpretação — humor em tirinha',
+    difficulty: 'Fácil',
+    question:
+      'Observe a descrição de uma tirinha: "No primeiro quadro, um estudante diz: Vou estudar a noite toda para a prova. No último quadro, o mesmo estudante aparece dormindo sobre o livro fechado, com o despertador tocando ao fundo."\n\nO efeito de humor da tirinha resulta:',
+    options: [
+      { letter: 'A', text: 'do contraste entre a intenção declarada no início e o resultado mostrado no final.' },
+      { letter: 'B', text: 'da repetição de uma mesma imagem em todos os quadros.' },
+      { letter: 'C', text: 'do uso de vocabulário técnico incompreensível ao leitor.' },
+      { letter: 'D', text: 'da ausência total de qualquer personagem na tirinha.' },
+      { letter: 'E', text: 'da explicação detalhada do processo de estudo do personagem.' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O humor nasce do contraste entre a promessa ("estudar a noite toda") e o desfecho (dormir sobre o livro) — recurso comum em tirinhas, que condensam uma situação cotidiana reconhecível em poucos quadros.',
+    triTip:
+      'Tirinhas de humor quase sempre exploram a virada inesperada entre o que o personagem planeja e o que realmente acontece — procure esse contraste antes de mais nada.'
+  },
+  {
+    ...base,
+    id: 'lin-50',
+    topic: 'Interpretação — sátira em post de rede social',
+    difficulty: 'Média',
+    question:
+      'Leia a publicação: "Aviso à população: a partir de hoje, reclamar do trânsito será considerado esporte olímpico nacional. Medalhistas receberão... mais trânsito."\n\nO texto utiliza o humor para:',
+    options: [
+      { letter: 'A', text: 'anunciar oficialmente uma nova modalidade esportiva.' },
+      { letter: 'B', text: 'informar tecnicamente sobre regras de competições olímpicas.' },
+      { letter: 'C', text: 'elogiar a eficiência do sistema de trânsito da cidade.' },
+      {
+        letter: 'D',
+        text: 'criticar, por meio da ironia, a naturalização da reclamação sobre um problema urbano crônico sem solução à vista.'
+      },
+      { letter: 'E', text: 'convocar atletas profissionais para uma nova seleção nacional.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'Ao tratar como "esporte" algo que é, na verdade, uma frustração cotidiana, o texto ironiza a naturalização do problema do trânsito e a sensação de que reclamar não muda nada — a "premiação" (mais trânsito) reforça esse tom crítico.',
+    triTip:
+      'Humor em redes sociais frequentemente veste uma crítica social de absurdo ou exagero proposital — separe o que é dito literalmente do que está sendo criticado por trás.'
+  },
+  {
+    ...base,
+    id: 'lin-51',
+    topic: 'Interpretação — propaganda de saúde pública',
+    difficulty: 'Fácil',
+    question:
+      'Leia o texto de uma campanha: "Lave as mãos. É simples, é grátis, e pode salvar vidas."\n\nA estrutura do texto, ao encadear três qualidades da ação recomendada, tem como efeito:',
+    options: [
+      { letter: 'A', text: 'reforçar a adesão à prática, mostrando que ela é acessível, sem custo e de grande importância.' },
+      { letter: 'B', text: 'desestimular a adesão à prática higiênica recomendada.' },
+      { letter: 'C', text: 'complicar desnecessariamente uma orientação simples.' },
+      { letter: 'D', text: 'transferir a responsabilidade da ação para o governo.' },
+      { letter: 'E', text: 'diminuir a importância da higiene das mãos.' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'A enumeração ("simples", "grátis", "pode salvar vidas") constrói uma progressão que remove barreiras (custo, dificuldade) e culmina no argumento mais forte (vidas salvas), reforçando a adesão à recomendação.',
+    triTip:
+      'Em campanhas de saúde pública, observe a ordem dos argumentos — geralmente crescem em importância, deixando o apelo mais forte por último.'
+  },
+  {
+    ...base,
+    id: 'lin-52',
+    topic: 'Interpretação — estratégia retórica em discurso',
+    difficulty: 'Difícil',
+    question:
+      'Leia o trecho de um discurso: "Não estou aqui para prometer um caminho fácil. Estou aqui para dizer que o caminho certo raramente é fácil, mas é o único que nos leva a algum lugar que valha a pena chegar."\n\nA estratégia argumentativa do orador consiste em:',
+    options: [
+      { letter: 'A', text: 'evitar qualquer compromisso com propostas futuras.' },
+      { letter: 'B', text: 'desqualificar as propostas de adversários políticos sem citá-los.' },
+      { letter: 'C', text: 'negar completamente que exista qualquer dificuldade no caminho proposto.' },
+      { letter: 'D', text: 'transferir toda a responsabilidade pelo esforço ao público ouvinte.' },
+      {
+        letter: 'E',
+        text: 'admitir a dificuldade do que propõe para, em seguida, valorizá-la como sinal de que a proposta é séria e legítima.'
+      }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'O orador reconhece a dificuldade ("raramente é fácil") não para desanimar, mas para transformar esse reconhecimento em argumento de credibilidade — sugere que o difícil é justamente o que tem valor, contrapondo-se a promessas fáceis e vazias.',
+    triTip:
+      'Em discursos políticos, admitir uma dificuldade antes de defender uma proposta costuma ser estratégia retórica para parecer mais honesto e crível, não uma fraqueza argumentativa.'
+  },
+  {
+    ...base,
+    id: 'lin-53',
+    topic: 'Interpretação — avaliação em resenha',
+    difficulty: 'Difícil',
+    question:
+      'Leia o trecho de uma resenha: "O filme não economiza em efeitos visuais grandiosos. Pena que, entre uma explosão e outra, esqueceram de escrever diálogos que alguém realmente diria."\n\nA avaliação do autor sobre o filme é:',
+    options: [
+      { letter: 'A', text: 'totalmente positiva, elogiando tanto os efeitos quanto os diálogos.' },
+      { letter: 'B', text: 'totalmente negativa, sem reconhecer qualquer qualidade na obra.' },
+      { letter: 'C', text: 'mista, reconhecendo qualidade técnica visual, mas criticando a artificialidade dos diálogos.' },
+      { letter: 'D', text: 'neutra, limitando-se a descrever o filme sem qualquer juízo de valor.' },
+      { letter: 'E', text: 'elogiosa aos diálogos e crítica aos efeitos visuais.' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'O autor reconhece o investimento em efeitos visuais ("não economiza"), mas usa ironia ("pena que... esqueceram") para criticar a qualidade dos diálogos, numa avaliação mista típica da resenha crítica.',
+    triTip:
+      'Em resenhas, a crítica nem sempre vem de forma direta — expressões como "pena que" e "por outro lado" costumam introduzir a ressalva que revela a real avaliação do autor.'
+  },
+  {
+    ...base,
+    id: 'lin-54',
+    topic: 'Interpretação — linguagem regulamentar',
+    difficulty: 'Fácil',
+    question:
+      'Leia o trecho de um regulamento: "É vedado o ingresso de acompanhantes após o início da prova, salvo em casos de comprovada necessidade, mediante autorização prévia da coordenação."\n\nO trecho estabelece uma regra:',
+    options: [
+      { letter: 'A', text: 'absoluta, sem qualquer exceção possível.' },
+      { letter: 'B', text: 'geral, mas que admite exceção mediante condição específica e autorização prévia.' },
+      { letter: 'C', text: 'que se aplica exclusivamente aos candidatos, nunca aos acompanhantes.' },
+      { letter: 'D', text: 'que permite ingresso irrestrito a qualquer momento da prova.' },
+      { letter: 'E', text: 'que independe de qualquer autorização da coordenação.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'A expressão "salvo" introduz uma exceção à regra geral, condicionada a dois requisitos: necessidade comprovada e autorização prévia. Não é uma proibição absoluta, mas também não é uma permissão livre.',
+    triTip:
+      'Em textos regulamentares, palavras como "salvo", "exceto" e "ressalvado o disposto em" sinalizam exceções à regra geral — sempre leia a condição completa antes de concluir se algo é proibido ou permitido.'
+  },
+
+  // ---- Literatura (4)
+  {
+    ...base,
+    id: 'lin-55',
+    topic: 'Literatura — Geração de 45 e Poesia Concreta',
+    difficulty: 'Difícil',
+    question:
+      'A Geração de 45 e, posteriormente, o movimento da Poesia Concreta retomaram, em certa medida, a preocupação com o rigor formal e a construção da linguagem, em resposta ao que consideravam excessos coloquiais das fases anteriores do Modernismo. A poesia concreta, especificamente, é conhecida por:',
+    options: [
+      { letter: 'A', text: 'explorar a disposição espacial das palavras na página como elemento constitutivo do sentido do poema.' },
+      { letter: 'B', text: 'rejeitar completamente qualquer inovação visual ou gráfica no poema.' },
+      { letter: 'C', text: 'retomar rigidamente o soneto camoniano como única forma válida.' },
+      { letter: 'D', text: 'abandonar por completo qualquer preocupação com a forma do texto.' },
+      { letter: 'E', text: 'restringir-se exclusivamente a temas religiosos e místicos.' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'A poesia concreta, com nomes como os irmãos Campos, explora a disposição gráfica das palavras — tamanho, posição, espaço em branco — como parte do significado do poema, unindo forma visual e conteúdo verbal.',
+    triTip:
+      'Enquanto a primeira fase modernista rompe com a forma em nome da liberdade, a Geração de 45 e o Concretismo retomam um cuidado formal, ainda que de maneiras muito diferentes entre si.'
+  },
+  {
+    ...base,
+    id: 'lin-56',
+    topic: 'Literatura — literatura brasileira contemporânea',
+    difficulty: 'Média',
+    question:
+      'A literatura brasileira contemporânea tem se caracterizado pela ampliação de vozes narrativas antes marginalizadas do cânone literário, incluindo autoras negras, escritores de periferia e narrativas indígenas. Essa ampliação reflete:',
+    options: [
+      { letter: 'A', text: 'o desaparecimento de qualquer critério de qualidade literária.' },
+      { letter: 'B', text: 'a exclusão definitiva dos autores consagrados do cânone tradicional.' },
+      { letter: 'C', text: 'o fim da produção literária em língua portuguesa no Brasil.' },
+      {
+        letter: 'D',
+        text: 'a diversificação de perspectivas sociais representadas na literatura, ampliando quem pode narrar e sobre o quê.'
+      },
+      { letter: 'E', text: 'o retorno aos padrões estéticos do Parnasianismo.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A literatura contemporânea tem incorporado vozes historicamente sub-representadas, ampliando o repertório de experiências, linguagens e perspectivas sociais narradas, sem que isso signifique exclusão do cânone anterior.',
+    triTip:
+      'Literatura marginal e autoria negra contemporânea (Conceição Evaristo, Carolina de Jesus, entre outros) são repertório atual e frequentemente citado — vale conhecer ao menos um nome e sua relevância.'
+  },
+  {
+    ...base,
+    id: 'lin-57',
+    topic: 'Literatura — Trovadorismo',
+    difficulty: 'Média',
+    question:
+      'As cantigas de amor e de amigo, produzidas na Península Ibérica entre os séculos XII e XIV, são a manifestação literária mais antiga em língua portuguesa. As cantigas de amor caracterizam-se por:',
+    options: [
+      { letter: 'A', text: 'um eu lírico feminino que lamenta a ausência do amado.' },
+      { letter: 'B', text: 'temática exclusivamente religiosa e litúrgica.' },
+      { letter: 'C', text: 'crítica social direta às autoridades da corte.' },
+      { letter: 'D', text: 'narrativas longas em prosa sobre feitos heroicos.' },
+      { letter: 'E', text: 'um eu lírico masculino que expressa sofrimento amoroso por uma dama idealizada e inacessível.' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'Nas cantigas de amor, o eu lírico é masculino e sofre de amor por uma dama idealizada, geralmente inatingível — nas cantigas de amigo, é o eu lírico feminino que lamenta a ausência do amado, em estrutura invertida.',
+    triTip:
+      'Não confunda cantiga de amor (eu lírico masculino, dama idealizada) com cantiga de amigo (eu lírico feminino, lamenta o amado ausente) — a inversão de vozes é o que mais se cobra.'
+  },
+  {
+    ...base,
+    id: 'lin-58',
+    topic: 'Literatura — Quinhentismo',
+    difficulty: 'Fácil',
+    question:
+      'A Carta de Pero Vaz de Caminha, escrita em 1500 para informar o rei de Portugal sobre a chegada à nova terra, é considerada o marco inicial da literatura no Brasil. Esse texto é classificado como literatura:',
+    options: [
+      { letter: 'A', text: 'Barroca, pelo conflito entre fé e razão.' },
+      { letter: 'B', text: 'de Informação, por descrever a terra e seus habitantes com finalidade documental e administrativa.' },
+      { letter: 'C', text: 'Romântica, pela idealização sentimental da paisagem.' },
+      { letter: 'D', text: 'Modernista, pela linguagem coloquial experimental.' },
+      { letter: 'E', text: 'Simbolista, pela musicalidade e sugestão.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'A Carta integra a chamada "literatura de informação" do período Quinhentista, com finalidade prática de relatar ao rei as características da terra, da fauna, da flora e dos povos indígenas encontrados.',
+    triTip:
+      'O Quinhentismo brasileiro se divide em literatura de informação (cartas e relatos, como a de Caminha) e literatura de catequese (textos jesuíticos, como os de Padre Anchieta).'
+  },
+
+  // ---- Variação linguística (2)
+  {
+    ...base,
+    id: 'lin-59',
+    topic: 'Variação linguística — jargão profissional',
+    difficulty: 'Fácil',
+    question:
+      'Termos como "deletar", "debugar" e "commitar" são de uso corrente entre profissionais de tecnologia, mas pouco compreendidos fora desse grupo. Esse tipo de variação linguística, associada a um grupo profissional específico, é chamada de:',
+    options: [
+      { letter: 'A', text: 'Jargão (variação social ligada a um grupo profissional)' },
+      { letter: 'B', text: 'Variação diatópica (regional)' },
+      { letter: 'C', text: 'Variação diacrônica (histórica)' },
+      { letter: 'D', text: 'Norma-padrão' },
+      { letter: 'E', text: 'Ortografia oficial' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O jargão é uma variedade lexical própria de determinado grupo profissional ou técnico, que facilita a comunicação entre seus membros, mas pode dificultar a compreensão para quem está fora do grupo.',
+    triTip:
+      'Jargão é um tipo de variação social (diastrática) ligada especificamente à atividade profissional — médicos, advogados e programadores têm jargões próprios.'
+  },
+  {
+    ...base,
+    id: 'lin-60',
+    topic: 'Variação linguística — estrangeirismo',
+    difficulty: 'Média',
+    question:
+      'O uso crescente de palavras como "delivery", "freelancer" e "home office" no português falado no Brasil é um exemplo do fenômeno linguístico denominado:',
+    options: [
+      { letter: 'A', text: 'Arcaísmo' },
+      { letter: 'B', text: 'Neologismo por composição vernácula' },
+      { letter: 'C', text: 'Estrangeirismo (ou empréstimo linguístico)' },
+      { letter: 'D', text: 'Regionalismo' },
+      { letter: 'E', text: 'Hipercorreção' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'Estrangeirismos são palavras ou expressões de outras línguas incorporadas ao vocabulário corrente, refletindo contatos culturais, comerciais e tecnológicos entre os povos — fenômeno tão antigo quanto a própria língua portuguesa, que já incorporou termos árabes, africanos e indígenas.',
+    triTip:
+      'Nem todo estrangeirismo é recente: "álcool" (árabe), "abacaxi" (tupi) e "sanduíche" (inglês) mostram que o português sempre incorporou palavras de outras línguas.'
+  },
+
+  // ---- Funções da linguagem (2)
+  {
+    ...base,
+    id: 'lin-61',
+    topic: 'Funções da linguagem — função poética',
+    difficulty: 'Média',
+    question:
+      'Leia o slogan de uma campanha de reciclagem: "Recicle e recrie: o lixo de hoje, a matéria-prima de amanhã."\n\nO jogo sonoro entre "recicle" e "recrie", somado à construção paralela da segunda parte da frase, evidencia a função da linguagem:',
+    options: [
+      { letter: 'A', text: 'referencial, centrada exclusivamente na informação técnica sobre reciclagem.' },
+      { letter: 'B', text: 'fática, voltada para testar o canal de comunicação.' },
+      { letter: 'C', text: 'poética, centrada na elaboração formal e sonora da própria mensagem.' },
+      { letter: 'D', text: 'metalinguística, por explicar o significado da palavra reciclagem.' },
+      { letter: 'E', text: 'emotiva, por expressar o sentimento pessoal de quem escreve.' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'A semelhança sonora entre "recicle" e "recrie", além do paralelismo estrutural ("o lixo de hoje, a matéria-prima de amanhã"), evidencia um trabalho estético sobre a forma da mensagem — marca da função poética, presente também fora da poesia, como em slogans e propagandas.',
+    triTip:
+      'Função poética não é exclusiva de poemas — qualquer texto que trabalhe deliberadamente o som, o ritmo ou a estrutura da frase para causar efeito está explorando essa função.'
+  },
+  {
+    ...base,
+    id: 'lin-62',
+    topic: 'Funções da linguagem — função referencial',
+    difficulty: 'Fácil',
+    question:
+      'Leia o trecho: "O Instituto Brasileiro de Geografia e Estatística (IBGE) informou que a população brasileira ultrapassou 203 milhões de habitantes no último censo."\n\nA função da linguagem predominante nesse texto é:',
+    options: [
+      { letter: 'A', text: 'Conativa, por tentar convencer o leitor de algo.' },
+      { letter: 'B', text: 'Fática, por testar o canal de comunicação.' },
+      { letter: 'C', text: 'Poética, por explorar recursos estéticos da linguagem.' },
+      { letter: 'D', text: 'Referencial, por transmitir informação objetiva sobre a realidade.' },
+      { letter: 'E', text: 'Emotiva, por expressar sentimentos do autor.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'O texto apresenta dados objetivos, sem opinião ou apelo, com foco no contexto e na informação em si — característica central da função referencial, predominante em notícias e textos informativos.',
+    triTip:
+      'Função referencial é a "linguagem dos fatos": predomina em notícias, relatórios e verbetes técnicos, sempre com foco no contexto, não no emissor ou no receptor.'
+  },
+
+  // ---- Figuras de linguagem (2)
+  {
+    ...base,
+    id: 'lin-63',
+    topic: 'Figuras de linguagem — eufemismo',
+    difficulty: 'Fácil',
+    question:
+      'Ao comunicar o falecimento de um funcionário, uma empresa publicou a nota: "Lamentamos informar que nosso colega partiu para um lugar melhor."\n\nA expressão "partiu para um lugar melhor", usada para suavizar a notícia da morte, é um exemplo de:',
+    options: [
+      { letter: 'A', text: 'Eufemismo' },
+      { letter: 'B', text: 'Hipérbole' },
+      { letter: 'C', text: 'Metonímia' },
+      { letter: 'D', text: 'Antítese' },
+      { letter: 'E', text: 'Prosopopeia' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O eufemismo substitui uma expressão desagradável ou dolorosa (como "morreu") por outra mais suave ("partiu para um lugar melhor"), atenuando o impacto emocional da informação.',
+    triTip:
+      'Eufemismo suaviza; hipérbole exagera. Frases sobre morte, doença ou demissão são o terreno mais comum para o uso do eufemismo.'
+  },
+  {
+    ...base,
+    id: 'lin-64',
+    topic: 'Figuras de linguagem — ironia',
+    difficulty: 'Difícil',
+    question:
+      'Ao ver um colega chegar duas horas atrasado a uma reunião importante, alguém comenta: "Que pontualidade admirável a sua!"\n\nO recurso expressivo empregado nessa fala é:',
+    options: [
+      { letter: 'A', text: 'Hipérbole, pelo exagero da qualidade elogiada.' },
+      { letter: 'B', text: 'Eufemismo, pela suavização de uma crítica.' },
+      { letter: 'C', text: 'Ironia, pela afirmação de sentido contrário ao que realmente se pretende comunicar.' },
+      { letter: 'D', text: 'Comparação, pela aproximação de dois termos com conectivo.' },
+      { letter: 'E', text: 'Catacrese, pelo uso impróprio de uma palavra por falta de termo específico.' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'Ao elogiar exatamente a qualidade que faltou (pontualidade, num atraso de duas horas), o falante comunica o oposto do que diz literalmente — mecanismo central da ironia, que depende do contexto para ser compreendida.',
+    triTip:
+      'Ironia se identifica pelo contexto que contradiz o sentido literal da frase. Sem esse contexto, a mesma frase seria apenas um elogio sincero.'
+  },
+
+  // ---- Gêneros textuais (2)
+  {
+    ...base,
+    id: 'lin-65',
+    topic: 'Gêneros textuais — reportagem investigativa',
+    difficulty: 'Média',
+    question:
+      'Um veículo de imprensa publica, após meses de apuração com documentos obtidos via Lei de Acesso à Informação e entrevistas com múltiplas fontes, um texto extenso que revela um esquema de desvio de recursos públicos. Esse gênero jornalístico é classificado como:',
+    options: [
+      { letter: 'A', text: 'Nota' },
+      { letter: 'B', text: 'Editorial' },
+      { letter: 'C', text: 'Reportagem investigativa' },
+      { letter: 'D', text: 'Carta do leitor' },
+      { letter: 'E', text: 'Classificado' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'A reportagem investigativa se distingue pela apuração aprofundada, uso de múltiplas fontes e documentos, e pela extensão maior que a notícia comum, com o objetivo de revelar fatos não evidentes ou deliberadamente ocultados.',
+    triTip:
+      'Diferencie notícia (relato rápido e factual), reportagem (aprofundamento de um tema) e reportagem investigativa (apuração extensa, muitas vezes reveladora de irregularidades).'
+  },
+  {
+    ...base,
+    id: 'lin-66',
+    topic: 'Gêneros textuais — roteiro de podcast',
+    difficulty: 'Fácil',
+    question:
+      'Um roteiro de podcast indica pausas para efeitos sonoros, marca a entrada de trilha musical entre os blocos e organiza falas divididas entre dois apresentadores. Esse tipo de texto, que orienta uma produção sonora, é um gênero:',
+    options: [
+      { letter: 'A', text: 'estritamente escrito, sem qualquer relação com a oralidade.' },
+      { letter: 'B', text: 'jurídico, por seguir formato regulamentar.' },
+      { letter: 'C', text: 'exclusivamente visual, sem qualquer componente textual.' },
+      { letter: 'D', text: 'multimodal, pois articula elementos verbais e sonoros na produção do sentido final.' },
+      { letter: 'E', text: 'poético, por seguir estritamente a métrica de versos.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'O roteiro de podcast é um gênero multimodal: combina texto escrito (o roteiro em si) com elementos sonoros (música, efeitos, fala) que juntos constroem o sentido da produção final, ouvida pelo público.',
+    triTip:
+      'Gêneros multimodais combinam mais de uma linguagem (verbal, sonora, visual) na construção do sentido — memes, podcasts e vídeos são exemplos típicos cobrados pelo ENEM.'
+  },
+
+  // ---- Coesão e coerência (2)
+  {
+    ...base,
+    id: 'lin-67',
+    topic: 'Coesão — conectivo de finalidade',
+    difficulty: 'Média',
+    question:
+      'Leia o período: "O município investiu em iluminação pública em LED _______ reduzir o consumo de energia elétrica e os custos de manutenção."\n\nO conectivo que preenche adequadamente a lacuna, considerando a relação de finalidade entre as orações, é:',
+    options: [
+      { letter: 'A', text: 'porque' },
+      { letter: 'B', text: 'portanto' },
+      { letter: 'C', text: 'no entanto' },
+      { letter: 'D', text: 'a fim de' },
+      { letter: 'E', text: 'apesar de' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A segunda oração expressa o OBJETIVO do investimento, não sua causa nem sua consequência. "A fim de" (ou "para que", "com o objetivo de") é o conectivo que marca relação de finalidade.',
+    triTip:
+      'Não confunda causa (porque, já que — o motivo que já existia) com finalidade (a fim de, para que — o objetivo que se pretende alcançar).'
+  },
+  {
+    ...base,
+    id: 'lin-68',
+    topic: 'Coerência — progressão temática',
+    difficulty: 'Difícil',
+    question:
+      'Leia o parágrafo de uma redação: "A educação é fundamental para o desenvolvimento do país. A educação também é essencial para o crescimento das nações. Sem educação, não há progresso educacional em uma sociedade."\n\nO principal problema desse parágrafo é:',
+    options: [
+      { letter: 'A', text: 'o uso incorreto da concordância nominal entre os termos.' },
+      { letter: 'B', text: 'a ausência de progressão temática: as frases repetem a mesma ideia sem acrescentar informação nova.' },
+      { letter: 'C', text: 'o emprego de vocabulário excessivamente técnico e inacessível.' },
+      { letter: 'D', text: 'a falta de pontuação entre os períodos do parágrafo.' },
+      { letter: 'E', text: 'o uso inadequado de figuras de linguagem.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'As três frases giram em torno da mesma afirmação, sem avançar o raciocínio com dados, exemplos ou desdobramentos — o parágrafo estaciona no lugar em vez de progredir, o que compromete a coerência e é penalizado na Competência 3 da Redação.',
+    triTip:
+      'Cada frase de um parágrafo argumentativo deve acrescentar algo novo — um dado, uma causa, uma consequência. Repetir a mesma ideia com outras palavras não é desenvolvimento, é estagnação textual.'
+  },
+
+  // ---- Artes, cultura e corpo (2)
+  {
+    ...base,
+    id: 'lin-69',
+    topic: 'Artes — Música Popular Brasileira',
+    difficulty: 'Média',
+    question:
+      'A Música Popular Brasileira (MPB), consolidada como categoria a partir da década de 1960, caracteriza-se por incorporar elementos de diferentes tradições musicais brasileiras — samba, bossa nova, ritmos regionais — associados a letras de conteúdo poético e, frequentemente, crítico-social. Essa produção é relevante culturalmente porque:',
+    options: [
+      { letter: 'A', text: 'rejeita completamente qualquer influência de ritmos regionais brasileiros.' },
+      { letter: 'B', text: 'foi incentivada oficialmente pelo governo militar como forma de propaganda.' },
+      { letter: 'C', text: 'restringe-se a temas amorosos, sem qualquer diálogo com o contexto histórico.' },
+      { letter: 'D', text: 'surgiu isolada de qualquer diálogo com outras artes, como o cinema e a literatura.' },
+      {
+        letter: 'E',
+        text: 'articula identidade nacional, experimentação estética e, em muitos casos, crítica política, sobretudo durante a ditadura militar.'
+      }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'A MPB, com nomes como Chico Buarque, Caetano Veloso e Elis Regina, uniu inovação estética à crítica social e política, muitas vezes usando metáforas para driblar a censura da ditadura militar — sendo perseguida pelo regime, e não incentivada por ele.',
+    triTip:
+      'Música censurada durante a ditadura (Chico Buarque, Caetano Veloso exilado) é repertório forte para redações sobre liberdade de expressão e resistência cultural.'
+  },
+  {
+    ...base,
+    id: 'lin-70',
+    topic: 'Artes — cinema nacional e retratos sociais',
+    difficulty: 'Fácil',
+    question:
+      'Filmes brasileiros que retratam a realidade das periferias urbanas, a violência e as desigualdades sociais, como parte de um movimento que ficou conhecido como Cinema de Retomada (a partir da década de 1990), têm como principal característica:',
+    options: [
+      { letter: 'A', text: 'evitar qualquer relação entre a arte cinematográfica e a realidade social brasileira.' },
+      { letter: 'B', text: 'evitar totalmente a participação de atores não profissionais.' },
+      { letter: 'C', text: 'restringir-se a temas de fantasia e ficção científica, sem qualquer conexão com o Brasil real.' },
+      { letter: 'D', text: 'reproduzir exclusivamente padrões estéticos de produções internacionais, sem características nacionais.' },
+      {
+        letter: 'E',
+        text: 'usar a linguagem audiovisual para dar visibilidade a realidades sociais frequentemente invisibilizadas nos meios de comunicação tradicionais.'
+      }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'Filmes como "Cidade de Deus" e "Central do Brasil" usam a linguagem cinematográfica para expor realidades sociais brasileiras muitas vezes marginalizadas pela mídia tradicional, dando visibilidade a periferias, desigualdade e violência urbana.',
+    triTip:
+      'Cinema, assim como a MPB e a literatura marginal, é repertório de "arte como denúncia social" — útil para redações sobre desigualdade, visibilidade e representatividade.'
+  },
+
+  // ---- Semântica (2)
+  {
+    ...base,
+    id: 'lin-71',
+    topic: 'Semântica — sinonímia',
+    difficulty: 'Fácil',
+    question:
+      'Nas frases "O projeto foi aprovado com rapidez" e "O projeto foi aprovado com celeridade", as palavras "rapidez" e "celeridade" mantêm entre si uma relação de:',
+    options: [
+      { letter: 'A', text: 'Antonímia' },
+      { letter: 'B', text: 'Sinonímia' },
+      { letter: 'C', text: 'Homonímia' },
+      { letter: 'D', text: 'Paronímia' },
+      { letter: 'E', text: 'Polissemia' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      '"Rapidez" e "celeridade" têm sentidos equivalentes no contexto — são sinônimos, palavras diferentes que expressam significados muito próximos.',
+    triTip:
+      'Sinônimos raramente são idênticos em TODOS os contextos, mas nesse caso específico as duas palavras são intercambiáveis sem alterar o sentido da frase.'
+  },
+  {
+    ...base,
+    id: 'lin-72',
+    topic: 'Semântica — paráfrase e plágio',
+    difficulty: 'Difícil',
+    question:
+      'Um estudante reproduz um trecho de um livro trocando algumas palavras por sinônimos e alterando levemente a ordem das frases, mas mantendo a estrutura e as ideias originais praticamente intactas, sem citar a fonte. Essa prática é caracterizada como:',
+    options: [
+      { letter: 'A', text: 'Paráfrase legítima, uma vez que houve reformulação das palavras.' },
+      {
+        letter: 'B',
+        text: 'Plágio, pois apresenta como próprias ideias e estrutura de outro autor, mesmo com alterações superficiais, sem dar crédito à fonte.'
+      },
+      { letter: 'C', text: 'Citação direta, por reproduzir fielmente o texto original entre aspas.' },
+      { letter: 'D', text: 'Resenha crítica, por incluir avaliação pessoal do conteúdo.' },
+      { letter: 'E', text: 'Domínio público, pois qualquer texto pode ser livremente reaproveitado sem citação.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'Trocar palavras por sinônimos sem alterar a estrutura das ideias e sem citar a fonte configura plágio, mesmo que o texto não seja copiado palavra por palavra. A paráfrase legítima também exige a indicação da fonte original.',
+    triTip:
+      'Reformular um texto não autoriza omitir a fonte. A diferença entre paráfrase e plágio não está apenas nas palavras trocadas, mas na citação (ou omissão) de quem escreveu a ideia original.'
   }
 ];

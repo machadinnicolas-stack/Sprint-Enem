@@ -90,6 +90,32 @@ const CALCULOS: Record<string, () => Esperado> = {
   'mat-47': () => 5 + 19 * 3,
   'mat-48': () => ((3 + (3 + 7 * 0.5)) * 8) / 2,
 
+  // ---- Matemática: Lote 2
+  'mat-49': () => 180 * 1.15,
+  'mat-50': () => ((900 - 720) / 900) * 100,
+  'mat-51': () => 4000 * Math.pow(1.05, 2),
+  'mat-52': () => (6 + 7 + 9 + 10) / 4,
+  'mat-53': () => mediana([22, 25, 19, 31, 28, 24]),
+  'mat-54': () => moda([4, 5, 5, 5, 6, 8, 9, 9, 10, 10]),
+  'mat-55': () => 20 - 6,
+  'mat-56': () => Math.sqrt(13 ** 2 - 5 ** 2),
+  'mat-57': () => ((30 + 20) / 2) * 10,
+  'mat-58': () => 5 + 3 * 15,
+  'mat-59': () => -12 / (2 * -1),
+  'mat-60': () => 50000 * Math.pow(0.9, 2),
+  'mat-61': () => 3 * (175 / 50),
+  'mat-62': () => 1 / (1 / 6 + 1 / 6),
+  'mat-63': () => 300 / 20,
+  'mat-64': () => 30 * 20 * 12,
+  'mat-65': () => (1 / 3) * 3 * 9 * 4,
+  'mat-66': () => (3 / 4) * 100,
+  'mat-67': () => (3 / 5) * (2 / 4) * 100,
+  'mat-68': () => 4 * 3 * 2 * 1,
+  'mat-69': () => C(6, 2),
+  'mat-70': () => 90 / 0.75,
+  'mat-71': () => ((4 + (4 + 9 * 5)) * 10) / 2,
+  'mat-72': () => 3 * Math.pow(2, 4),
+
   // ---- Natureza: Biologia
   'nat-01': () => 10000 * 0.1 * 0.1,
   'nat-02': () => t('aves piscívoras'),
@@ -143,6 +169,36 @@ const CALCULOS: Record<string, () => Esperado> = {
   'nat-46': () => t('se oxida preferencialmente'),
   'nat-47': () => 2 * 890,
   'nat-48': () => t('enxofre'),
+
+  // ---- Natureza: Lote 2 (Biologia)
+  'nat-49': () => t('Sucessão ecológica secundária'),
+  'nat-50': () => t('menor que a base'),
+  'nat-51': () => (1 / 2) * 100,
+  'nat-52': () => t('Transporte ativo'),
+  'nat-53': () => t('liberação de neurotransmissores'),
+  'nat-54': () => t('Proteínas'),
+  'nat-55': () => t('Especiação alopátrica'),
+  'nat-56': () => t('não possuem estrutura celular'),
+
+  // ---- Natureza: Lote 2 (Física)
+  'nat-57': () => 8 * 10,
+  'nat-58': () => 3000 / 5,
+  'nat-59': () => 20 / (4 + 6 + 10),
+  'nat-60': () => t('um quarto de F'),
+  'nat-61': () => (0.004 / 2) * 100,
+  'nat-62': () => (340 * 2) / 2,
+  'nat-63': () => t('real, invertida e menor'),
+  'nat-64': () => 80 / Math.pow(2, 30 / 10),
+
+  // ---- Natureza: Lote 2 (Química)
+  'nat-65': () => 1,
+  'nat-66': () => t('menor raio atômico e maior eletronegatividade'),
+  'nat-67': () => t('Ligação iônica'),
+  'nat-68': () => t('H₂ é limitante; formam-se 2 mols'),
+  'nat-69': () => t('diminui a energia cinética'),
+  'nat-70': () => t('sentido inverso'),
+  'nat-71': () => t('Esterificação'),
+  'nat-72': () => (2 * 4) / 2,
 
   // ---- Humanas: História
   'hum-01': () => t('construindo comunidades autônomas'),
@@ -199,6 +255,38 @@ const CALCULOS: Record<string, () => Esperado> = {
   'hum-46': () => t('ampliação de direitos'),
   'hum-47': () => t('reproduzir entre gerações'),
   'hum-48': () => t('fluidez e à fragilidade'),
+
+  // ---- Humanas: Lote 2 (História)
+  'hum-49': () => t('acúmulo de metais preciosos'),
+  'hum-50': () => t('estatização dos meios de produção'),
+  'hum-51': () => t('política de Estado, planejada'),
+  'hum-52': () => t('enfraquecimento econômico e militar'),
+  'hum-53': () => t('concentração de renda'),
+  'hum-54': () => t('derrama'),
+  'hum-55': () => t('café com leite'),
+
+  // ---- Humanas: Lote 2 (Geografia)
+  'hum-56': () => t('intensificação dos fluxos'),
+  'hum-57': () => t('12h'),
+  'hum-58': () => t('pecuária extensiva'),
+  'hum-59': () => t('administrativa e de planejamento'),
+  'hum-60': () => t('maior participação do Estado'),
+  'hum-61': () => t('Rede urbana e hierarquia urbana'),
+  'hum-62': () => t('Semiárido'),
+
+  // ---- Humanas: Lote 2 (Filosofia)
+  'hum-63': () => t('certeza do próprio pensamento'),
+  'hum-64': () => t('primeiro existe'),
+  'hum-65': () => t('tábula rasa'),
+  'hum-66': () => t('construções culturais'),
+  'hum-67': () => t('resultados práticos'),
+
+  // ---- Humanas: Lote 2 (Sociologia)
+  'hum-68': () => t('Racional-legal'),
+  'hum-69': () => t('substituição de postos de trabalho'),
+  'hum-70': () => t('Bolha informacional'),
+  'hum-71': () => t('acesso à educação, à saúde'),
+  'hum-72': () => t('estruturas sociais, econômicas'),
 
   // ---- Linguagens: Interpretação
   'lin-01': () => t('descompasso entre a exigência legal'),
@@ -264,7 +352,49 @@ const CALCULOS: Record<string, () => Esperado> = {
   // ---- Linguagens: Semântica
   'lin-46': () => t('conotativo, com sentido figurado'),
   'lin-47': () => t('ambiguidade'),
-  'lin-48': () => t('polissemia')
+  'lin-48': () => t('polissemia'),
+
+  // ---- Linguagens: Lote 2 (Interpretação)
+  'lin-49': () => t('contraste entre a intenção declarada'),
+  'lin-50': () => t('naturalização da reclamação'),
+  'lin-51': () => t('acessível, sem custo'),
+  'lin-52': () => t('valorizá-la como sinal'),
+  'lin-53': () => t('reconhecendo qualidade técnica'),
+  'lin-54': () => t('admite exceção mediante condição'),
+
+  // ---- Linguagens: Lote 2 (Literatura)
+  'lin-55': () => t('disposição espacial das palavras'),
+  'lin-56': () => t('diversificação de perspectivas'),
+  'lin-57': () => t('eu lírico masculino'),
+  'lin-58': () => t('de Informação'),
+
+  // ---- Linguagens: Lote 2 (Variação linguística)
+  'lin-59': () => t('Jargão'),
+  'lin-60': () => t('Estrangeirismo'),
+
+  // ---- Linguagens: Lote 2 (Funções da linguagem)
+  'lin-61': () => t('poética'),
+  'lin-62': () => t('Referencial'),
+
+  // ---- Linguagens: Lote 2 (Figuras de linguagem)
+  'lin-63': () => t('Eufemismo'),
+  'lin-64': () => t('Ironia'),
+
+  // ---- Linguagens: Lote 2 (Gêneros textuais)
+  'lin-65': () => t('Reportagem investigativa'),
+  'lin-66': () => t('multimodal'),
+
+  // ---- Linguagens: Lote 2 (Coesão e coerência)
+  'lin-67': () => t('a fim de'),
+  'lin-68': () => t('ausência de progressão temática'),
+
+  // ---- Linguagens: Lote 2 (Artes, cultura e corpo)
+  'lin-69': () => t('crítica política'),
+  'lin-70': () => t('visibilidade a realidades sociais'),
+
+  // ---- Linguagens: Lote 2 (Semântica)
+  'lin-71': () => t('Sinonímia'),
+  'lin-72': () => t('Plágio')
 };
 
 // Converte "R$ 6.655,00", "2 880 peças", "5,4 m", "80 km/h" e "1/3" em número.

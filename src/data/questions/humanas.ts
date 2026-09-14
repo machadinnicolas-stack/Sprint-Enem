@@ -1082,5 +1082,524 @@ export const HUMANAS_QUESTIONS: ExamQuestion[] = [
       'Bauman contrasta a "solidez" das estruturas modernas — emprego duradouro, casamento para a vida toda, identidades estáveis — com a fluidez contemporânea, em que vínculos e compromissos se tornam provisórios.',
     triTip:
       'Modernidade líquida é repertório curinga para consumo, relações digitais e descartabilidade. Use com precisão: o conceito descreve a fragilidade dos vínculos, não a velocidade da tecnologia.'
+  },
+
+  // ================================================================ LOTE 2 (hum-49 a hum-72)
+  // ---- História (7)
+  {
+    ...base,
+    id: 'hum-49',
+    topic: 'Idade Moderna — mercantilismo',
+    difficulty: 'Média',
+    question:
+      'O mercantilismo, política econômica predominante na Europa entre os séculos XVI e XVIII, caracterizava-se por:',
+    options: [
+      { letter: 'A', text: 'livre concorrência entre nações, sem qualquer intervenção estatal na economia.' },
+      { letter: 'B', text: 'predomínio do trabalho assalariado livre nas colônias americanas.' },
+      { letter: 'C', text: 'abolição das colônias e do comércio internacional.' },
+      {
+        letter: 'D',
+        text: 'intensa intervenção do Estado na economia, balança comercial favorável e acúmulo de metais preciosos.'
+      },
+      { letter: 'E', text: 'rejeição do uso de metais preciosos como medida de riqueza.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'O mercantilismo defendia intervenção estatal, protecionismo, balança comercial favorável (exportar mais que importar) e acúmulo de ouro e prata como medida de riqueza da nação — princípios que sustentaram o Pacto Colonial nas Américas.',
+    triTip:
+      'Mercantilismo é a base econômica de todo o sistema colonial: a metrópole controla o comércio, a colônia fornece matéria-prima e metais preciosos.'
+  },
+  {
+    ...base,
+    id: 'hum-50',
+    topic: 'História Geral — Revolução Russa',
+    difficulty: 'Difícil',
+    question:
+      'A Revolução Russa de 1917 resultou na ascensão dos bolcheviques ao poder, liderados por Lenin, e na posterior formação da União Soviética. Entre as principais transformações promovidas está:',
+    options: [
+      { letter: 'A', text: 'a manutenção da monarquia czarista com poderes ampliados.' },
+      { letter: 'B', text: 'o fortalecimento da Igreja Ortodoxa como poder político central.' },
+      { letter: 'C', text: 'a adoção do livre mercado e a privatização acelerada da economia.' },
+      { letter: 'D', text: 'a manutenção da Rússia na Primeira Guerra Mundial até a vitória final.' },
+      { letter: 'E', text: 'a estatização dos meios de produção e o fim da propriedade privada sobre terras e indústrias.' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'Os bolcheviques aboliram a propriedade privada dos meios de produção, estatizando indústrias e redistribuindo terras, além de retirar a Rússia da guerra (Tratado de Brest-Litovsk) — o oposto das demais alternativas.',
+    triTip:
+      'Associe 1917 a Lenin, ao partido bolchevique, ao fim da propriedade privada e à saída da Primeira Guerra — a Guerra Civil Russa que se seguiu também costuma ser cobrada.'
+  },
+  {
+    ...base,
+    id: 'hum-51',
+    topic: 'Segunda Guerra Mundial — Holocausto',
+    difficulty: 'Difícil',
+    question:
+      'O Holocausto, extermínio sistemático de cerca de seis milhões de judeus e de outros grupos perseguidos pelo regime nazista, foi conduzido por meio de um aparato burocrático e industrial organizado pelo Estado alemão. Essa característica revela que o genocídio:',
+    options: [
+      {
+        letter: 'A',
+        text: 'foi uma política de Estado, planejada e executada com uso deliberado da racionalidade burocrática moderna.'
+      },
+      { letter: 'B', text: 'resultou de decisão exclusivamente militar, sem envolvimento da administração civil.' },
+      { letter: 'C', text: 'foi resultado de atos isolados de violência espontânea, sem qualquer planejamento.' },
+      { letter: 'D', text: 'ocorreu à revelia do conhecimento das autoridades nazistas.' },
+      { letter: 'E', text: 'foi restrito a poucos indivíduos, sem qualquer estrutura institucional de apoio.' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O extermínio envolveu ministérios, ferrovias, indústrias e planejamento logístico detalhado (a Conferência de Wannsee organizou a "solução final") — prova de que foi política de Estado deliberada, e não violência espontânea.',
+    triTip:
+      'O caráter burocrático e planejado do Holocausto é o que Hannah Arendt discute na "banalidade do mal" — a máquina administrativa foi tão determinante quanto o ódio ideológico.'
+  },
+  {
+    ...base,
+    id: 'hum-52',
+    topic: 'História Geral — descolonização afro-asiática',
+    difficulty: 'Média',
+    question:
+      'Após a Segunda Guerra Mundial, diversos países da África e da Ásia conquistaram a independência de suas antigas metrópoles coloniais europeias. Esse processo de descolonização foi impulsionado, entre outros fatores, por:',
+    options: [
+      { letter: 'A', text: 'o fortalecimento dos impérios coloniais europeus após a guerra.' },
+      { letter: 'B', text: 'o desinteresse da ONU em relação à autodeterminação dos povos.' },
+      { letter: 'C', text: 'a ausência completa de resistência armada nos territórios coloniais.' },
+      {
+        letter: 'D',
+        text: 'o enfraquecimento econômico e militar das potências europeias e a ascensão de movimentos nacionalistas locais.'
+      },
+      { letter: 'E', text: 'a manutenção do status quo colonial exigida pelas Nações Unidas.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A guerra debilitou economicamente as potências coloniais europeias, enquanto cresciam os movimentos nacionalistas nas colônias e a pressão internacional, inclusive da ONU, por autodeterminação dos povos.',
+    triTip:
+      'A descolonização afro-asiática conecta-se com a Geografia (novos Estados, fronteiras artificiais) — associe aos conflitos étnicos posteriores em fronteiras traçadas pelos colonizadores.'
+  },
+  {
+    ...base,
+    id: 'hum-53',
+    topic: 'Ditadura Militar — Milagre Econômico',
+    difficulty: 'Difícil',
+    question:
+      'Entre 1969 e 1973, o Brasil viveu um período de crescimento econômico acelerado sob a ditadura militar, conhecido como "Milagre Econômico". Historiadores apontam que esse crescimento veio acompanhado de:',
+    options: [
+      { letter: 'A', text: 'concentração de renda, forte endividamento externo e ampliação da repressão política.' },
+      { letter: 'B', text: 'redução do endividamento externo brasileiro no período.' },
+      { letter: 'C', text: 'melhora simultânea e uniforme na distribuição de renda entre todas as classes sociais.' },
+      { letter: 'D', text: 'fortalecimento dos sindicatos e ampliação das liberdades civis.' },
+      { letter: 'E', text: 'desaceleração da urbanização e do crescimento industrial.' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O "Milagre" combinou alto crescimento do PIB com concentração de renda, endividamento externo crescente e coincidiu com o período mais repressivo do regime, no pós-AI-5.',
+    triTip:
+      'Assim como no Estado Novo, o Milagre Econômico mostra crescimento e restrição política andando juntos — padrão recorrente em vários regimes autoritários cobrados pelo ENEM.'
+  },
+  {
+    ...base,
+    id: 'hum-54',
+    topic: 'Brasil Colônia — Inconfidência Mineira',
+    difficulty: 'Média',
+    question:
+      'A Inconfidência Mineira (1789) foi um movimento de contestação ao domínio português, articulado por elites locais de Minas Gerais insatisfeitas principalmente com:',
+    options: [
+      { letter: 'A', text: 'a abolição da escravidão decretada pela Coroa portuguesa.' },
+      { letter: 'B', text: 'a criação de universidades públicas na colônia.' },
+      { letter: 'C', text: 'a proibição de qualquer atividade agrícola na capitania.' },
+      { letter: 'D', text: 'a concessão de autonomia política total à região mineira.' },
+      { letter: 'E', text: 'a cobrança rigorosa de impostos sobre a extração de ouro, especialmente a derrama.' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'A insatisfação com a alta carga tributária sobre a mineração, especialmente a ameaça da derrama (cobrança forçada da quota de ouro), motivou a articulação de elites locais, inspiradas também pelos ideais iluministas e pela independência dos Estados Unidos.',
+    triTip:
+      'Os movimentos nativistas e sediciosos coloniais refletem insatisfação econômica somada à influência das ideias iluministas — combinação típica desse tipo de questão.'
+  },
+  {
+    ...base,
+    id: 'hum-55',
+    topic: 'República — Revolução de 1930',
+    difficulty: 'Média',
+    question:
+      'A Revolução de 1930, que levou Getúlio Vargas ao poder, encerrou o período conhecido como República Velha (1889-1930). Esse rompimento está diretamente relacionado à crise:',
+    options: [
+      { letter: 'A', text: 'da política do café com leite e do sistema oligárquico de alternância entre São Paulo e Minas Gerais.' },
+      { letter: 'B', text: 'da monarquia constitucional brasileira.' },
+      { letter: 'C', text: 'da escravidão, ainda vigente formalmente no país até aquele ano.' },
+      { letter: 'D', text: 'da ditadura militar instaurada em 1964.' },
+      { letter: 'E', text: 'da União Soviética, que influenciava diretamente a política brasileira.' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'A ruptura da aliança entre as oligarquias paulista e mineira (o "café com leite"), somada aos efeitos da crise de 1929 sobre a economia cafeeira, abriu caminho para a aliança política que levou Vargas ao poder, encerrando a Primeira República.',
+    triTip:
+      '1930 marca o fim do domínio das oligarquias regionais e o início da centralização do poder federal que caracterizará toda a Era Vargas.'
+  },
+
+  // ---- Geografia (7)
+  {
+    ...base,
+    id: 'hum-56',
+    topic: 'Geografia econômica — globalização',
+    difficulty: 'Fácil',
+    question:
+      'A globalização, processo de integração econômica, cultural e tecnológica em escala mundial, é caracterizada por:',
+    options: [
+      { letter: 'A', text: 'isolamento crescente entre as economias nacionais.' },
+      { letter: 'B', text: 'redução do comércio internacional a níveis pré-industriais.' },
+      { letter: 'C', text: 'eliminação completa das diferenças culturais entre as nações.' },
+      { letter: 'D', text: 'intensificação dos fluxos de capitais, mercadorias, informações e pessoas entre os países.' },
+      { letter: 'E', text: 'fim de qualquer forma de desigualdade entre países ricos e pobres.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A globalização se caracteriza pela intensificação dos fluxos — de capital financeiro, mercadorias, informação e pessoas —, facilitada por avanços tecnológicos e de transporte, o que não elimina, mas frequentemente aprofunda desigualdades entre países.',
+    triTip:
+      'A globalização é definida pelo AUMENTO dos fluxos, não pela homogeneização cultural completa nem pela redução das desigualdades — cuidado com alternativas que exageram esses efeitos.'
+  },
+  {
+    ...base,
+    id: 'hum-57',
+    topic: 'Geografia — fusos horários',
+    difficulty: 'Média',
+    question:
+      'Um voo parte de São Paulo (fuso −3 em relação a Greenwich) às 22h de um determinado dia, com destino a Londres (fuso 0), e a viagem dura 11 horas. Que horário local será em Londres no momento da chegada?',
+    options: [
+      { letter: 'A', text: '06h' },
+      { letter: 'B', text: '09h' },
+      { letter: 'C', text: '12h' },
+      { letter: 'D', text: '20h' },
+      { letter: 'E', text: '23h' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'Londres está 3 horas à frente de São Paulo. No momento da partida (22h em São Paulo), em Londres já era 1h do dia seguinte. Somando as 11 horas de voo: 1h + 11h = 12h.',
+    triTip:
+      'Primeiro converta o horário de partida para o fuso de destino, e só depois some a duração do voo — inverter essa ordem é o erro mais comum.'
+  },
+  {
+    ...base,
+    id: 'hum-58',
+    topic: 'Geografia física — desmatamento na Amazônia',
+    difficulty: 'Média',
+    question:
+      'O desmatamento na Amazônia Legal brasileira está historicamente associado, entre outros fatores, à expansão:',
+    options: [
+      { letter: 'A', text: 'da pesca artesanal ribeirinha.' },
+      { letter: 'B', text: 'da prática do extrativismo sustentável de baixo impacto.' },
+      { letter: 'C', text: 'da proteção ambiental por unidades de conservação.' },
+      { letter: 'D', text: 'da demarcação de terras indígenas na região.' },
+      { letter: 'E', text: 'da pecuária extensiva, da agricultura de exportação e da grilagem de terras públicas.' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'A expansão da fronteira agropecuária — pecuária extensiva e monoculturas como a soja —, associada à grilagem de terras públicas, é apontada como principal vetor histórico do desmatamento amazônico. Terras indígenas e unidades de conservação apresentam, comprovadamente, as menores taxas de desmatamento.',
+    triTip:
+      'Estudos mostram que terras indígenas e unidades de conservação têm as MENORES taxas de desmatamento da Amazônia — argumento útil para desconstruir o senso comum em redações sobre o tema.'
+  },
+  {
+    ...base,
+    id: 'hum-59',
+    topic: 'Geografia do Brasil — regionalização do IBGE',
+    difficulty: 'Fácil',
+    question:
+      'A divisão do território brasileiro em cinco regiões (Norte, Nordeste, Centro-Oeste, Sudeste e Sul), utilizada oficialmente pelo IBGE, tem finalidade principalmente:',
+    options: [
+      { letter: 'A', text: 'exclusivamente turística, sem qualquer aplicação em políticas públicas.' },
+      { letter: 'B', text: 'religiosa, seguindo a distribuição de dioceses.' },
+      { letter: 'C', text: 'militar, para fins de defesa territorial.' },
+      {
+        letter: 'D',
+        text: 'administrativa e de planejamento, orientando a coleta de dados estatísticos e políticas públicas regionais.'
+      },
+      { letter: 'E', text: 'diplomática, na definição de fronteiras internacionais.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'A regionalização do IBGE serve sobretudo para fins estatísticos, administrativos e de planejamento de políticas públicas regionais, permitindo comparar indicadores socioeconômicos entre diferentes áreas do país.',
+    triTip:
+      'Existem outras regionalizações além da do IBGE, como a divisão em Complexos Regionais, que agrupam estados por critérios econômicos e históricos, não apenas geográficos.'
+  },
+  {
+    ...base,
+    id: 'hum-60',
+    topic: 'Geopolítica dos recursos — pré-sal',
+    difficulty: 'Difícil',
+    question:
+      'A descoberta de grandes reservas de petróleo na camada pré-sal brasileira, a partir de 2006, trouxe à tona debates sobre o modelo de exploração mais adequado. A adoção do regime de partilha de produção, em substituição à concessão em algumas áreas, tem como principal justificativa:',
+    options: [
+      { letter: 'A', text: 'reduzir integralmente a presença de empresas estrangeiras no setor.' },
+      { letter: 'B', text: 'impedir o uso da receita do petróleo em políticas sociais.' },
+      { letter: 'C', text: 'eliminar qualquer forma de exploração privada do petróleo brasileiro.' },
+      { letter: 'D', text: 'transferir a totalidade da exploração para empresas multinacionais.' },
+      { letter: 'E', text: 'garantir maior participação do Estado nos lucros da exploração de uma reserva estratégica de grande volume.' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'No regime de partilha, o Estado garante parcela maior dos lucros em áreas consideradas estratégicas, diferente da concessão, em que a empresa vencedora do leilão detém todo o petróleo extraído mediante pagamento de royalties.',
+    triTip:
+      'A partilha de produção não expulsa empresas privadas do setor — apenas muda a forma como o excedente é dividido entre elas e o Estado.'
+  },
+  {
+    ...base,
+    id: 'hum-61',
+    topic: 'Geografia urbana — rede urbana',
+    difficulty: 'Média',
+    question:
+      'Uma metrópole nacional concentra funções de comando político-econômico de alcance para todo o país, enquanto cidades médias exercem influência regional sobre municípios vizinhos. Essa organização hierárquica das cidades é estudada pela Geografia como:',
+    options: [
+      { letter: 'A', text: 'Conurbação' },
+      { letter: 'B', text: 'Rede urbana e hierarquia urbana' },
+      { letter: 'C', text: 'Êxodo rural' },
+      { letter: 'D', text: 'Segregação socioespacial' },
+      { letter: 'E', text: 'Macrocefalia isolada' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'A rede urbana organiza as cidades em uma hierarquia funcional, da metrópole nacional (que centraliza serviços mais complexos) até as pequenas cidades locais, conectadas por fluxos de pessoas, mercadorias, capital e informação.',
+    triTip:
+      'Pense na rede urbana como uma pirâmide de influência: metrópole nacional no topo, capitais regionais e cidades médias no meio, cidades locais na base.'
+  },
+  {
+    ...base,
+    id: 'hum-62',
+    topic: 'Climatologia — clima semiárido',
+    difficulty: 'Fácil',
+    question:
+      'O clima predominante no interior do Nordeste brasileiro, caracterizado por baixos e irregulares índices pluviométricos e vegetação adaptada à escassez hídrica, é classificado como:',
+    options: [
+      { letter: 'A', text: 'Semiárido' },
+      { letter: 'B', text: 'Tropical' },
+      { letter: 'C', text: 'Equatorial' },
+      { letter: 'D', text: 'Subtropical' },
+      { letter: 'E', text: 'Temperado' }
+    ],
+    correctLetter: 'A',
+    explanation:
+      'O clima semiárido do sertão nordestino apresenta chuvas escassas e concentradas em curto período, associadas à vegetação da caatinga, adaptada para reter água e resistir a longos períodos de seca.',
+    triTip:
+      'Associe cada clima brasileiro a um bioma: equatorial à Amazônia, semiárido à Caatinga, tropical ao Cerrado, subtropical à Mata Atlântica e ao Pampa no Sul.'
+  },
+
+  // ---- Filosofia (5)
+  {
+    ...base,
+    id: 'hum-63',
+    topic: 'Filosofia moderna — Descartes',
+    difficulty: 'Difícil',
+    question:
+      'René Descartes propôs um método baseado na dúvida sistemática, duvidando de tudo que pudesse ser questionado, até chegar a uma certeza inabalável expressa na fórmula "penso, logo existo". Esse procedimento demonstra que, para Descartes, o fundamento do conhecimento reside:',
+    options: [
+      { letter: 'A', text: 'na tradição religiosa e na autoridade da Igreja.' },
+      { letter: 'B', text: 'na observação empírica dos sentidos, únicos guias confiáveis.' },
+      {
+        letter: 'C',
+        text: 'na razão e na certeza do próprio pensamento, ponto de partida indubitável para reconstruir o saber.'
+      },
+      { letter: 'D', text: 'na experiência coletiva acumulada pela sociedade ao longo do tempo.' },
+      { letter: 'E', text: 'na intuição mística, alheia a qualquer procedimento racional.' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'Ao duvidar metodicamente de tudo — inclusive dos sentidos, que podem enganar —, Descartes chega a uma certeza que resiste a qualquer dúvida: a existência do próprio pensamento (cogito ergo sum). Essa certeza racional torna-se a base para reconstruir o conhecimento.',
+    triTip:
+      'Descartes é o marco do racionalismo moderno: a razão, e não os sentidos, é a fonte segura do conhecimento — oposição direta ao empirismo de Locke e Hume.'
+  },
+  {
+    ...base,
+    id: 'hum-64',
+    topic: 'Existencialismo — Sartre',
+    difficulty: 'Difícil',
+    question:
+      'Jean-Paul Sartre afirma que, para o ser humano, "a existência precede a essência". Essa formulação significa que:',
+    options: [
+      { letter: 'A', text: 'o ser humano nasce com uma natureza fixa e predeterminada, que apenas se manifesta ao longo da vida.' },
+      { letter: 'B', text: 'todos os seres humanos compartilham uma essência divina estabelecida antes do nascimento.' },
+      { letter: 'C', text: 'a essência humana é definida integralmente por forças biológicas e genéticas.' },
+      { letter: 'D', text: 'o ser humano primeiro existe, e só depois, por meio de suas escolhas e ações, define quem é.' },
+      { letter: 'E', text: 'a liberdade humana é uma ilusão, pois tudo já está determinado antecipadamente.' }
+    ],
+    correctLetter: 'D',
+    explanation:
+      'Diferente de objetos fabricados (cuja essência precede a existência, como uma faca projetada antes de existir), o ser humano, para Sartre, primeiro existe e, através de suas escolhas livres, vai construindo o que é — daí a ideia de que "estamos condenados a ser livres".',
+    triTip:
+      'O existencialismo sartriano é o oposto de qualquer determinismo (biológico, divino ou social): o indivíduo é responsável por se definir através de suas próprias escolhas.'
+  },
+  {
+    ...base,
+    id: 'hum-65',
+    topic: 'Epistemologia — empirismo e racionalismo',
+    difficulty: 'Média',
+    question:
+      'Enquanto os racionalistas defendem a razão como fonte principal do conhecimento verdadeiro, os empiristas, como John Locke, sustentam que:',
+    options: [
+      { letter: 'A', text: 'todo conhecimento deriva de ideias inatas presentes desde o nascimento.' },
+      {
+        letter: 'B',
+        text: 'todo conhecimento tem origem na experiência sensível, sendo a mente, ao nascer, como uma "tábula rasa".'
+      },
+      { letter: 'C', text: 'o conhecimento é impossível de ser alcançado por qualquer meio.' },
+      { letter: 'D', text: 'apenas a intuição mística permite acessar verdades absolutas.' },
+      { letter: 'E', text: 'a razão deve ser completamente descartada em favor da fé religiosa.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'Para os empiristas, a mente nasce vazia (tábula rasa) e todo conhecimento se constrói a partir da experiência sensível — em oposição aos racionalistas, que admitem ideias ou estruturas inatas da razão.',
+    triTip:
+      'Racionalismo (Descartes) valoriza a razão e ideias inatas; empirismo (Locke, Hume) valoriza a experiência sensorial. É uma das oposições mais cobradas de Filosofia moderna.'
+  },
+  {
+    ...base,
+    id: 'hum-66',
+    topic: 'Ética — relativismo e universalismo moral',
+    difficulty: 'Difícil',
+    question:
+      'Diante de práticas culturais distintas em diferentes sociedades, uma postura ética relativista sustenta que:',
+    options: [
+      { letter: 'A', text: 'existe um único código moral válido para todas as culturas, independentemente do contexto.' },
+      {
+        letter: 'B',
+        text: 'os valores morais são construções culturais e devem ser compreendidos e julgados dentro do contexto de cada sociedade específica.'
+      },
+      {
+        letter: 'C',
+        text: 'toda prática cultural deve ser aceita sem qualquer possibilidade de crítica, mesmo quando viola direitos fundamentais.'
+      },
+      { letter: 'D', text: 'a moral é determinada exclusivamente por leis biológicas universais.' },
+      { letter: 'E', text: 'apenas sociedades ocidentais possuem sistemas morais válidos.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'O relativismo ético reconhece que valores morais variam entre culturas e devem ser compreendidos dentro de seu contexto — o que é diferente de aceitar tudo sem crítica, pois é possível debater limites, como os direitos humanos, dentro dessa perspectiva relativista moderada.',
+    triTip:
+      'Não confunda relativismo (compreender o contexto) com permissividade total (aceitar tudo sem julgamento). O ENEM costuma cobrar a versão moderada do conceito, ligada ao relativismo cultural de Sociologia.'
+  },
+  {
+    ...base,
+    id: 'hum-67',
+    topic: 'Filosofia política — Maquiavel',
+    difficulty: 'Média',
+    question:
+      'Em "O Príncipe", Nicolau Maquiavel analisa o exercício do poder político de forma pragmática, separando a política da moral religiosa tradicional. Uma de suas ideias mais conhecidas é a de que o governante deve:',
+    options: [
+      {
+        letter: 'A',
+        text: 'subordinar toda decisão política aos princípios morais e religiosos da época, mesmo que isso comprometa a estabilidade do Estado.'
+      },
+      { letter: 'B', text: 'priorizar a manutenção e a estabilidade do poder e do Estado, avaliando os meios pelos resultados práticos que produzem.' },
+      { letter: 'C', text: 'governar exclusivamente por meio do amor incondicional dos súditos, evitando qualquer forma de temor.' },
+      { letter: 'D', text: 'abolir toda forma de exército e defesa militar do território.' },
+      { letter: 'E', text: 'delegar integralmente o poder político ao clero.' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'Maquiavel inaugura uma análise realista da política, avaliando as ações do governante por sua eficácia em manter o poder e a estabilidade do Estado, e não por sua conformidade com preceitos morais ou religiosos tradicionais.',
+    triTip:
+      'Maquiavel separa política de moral religiosa, tema central da modernidade política — não confundir com defesa da crueldade gratuita, e sim com análise pragmática do poder.'
+  },
+
+  // ---- Sociologia (5)
+  {
+    ...base,
+    id: 'hum-68',
+    topic: 'Sociologia clássica — tipos de dominação de Weber',
+    difficulty: 'Difícil',
+    question:
+      'Max Weber identifica três tipos puros de dominação legítima: a tradicional, fundada nos costumes; a carismática, baseada nas qualidades excepcionais atribuídas a um líder; e a racional-legal, fundamentada em normas e procedimentos impessoais. Um presidente eleito que governa de acordo com a Constituição exemplifica a dominação:',
+    options: [
+      { letter: 'A', text: 'Tradicional' },
+      { letter: 'B', text: 'Carismática' },
+      { letter: 'C', text: 'Racional-legal' },
+      { letter: 'D', text: 'Teocrática' },
+      { letter: 'E', text: 'Patrimonialista' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'A autoridade do presidente eleito deriva de regras constitucionais e procedimentos legais impessoais, não de tradição ancestral nem de qualidades pessoais excepcionais — é o tipo de dominação característico do Estado burocrático moderno.',
+    triTip:
+      'Tradicional é "sempre foi assim" (reis hereditários); carismática é a figura excepcional do líder; racional-legal é a lei e o cargo, não a pessoa.'
+  },
+  {
+    ...base,
+    id: 'hum-69',
+    topic: 'Sociologia do trabalho — automação',
+    difficulty: 'Média',
+    question:
+      'A automação crescente de processos produtivos, impulsionada pela robótica e pela inteligência artificial, tem gerado debates sociológicos sobre:',
+    options: [
+      { letter: 'A', text: 'a eliminação total e definitiva do trabalho humano em todos os setores da economia.' },
+      { letter: 'B', text: 'o desaparecimento de qualquer forma de desigualdade no mercado de trabalho.' },
+      { letter: 'C', text: 'o retorno ao modelo artesanal de produção anterior à Revolução Industrial.' },
+      { letter: 'D', text: 'a garantia automática de emprego estável e vitalício para todos os trabalhadores.' },
+      { letter: 'E', text: 'a substituição de postos de trabalho repetitivos e a exigência de novas qualificações para os trabalhadores.' }
+    ],
+    correctLetter: 'E',
+    explanation:
+      'A automação tende a substituir funções repetitivas e previsíveis, ao mesmo tempo em que cria demanda por novas qualificações técnicas — um processo desigual, que pode aprofundar disparidades entre trabalhadores qualificados e não qualificados.',
+    triTip:
+      'A discussão sobre automação retoma o debate fordismo/toyotismo em nova chave: a tecnologia redefine o trabalho, mas raramente o elimina por completo — ela o transforma e desloca.'
+  },
+  {
+    ...base,
+    id: 'hum-70',
+    topic: 'Sociologia da comunicação — bolha informacional',
+    difficulty: 'Média',
+    question:
+      'Algoritmos de redes sociais selecionam o conteúdo exibido a cada usuário com base em suas interações anteriores, favorecendo a exposição a opiniões semelhantes às já compartilhadas por ele. Esse fenômeno é conhecido como:',
+    options: [
+      { letter: 'A', text: 'Democratização da informação' },
+      { letter: 'B', text: 'Bolha informacional (ou câmara de eco)' },
+      { letter: 'C', text: 'Pluralismo midiático' },
+      { letter: 'D', text: 'Neutralidade algorítmica' },
+      { letter: 'E', text: 'Alfabetização midiática' }
+    ],
+    correctLetter: 'B',
+    explanation:
+      'A bolha informacional (ou câmara de eco) descreve o isolamento do usuário em um ambiente de informações que reforçam suas próprias crenças, dificultando o contato com pontos de vista diferentes e podendo intensificar a polarização social.',
+    triTip:
+      'Bolha informacional conecta-se à indústria cultural de Adorno e Horkheimer — os algoritmos padronizam e personalizam ao mesmo tempo, moldando o consumo de informação com fins comerciais.'
+  },
+  {
+    ...base,
+    id: 'hum-71',
+    topic: 'Cidadania — direitos civis, políticos e sociais',
+    difficulty: 'Difícil',
+    question:
+      'O sociólogo T. H. Marshall propôs que a cidadania plena se constrói historicamente pela conquista de três tipos de direitos: civis, políticos e sociais. Os direitos sociais, nessa classificação, referem-se especificamente a:',
+    options: [
+      { letter: 'A', text: 'liberdade de expressão, de ir e vir e de propriedade.' },
+      { letter: 'B', text: 'direito ao voto e à participação em eleições.' },
+      { letter: 'C', text: 'acesso à educação, à saúde e a um mínimo de bem-estar econômico garantido pelo Estado.' },
+      { letter: 'D', text: 'direito de ser julgado por um tribunal imparcial.' },
+      { letter: 'E', text: 'liberdade de imprensa e de reunião pacífica.' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'Para Marshall, os direitos civis garantem liberdade individual, os políticos garantem participação no poder (voto), e os sociais garantem um padrão mínimo de bem-estar — educação, saúde, seguridade — que permite o exercício efetivo dos demais direitos.',
+    triTip:
+      'A sequência histórica de Marshall (civis no séc. XVIII, políticos no XIX, sociais no XX) é repertório útil para redações sobre cidadania: direitos sem condições sociais mínimas ficam apenas no papel.'
+  },
+  {
+    ...base,
+    id: 'hum-72',
+    topic: 'Sociologia — racismo estrutural',
+    difficulty: 'Média',
+    question:
+      'O conceito de racismo estrutural, discutido por autores como Silvio Almeida, propõe que o racismo no Brasil:',
+    options: [
+      { letter: 'A', text: 'se manifesta apenas em atos isolados e pontuais de indivíduos preconceituosos.' },
+      { letter: 'B', text: 'foi completamente superado após a abolição da escravidão em 1888.' },
+      {
+        letter: 'C',
+        text: 'está inserido nas próprias estruturas sociais, econômicas e institucionais, produzindo desigualdades sistemáticas independentemente da intenção individual.'
+      },
+      { letter: 'D', text: 'afeta igualmente todos os grupos étnicos, sem qualquer assimetria histórica.' },
+      { letter: 'E', text: 'é um fenômeno exclusivamente jurídico, resolvido pela legislação antidiscriminatória vigente.' }
+    ],
+    correctLetter: 'C',
+    explanation:
+      'O racismo estrutural entende que a discriminação racial está incorporada ao funcionamento normal das instituições (mercado de trabalho, sistema educacional, segurança pública), produzindo desigualdades persistentes mesmo sem intenção consciente de discriminar por parte de cada indivíduo.',
+    triTip:
+      'Racismo estrutural desloca o foco do "indivíduo preconceituoso" para as INSTITUIÇÕES e estruturas sociais — é o argumento sociológico central por trás de políticas afirmativas e de cotas.'
   }
 ];
