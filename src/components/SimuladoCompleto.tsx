@@ -29,8 +29,24 @@ function interleave<T>(a: T[], b: T[]): T[] {
   return result;
 }
 
-// "336 minutos" é tecnicamente correto e ilegível. "5h36" corresponde à duração
-// real que um dia de 96 questões passou a ter.
+// Embaralha e recorta uma amostra do banco de questões de uma matéria. Sem esse
+// teto, o Simulado Completo usaria o banco inteiro por matéria: com 72 por área,
+// cada dia teria 144 questões — cerca de 8h24 pelo ritmo do ENEM. Um teto fixo
+// mantém a prova no tamanho real (45+45=90/dia) mesmo que o banco continue
+// crescendo, e o embaralhamento faz cada tentativa puxar um recorte diferente.
+const QUESTOES_POR_MATERIA_NO_DIA = 45;
+
+function amostra<T>(lista: T[], quantidade: number): T[] {
+  const copia = [...lista];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia.slice(0, quantidade);
+}
+
+// "315 minutos" é tecnicamente correto e ilegível. "5h15" é como a duração de
+// um dia de 90 questões (o tamanho real do Simulado Completo) deve aparecer.
 function formatDuration(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
@@ -43,9 +59,9 @@ function formatTime(totalSeconds: number): string {
   const h = Math.floor(totalSeconds / 3600);
   const m = Math.floor((totalSeconds % 3600) / 60);
   const s = totalSeconds % 60;
-  // Com 48 questões por área, uma prova completa passa de 5 horas — perto do
-  // tempo real do ENEM. Sem essa ramificação, o cronômetro mostraria algo como
-  // "336:00" em vez de horas.
+  // Um dia de 90 questões (45+45) passa de 5 horas — perto do tempo real do
+  // ENEM. Sem essa ramificação, o cronômetro mostraria algo como "315:00" em
+  // vez de horas.
   if (h > 0) {
     return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   }
@@ -60,13 +76,15 @@ export const SimuladoCompleto: React.FC<SimuladoCompletoProps> = ({ onFinishedDi
   }, []);
 
   // O ENEM real reserva cerca de 3,5 minutos por questão (330 min para 90 itens
-  // no 1º dia, com redação; 300 min para 90 no 2º). Fixar a duração em 70 min
-  // fazia sentido com 24 questões por dia; com o banco de 48 por área, manter o
-  // valor fixo daria menos de 1 minuto por questão.
+  // no 1º dia, com redação; 300 min para 90 no 2º).
   const MINUTOS_POR_QUESTAO = 3.5;
 
   const dias = useMemo<SimuladoCompletoDia[]>(() => {
-    const bySubject = (s: SubjectType) => MOCK_QUESTIONS.filter((q) => q.subject === s);
+    const bySubject = (s: SubjectType) =>
+      amostra(
+        MOCK_QUESTIONS.filter((q) => q.subject === s),
+        QUESTOES_POR_MATERIA_NO_DIA
+      );
     const linguagens = bySubject('linguagens');
     const humanas = bySubject('humanas');
     const natureza = bySubject('natureza');
